@@ -40,6 +40,7 @@ public class GreyScaleImage implements ImageOperation{
     }
     return null;
   }
+
   private int [] setPixelValue(int [] pixelArray, Function<int [],Integer>greyConverter){
     int pixelValue=greyConverter.apply(pixelArray);
     Arrays.fill(pixelArray, pixelValue);

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface RGBImageInterface {
-  void saveImage(String imagePath, String ImageName) throws IOException;
+  void saveImage(String imagePath) throws IOException;
 
   RGBImageInterface flipImage(int axisDirection) throws IOException;
 
@@ -19,6 +19,8 @@ public interface RGBImageInterface {
   RGBImageInterface getSingleComponentImage(int colorValue) throws IOException;
 
   RGBImageInterface greyScaleImage(int greyScaleType) throws IOException;
+
+  RGBImageInterface sepiaImage() throws IOException;
 
   int getImageHeight();
 

@@ -14,7 +14,7 @@ public enum GreyScaleType {
                 for(int ele=0;ele<ar.length;ele++){
                   num=Math.max(num,ar[ele]);
                 }
-                System.out.println("num: "+num);
+//                System.out.println("Value num: "+num);
                 return num;
               }
       );
@@ -32,8 +32,9 @@ public enum GreyScaleType {
                         0.7152*rgbPixelArray[ColorMapping.green.ordinal()]+
                         0.0722*rgbPixelArray[ColorMapping.blue.ordinal()];
 
-                System.out.println("num: "+num);
-                return (int)num;
+//                System.out.println("Luma num: "+num);
+                return (int)Math.min(255, Math.max(0, num));
+//                return (int)num;
               }
       );
     }
@@ -49,8 +50,8 @@ public enum GreyScaleType {
                 for(int ele=0;ele<ar.length;ele++){
                   num+=ar[ele];
                 }
-                System.out.println("num: "+num);
-                return num/3;
+//                System.out.println("Intensity num: "+num);
+                return (num/ColorMapping.values().length);
               }
       );
     }

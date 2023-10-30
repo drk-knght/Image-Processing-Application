@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 
 import Model.Enums.ColorMapping;
 import Model.ImageOperations.BrightnessProfilerImage;
+import Model.ImageOperations.ColorTransformation;
 import Model.ImageOperations.CombineChannelImage;
 import Model.ImageOperations.FlipImage;
 import Model.ImageOperations.GreyScaleImage;
@@ -31,7 +32,7 @@ public class RGBImage implements RGBImageInterface{
 
   private int width;
 
-  private final int maxValue=255;
+  private static final int maxValue=255;
 
   public RGBImage(String filePath) throws IOException {
     String extension=getFileExtension(filePath);
@@ -193,7 +194,7 @@ public class RGBImage implements RGBImageInterface{
   }
 
   @Override
-  public void saveImage(String imagePath, String ImageName) throws IOException {
+  public void saveImage(String imagePath) throws IOException {
     String imageExtension=getFileExtension(imagePath);
     if(imageExtension.equals("ppm")){
       savePPMImage(imagePath);
@@ -243,7 +244,13 @@ public class RGBImage implements RGBImageInterface{
 
   @Override
   public RGBImageInterface greyScaleImage(int greyScaleType) throws IOException {
-    ImageOperation imageOperation=new GreyScaleImage(0);
+    ImageOperation imageOperation=new GreyScaleImage(greyScaleType);
+    return imageOperation.operation(this);
+  }
+
+  @Override
+  public RGBImageInterface sepiaImage() throws IOException {
+    ImageOperation imageOperation=new ColorTransformation();
     return imageOperation.operation(this);
   }
 
@@ -305,15 +312,15 @@ public class RGBImage implements RGBImageInterface{
 //      String filedir="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/Koala"+i+".png";
 //      result.get(i).saveImage(filedir,"abc");
 //    }
-    String filePathBlue="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/Manhattan.png";
-    RGBImageInterface imageInterfaceBlue=new RGBImage(filePathBlue);
-    RGBImageInterface result=imageInterfaceBlue.changeSharpness(1);
-    result=result.changeSharpness(1);
+    String filePathBlue="/Users/omagarwal/Desktop/Koala.ppm";
+    RGBImageInterface imageInterface=new RGBImage(filePathBlue);
+    RGBImageInterface result=imageInterface.greyScaleImage(0);
 //    result=result.changeSharpness(1);
 //    result=result.changeSharpness(1);
 //    result=result.changeSharpness(1);
 //    result=result.changeSharpness(1);
-    String filedir="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/ManhattanSharp.jpg";
-    result.saveImage(filedir,"abc");
+//    result=result.changeSharpness(1);
+    String filedir="/Users/omagarwal/Desktop/KoalaGrey.jpg";
+    result.saveImage(filedir);
   }
 }
