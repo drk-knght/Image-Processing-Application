@@ -7,7 +7,7 @@ public enum ColorMapping {
 
   final int colorCoding;
 
-  ColorMapping(int colorCoding){
-    this.colorCoding=colorCoding;
+  ColorMapping(int colorCoding) {
+    this.colorCoding = colorCoding;
   }
 }

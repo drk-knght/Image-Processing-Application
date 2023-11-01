@@ -7,5 +7,5 @@ import Model.RGBImageInterface;
 
 public interface RGBImageCommandInterface {
 
-  void execute(Map<String, RGBImageInterface> cachedImage) throws IOException;
+  void execute(Map<String, RGBImageInterface> cachedImage) throws NullPointerException, IOException;
 }

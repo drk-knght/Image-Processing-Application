@@ -1,4 +1,4 @@
-package Model.ImageOperations;
+package Model.ImageOperations.SingleIN;
 
 import Model.Enums.ColorMapping;
 import Model.RGBImage;
@@ -13,7 +13,10 @@ public class BrightnessProfilerImage implements ImageOperation{
     this.deltaChangeValue=deltaChangeValue;
   }
   @Override
-  public RGBImageInterface operation(RGBImageInterface rgbImage) {
+  public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
+    if(rgbImage==null){
+      throw new IllegalArgumentException("Image passed for changing the brightness of image transformation is not as expected, check again. Aborting!!");
+    }
     int height=rgbImage.getImageHeight();
     int width=rgbImage.getImageWidth();
     int [][][]pixelMatrix=rgbImage.getPixel();
@@ -21,12 +24,14 @@ public class BrightnessProfilerImage implements ImageOperation{
       for(int j=0;j<width;j++){
         for(int k = 0; k< ColorMapping.values().length; k++){
           pixelMatrix[i][j][k]+=deltaChangeValue;
-          if(pixelMatrix[i][j][k]>255){
-            pixelMatrix[i][j][k]=255;
-          }
-          if(pixelMatrix[i][j][k]<0){
-            pixelMatrix[i][j][k]=0;
-          }
+//          if(pixelMatrix[i][j][k]>255){
+//            pixelMatrix[i][j][k]=255;
+//          }
+//          if(pixelMatrix[i][j][k]<0){
+//            pixelMatrix[i][j][k]=0;
+//          }
+          pixelMatrix[i][j][k]=Math.max(0,Math.min(255,pixelMatrix[i][j][k]));
+          // Max(0, min(255,value))
         }
       }
     }

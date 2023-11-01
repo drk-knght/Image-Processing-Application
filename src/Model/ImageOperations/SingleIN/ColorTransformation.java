@@ -1,4 +1,4 @@
-package Model.ImageOperations;
+package Model.ImageOperations.SingleIN;
 
 import java.io.IOException;
 
@@ -21,13 +21,16 @@ public class ColorTransformation implements ImageOperation{
       for(int k=0;k<rgbPixels.length;k++){
         weightedSum+=SEPIA_WEIGHTS[i][k]*rgbPixels[k];
       }
-      transformedResult[i]=(int)weightedSum;
+      transformedResult[i]=Math.max(0,Math.min(255,(int)weightedSum));
     }
     return transformedResult;
   }
 
   @Override
-  public RGBImageInterface operation(RGBImageInterface rgbImage) throws IOException {
+  public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
+    if(rgbImage==null){
+      throw new IllegalArgumentException("Image passed for sepia image transformation is not as expected, check again. Aborting!!");
+    }
     int height=rgbImage.getImageHeight();
     int width=rgbImage.getImageWidth();
     int [][][]pixelMatrix=rgbImage.getPixel();
@@ -37,7 +40,7 @@ public class ColorTransformation implements ImageOperation{
         for(int k=0;k<ColorMapping.values().length;k++){
           imagePixels[k]=pixelMatrix[i][j][k];
         }
-        pixelMatrix[i][j]=matrixMultiplication(imagePixels);
+        pixelMatrix[i][j]= matrixMultiplication(imagePixels);
       }
     }
     return new RGBImage(pixelMatrix);

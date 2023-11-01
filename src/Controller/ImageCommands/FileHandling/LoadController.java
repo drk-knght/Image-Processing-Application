@@ -13,26 +13,29 @@ public class LoadController implements RGBImageCommandInterface {
 
   private final String imageFilePath;
 
-  public LoadController(String [] commandArguments) throws IllegalArgumentException{
-    if(commandArguments.length!=2){
+  public LoadController(String[] commandArguments) throws IllegalArgumentException {
+    if (commandArguments.length != 2) {
       throw new IllegalArgumentException("Wrong number of parameters passed for load command.");
     }
-    imageFilePath=commandArguments[0];
-    imageName=commandArguments[1];
+    imageFilePath = commandArguments[0];
+    imageName = commandArguments[1];
   }
 
-  public LoadController(String imageName, String imageFilePath){
-    this.imageName=imageName;
-    this.imageFilePath=imageFilePath;
+  public LoadController(String imageName, String imageFilePath) {
+    this.imageName = imageName;
+    this.imageFilePath = imageFilePath;
   }
 
   @Override
-  public void execute(Map<String, RGBImageInterface> cachedImage) throws IOException {
-    RGBImageInterface rgbImage=cachedImage.get(imageName);
-    if(rgbImage!=null){
+  public void execute(Map<String, RGBImageInterface> cachedImage) throws NullPointerException, IOException {
+    if(cachedImage==null){
+      throw new NullPointerException("The lookup table passed for the image processing app does not exists.");
+    }
+    RGBImageInterface rgbImage = cachedImage.get(imageName);
+    if (rgbImage != null) {
       System.out.println("Changing the existing image present in Cache.");
     }
-    rgbImage=new RGBImage(imageFilePath);
-    cachedImage.put(imageName,rgbImage);
+    rgbImage = new RGBImage(imageFilePath);
+    cachedImage.put(imageName, rgbImage);
   }
 }

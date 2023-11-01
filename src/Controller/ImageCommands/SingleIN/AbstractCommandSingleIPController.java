@@ -1,4 +1,4 @@
-package Controller.ImageCommands.SingleIn;
+package Controller.ImageCommands.SingleIN;
 
 import java.io.IOException;
 import java.util.Map;
@@ -21,24 +21,29 @@ public abstract class AbstractCommandSingleIPController implements RGBImageComma
     this.imageOperationValueIndex=Integer.parseInt(commandArguments[0]);
     this.rgbExistingImage=commandArguments[1];
     this.rgbModifiedImage=commandArguments[2];
-//    this.imageOperationValueIndex=Integer.parseInt(commandArguments[2]);
   }
 
-  AbstractCommandSingleIPController(int imageOperationValueIndex, String rgbExistingImage, String rgbModifiedImage){
+  AbstractCommandSingleIPController(int imageOperationValueIndex, String rgbExistingImage, String rgbModifiedImage) throws IllegalArgumentException{
+    if(imageOperationValueIndex<0 || rgbExistingImage==null || rgbModifiedImage==null){
+      throw new IllegalArgumentException("Parameters passed for single input controller can not be null and negative.");
+    }
     this.imageOperationValueIndex=imageOperationValueIndex;
     this.rgbExistingImage=rgbExistingImage;
     this.rgbModifiedImage=rgbModifiedImage;
   }
 
   @Override
-  public void execute(Map<String, RGBImageInterface> cachedImage) throws IOException {
+  public void execute(Map<String, RGBImageInterface> cachedImage) throws NullPointerException,IOException {
+    if(cachedImage==null){
+      throw new NullPointerException("The lookup table passed for the image processing app does not exists.");
+    }
     RGBImageInterface existingImage=cachedImage.get(rgbExistingImage);
 
     if(existingImage==null){
       return;
     }
 
-    RGBImageInterface rgbImage=defineImageOperation(existingImage,imageOperationValueIndex);
+    RGBImageInterface rgbImage=defineImageOperation(existingImage, imageOperationValueIndex);
     cachedImage.put(rgbModifiedImage,rgbImage);
   }
 
