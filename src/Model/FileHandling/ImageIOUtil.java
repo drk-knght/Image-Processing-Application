@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.InputMismatchException;
 
 import javax.imageio.ImageIO;
 
@@ -32,6 +33,7 @@ public class ImageIOUtil {
     int imageHeight = imageElement.getHeight();
     int imageWidth = imageElement.getWidth();
     int[][][] imagePixelMatrix = new int[imageHeight][imageWidth][ColorMapping.values().length];
+    checkDimensionMatrix(imagePixelMatrix);
     for (int i = 0; i < imageHeight; i++) {
       for (int j = 0; j < imageWidth; j++) {
         int rgbCellValue = imageElement.getRGB(j, i);
@@ -45,12 +47,31 @@ public class ImageIOUtil {
 
   public static void saveImageIOFile(int height, int width, int[][][] imageMatrix,
                                      String imageFilePath, String imageExtension) throws IOException {
+    checkDimensionMatrix(imageMatrix);
     BufferedImage imageSavingElement = getBufferedImage(width, height, imageMatrix);
     try {
       File filePath = new File(imageFilePath);
       ImageIO.write(imageSavingElement, imageExtension, filePath);
     } catch (FileNotFoundException ex) {
       throw new FileNotFoundException("File could not be created in the file system at path: "+imageFilePath);
+    }
+  }
+
+  private static void checkDimensionMatrix(int[][][] mat){
+    if(mat.length==0 || mat[0].length==0){
+      throw new InputMismatchException("The dimension of all the pixel arrays are not same");
+    }
+    int height= mat.length;
+    int width=mat[0].length;
+    for(int i=0;i<height;i++){
+      if(mat[i].length!=width){
+        throw new InputMismatchException("The dimension of all the pixel arrays are not same");
+      }
+      for(int j=0;j<width;j++){
+        if(mat[i][j].length!=ColorMapping.values().length){
+          throw new InputMismatchException("The dimension of all the pixel arrays are not same");
+        }
+      }
     }
   }
 

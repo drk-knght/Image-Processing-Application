@@ -44,13 +44,18 @@ public class PPMUtil {
 
   private static int[][][] helperImageMatrix(Scanner sc, int height, int width,
                                              int[][][] pixelMatrix) {
+
     for (int i = 0; i < height; i++) {
+      if(pixelMatrix[i].length!=width){
+        throw new InputMismatchException("The width of all the pixel arrays are not same");
+      }
       for (int j = 0; j < width; j++) {
         pixelMatrix[i][j][ColorMapping.red.ordinal()] = sc.nextInt();
         pixelMatrix[i][j][ColorMapping.green.ordinal()] = sc.nextInt();
         pixelMatrix[i][j][ColorMapping.blue.ordinal()] = sc.nextInt();
       }
     }
+
     if(sc.hasNext()){
       throw new InputMismatchException("Inputs are more than expected for given width and height dimensions");
     }

@@ -3,14 +3,17 @@ package Model.FileHandling;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
 
 import Model.Enums.ColorMapping;
 import Model.RGBImage;
 import Model.RGBImageInterface;
 
-import static Model.FileHandling.PPMUtil.convertImageMatrixToString;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -35,7 +38,7 @@ public class PPMUtilTest {
   }
 
   @Test
-  public void testValidRead() throws IOException {
+  public void testValidReadOperation() throws IOException {
     int [][][]actualPixelMat=PPMUtil.ppmFileReader(imageSavedPath);
     for(int i=0;i<3;i++){
       for(int j=0;j<4;j++){
@@ -50,18 +53,24 @@ public class PPMUtilTest {
 
   private boolean checkImageStringFormat(String actualFormat, int [][][] mat) throws IOException {
 
-    StringBuilder expectedFormat = generate(mat);
+    StringBuilder expectedFormat = generate(mat,false);
     assertEquals(expectedFormat.toString(),actualFormat);
     return true;
   }
 
-  private StringBuilder generate(int [][][]mat){
+  private StringBuilder generate(int [][][]mat, boolean addComment){
     StringBuilder expectedFormat = new StringBuilder();
+    int height= mat.length;
+    int width=mat[0].length;
+    if(addComment){
+      expectedFormat.append("############### Represent a ppm image of dim 3X4\n");
+    }
     expectedFormat.append("P3 ").append(4).append(" ").append(3).append("\n255\n");
     for (int i = 0; i < mat.length; i++) {
-      for (int j = 0; j < mat[0].length; j++) {
-        for (int k = 0; k < ColorMapping.values().length; k++) {
+      for (int j = 0; j < mat[i].length; j++) {
+        for (int k = 0; k < mat[i][j].length; k++) {
           expectedFormat.append(" ").append(mat[i][j][k]).append(" ");
+
         }
       }
     }
@@ -81,19 +90,69 @@ public class PPMUtilTest {
   }
 
   @Test
-  public void testIllegalFileInput(){
-    imageSavedPath="/Users/omagarwal/Desktop/ErrorFile.ppm";
+  public void testIllegalFileInput() throws IOException {
+    int [][][] newMat=new int[][][]{
+            { {145, 203, 132}, {248, 69, 80}, {21, 65, 98}, {19, 11, 211} },
+            { {95, 216, 181}, {243, 108, 173}, {97, 13, 96}, {171, 198, 224}, {13, 34,56} },
+            { {54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110} }
+    };
+    String content=generate(newMat,false).toString();
+    imageSavedPath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/ErrorImg.ppm";
+    generateWriteContentsFile(content, imageSavedPath);
+
     try {
       int [][][] res=PPMUtil.ppmFileReader(imageSavedPath);
       fail("Corrupted file test failed.");
-    } catch (FileNotFoundException e) {
+    } catch (InputMismatchException e) {
       // to catch the corrupted file
     }
   }
 
   @Test
-  public void testValidWrite(){
+  public void testCommentFile() throws IOException {
+    String fileContentComment=generate(pixelMatrix,true).toString();
+    String imageCommentPath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/CommentImg.ppm";
+    generateWriteContentsFile(fileContentComment,imageCommentPath);
+    int [][][] mat=PPMUtil.ppmFileReader(imageCommentPath);
+    for(int i=0;i<mat.length;i++){
+      for(int j=0;j<mat[i].length;j++){
+        for(int k=0;k<mat[i][j].length;k++){
+          assertEquals(pixelMatrix[i][j][k],mat[i][j][k]);
+        }
+      }
+    }
+  }
 
+  @Test
+  public void testValidImgDimensions() throws FileNotFoundException {
+    int [][][] actualMatrix=PPMUtil.ppmFileReader(imageSavedPath);
+    RGBImageInterface rgbImage=new RGBImage(actualMatrix);
+    int height=3;
+    int width=4;
+    assertEquals(height,rgbImage.getImageHeight());
+    assertEquals(width,rgbImage.getImageWidth());
+  }
+
+  public void generateWriteContentsFile(String content, String filePath) throws IOException {
+    File path = new File(filePath);
+    FileWriter wr = new FileWriter(path);
+    wr.write(content);
+    wr.flush();
+    wr.close();
+  }
+
+  @Test
+  public void testValidWriteOperation() throws IOException {
+    String imagePath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/SavingImg.ppm";
+    PPMUtil.savePPMImage(3,4,pixelMatrix,imagePath);
+    int [][][]actualMat=PPMUtil.ppmFileReader(imagePath);
+    for(int i=0;i<3;i++){
+      for(int j=0;j<4;j++){
+        for(int k=0;k<3;k++){
+          assertEquals(pixelMatrix[i][j][k],actualMat[i][j][k]);
+        }
+      }
+    }
   }
 
 }
