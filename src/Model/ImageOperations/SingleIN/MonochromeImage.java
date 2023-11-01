@@ -11,7 +11,10 @@ public class MonochromeImage implements ImageOperation {
   private final int colorComponent;
 
 
-  public MonochromeImage(int colorComponent) {
+  public MonochromeImage(int colorComponent) throws IllegalArgumentException {
+    if(colorComponent<0 || colorComponent>=ColorMapping.values().length){
+      throw new IllegalArgumentException("Single channel operation value passed is not defined in the system. Try again.");
+    }
     this.colorComponent = colorComponent;
   }
 
