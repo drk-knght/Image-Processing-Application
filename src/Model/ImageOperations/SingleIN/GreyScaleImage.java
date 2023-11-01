@@ -8,7 +8,10 @@ public class GreyScaleImage implements ImageOperation {
 
   int greyScaleOperationType;
 
-  public GreyScaleImage(int greyScaleOperationType) {
+  public GreyScaleImage(int greyScaleOperationType) throws IllegalArgumentException{
+    if(greyScaleOperationType<0 || greyScaleOperationType>= GreyScaleType.values().length){
+      throw new IllegalArgumentException("Grey scale operation is not defined. Please try again.");
+    }
     this.greyScaleOperationType = greyScaleOperationType;
   }
 
@@ -39,11 +42,5 @@ public class GreyScaleImage implements ImageOperation {
     }
     return null;
   }
-
-//  private int [] setPixelValue(int [] pixelArray, Function<int [],Integer>greyConverter){
-//    int pixelValue=greyConverter.apply(pixelArray);
-//    Arrays.fill(pixelArray, pixelValue);
-//    return pixelArray;
-//  }
 
 }

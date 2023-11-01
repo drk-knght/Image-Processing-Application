@@ -11,6 +11,9 @@ public class FlipImage implements ImageOperation {
 
 
   public FlipImage(int axisValue) {
+    if(axisValue<0 || axisValue>=AxisName.values().length){
+      throw new IllegalArgumentException("Flipping operation passed is not defined in the system. Try again.");
+    }
     this.axisValue = axisValue;
 
   }

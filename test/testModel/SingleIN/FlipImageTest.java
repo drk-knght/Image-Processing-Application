@@ -43,7 +43,7 @@ public class FlipImageTest {
 
   @Test
   public void testNullImage(){
-    ImageOperation imageOperation=new BrightnessProfilerImage(100);
+    ImageOperation imageOperation=new FlipImage(100);
     try{
       imageOperation.operation(null);
       fail("Test for null object passing failed.");
@@ -55,7 +55,7 @@ public class FlipImageTest {
 
   @Test
   public void testInvalidImageHeight(){
-    ImageOperation imageOperation=new BrightnessProfilerImage(340);
+    ImageOperation imageOperation=new FlipImage(340);
     try{
       int [][][] arZeroLength=new int [0][][];
       imageOperation.operation(new RGBImage(arZeroLength));
@@ -68,7 +68,7 @@ public class FlipImageTest {
 
   @Test
   public void testInvalidImageWidth(){
-    ImageOperation imageOperation=new BrightnessProfilerImage(-90);
+    ImageOperation imageOperation=new FlipImage(-90);
     try{
       int [][][] arZeroWidth=new int [40][0][];
       imageOperation.operation(new RGBImage(arZeroWidth));
@@ -148,5 +148,24 @@ public class FlipImageTest {
     assertTrue(checkImageStringFormat(verticalFlippedImage,expectedMat));
   }
 
+  @Test
+  public void testIllegalFlip() {
+
+    try{
+      ImageOperation imageOperation=new FlipImage(AxisName.values().length+100);
+      fail("Positive illegal flipping operation test failed.");
+    }
+    catch (IllegalArgumentException ex){
+      // test passes if exception is thrown.
+    }
+
+    try{
+      ImageOperation imageOperation=new FlipImage(-54);
+      fail("Negative illegal flipping operation test failed.");
+    }
+    catch (IllegalArgumentException ex){
+      // test passes if exception is thrown.
+    }
+  }
 
 }
