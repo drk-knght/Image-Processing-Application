@@ -17,7 +17,7 @@ public class MonochromeImage implements ImageOperation {
 
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException{
-    if(rgbImage==null){
+    if(rgbImage==null || rgbImage.getImageWidth()<=0 || rgbImage.getImageHeight()<=0){
       throw new IllegalArgumentException("Image passed for monochrome images is not as expected, check again. Aborting!!");
     }
     int height = rgbImage.getImageHeight();

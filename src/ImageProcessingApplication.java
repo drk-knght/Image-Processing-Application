@@ -9,7 +9,7 @@ import Controller.RGBImageController;
 import Controller.RGBImageControllerInterface;
 
 public class ImageProcessingApplication {
-  public static void main(String[] args) throws FileNotFoundException, IOException {
+  public static void main(String[] args) throws IOException {
     InputStream in;
 
     OutputStream out = System.out;
