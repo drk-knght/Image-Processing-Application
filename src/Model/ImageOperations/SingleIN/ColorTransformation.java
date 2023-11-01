@@ -1,6 +1,5 @@
 package Model.ImageOperations.SingleIN;
 
-import java.io.IOException;
 
 import Model.Enums.ColorMapping;
 import Model.RGBImage;

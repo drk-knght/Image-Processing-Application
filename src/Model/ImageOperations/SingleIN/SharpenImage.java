@@ -13,6 +13,9 @@ public class SharpenImage implements ImageOperation {
   private final int kernelOperation;
 
   public SharpenImage(int kernelOperation) {
+    if(kernelOperation<0 || kernelOperation>=KernelImage.values().length){
+      throw new IllegalArgumentException("Sharpening operation value passed is not defined in the system. Try again.");
+    }
     this.kernelOperation = kernelOperation;
   }
 

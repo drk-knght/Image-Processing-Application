@@ -5,12 +5,10 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-
 import Model.Enums.ColorMapping;
-import Model.Enums.KernelImage;
-
+import Model.ImageOperations.SingleIN.ColorTransformation;
 import Model.ImageOperations.SingleIN.ImageOperation;
-import Model.ImageOperations.SingleIN.SharpenImage;
+
 import Model.RGBImage;
 import Model.RGBImageInterface;
 
@@ -19,7 +17,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public class SharpenImageTest {
+public class SepiaImageTest {
+
   String imagePathImageIO;
 
   String imagePathPPM;
@@ -42,7 +41,7 @@ public class SharpenImageTest {
 
   @Test
   public void testNullImage(){
-    ImageOperation imageOperation=new SharpenImage(100);
+    ImageOperation imageOperation=new ColorTransformation();
     try{
       imageOperation.operation(null);
       fail("Test for null object passing failed.");
@@ -54,7 +53,7 @@ public class SharpenImageTest {
 
   @Test
   public void testInvalidImageHeight(){
-    ImageOperation imageOperation=new SharpenImage(340);
+    ImageOperation imageOperation=new ColorTransformation();
     try{
       int [][][] arZeroLength=new int [0][][];
       imageOperation.operation(new RGBImage(arZeroLength));
@@ -67,7 +66,7 @@ public class SharpenImageTest {
 
   @Test
   public void testInvalidImageWidth(){
-    ImageOperation imageOperation=new SharpenImage(-90);
+    ImageOperation imageOperation=new ColorTransformation();
     try{
       int [][][] arZeroWidth=new int [40][0][];
       imageOperation.operation(new RGBImage(arZeroWidth));
@@ -79,68 +78,20 @@ public class SharpenImageTest {
   }
 
   @Test
-  public void testIllegalSharpen() {
-
-    try{
-      ImageOperation imageOperation=new SharpenImage(KernelImage.values().length+570);
-      fail("Positive illegal sharpen operation test failed.");
-    }
-    catch (IllegalArgumentException ex){
-      // test passes if exception is thrown.
-    }
-
-    try{
-      ImageOperation imageOperation=new SharpenImage(-69);
-      fail("Negative illegal sharpen operation test failed.");
-    }
-    catch (IllegalArgumentException ex){
-      // test passes if exception is thrown.
-    }
-  }
-
-  @Test
-  public void testBlurImage() throws IOException {
+  public void testSepiaImage() throws IOException {
     int [][][] smallResImage = new int[][][]{
             { {145, 203, 132}, {248, 69, 80}, {21, 65, 98}, {19, 11, 211} },
             { {95, 216, 181}, {243, 108, 173}, {97, 13, 96}, {171, 198, 224} },
             { {54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110} }
     };
     RGBImageInterface rgbImage=new RGBImage(smallResImage);
-    ImageOperation imageOperation=new SharpenImage(KernelImage.Blur.ordinal());
-    RGBImageInterface blurredImage=imageOperation.operation(rgbImage);
-    int [][][] actualMat= blurredImage.getPixel();
+    ImageOperation imageOperation=new ColorTransformation();
+    RGBImageInterface sepiaImage=imageOperation.operation(rgbImage);
+    int [][][] actualMat= sepiaImage.getPixel();
     int [][][] expectedMat= new int [][][]{
-            { {94,93,76}, {125, 78, 87}, {76, 47, 97}, {34, 36, 99} },
-            { {100, 129, 92}, {157,116, 114}, {143,86, 128}, {94,76, 121} },
-            { {53,98, 40}, {105,97, 63}, {133,84, 84}, {100,66, 76} }
-    };
-    for(int i=0;i<3;i++){
-      for(int j=0;j<4;j++){
-        for(int k=0;k<3;k++){
-//          System.out.println("i: "+i+" j:"+j+" k:"+k);
-//          System.out.println(actualMat[i][j][k]);
-          assertEquals(expectedMat[i][j][k],actualMat[i][j][k]);
-        }
-      }
-    }
-    assertTrue(checkImageStringFormat(blurredImage,expectedMat));
-  }
-
-  @Test
-  public void testSharpenImage() throws IOException {
-    int [][][] smallResImage = new int[][][]{
-            { {145, 203, 132}, {248, 69, 80}, {21, 65, 98}, {19, 11, 211} },
-            { {95, 216, 181}, {243, 108, 173}, {97, 13, 96}, {171, 198, 224} },
-            { {54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110} }
-    };
-    RGBImageInterface rgbImage=new RGBImage(smallResImage);
-    ImageOperation imageOperation=new SharpenImage(KernelImage.Sharpen.ordinal());
-    RGBImageInterface sharpenedImage=imageOperation.operation(rgbImage);
-    int [][][] actualMat= sharpenedImage.getPixel();
-    int [][][] expectedMat= new int [][][]{
-            { {226,232,195}, {255, 125, 161}, {114, 43, 220}, {0, 16, 251} },
-            { {247, 255, 249}, {255,255, 255}, {255,130, 255}, {234,249, 255} },
-            { {69,252, 44}, {190,189, 70}, {255,194, 191}, {216,130, 146} }
+            { {238,212,165}, {165, 147, 114}, {76, 68, 53}, {55, 49, 38} },
+            { {237, 211, 164}, {211,187, 146}, {66,58, 45}, {255,233, 181} },
+            { {189,168, 131}, {113,100, 78}, {251,224, 174}, {145,129, 100} }
     };
     for(int i=0;i<3;i++){
       for(int j=0;j<4;j++){
@@ -149,12 +100,12 @@ public class SharpenImageTest {
         }
       }
     }
-    assertTrue(checkImageStringFormat(sharpenedImage,expectedMat));
+    assertTrue(checkImageStringFormat(sepiaImage,expectedMat));
   }
 
-  private boolean checkImageStringFormat(RGBImageInterface sharpenedImage, int [][][] mat) throws IOException {
-    sharpenedImage.saveImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-Sharp-Testing.ppm");
-    StringBuilder savedRes = convertImageMatrixToString(sharpenedImage.getImageHeight(), sharpenedImage.getImageWidth(), sharpenedImage.getPixel());
+  private boolean checkImageStringFormat(RGBImageInterface sepiaImage, int [][][] mat) throws IOException {
+    sepiaImage.saveImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-Sepia-Testing.ppm");
+    StringBuilder savedRes = convertImageMatrixToString(sepiaImage.getImageHeight(), sepiaImage.getImageWidth(), sepiaImage.getPixel());
     String savedFormat = new String(savedRes);
     StringBuilder expectedFormat = new StringBuilder();
     expectedFormat.append("P3 ").append(4).append(" ").append(3).append("\n255\n");
