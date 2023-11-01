@@ -76,7 +76,7 @@ public class PPMUtil {
     fileStream.write(new String(ppmImageData).getBytes());
   }
 
-  private static StringBuilder convertImageMatrixToString(int imageHeight, int imageWidth,
+  public static StringBuilder convertImageMatrixToString(int imageHeight, int imageWidth,
                                                           int[][][] pixelImageMatrix) {
     StringBuilder s = new StringBuilder();
     s.append("P3 ").append(imageWidth).append(" ").append(imageHeight).append("\n255\n");
