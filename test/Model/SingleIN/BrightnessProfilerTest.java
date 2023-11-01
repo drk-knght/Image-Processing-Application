@@ -1,4 +1,4 @@
-package testModel.SingleIN;
+package Model.SingleIN;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,5 @@
 package Model.ImageOperations.MultiOUT;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class SplitChannelImage implements MultipleOperationImages {
 
   @Override
   public List<RGBImageInterface> operation(RGBImageInterface rgbImages) throws IllegalArgumentException {
-    if(rgbImages==null){
+    if(rgbImages==null || rgbImages.getImageHeight()<=0 || rgbImages.getImageWidth()<=0){
       throw new IllegalArgumentException("Image passed for the split operation on image is not as expected, check again. Aborting!!");
     }
     ArrayList<RGBImageInterface> channelImages = new ArrayList<RGBImageInterface>();
@@ -21,4 +20,6 @@ public class SplitChannelImage implements MultipleOperationImages {
     }
     return channelImages;
   }
+
+
 }

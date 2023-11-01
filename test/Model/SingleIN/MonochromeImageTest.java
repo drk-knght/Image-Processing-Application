@@ -1,4 +1,4 @@
-package testModel.SingleIN;
+package Model.SingleIN;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,10 +7,6 @@ import java.io.IOException;
 
 import Model.Enums.AxisName;
 import Model.Enums.ColorMapping;
-import Model.Enums.GreyScaleType;
-import Model.ImageOperations.SingleIN.BrightnessProfilerImage;
-import Model.ImageOperations.SingleIN.FlipImage;
-import Model.ImageOperations.SingleIN.GreyScaleImage;
 import Model.ImageOperations.SingleIN.ImageOperation;
 import Model.ImageOperations.SingleIN.MonochromeImage;
 import Model.RGBImage;
