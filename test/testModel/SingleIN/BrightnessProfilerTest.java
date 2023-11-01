@@ -3,7 +3,6 @@ package testModel.SingleIN;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import Model.Enums.ColorMapping;
@@ -12,10 +11,8 @@ import Model.ImageOperations.SingleIN.ImageOperation;
 import Model.RGBImage;
 import Model.RGBImageInterface;
 
-import Model.FileHandling.PPMUtil;
-
 import static Model.FileHandling.PPMUtil.convertImageMatrixToString;
-import static Model.FileHandling.PPMUtil.savePPMImage;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -31,7 +28,7 @@ public class BrightnessProfilerTest {
   RGBImageInterface testingImagePPM;
 
   @Before
-  public void setUp() throws IOException{
+  public void setUp() {
     imagePathImageIO = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/Koala.png";
     imagePathPPM="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/Koala.ppm";
     try {
@@ -114,7 +111,7 @@ public class BrightnessProfilerTest {
   }
 
   private boolean checkImageStringFormat(RGBImageInterface brighterImg, int num, int [][][] mat) throws IOException {
-    brighterImg.saveImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-Testing.ppm");
+    brighterImg.saveImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-Brighter-"+num+"-Testing.ppm");
     StringBuilder savedRes=convertImageMatrixToString(brighterImg.getImageHeight(), brighterImg.getImageWidth(), brighterImg.getPixel());
     String savedFormat=new String(savedRes);
     StringBuilder expectedFormat= new StringBuilder();
