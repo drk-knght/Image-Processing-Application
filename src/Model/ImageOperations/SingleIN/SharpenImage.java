@@ -1,18 +1,25 @@
 package Model.ImageOperations.SingleIN;
 
-import java.io.IOException;
-
 import Model.Enums.ColorMapping;
 import Model.Enums.KernelImage;
-import Model.ImageOperations.SingleIN.ImageOperation;
 import Model.RGBImage;
 import Model.RGBImageInterface;
 
+/**
+ * This class represents the sharpness operation on a single image currently present in the memory.
+ * It takes the kernel type (blur / sharpen) and performs the action on it to get a new image.
+ * It checks for validity of inputs passed to it and exception is thrown if invalid.
+ */
 public class SharpenImage implements ImageOperation {
 
   private final int kernelOperation;
 
-  public SharpenImage(int kernelOperation) {
+  /**
+   * This constructor takes kernel filter type which will be used during the operation of the image.
+   * @param kernelOperation Integer representing the kernel operation which needs to be performed.
+   * @throws IllegalArgumentException Throws exception if an invalid kernel type is passed as args.
+   */
+  public SharpenImage(int kernelOperation) throws IllegalArgumentException {
     if(kernelOperation<0 || kernelOperation>=KernelImage.values().length){
       throw new IllegalArgumentException("Sharpening operation value passed is not defined in the system. Try again.");
     }
@@ -28,6 +35,13 @@ public class SharpenImage implements ImageOperation {
     return null;
   }
 
+  /**
+   * The method performs an action on the existing image in memory of the image processing app.
+   * Returns the images containing the data that can be accessed and operated by this interface.
+   * @param rgbImage Image currently in memory on which the working is to be done.
+   * @return An image as the result of the action performed n the former image.
+   * @throws IllegalArgumentException Throws exception if the parameter passed is invalid.
+   */
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException{
     if(rgbImage==null || rgbImage.getImageWidth()<=0 || rgbImage.getImageHeight()<=0) {

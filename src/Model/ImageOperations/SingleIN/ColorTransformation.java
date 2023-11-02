@@ -5,6 +5,11 @@ import Model.Enums.ColorMapping;
 import Model.RGBImage;
 import Model.RGBImageInterface;
 
+/**
+ * This class represents the sepia color transformation on a single image presently in the memory.
+ * It takes the image and converts to sepia image as required by the client using this.
+ * It checks for validity of inputs passed to it and exception is thrown if invalid.
+ */
 public class ColorTransformation implements ImageOperation{
 
   private final double [][] SEPIA_WEIGHTS={
@@ -25,6 +30,13 @@ public class ColorTransformation implements ImageOperation{
     return transformedResult;
   }
 
+  /**
+   * The method performs an action on the existing image in memory of the image processing app.
+   * Returns the images containing the data that can be accessed and operated by this interface.
+   * @param rgbImage Image currently in memory on which the working is to be done.
+   * @return An image as the result of the action performed n the former image.
+   * @throws IllegalArgumentException Throws exception if the parameter passed is invalid.
+   */
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if(rgbImage==null || rgbImage.getImageWidth()<=0 || rgbImage.getImageHeight()<=0){

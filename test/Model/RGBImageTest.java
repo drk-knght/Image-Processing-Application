@@ -49,7 +49,7 @@ public class RGBImageTest {
       RGBImageInterface newImg=new RGBImage(newMat);
       fail("Test failed");
     }
-    catch (InputMismatchException ex){
+    catch (IllegalArgumentException ex){
       // catch to pass the test
     }
   }

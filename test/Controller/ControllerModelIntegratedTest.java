@@ -32,7 +32,8 @@ public class ControllerModelIntegratedTest {
     RGBImageControllerInterface rgbController=new RGBImageController(in,out);
     rgbController.go();
     String actualOutput=out.toString();
-    String expectedOp="Illegal arguments passed for the operations.Do you want to try again?";
+    String expectedOp="Illegal arguments passed for the operations.Do you want to try again?\n"+
+            "\n\nLooks like we are at the end of program. See you soon.";
     assertEquals(expectedOp,actualOutput);
   }
 
@@ -50,7 +51,7 @@ public class ControllerModelIntegratedTest {
     rgbControllerQuit.go();
     String actualOutputQ=outQ.toString();
     String actualOutputQuit=outQuit.toString();
-    String expectedOp="Quitting application.";
+    String expectedOp="Quitting application.\n";
     assertEquals(expectedOp,actualOutputQ);
     assertEquals(expectedOp,actualOutputQuit);
   }
@@ -63,7 +64,7 @@ public class ControllerModelIntegratedTest {
     RGBImageControllerInterface rgbController=new RGBImageController(in,out);
     rgbController.go();
     String actualOutput=out.toString();
-    String expectedOp="Reading comment now....";
+    String expectedOp="Reading comment now....\n"+"\n\nLooks like we are at the end of program. See you soon.";
     assertEquals(expectedOp,actualOutput);
   }
 

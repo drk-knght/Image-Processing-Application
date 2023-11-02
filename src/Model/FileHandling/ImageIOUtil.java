@@ -11,8 +11,21 @@ import javax.imageio.ImageIO;
 
 import Model.Enums.ColorMapping;
 
+/**
+ * This utility class signifies file handling operations on images which can be accessed by ImageIO.
+ * The class can read a file from a specified path and write down the information to another file.
+ * It checks for various exception that can occur during the process like IOException.
+ */
 public class ImageIOUtil {
 
+  /**
+   * The static methods performs the read operation to get the image from a specified file path.
+   * The method also throws exception if an invalid file path is passed.
+   * It also throws exception if an error occurred while reading the inputs stored in the file.
+   * @param filePathImageIO String representing the file pah which contains the image data.
+   * @return A 3-d matrix which contains the information about the individual rgb image pixels.
+   * @throws IOException Throws exception if an invalid file path input is provided to the method.
+   */
   public static int[][][] imageIOFileReader(String filePathImageIO) throws IOException {
     BufferedImage imageElement;
     FileInputStream fileName;
@@ -45,6 +58,16 @@ public class ImageIOUtil {
     return imagePixelMatrix;
   }
 
+  /**
+   * The static methods performs the write operation to get the image from a specified file path.
+   * The method also throws exception if the info could not be written to the specified file path.
+   * @param height Integer containing the data about the height of the image in memory.
+   * @param width Integer containing the data about the width of the image in memory.
+   * @param imageMatrix 3-d matrix which contains the data about the individual rgb image pixels.
+   * @param imageFilePath String representing the file pah where image data need to be saved.
+   * @param imageExtension Extension of the image format for saving the image.
+   * @throws IOException Throws exception if the image data cannot be written to the specified file.
+   */
   public static void saveImageIOFile(int height, int width, int[][][] imageMatrix,
                                      String imageFilePath, String imageExtension) throws IOException {
     checkDimensionMatrix(imageMatrix);

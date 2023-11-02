@@ -4,10 +4,20 @@ import Model.Enums.GreyScaleType;
 import Model.RGBImage;
 import Model.RGBImageInterface;
 
+/**
+ * This class represents the greyscale operation on a single image currently present in the memory.
+ * Takes the greyscale type and performs the action on it to get a new black-white image.
+ * It checks for validity of inputs passed to it and exception is thrown if invalid.
+ */
 public class GreyScaleImage implements ImageOperation {
 
-  int greyScaleOperationType;
+  private final int greyScaleOperationType;
 
+  /**
+   * This constructor takes greyscale type which will be used for greyscale action on an image.
+   * @param greyScaleOperationType Integer signifying the greyscale mapping with the Enum.
+   * @throws IllegalArgumentException Throws exception if an invalid greyscale is passed as args.
+   */
   public GreyScaleImage(int greyScaleOperationType) throws IllegalArgumentException{
     if(greyScaleOperationType<0 || greyScaleOperationType>= GreyScaleType.values().length){
       throw new IllegalArgumentException("Grey scale operation is not defined. Please try again.");
@@ -15,6 +25,13 @@ public class GreyScaleImage implements ImageOperation {
     this.greyScaleOperationType = greyScaleOperationType;
   }
 
+  /**
+   * The method performs an action on the existing image in memory of the image processing app.
+   * Returns the images containing the data that can be accessed and operated by this interface.
+   * @param rgbImage Image currently in memory on which the working is to be done.
+   * @return An image as the result of the action performed n the former image.
+   * @throws IllegalArgumentException Throws exception if the parameter passed is invalid.
+   */
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException{
     if(rgbImage==null || rgbImage.getImageWidth()<=0 || rgbImage.getImageHeight()<=0){

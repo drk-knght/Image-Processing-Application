@@ -4,14 +4,32 @@ import Model.Enums.ColorMapping;
 import Model.RGBImage;
 import Model.RGBImageInterface;
 
+/**
+ * This class represents the brightness operation on a single image currently present in the memory.
+ * It takes the image and change the brightness of the image as required by the client using this.
+ * It checks for validity of inputs passed to it and exception is thrown if invalid.
+ */
 public class BrightnessProfilerImage implements ImageOperation{
 
-  int deltaChangeValue;
+  private final int deltaChangeValue;
 
-
+  /**
+   * This constructor takes numerical change required for each pixel of the img as part of this op.
+   * @param deltaChangeValue Integer signifying the change in the pixel value that needs to be done.
+   * @throws IllegalArgumentException Throws exception if an invalid axis type is passed as args.
+   */
   public BrightnessProfilerImage(int deltaChangeValue){
     this.deltaChangeValue=deltaChangeValue;
   }
+
+  /**
+   * The method performs an action on the existing image in memory of the image processing app.
+   * Returns the images containing the data that can be accessed and operated by this interface.
+   * @param rgbImage Image currently in memory on which the working is to be done.
+   * @return An image as the result of the action performed n the former image.
+   * @throws IllegalArgumentException Throws exception if the parameter passed is invalid.
+   */
+
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if(rgbImage==null || rgbImage.getImageWidth()<=0 || rgbImage.getImageHeight()<=0){
@@ -24,14 +42,7 @@ public class BrightnessProfilerImage implements ImageOperation{
       for(int j=0;j<width;j++){
         for(int k = 0; k< ColorMapping.values().length; k++){
           pixelMatrix[i][j][k]+=deltaChangeValue;
-//          if(pixelMatrix[i][j][k]>255){
-//            pixelMatrix[i][j][k]=255;
-//          }
-//          if(pixelMatrix[i][j][k]<0){
-//            pixelMatrix[i][j][k]=0;
-//          }
           pixelMatrix[i][j][k]=Math.max(0,Math.min(255,pixelMatrix[i][j][k]));
-          // Max(0, min(255,value))
         }
       }
     }
