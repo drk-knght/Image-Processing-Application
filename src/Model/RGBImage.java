@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.List;
 
 import Model.Enums.AxisName;
@@ -60,8 +61,14 @@ public class RGBImage implements RGBImageInterface {
     if(pixelMatrix==null){
       throw new NullPointerException("The image matrix passed is a null reference. Aborting the program.");
     }
-    if (pixelMatrix.length == 0 || pixelMatrix[0].length == 0) {
-      throw new IllegalArgumentException("Image file doesn't have a valid dimensions.");
+    int height=pixelMatrix.length;
+    int width=pixelMatrix[0].length;
+    for(int i=0;i< pixelMatrix.length;i++){
+      for(int j=0;j<pixelMatrix[i].length;j++){
+        if(pixelMatrix[i].length!=width || pixelMatrix[i][j].length!=ColorMapping.values().length){
+          throw new InputMismatchException("Input values of the array does not match as expected.");
+        }
+      }
     }
   }
 
@@ -171,14 +178,14 @@ public class RGBImage implements RGBImageInterface {
   }
 
 
-  public static void main(String[] args) throws IOException {
-
-    String filePathBlue = "/Users/omagarwal/Desktop/LowRes.jpeg";
-
-    RGBImageInterface imageInterface = new RGBImage(filePathBlue);
-    RGBImageInterface result = imageInterface.greyScaleImage(2);
-
-    String filedir = "/Users/omagarwal/Desktop/LowRes.ppm";
-    result.saveImage(filedir);
-  }
+//  public static void main(String[] args) throws IOException {
+//
+//    String filePathBlue = "/Users/omagarwal/Desktop/LowRes.jpeg";
+//
+//    RGBImageInterface imageInterface = new RGBImage(filePathBlue);
+//    RGBImageInterface result = imageInterface.greyScaleImage(2);
+//
+//    String filedir = "/Users/omagarwal/Desktop/LowRes.ppm";
+//    result.saveImage(filedir);
+//  }
 }

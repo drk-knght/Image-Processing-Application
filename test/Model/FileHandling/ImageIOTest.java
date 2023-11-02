@@ -85,6 +85,7 @@ public class ImageIOTest {
     String imagePath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/IllegalImageIOImg.png";
     try{
       ImageIOUtil.saveImageIOFile(3,4,newMat,imagePath,"png");
+      fail("Test failed");
     }
     catch (InputMismatchException ex){
       // to catch mismatched input image matrix.
