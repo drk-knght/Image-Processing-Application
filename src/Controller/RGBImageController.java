@@ -35,6 +35,11 @@ import Model.Enums.GreyScaleType;
 import Model.Enums.KernelImage;
 import Model.RGBImageInterface;
 
+/**
+ * The class represents the controller part of the MVC  which handles the bifurcation of the work.
+ * The controller has an InputStream and an OutputStream where the inputs and outputs are fetched.
+ * The design is based on the command builder design pattern.
+ */
 public class RGBImageController implements RGBImageControllerInterface {
 
   private final InputStream in;
@@ -45,6 +50,12 @@ public class RGBImageController implements RGBImageControllerInterface {
 
   private final Map<String, Function<String[], RGBImageCommandInterface>> knownCommands;
 
+  /**
+   * Constructor takes the input and output stream from where the interaction is to be made.
+   * The data is fetched from in and the result if any are posted to out streams.
+   * @param in The inputStream from where the controller gets the data.
+   * @param out The outputStream where the controller send the result of the operation.
+   */
   public RGBImageController(InputStream in, OutputStream out) {
     this.in = in;
     this.out = out;
@@ -135,6 +146,11 @@ public class RGBImageController implements RGBImageControllerInterface {
     return knownCommands;
   }
 
+  /**
+   * The method which gives command for all the image processing application operations.
+   * It encapsulates all the helper command classes objects under the method.
+   * @throws IOException Throws exception if invalid data is used in the method.
+   */
   @Override
   public void go() throws IOException {
 

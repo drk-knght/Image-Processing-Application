@@ -6,6 +6,10 @@ import java.util.Map;
 import Controller.ImageCommands.RGBImageCommandInterface;
 import Model.RGBImageInterface;
 
+/**
+ * This abstract class represents an abstract controller which handles single input related query.
+ * The class takes the operation index, existing and new image name to perform the operation.
+ */
 public abstract class AbstractCommandSingleIPController implements RGBImageCommandInterface {
 
   private final int imageOperationValueIndex;
@@ -23,15 +27,13 @@ public abstract class AbstractCommandSingleIPController implements RGBImageComma
     this.rgbModifiedImage=commandArguments[2];
   }
 
-  AbstractCommandSingleIPController(int imageOperationValueIndex, String rgbExistingImage, String rgbModifiedImage) throws IllegalArgumentException{
-    if(imageOperationValueIndex<0 || rgbExistingImage==null || rgbModifiedImage==null){
-      throw new IllegalArgumentException("Parameters passed for single input controller can not be null and negative.");
-    }
-    this.imageOperationValueIndex=imageOperationValueIndex;
-    this.rgbExistingImage=rgbExistingImage;
-    this.rgbModifiedImage=rgbModifiedImage;
-  }
 
+  /**
+   * Method represents the single input commands on image operations to be performed by the app.
+   * @param cachedImage The set of images presently in use in the memory of this application.
+   * @throws NullPointerException Throws exception if the input is of null type.
+   * @throws IOException throws exception if there is an error when reading files during operation.
+   */
   @Override
   public void execute(Map<String, RGBImageInterface> cachedImage) throws NullPointerException,IOException {
     if(cachedImage==null){
@@ -47,6 +49,14 @@ public abstract class AbstractCommandSingleIPController implements RGBImageComma
     cachedImage.put(rgbModifiedImage,rgbImage);
   }
 
+  /**
+   * The method represent the image controller operation for the single input param.
+   * This is override by the respective controller utilities as per the required functionality.
+   * @param existingImage Image presently in the memory of the application.
+   * @param imageOperationValueIndex Operation index that needs to be performed for single input.
+   * @return A new image from the model methods after the operation passed from the controller.
+   * @throws IOException Throws exception if it's not able to perform the read and write operation.
+   */
   abstract protected RGBImageInterface defineImageOperation(RGBImageInterface existingImage,
                                                             int imageOperationValueIndex) throws IOException;
 }

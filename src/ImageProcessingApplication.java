@@ -8,7 +8,18 @@ import java.io.OutputStream;
 import Controller.RGBImageController;
 import Controller.RGBImageControllerInterface;
 
+/**
+ * The class represents the starting point of the image processing application.
+ * The main method here initializes the states of model with inputStream and outputStream.
+ * Then it provides the responsibilities to the controller where all the work is bifurcated.
+ */
 public class ImageProcessingApplication {
+
+  /**
+   * Main method where the controller is initialized and provided the access to start the app.
+   * @param args The command line arguments if any passed to the main method.
+   * @throws IOException Throws exception if the file path in args in invalid or not exists.
+   */
   public static void main(String[] args) throws IOException {
     InputStream in;
 
