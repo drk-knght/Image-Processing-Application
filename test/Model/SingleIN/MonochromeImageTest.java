@@ -17,6 +17,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * The class is used to check if the red, green and blue channels are generated correctly
+ * individually.
+ */
 public class MonochromeImageTest {
   String imagePathImageIO;
 
@@ -26,6 +30,9 @@ public class MonochromeImageTest {
 
   RGBImageInterface testingImagePPM;
 
+  /**
+   * SetUp() is used to load a test image which is used to for comparing test results.
+   */
   @Before
   public void setUp() {
     imagePathImageIO = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/Koala.png";
@@ -38,6 +45,9 @@ public class MonochromeImageTest {
     }
   }
 
+  /**
+   * The test is used to check if the input passed is null.
+   */
   @Test
   public void testNullImage(){
     ImageOperation imageOperation=new MonochromeImage(0);
@@ -49,6 +59,10 @@ public class MonochromeImageTest {
       // test passes if the exception is thrown
     }
   }
+
+  /**
+   * The test is used to check if the height of the input image is invalid.
+   */
 
   @Test
   public void testInvalidImageHeight(){
@@ -63,6 +77,9 @@ public class MonochromeImageTest {
     }
   }
 
+  /**
+   * The test is used to check if the width of the input image is invalid.
+   */
   @Test
   public void testInvalidImageWidth(){
     ImageOperation imageOperation=new MonochromeImage(2);
@@ -76,6 +93,9 @@ public class MonochromeImageTest {
     }
   }
 
+  /**
+   * The test is used to check if the values passed for any of the components is invalid.
+   */
   @Test
   public void testIllegalSingleComponent() {
 
@@ -96,6 +116,10 @@ public class MonochromeImageTest {
     }
   }
 
+  /**
+   * The test is sued to check if the red component generated is correct.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testRedComponentImage() throws IOException {
     int [][][] smallResImage = new int[][][]{
@@ -122,6 +146,10 @@ public class MonochromeImageTest {
     assertTrue(checkImageStringFormat(redChannelImage,expectedMat));
   }
 
+  /**
+   * The test is used check if the green component generated is correct.
+   * @throws IOException Throws exception if th input/output is invalid.
+   */
   @Test
   public void testGreenComponentImage() throws IOException {
     int [][][] smallResImage = new int[][][]{
@@ -148,6 +176,10 @@ public class MonochromeImageTest {
     assertTrue(checkImageStringFormat(greenChannelImage,expectedMat));
   }
 
+  /**
+   * The test is used to check if the blue component generated is correct.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testBlueComponentImage() throws IOException {
     int [][][] smallResImage = new int[][][]{

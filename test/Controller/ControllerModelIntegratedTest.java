@@ -16,14 +16,26 @@ import Model.Enums.ColorMapping;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * The class represents the Junit testing for the integrated version of the model and controller.
+ * The test for all the operations of the image processing application are done from end-to-end.
+ * This ensures that controller and model when coupled together are working correctly.
+ */
 public class ControllerModelIntegratedTest {
   String imagePath;
 
+  /**
+   * SetUp() is used to load a test file path which is used to for comparing test results.
+   */
   @Before
   public void setUp(){
     imagePath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Koala.ppm";
   }
 
+  /**
+   * The test is used to check if the input command is invalid.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testUnknownCommand() throws IOException {
     String command="unknown command";
@@ -37,6 +49,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedOp,actualOutput);
   }
 
+  /**
+   * The test is used to check if the application exits when the "q" or "quit" command is given.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testQuitApplication() throws IOException{
     String commandQ="q";
@@ -56,6 +72,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedOp,actualOutputQuit);
   }
 
+  /**
+   * The test is used to check if the application reads the comment properly or error is thrown.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testCommentLineInput() throws IOException {
     String command="### Comment command";
@@ -68,6 +88,11 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedOp,actualOutput);
   }
 
+  /**
+   * The test is used to check if the application reads the incomplete commands properly.
+   * The incorrect commands should display the message regarding the same.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testIncompleteCommands(){
     String [] cmd=new String []{"load","save","red-component","green-component","blue-component","value-component",
@@ -91,6 +116,10 @@ public class ControllerModelIntegratedTest {
     }
   }
 
+  /**
+   * The test to check if the application throws an exception when excess arguments are given.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testExcessArgs(){
     String [] cmd=new String []{"load","save","red-component","green-component","blue-component","value-component",
@@ -131,6 +160,10 @@ public class ControllerModelIntegratedTest {
     return expectedFormat.toString();
   }
 
+  /**
+   * The test to check if the application works correctly for the brightness operation on an image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testBrightness() throws IOException {
     int [][][] smallResImage = new int[][][]{
@@ -150,6 +183,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for the darkness operation on an image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testDarkness() throws IOException {
     int [][][] smallResImage = new int[][][]{
@@ -169,6 +206,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for to get single component red image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testSingleChannelRed() throws  IOException{
     int [][][] smallResImage = new int[][][]{
@@ -188,6 +229,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for to get single component green image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testSingleChannelGreen() throws  IOException{
     int [][][] smallResImage = new int[][][]{
@@ -207,6 +252,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for to get single component blue image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testSingleChannelBlue() throws  IOException{
     int [][][] smallResImage = new int[][][]{
@@ -226,6 +275,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for flip horizontal op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testFlipHorizontal() throws IOException {
     int [][][] smallResImage = new int[][][]{
@@ -245,6 +298,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for flip vertical op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testVerticalFlip() throws IOException {
     int [][][] smallResImage = new int[][][]{
@@ -264,6 +321,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for sepia op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testSepia() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -283,6 +344,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for value greyscale op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testValueGreyscale() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -302,6 +367,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for intensity greyscale op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testIntensityGreyscale() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -321,6 +390,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for blur op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testBlurComponent() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -340,6 +413,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for sharpen op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testSharpenComponent() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -359,6 +436,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for luma greyscale op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testLumaGreyscale() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -395,6 +476,10 @@ public class ControllerModelIntegratedTest {
     return res;
   }
 
+  /**
+   * The test to check if the application works correctly for RGB split op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testRGBSplit() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -430,6 +515,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValueBlue,contentBlue);
   }
 
+  /**
+   * The test to check if the application works correctly for RGB combine op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testCombineRGB() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -457,6 +546,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for correct save op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testSaveImage() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -478,6 +571,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for load op on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testLoadImage() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -499,6 +596,10 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
+  /**
+   * The test to check if the application works correctly for running a script file on image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testRunFile() throws IOException{
     int [][][] smallResImage = new int[][][]{

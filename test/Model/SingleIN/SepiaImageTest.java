@@ -17,6 +17,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * The class is used to test the operations performed while converting an image into sepia tone.
+ */
 public class SepiaImageTest {
 
   String imagePathImageIO;
@@ -27,6 +30,9 @@ public class SepiaImageTest {
 
   RGBImageInterface testingImagePPM;
 
+  /**
+   * SetUp() is used to load a test image which is used to for comparing test results.
+   */
   @Before
   public void setUp() {
     imagePathImageIO = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/Koala.png";
@@ -39,6 +45,9 @@ public class SepiaImageTest {
     }
   }
 
+  /**
+   * The test is used to check if the input passed is null.
+   */
   @Test
   public void testNullImage(){
     ImageOperation imageOperation=new ColorTransformation();
@@ -51,6 +60,9 @@ public class SepiaImageTest {
     }
   }
 
+  /**
+   * The test is used to check if the height of the input image is invalid.
+   */
   @Test
   public void testInvalidImageHeight(){
     ImageOperation imageOperation=new ColorTransformation();
@@ -64,6 +76,9 @@ public class SepiaImageTest {
     }
   }
 
+  /**
+   * The test is used to check if the width of the input image is invalid.
+   */
   @Test
   public void testInvalidImageWidth(){
     ImageOperation imageOperation=new ColorTransformation();
@@ -76,6 +91,11 @@ public class SepiaImageTest {
       // test passes if the exception is thrown.
     }
   }
+
+  /**
+   * The test is used to check if the image is correctly converted into sepia tone.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
 
   @Test
   public void testSepiaImage() throws IOException {

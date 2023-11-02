@@ -17,6 +17,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * The class is used to check if the image is properly converted into intensity, value and luma
+ * greyscale.
+ */
 public class GreyscaleTest {
   String imagePathImageIO;
 
@@ -26,6 +30,9 @@ public class GreyscaleTest {
 
   RGBImageInterface testingImagePPM;
 
+  /**
+   * SetUp() is used to load a test image which is used to for comparing test results.
+   */
   @Before
   public void setUp() {
     imagePathImageIO = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/Koala.png";
@@ -38,6 +45,9 @@ public class GreyscaleTest {
     }
   }
 
+  /**
+   * The test is used to check if the input passed is null.
+   */
   @Test
   public void testNullImage(){
     ImageOperation imageOperation=new GreyScaleImage(1);
@@ -50,6 +60,9 @@ public class GreyscaleTest {
     }
   }
 
+  /**
+   * The test is used to check if the height of the input image is invalid.
+   */
   @Test
   public void testInvalidImageHeight(){
     ImageOperation imageOperation=new GreyScaleImage(0);
@@ -63,6 +76,9 @@ public class GreyscaleTest {
     }
   }
 
+  /**
+   * The test is used to check if the width of the input image is invalid.
+   */
   @Test
   public void testInvalidImageWidth(){
     ImageOperation imageOperation=new GreyScaleImage(2);
@@ -76,6 +92,9 @@ public class GreyscaleTest {
     }
   }
 
+  /**
+   * The test is used to check if the greyscale values are invalid.
+   */
   @Test
   public void testIllegalGreyscale() {
     try{
@@ -95,6 +114,10 @@ public class GreyscaleTest {
     }
   }
 
+  /**
+   * The test is used to check if the greyscale value is calculated correctly.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testValueGreyScale() throws IOException {
     int [][][] smallResImage = new int[][][]{
@@ -115,14 +138,16 @@ public class GreyscaleTest {
       for(int j=0;j<4;j++){
         for(int k=0;k<3;k++){
           assertEquals(expectedMat[i][j][k],actualMat[i][j][k]);
-//          System.out.println("i:"+i +" j:"+j+" k:"+k);
-//          System.out.println(actualMat[i][j][k]);
         }
       }
     }
     assertTrue(checkImageStringFormat(greyscaleValueImage,expectedMat));
   }
 
+  /**
+   * The test is used to check if the luma value is calculated correctly.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testLumaGreyscale() throws IOException {
     int [][][] smallResImage = new int[][][]{
@@ -149,6 +174,10 @@ public class GreyscaleTest {
     assertTrue(checkImageStringFormat(greyscaleLumaImage,expectedMat));
   }
 
+  /**
+   * The test is used to check if the intensity value is calculated correctly.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testIntensityGreyscale() throws IOException {
     int [][][] smallResImage = new int[][][]{

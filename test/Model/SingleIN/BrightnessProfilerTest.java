@@ -17,6 +17,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Class to test the operations performed while increasing/decreasing the brightness of an image.
+ */
 public class BrightnessProfilerTest {
 
   String imagePathImageIO;
@@ -27,6 +30,9 @@ public class BrightnessProfilerTest {
 
   RGBImageInterface testingImagePPM;
 
+  /**
+   * SetUp() is used to load a test image which is used to for comparing test results.
+   */
   @Before
   public void setUp() {
     imagePathImageIO = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/Koala.png";
@@ -37,27 +43,11 @@ public class BrightnessProfilerTest {
     } catch (IOException err) {
       fail("file for testing not found while environment set up for brightness ");
     }
-    // 3*4 rgb mat;
-//    smallResImage = new int[][][]{
-//            {
-//                    {145, 203, 132}, {248, 69, 80}, {21, 65, 98}, {19, 11, 211}
-//            },
-//            {
-//                    {95, 216, 181}, {243, 108, 173}, {97, 13, 96}, {171, 198, 224}
-//            },
-//            {
-//                    {54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}
-//            }
-//    };
-
-//    try{
-//      savePPMImage(3,4,smallResImage,"/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/testingSmallRes.ppm");
-//    }
-//    catch (IOException ex){
-//      throw new IOException("Unable to save ppm file");
-//    }
   }
 
+  /**
+   * The test is used to check if the input passed is null.
+   */
   @Test
   public void testNullImage(){
     ImageOperation imageOperation=new BrightnessProfilerImage(100);
@@ -70,6 +60,9 @@ public class BrightnessProfilerTest {
     }
   }
 
+  /**
+   * The test is used to check if the height of the input image is invalid.
+   */
   @Test
   public void testInvalidImageHeight(){
     ImageOperation imageOperation=new BrightnessProfilerImage(340);
@@ -82,6 +75,10 @@ public class BrightnessProfilerTest {
       // test passes if the exception is thrown.
     }
   }
+
+  /**
+   * The test is used to check if the width of the input image is invalid.
+   */
 
   @Test
   public void testInvalidImageWidth(){
@@ -96,6 +93,10 @@ public class BrightnessProfilerTest {
     }
   }
 
+  /**
+   * The test is used to check if the brightness of the image is increased/decreased correctly.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testMaxBrightnessImage() throws IOException {
     int [][][] smallResImage = new int[][][]{
@@ -142,6 +143,10 @@ public class BrightnessProfilerTest {
     return true;
   }
 
+  /**
+   * The test is used to check minimum darkness value of the image.
+   * @throws IOException Throws exception if the input is invalid.
+   */
   @Test
   public void testMinDarkness() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -156,6 +161,10 @@ public class BrightnessProfilerTest {
     assertTrue(checkImageStringFormat(brighterImg,-300,smallResImage));
   }
 
+  /**
+   * The test is used to check if the brightness of the image is correctly adjusted to the given value.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testStandardBrightness() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -170,6 +179,10 @@ public class BrightnessProfilerTest {
     assertTrue(checkImageStringFormat(brighterImg,30,smallResImage));
   }
 
+  /**
+   * The test is used to check if the brightness of the image is correctly adjusted to the given value.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testStandardDarkness() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -184,6 +197,10 @@ public class BrightnessProfilerTest {
     assertTrue(checkImageStringFormat(brighterImg,-5,smallResImage));
   }
 
+  /**
+   * The test is used to check the validity if the brightness is changed by 0.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testZeroChangeBrightness() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -198,6 +215,10 @@ public class BrightnessProfilerTest {
     assertTrue(checkImageStringFormat(brighterImg,+0,smallResImage));
   }
 
+  /**
+   * The test is used to check the validity if the darkness is changed by 0.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testZeroChangeDarkness() throws IOException{
     int [][][] smallResImage = new int[][][]{

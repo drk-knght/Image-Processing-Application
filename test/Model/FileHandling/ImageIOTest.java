@@ -15,6 +15,9 @@ import static org.junit.Assert.assertEquals;
 
 import static org.junit.Assert.fail;
 
+/**
+ * This class is used to test if the file input and output are correct.
+ */
 public class ImageIOTest {
 
   private String imageSavedPath;
@@ -23,6 +26,10 @@ public class ImageIOTest {
 
   int [][][] pixelMatrix;
 
+  /**
+   * SetUp() is used to initialise an image into a 3x4 matrix of pixels.
+   * @throws IOException Throws exception if the input is invalid.
+   */
   @Before
   public void setUp() throws IOException {
     imageSavedPath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-combineChannel-Testing.png";
@@ -35,6 +42,10 @@ public class ImageIOTest {
     rgbImage.saveImage(imageSavedPath);
   }
 
+  /**
+   * The test is used to check if the input file is read correctly.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testValidReadOperation() throws IOException {
     int [][][]actualPixelMat=ImageIOUtil.imageIOFileReader(imageSavedPath);
@@ -47,6 +58,9 @@ public class ImageIOTest {
     }
   }
 
+  /**
+   * The test is used to check if the image file path is correct.
+   */
   @Test
   public void testIncorrectFilePath(){
     imageSavedPath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-abc-Testing.jpg";
@@ -61,6 +75,10 @@ public class ImageIOTest {
     }
   }
 
+  /**
+   * The test is used to check if the write operation is performed correctly.
+   * @throws IOException Throws exception if the input is invalid.
+   */
   @Test
   public void testValidWriteOperation() throws IOException {
     String imagePath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/SavingImg.png";
@@ -75,6 +93,10 @@ public class ImageIOTest {
     }
   }
 
+  /**
+   * The test is used to check if the image write operation is performed correctly.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testIllegalImageWrite() throws IOException {
     int [][][] newMat=new int[][][]{

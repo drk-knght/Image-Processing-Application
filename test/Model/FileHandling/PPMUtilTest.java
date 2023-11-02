@@ -18,6 +18,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Class to test the operations on PPm images.
+ */
 public class PPMUtilTest {
 
   private String imageSavedPath;
@@ -26,6 +29,10 @@ public class PPMUtilTest {
 
   int [][][] pixelMatrix;
 
+  /**
+   * SetUp() is used to initialise a 3x4 pixel matrix representing an image.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Before
   public void setUp() throws IOException {
     imageSavedPath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-combineChannel-Testing.ppm";
@@ -37,6 +44,10 @@ public class PPMUtilTest {
     };
   }
 
+  /**
+   * The test is used to check if the read operation is performed correctly.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testValidReadOperation() throws IOException {
     int [][][]actualPixelMat=PPMUtil.ppmFileReader(imageSavedPath);
@@ -77,6 +88,9 @@ public class PPMUtilTest {
     return expectedFormat;
   }
 
+  /**
+   * The test is used to validate the file path..
+   */
   @Test
   public void testIncorrectFilePath(){
     imageSavedPath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-abc-Testing.ppm";
@@ -89,6 +103,10 @@ public class PPMUtilTest {
     }
   }
 
+  /**
+   * The test is used to validate the input file with the help of a 3x4 pixel matrix.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testIllegalFileInput() throws IOException {
     int [][][] newMat=new int[][][]{
@@ -108,6 +126,10 @@ public class PPMUtilTest {
     }
   }
 
+  /**
+   * The test is used to check in the given input is a comment.
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testCommentFile() throws IOException {
     String fileContentComment=generate(pixelMatrix,true).toString();
@@ -123,6 +145,10 @@ public class PPMUtilTest {
     }
   }
 
+  /**
+   * The test is used to check if the height and width of the image is valid.
+   * @throws FileNotFoundException Throws an exception if the file doesn't exist.
+   */
   @Test
   public void testValidImgDimensions() throws FileNotFoundException {
     int [][][] actualMatrix=PPMUtil.ppmFileReader(imageSavedPath);
@@ -133,7 +159,7 @@ public class PPMUtilTest {
     assertEquals(width,rgbImage.getImageWidth());
   }
 
-  public void generateWriteContentsFile(String content, String filePath) throws IOException {
+  private void generateWriteContentsFile(String content, String filePath) throws IOException {
     File path = new File(filePath);
     FileWriter wr = new FileWriter(path);
     wr.write(content);
@@ -141,6 +167,10 @@ public class PPMUtilTest {
     wr.close();
   }
 
+  /**
+   * The test is to check if the write operation performed is correct.
+   * @throws IOException Throws exception if the input/output is valid.
+   */
   @Test
   public void testValidWriteOperation() throws IOException {
     String imagePath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/SavingImg.ppm";
