@@ -70,8 +70,7 @@ public class ControllerModelMock {
       logData.append("Split operation on an image.");
       ArrayList<RGBImageInterface> arr=new ArrayList<>();
       arr.add(imageObj);
-      arr.add(imageObj);
-      arr.add(imageObj);
+
       return arr;
     }
 

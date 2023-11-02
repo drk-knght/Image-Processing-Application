@@ -52,12 +52,6 @@ public class RGBImageController implements RGBImageControllerInterface {
     knownCommands = getFamiliarCommands();
   }
 
-//  public RGBImageController(InputStream in, OutputStream out, Map<String, RGBImageInterface> cachedImages){
-//    this.in=in;
-//    this.out=out;
-//    this.cachedImages=cachedImages;
-//    this.knownCommands=getFamiliarCommands();
-//  }
 
   private String[] concatenateStringArrays(String[] args, int newValue) {
     int n = args.length;
@@ -153,19 +147,24 @@ public class RGBImageController implements RGBImageControllerInterface {
       String commandLine = sc.nextLine().trim();
 
       if (commandLine.equals("")) {
-        System.out.println("Please enter a valid command.");
+//        System.out.println("Please enter a valid command.");
+        String op="You have entered a space. Please enter a valid command.";
+        out.write(op.getBytes());
         continue;
       }
 
       if (commandLine.charAt(0) == '#') {
-        System.out.println("Reading comment now...");
+//        System.out.println("Reading comment now...");
+        String op="Reading comment now....";
+        out.write(op.getBytes());
         continue;
       }
 
 
 
       if (commandLine.equalsIgnoreCase("q") || commandLine.equalsIgnoreCase("quit")){
-        System.out.println("Quitting application.");
+        String op="Quitting application.";
+        out.write(op.getBytes());
         return;
       }
 
@@ -179,8 +178,8 @@ public class RGBImageController implements RGBImageControllerInterface {
       Function<String[], RGBImageCommandInterface> cmd = knownCommands.getOrDefault(tokenizedCommandStrings[0], null);
 
       if (cmd == null) {
-        System.out.println("Illegal arguments passed for the operations.");
-        System.out.println("Do you want to try again?");
+        String op="Illegal arguments passed for the operations."+"Do you want to try again?";
+        out.write(op.getBytes());
       } else {
         c = cmd.apply(Arrays.copyOfRange(tokenizedCommandStrings, 1, tokenizedCommandStrings.length));
         try {
