@@ -19,8 +19,6 @@ import static org.junit.Assert.fail;
 public class ControllerModelIntegratedTest {
   String imagePath;
 
-
-  // write a test for run
   @Before
   public void setUp(){
     imagePath="/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Koala.ppm";
@@ -379,8 +377,6 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue,content);
   }
 
-
-
   private int [][][] getColorMat(int [][][] mat, int colorIdx){
     int [][][] res=new int[mat.length][mat[0].length][mat[0][0].length];
     for(int i=0;i<mat.length;i++){
@@ -397,6 +393,7 @@ public class ControllerModelIntegratedTest {
     }
     return res;
   }
+
   @Test
   public void testRGBSplit() throws IOException{
     int [][][] smallResImage = new int[][][]{
@@ -492,6 +489,25 @@ public class ControllerModelIntegratedTest {
     String command="load "+readImgPath+" image"+
             "\nsave "+saveImgPath+" image";
 
+    InputStream in=new ByteArrayInputStream(command.getBytes());
+    OutputStream out=new ByteArrayOutputStream();
+    RGBImageControllerInterface controller=new RGBImageController(in,out);
+    controller.go();
+    String content = Files.readString(Paths.get(saveImgPath));
+    String expectedValue=checkImageStringFormat(smallResImage,0);
+    assertEquals(expectedValue,content);
+  }
+
+  @Test
+  public void testRunFile() throws IOException{
+    int [][][] smallResImage = new int[][][]{
+            { {145, 203, 132}, {248, 69, 80}, {21, 65, 98}, {19, 11, 211} },
+            { {95, 216, 181}, {243, 108, 173}, {97, 13, 96}, {171, 198, 224} },
+            { {54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110} }
+    };
+    String readScriptFilePath="/Users/omagarwal/Desktop/ErrorFile.txt";
+    String saveImgPath="/Users/omagarwal/Desktop/Image-saveFileTest.ppm";
+    String command="run "+readScriptFilePath;
     InputStream in=new ByteArrayInputStream(command.getBytes());
     OutputStream out=new ByteArrayOutputStream();
     RGBImageControllerInterface controller=new RGBImageController(in,out);

@@ -147,23 +147,20 @@ public class RGBImageController implements RGBImageControllerInterface {
       String commandLine = sc.nextLine().trim();
 
       if (commandLine.equals("")) {
-//        System.out.println("Please enter a valid command.");
-        String op="You have entered a space. Please enter a valid command.";
+        String op="\nEncountered a space.\n";
         out.write(op.getBytes());
         continue;
       }
 
       if (commandLine.charAt(0) == '#') {
-//        System.out.println("Reading comment now...");
-        String op="Reading comment now....";
+        String op="Reading comment now....\n";
         out.write(op.getBytes());
         continue;
       }
 
 
-
       if (commandLine.equalsIgnoreCase("q") || commandLine.equalsIgnoreCase("quit")){
-        String op="Quitting application.";
+        String op="Quitting application.\n";
         out.write(op.getBytes());
         return;
       }
@@ -178,17 +175,19 @@ public class RGBImageController implements RGBImageControllerInterface {
       Function<String[], RGBImageCommandInterface> cmd = knownCommands.getOrDefault(tokenizedCommandStrings[0], null);
 
       if (cmd == null) {
-        String op="Illegal arguments passed for the operations."+"Do you want to try again?";
+        String op="Illegal arguments passed for the operations."+"Do you want to try again?\n";
         out.write(op.getBytes());
       } else {
         c = cmd.apply(Arrays.copyOfRange(tokenizedCommandStrings, 1, tokenizedCommandStrings.length));
         try {
           c.execute(cachedImages);
         } catch (IOException ex) {
-          throw new IOException("Exception occurred while executing the command.");
+          throw new IOException("Exception occurred while executing the command.\n");
         }
       }
     }
+    String endMessage="\n\nLooks like we are at the end of program. See you soon.";
+    out.write(endMessage.getBytes());
   }
 
   private Scanner checkFileStreamExists(String[] tokenizedCommandStrings) throws FileNotFoundException {
