@@ -1,0 +1,66 @@
+#load Tiger.png and call it 'Tiger'
+load "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger.jpg" Tiger
+
+#brighten Tiger by adding 10
+brighten 10 Tiger Tiger-brighter
+
+brighten -30 Tiger Tiger-darker
+
+#save Tiger-brighter
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-brighter.png" Tiger-brighter
+
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-darker.jpg" Tiger-darker
+
+#flip Tiger vertically
+vertical-flip Tiger Tiger-vertical
+
+#save Tiger-vertical
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-vertical.png" Tiger-vertical
+
+#flip the vertically flipped Tiger horizontally
+horizontal-flip Tiger Tiger-horizontal
+
+#save Tiger-horizontally
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-horizontal.png" Tiger-horizontal
+
+#create a greyscale using only the value component, as an image Tiger-greyscale
+value-component Tiger Tiger-value-greyscale
+
+luma-component Tiger Tiger-luma-greyscale
+
+intensity-component Tiger Tiger-intensity-greyscale
+
+#save Tiger-greyscale
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-value-greyscale.png" Tiger-value-greyscale
+
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-luma-greyscale.png" Tiger-luma-greyscale
+
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-intensity-greyscale.png" Tiger-intensity-greyscale
+
+blur Tiger Tiger-blur
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-blur.png" Tiger-blur
+
+sharpen Tiger Tiger-sharpen
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-sharpen.png" Tiger-sharpen
+
+sepia Tiger Tiger-sepia
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-sepia.png" Tiger-sepia
+
+
+#overwrite Tiger with another file
+load "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-horizontal.png" Tiger
+
+#give the Tiger a red tint, green tint, and blue tint
+rgb-split Tiger Tiger-red Tiger-green Tiger-blue
+
+#save Tiger-red Tiger-green Tiger-blue
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-red.png" Tiger-red
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-green.png" Tiger-green
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-blue.png" Tiger-blue
+
+#brighten just the red image
+brighten 50 Tiger-red Tiger-red
+
+#combine them back, but by using the brightened red we get a red tint
+rgb-combine Tiger-red-tint Tiger-red Tiger-green Tiger-blue
+save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-red-tint.png" Tiger-red-tint

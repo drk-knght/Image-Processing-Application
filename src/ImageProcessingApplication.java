@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import Controller.RGBImageController;
-import Controller.RGBImageControllerInterface;
+import controller.RGBImageController;
+import controller.RGBImageControllerInterface;
 
 /**
  * The class represents the starting point of the image processing application.
@@ -17,6 +17,7 @@ public class ImageProcessingApplication {
 
   /**
    * Main method where the controller is initialized and provided the access to start the app.
+   *
    * @param args The command line arguments if any passed to the main method.
    * @throws IOException Throws exception if the file path in args in invalid or not exists.
    */
@@ -39,6 +40,6 @@ public class ImageProcessingApplication {
       in = System.in;
     }
     controller = new RGBImageController(in, out);
-    controller.go();
+    controller.goCall();
   }
 }
