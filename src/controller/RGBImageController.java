@@ -18,17 +18,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-import controller.imagecommands.filehandling.LoadController;
-import controller.imagecommands.filehandling.SaveController;
-import controller.imagecommands.multiin.CombineChannelsController;
-import controller.imagecommands.multiout.SplitChannelsController;
+import controller.imagecommands.filehandling.LoadCommand;
+import controller.imagecommands.filehandling.SaveCommand;
+import controller.imagecommands.multiin.CombineChannelsCommand;
+import controller.imagecommands.multiout.SplitChannelsCommand;
 import controller.imagecommands.RGBImageCommandInterface;
-import controller.imagecommands.singlein.BrightnessController;
-import controller.imagecommands.singlein.ColorTransformationController;
-import controller.imagecommands.singlein.FlipImageController;
-import controller.imagecommands.singlein.GreyScaleController;
-import controller.imagecommands.singlein.RGBFilterController;
-import controller.imagecommands.singlein.SharpnessController;
+import controller.imagecommands.singlein.BrightnessCommand;
+import controller.imagecommands.singlein.ColorTransformationCommand;
+import controller.imagecommands.singlein.FlipImageCommand;
+import controller.imagecommands.singlein.GreyScaleCommand;
+import controller.imagecommands.singlein.RGBFilterCommand;
+import controller.imagecommands.singlein.SharpnessCommand;
 import model.enums.AxisName;
 import model.enums.ColorMapping;
 import model.enums.GreyScaleType;
@@ -79,69 +79,69 @@ public class RGBImageController implements RGBImageControllerInterface {
 
     Map<String, Function<String[], RGBImageCommandInterface>> knownCommands = new HashMap<>();
 
-    knownCommands.put("load", args -> new LoadController(args));
-    knownCommands.put("save", args -> new SaveController(args));
+    knownCommands.put("load", args -> new LoadCommand(args));
+    knownCommands.put("save", args -> new SaveCommand(args));
 
     knownCommands.put("red-component",
         args -> {
         String[] newArgs = concatenateStringArrays(args, ColorMapping.red.ordinal());
-        return new RGBFilterController(newArgs);
+        return new RGBFilterCommand(newArgs);
         });
     knownCommands.put("green-component",
         args -> {
         String[] newArgs = concatenateStringArrays(args, ColorMapping.green.ordinal());
-        return new RGBFilterController(newArgs);
+        return new RGBFilterCommand(newArgs);
         });
     knownCommands.put("blue-component",
         args -> {
         String[] newArgs = concatenateStringArrays(args, ColorMapping.blue.ordinal());
-        return new RGBFilterController(newArgs);
+        return new RGBFilterCommand(newArgs);
         });
 
     knownCommands.put("value-component",
         args -> {
         String[] newArgs = concatenateStringArrays(args, GreyScaleType.value.ordinal());
-        return new GreyScaleController(newArgs);
+        return new GreyScaleCommand(newArgs);
         });
     knownCommands.put("luma-component",
         args -> {
         String[] newArgs = concatenateStringArrays(args, GreyScaleType.luma.ordinal());
-        return new GreyScaleController(newArgs);
+        return new GreyScaleCommand(newArgs);
         });
     knownCommands.put("intensity-component",
         args -> {
         String[] newArgs = concatenateStringArrays(args, GreyScaleType.intensity.ordinal());
-        return new GreyScaleController(newArgs);
+        return new GreyScaleCommand(newArgs);
         });
 
     knownCommands.put("horizontal-flip",
         args -> {
         String[] newArgs = concatenateStringArrays(args, AxisName.horizontal.ordinal());
-        return new FlipImageController(newArgs);
+        return new FlipImageCommand(newArgs);
         });
     knownCommands.put("vertical-flip",
         args -> {
         String[] newArgs = concatenateStringArrays(args, AxisName.vertical.ordinal());
-        return new FlipImageController(newArgs);
+        return new FlipImageCommand(newArgs);
         });
 
-    knownCommands.put("brighten", args -> new BrightnessController(args));
+    knownCommands.put("brighten", args -> new BrightnessCommand(args));
 
-    knownCommands.put("rgb-split", args -> new SplitChannelsController(args));
-    knownCommands.put("rgb-combine", args -> new CombineChannelsController(args));
+    knownCommands.put("rgb-split", args -> new SplitChannelsCommand(args));
+    knownCommands.put("rgb-combine", args -> new CombineChannelsCommand(args));
 
     knownCommands.put("blur",
         args -> {
         String[] newArgs = concatenateStringArrays(args, KernelImage.Blur.ordinal());
-        return new SharpnessController(newArgs);
+        return new SharpnessCommand(newArgs);
         });
     knownCommands.put("sharpen",
         args -> {
         String[] newArgs = concatenateStringArrays(args, KernelImage.Sharpen.ordinal());
-        return new SharpnessController(newArgs);
+        return new SharpnessCommand(newArgs);
         });
 
-    knownCommands.put("sepia", args -> new ColorTransformationController(args));
+    knownCommands.put("sepia", args -> new ColorTransformationCommand(args));
     return knownCommands;
   }
 

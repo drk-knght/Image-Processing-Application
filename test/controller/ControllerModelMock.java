@@ -9,15 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import controller.imagecommands.multiin.CombineChannelsController;
-import controller.imagecommands.multiout.SplitChannelsController;
+import controller.imagecommands.multiin.CombineChannelsCommand;
+import controller.imagecommands.multiout.SplitChannelsCommand;
 import controller.imagecommands.RGBImageCommandInterface;
-import controller.imagecommands.singlein.BrightnessController;
-import controller.imagecommands.singlein.ColorTransformationController;
-import controller.imagecommands.singlein.FlipImageController;
-import controller.imagecommands.singlein.GreyScaleController;
-import controller.imagecommands.singlein.RGBFilterController;
-import controller.imagecommands.singlein.SharpnessController;
+import controller.imagecommands.singlein.BrightnessCommand;
+import controller.imagecommands.singlein.ColorTransformationCommand;
+import controller.imagecommands.singlein.FlipImageCommand;
+import controller.imagecommands.singlein.GreyScaleCommand;
+import controller.imagecommands.singlein.RGBFilterCommand;
+import controller.imagecommands.singlein.SharpnessCommand;
 import model.RGBImageInterface;
 
 import static org.junit.Assert.assertEquals;
@@ -214,7 +214,7 @@ public class ControllerModelMock {
     MockModel mockModel = new MockModel(log, null);
     String[] ar = new String[]{"0", "Koala", "Koala-Bright"};
 
-    RGBImageCommandInterface controller = new BrightnessController(ar);
+    RGBImageCommandInterface controller = new BrightnessCommand(ar);
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
@@ -233,7 +233,7 @@ public class ControllerModelMock {
     MockModel mockModel = new MockModel(log, null);
     String[] ar = new String[]{"0", "Koala", "Koala-Flip"};
 
-    RGBImageCommandInterface controller = new FlipImageController(ar);
+    RGBImageCommandInterface controller = new FlipImageCommand(ar);
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
@@ -252,7 +252,7 @@ public class ControllerModelMock {
     MockModel mockModel = new MockModel(log, null);
     String[] ar = new String[]{"0", "Koala", "Koala-Sharp"};
 
-    RGBImageCommandInterface controller = new SharpnessController(ar);
+    RGBImageCommandInterface controller = new SharpnessCommand(ar);
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
@@ -271,7 +271,7 @@ public class ControllerModelMock {
     MockModel mockModel = new MockModel(log, null);
     String[] ar = new String[]{"0", "Koala", "Koala-grey"};
 
-    RGBImageCommandInterface controller = new GreyScaleController(ar);
+    RGBImageCommandInterface controller = new GreyScaleCommand(ar);
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
@@ -290,7 +290,7 @@ public class ControllerModelMock {
     MockModel mockModel = new MockModel(log, null);
     String[] ar = new String[]{"0", "Koala", "Koala-grey"};
 
-    RGBImageCommandInterface controller = new RGBFilterController(ar);
+    RGBImageCommandInterface controller = new RGBFilterCommand(ar);
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
@@ -309,7 +309,7 @@ public class ControllerModelMock {
     MockModel mockModel = new MockModel(log, null);
     String[] ar = new String[]{"Koala", "Koala-grey"};
 
-    RGBImageCommandInterface controller = new ColorTransformationController(ar);
+    RGBImageCommandInterface controller = new ColorTransformationCommand(ar);
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
@@ -328,7 +328,7 @@ public class ControllerModelMock {
     MockModel mockModel = new MockModel(log, null);
     String[] ar = new String[]{"Koala", "Koala-Red", "Koala-Green", "Koala-Blue"};
 
-    RGBImageCommandInterface controller = new CombineChannelsController(ar);
+    RGBImageCommandInterface controller = new CombineChannelsCommand(ar);
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala-Red", mockModel);
     controller.execute(mp);
@@ -347,7 +347,7 @@ public class ControllerModelMock {
     MockModel mockModel = new MockModel(log, null);
     String[] ar = new String[]{"Koala", "Koala-Red", "Koala-Green", "Koala-Blue"};
 
-    RGBImageCommandInterface controller = new SplitChannelsController(ar);
+    RGBImageCommandInterface controller = new SplitChannelsCommand(ar);
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
