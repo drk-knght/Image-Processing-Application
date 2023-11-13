@@ -105,12 +105,12 @@ public class Histogram implements ImageOperation{
     return resultImgMat;
   }
 
-//  public static void main(String[] args) throws IOException {
-//    RGBImageInterface imgColorPolluted=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/galaxy.png");
-//    Histogram hrColorPolluted=new Histogram();
-//    RGBImageInterface resColor=hrColorPolluted.operation(imgColorPolluted);
-//    String trying="/Users/omagarwal/Desktop/Img-galaxy-Polluted.ppm";
-//    resColor.saveImage(trying);
+  public static void main(String[] args) throws IOException {
+    RGBImageInterface imgColorPolluted=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Koala.ppm");
+    Histogram hrColorPolluted=new Histogram();
+    RGBImageInterface resColor=hrColorPolluted.operation(imgColorPolluted);
+    String trying="/Users/omagarwal/Desktop/Img-Koala.ppm";
+    resColor.saveImage(trying);
 //
 //    RGBImageInterface imgColorCorrected=new ColorCorrection().operation(imgColorPolluted);
 //    Histogram hrColorCorrected=new Histogram();
@@ -119,5 +119,5 @@ public class Histogram implements ImageOperation{
 //    resColorCorrected.saveImage(try2);
 //    File outputfile = new File("/Users/omagarwal/Desktop/Histogram-galaxy-new.jpg");
 //    ImageIO.write(hr.rgbHistogramGraph, "jpg", outputfile);
-//  }
+  }
 }

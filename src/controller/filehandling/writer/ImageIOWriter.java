@@ -10,19 +10,19 @@ import javax.imageio.ImageIO;
 import model.RGBImageInterface;
 import model.enums.ColorMapping;
 
-public class ImageIOWriter implements FileWriter{
+public class ImageIOWriter {
 
-  private final OutputStream out;
+//  private final OutputStream out;
+//
+//  private final String fileExtension;
+//
+//  public ImageIOWriter(OutputStream out,String fileExtension){
+//    this.out=out;
+//    this.fileExtension=fileExtension;
+//  }
 
-  private final String fileExtension;
 
-  public ImageIOWriter(OutputStream out,String fileExtension){
-    this.out=out;
-    this.fileExtension=fileExtension;
-  }
-
-  @Override
-  public void write(RGBImageInterface image) throws IOException {
+  public static void writeToStorageDisk(RGBImageInterface image,OutputStream out, String fileExtension) throws IOException {
     checkDimensionMatrix(image.getPixel());
     BufferedImage imageSavingElement = getBufferedImage(image.getImageWidth(), image.getImageHeight(), image.getPixel());
     try {

@@ -1,4 +1,4 @@
-package controller.imagecommands.singlein;
+package controller.imagecommands.singleincommands;
 
 import java.io.IOException;
 import java.util.Map;

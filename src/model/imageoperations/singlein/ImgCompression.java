@@ -1,11 +1,14 @@
 package model.imageoperations.singlein;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Function;
+import java.util.stream.IntStream;
 
 import model.RGBImage;
 import model.RGBImageInterface;
@@ -53,14 +56,14 @@ public class ImgCompression implements ImageOperation{
       updateChannelCompressionValue(i,operatedImageMatrix,resultMat);
     }
     int [][][] pixelMat=rgbImage.getPixel();
-    removePadding(operatedImageMatrix,pixelMat);
+    getCompressedImgMatrix(operatedImageMatrix,pixelMat);
     return new RGBImage(pixelMat);
   }
 
   private void updateChannelCompressionValue(int channel, int [][][] imgMat, double [][] modifiedImg){
     for(int i=0;i< imgMat.length;i++){
       for(int j=0;j<imgMat[i].length;j++){
-        int value=(int)Math.round(modifiedImg[i][j]);
+        int value=(int)Math.round(Math.abs(modifiedImg[i][j]));
         imgMat[i][j][channel]=Math.max(0,Math.min(255,value));
       }
     }
@@ -101,34 +104,41 @@ public class ImgCompression implements ImageOperation{
     return chanelPixelMatrix;
   }
 
+  private void performHaarTransformation(double [][] originalImage){
+    int subArrayLength= originalImage.length;
+    while(subArrayLength>1) {
+      for(int i=0;i<originalImage.length;i++){
+        haarWaveletRowTransform(originalImage,i, subArrayLength, this::transform);
+      }
+      for(int j=0;j<originalImage.length;j++){
+        haarWaveletColTransform(originalImage,j, subArrayLength, this::transform);
+      }
+      subArrayLength/=2;
+    }
+  }
+
   private void performInvHaarTransformation(double [][] originalImage){
     int subArrayLength= 2;
     while(subArrayLength<=originalImage.length) {
-      performSingleInvHaarTransformationIteration(originalImage,subArrayLength);
+      for(int j=0;j<originalImage.length;j++){
+        haarWaveletColTransform(originalImage,j,subArrayLength, this::inverseTransform);
+      }
+      for(int i=0;i<originalImage.length;i++){
+        haarWaveletRowTransform(originalImage,i, subArrayLength, this::inverseTransform);
+      }
       subArrayLength*=2;
     }
   }
 
-  private void performSingleInvHaarTransformationIteration(double [][] originalImage, int subArrayLength){
-    for(int j=0;j<originalImage.length;j++){
-      invHaarTransformColVector(originalImage,j, subArrayLength);
-    }
-
-    for(int i=0;i<originalImage.length;i++){
-      invHaarTransformRowVector(originalImage,i, subArrayLength);
-    }
-
-  }
-
-  private void invHaarTransformRowVector(double [][] matrix, int row, int length){
+  private void haarWaveletRowTransform(double [][] matrix, int row, int length, Function<double[], double[]> haarFunc){
     double [] rowSubArray= Arrays.copyOfRange(matrix[row],0,length);
-    double [] transformResultSubArray=inverseTransform(rowSubArray);
+    double [] transformResultSubArray=haarFunc.apply(rowSubArray);
     System.arraycopy(transformResultSubArray,0,matrix[row],0,length);
   }
 
-  private void invHaarTransformColVector(double [][] matrix, int col, int length){
-    double [] colSubArray=getColSubArray(matrix,col,length);
-    double [] transformResultSubArray=inverseTransform(colSubArray);
+  private void haarWaveletColTransform(double [][] matrix, int col, int length,Function<double[], double[]> haarFunc){
+    double [] colSubArray=IntStream.range(0, length).mapToDouble(i -> matrix[i][col]).toArray();
+    double [] transformResultSubArray=haarFunc.apply(colSubArray);
     updateColData(matrix,col,transformResultSubArray);
   }
 
@@ -141,48 +151,6 @@ public class ImgCompression implements ImageOperation{
       }
     }
     return resultMat;
-  }
-
-  private void performHaarTransformation(double [][] originalImage){
-    int subArrayLength= originalImage.length;
-    while(subArrayLength>1) {
-      performSingleHaarTransformationIteration(originalImage,subArrayLength);
-      subArrayLength/=2;
-    }
-  }
-
-  private void performSingleHaarTransformationIteration(double [][] originalImage, int subArrayLength){
-    for(int i=0;i<originalImage.length;i++){
-      haarTransformRowVector(originalImage,i, subArrayLength);
-    }
-    for(int j=0;j<originalImage.length;j++){
-      haarTransformColVector(originalImage,j, subArrayLength);
-    }
-  }
-
-  private void haarTransformRowVector(double [][] matrix, int row, int length){
-    double [] rowSubArray= Arrays.copyOfRange(matrix[row],0,length);
-    double [] transformResultSubArray=transform(rowSubArray);
-    System.arraycopy(transformResultSubArray,0,matrix[row],0,length);
-  }
-
-  private void haarTransformColVector(double [][] matrix, int col,int length){
-    // 1. Get the col index.
-    // 2. Get the col sub array and perform the transformation.
-    // 3. copy back the result to the original array to that position.
-    // 4. return back to calling point.
-    double [] colSubArray=getColSubArray(matrix,col,length);
-    double [] transformResultSubArray=transform(colSubArray);
-    updateColData(matrix,col,transformResultSubArray);
-  }
-
-  private double [] getColSubArray(double [][] matrix, int col, int length){
-    double [] result=new double[length];
-    for(int i=0;i<length;i++){
-      result[i]=matrix[i][col];
-    }
-    return result;
-//    IntStream.range(0, length).mapToDouble(i -> matrix[i][col]).toArray();
   }
 
   private void updateColData(double [][] matrix, int col,double [] newData){
@@ -215,42 +183,32 @@ public class ImgCompression implements ImageOperation{
 
   private void eliminateSmallValues(double [][] transformedMatrix){
 
-    // 1. Get the unique values in the matrix
-    // 2. Calculate the max of eliminated value using percentage.
-    // 3. Update the matrix
-
     Set<Double> set=new TreeSet<>();
     for(int i=0;i<transformedMatrix.length;i++){
       for(int j=0;j<transformedMatrix.length;j++){
-        set.add(Math.abs(transformedMatrix[i][j]));
+        double num=(double) Math.round(Math.abs(transformedMatrix[i][j]*10))/10;
+        set.add(num);
       }
     }
     double num = (double)set.size() * compressionPercentage;
     int cnt=(int)Math.round(num/100);
     double firstEle=Double.POSITIVE_INFINITY;
-//    for(double d:set){
-//
-//      cnt--;
-//      if(cnt==0){
-//        break;
-//      }
-//    }
+
     Iterator<Double> iterator= set.iterator();
     if(set.size()>cnt){
       for(int i=0;i<cnt+1;i++){
         firstEle=iterator.next();
       }
     }
-    int zeroCalc=0;
+
     for(int i=0;i<transformedMatrix.length;i++){
       for(int j=0;j<transformedMatrix.length;j++){
         if(Math.abs(transformedMatrix[i][j])< firstEle ){
           transformedMatrix[i][j]=0.0;
-          zeroCalc++;
         }
       }
     }
-    System.out.println("ZERO: "+zeroCalc);
+
   }
 
   private double [] inverseTransform(double [] transformedPixel){
@@ -266,7 +224,7 @@ public class ImgCompression implements ImageOperation{
     return interleavePixels;
   }
 
-  private void removePadding(int [][][] operatedImg, int [][][] pixelMat){
+  private void getCompressedImgMatrix(int [][][] operatedImg, int [][][] pixelMat){
     for(int i=0;i<pixelMat.length;i++){
       for(int j=0;j<pixelMat[i].length;j++){
         for(int k=0;k<pixelMat[i][j].length;k++){
@@ -279,12 +237,31 @@ public class ImgCompression implements ImageOperation{
   public static void main(String [] args) throws IOException {
 
     RGBImageInterface imgColorPolluted=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Koala.ppm");
-    ImgCompression img=new ImgCompression(65);
+    ImgCompression img=new ImgCompression(50);
     RGBImageInterface resColor=img.operation(imgColorPolluted);
     String trying="/Users/omagarwal/Desktop/compressed-Image-Koala.ppm";
     resColor.saveImage(trying);
 //    File outputfile = new File("/Users/omagarwal/Desktop/Histogram-galaxy-new.jpg");
 //    ImageIO.write(hr.rgbHistogramGraph, "jpg", outputfile);
+//    int [][][]testMat= new int [][][]{
+//            {{5, 5, 5}, {3, 3, 3}},
+//            {{2, 2, 2}, {4, 4, 4}}
+//    };
+//    RGBImageInterface image=new RGBImage(testMat);
+//    image.saveImage("/Users/omagarwal/Desktop/TestingManualImage.png");
+//    ImgCompression img=new ImgCompression(80);
+//    RGBImageInterface resColor=img.operation(image);
+//    int [][][] resultMat= resColor.getPixel();
+//    for(int color=0;color<3;color++){
+//      System.out.println("Color: "+color);
+//      System.out.println("Printing matrix values: ");
+//      for(int i=0;i<resultMat.length;i++){
+//        for(int j=0;j<resultMat[i].length;j++){
+//          System.out.println("I: "+i+" J: "+j+" VAL: "+resultMat[i][j][color]);
+//        }
+//      }
+//    }
+
   }
 
 }

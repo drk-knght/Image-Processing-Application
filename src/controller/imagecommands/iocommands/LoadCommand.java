@@ -1,8 +1,10 @@
-package controller.imagecommands.filehandling;
+package controller.imagecommands.iocommands;
 
 import java.io.IOException;
 import java.util.Map;
 
+import controller.filehandling.reader.FileReader;
+import controller.filehandling.reader.FileReaderInterface;
 import controller.imagecommands.RGBImageCommandInterface;
 import model.RGBImage;
 import model.RGBImageInterface;
@@ -56,7 +58,9 @@ public class LoadCommand implements RGBImageCommandInterface {
     if (rgbImage != null) {
       System.out.println("Changing the existing image present in Cache.");
     }
-    rgbImage = new RGBImage(imageFilePath);
+//    rgbImage = new RGBImage(imageFilePath);
+    FileReaderInterface reader=new FileReader(imageFilePath);
+    rgbImage=new RGBImage(reader.read());
     cachedImage.put(imageName, rgbImage);
   }
 }

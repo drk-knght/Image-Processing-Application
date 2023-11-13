@@ -9,13 +9,8 @@ import javax.imageio.ImageIO;
 
 import model.enums.ColorMapping;
 
-public class ImageIOReader implements FileReader{
+public class ImageIOReader{
 
-  private final InputStream in;
-
-  public ImageIOReader(InputStream in){
-    this.in=in;
-  }
 
   /**
    * The method performs the read operation to get the image from a specified inputStream path.
@@ -24,18 +19,18 @@ public class ImageIOReader implements FileReader{
    * @return A 3-d matrix which contains the information about the individual rgb image pixels.
    * @throws IOException Throws exception if an error occurs while reading the stream.
    */
-  @Override
-  public int[][][] read() throws IOException {
+
+  public static int[][][] readFileContent(InputStream in) throws IOException {
     BufferedImage imageElement;
     try {
-      imageElement = ImageIO.read(this.in);
+      imageElement = ImageIO.read(in);
     } catch (IOException ex) {
       throw new IOException("Unable to get image from the mentioned inputStream path for ImageIO Reader.");
     }
     return getPixelMatrixBuffer(imageElement);
   }
 
-  private int[][][] getPixelMatrixBuffer(BufferedImage imageElement) {
+  private static int[][][] getPixelMatrixBuffer(BufferedImage imageElement) {
     int imageHeight = imageElement.getHeight();
     int imageWidth = imageElement.getWidth();
     int[][][] imagePixelMatrix = new int[imageHeight][imageWidth][ColorMapping.values().length];
@@ -51,7 +46,7 @@ public class ImageIOReader implements FileReader{
     return imagePixelMatrix;
   }
 
-  private void checkDimensionMatrix(int[][][] mat) {
+  private static void checkDimensionMatrix(int[][][] mat) {
     if (mat.length == 0 || mat[0].length == 0) {
       throw new InputMismatchException("The dimension of all the pixel arrays are not same");
     }

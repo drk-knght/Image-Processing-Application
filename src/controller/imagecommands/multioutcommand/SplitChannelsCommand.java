@@ -1,4 +1,4 @@
-package controller.imagecommands.multiout;
+package controller.imagecommands.multioutcommand;
 
 import java.io.IOException;
 import java.util.Arrays;

@@ -7,16 +7,16 @@ import java.io.OutputStream;
 import model.RGBImageInterface;
 import model.enums.ColorMapping;
 
-public class PPMWriter implements FileWriter{
+public class PPMWriter {
 
-  private final OutputStream out;
+//  private final OutputStream out;
+//
+//  public PPMWriter(OutputStream out){
+//    this.out=out;
+//  }
 
-  public PPMWriter(OutputStream out){
-    this.out=out;
-  }
 
-  @Override
-  public void write(RGBImageInterface image) throws IOException {
+  public static void writeToStorageDisk(RGBImageInterface image,OutputStream out) throws IOException {
     StringBuilder ppmImageData = convertImageMatrixToString(image.getImageHeight(), image.getImageWidth(), image.getPixel());
     try {
       out.write(new String(ppmImageData).getBytes());
@@ -34,7 +34,7 @@ public class PPMWriter implements FileWriter{
    * @param pixelImageMatrix 3-d matrix containing the data about the individual rgb image pixels.
    * @return StringBuilder which contains PPM file image data as a string containing headers.
    */
-  public StringBuilder convertImageMatrixToString(int imageHeight, int imageWidth,
+  public static StringBuilder convertImageMatrixToString(int imageHeight, int imageWidth,
                                                          int[][][] pixelImageMatrix) {
     StringBuilder s = new StringBuilder();
     s.append("P3 ").append(imageWidth).append(" ").append(imageHeight).append("\n255\n");

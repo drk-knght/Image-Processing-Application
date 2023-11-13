@@ -9,15 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import controller.imagecommands.multiin.CombineChannelsCommand;
-import controller.imagecommands.multiout.SplitChannelsCommand;
+import controller.imagecommands.multiincommand.CombineChannelsCommand;
+import controller.imagecommands.multioutcommand.SplitChannelsCommand;
 import controller.imagecommands.RGBImageCommandInterface;
-import controller.imagecommands.singlein.BrightnessCommand;
-import controller.imagecommands.singlein.ColorTransformationCommand;
-import controller.imagecommands.singlein.FlipImageCommand;
-import controller.imagecommands.singlein.GreyScaleCommand;
-import controller.imagecommands.singlein.RGBFilterCommand;
-import controller.imagecommands.singlein.SharpnessCommand;
+import controller.imagecommands.singleincommands.BrightnessCommand;
+import controller.imagecommands.singleincommands.ColorTransformationCommand;
+import controller.imagecommands.singleincommands.FlipImageCommand;
+import controller.imagecommands.singleincommands.GreyScaleCommand;
+import controller.imagecommands.singleincommands.RGBFilterCommand;
+import controller.imagecommands.singleincommands.SharpnessCommand;
 import model.RGBImageInterface;
 
 import static org.junit.Assert.assertEquals;

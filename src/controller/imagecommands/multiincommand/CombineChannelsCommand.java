@@ -1,4 +1,4 @@
-package controller.imagecommands.multiin;
+package controller.imagecommands.multiincommand;
 
 
 import java.util.ArrayList;

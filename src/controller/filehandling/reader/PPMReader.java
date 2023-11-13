@@ -1,6 +1,5 @@
 package controller.filehandling.reader;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,24 +7,17 @@ import java.util.Scanner;
 import model.RGBImage;
 import model.enums.ColorMapping;
 
-public class PPMReader implements FileReader{
+public class PPMReader{
 
-  private final InputStream in;
-
-  public PPMReader(InputStream in){
-    this.in=in;
-  }
-
-  @Override
-  public int[][][] read() throws IOException {
-    Scanner sc = new Scanner(this.in);
+  public static int[][][] readFileContent(InputStream in) {
+    Scanner sc = new Scanner(in);
     StringBuilder builder = getBuilderFromFile(sc);
     sc = new Scanner(builder.toString());
     checkPPMToken(sc);
     return checkMetaDataGetImgData(sc);
   }
 
-  private int [][][] checkMetaDataGetImgData(Scanner sc) {
+  private static int [][][] checkMetaDataGetImgData(Scanner sc) {
     int width;
     int height;
     int maxValue;
