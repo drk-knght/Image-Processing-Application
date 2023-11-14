@@ -1,18 +1,16 @@
 package model.imageoperations.singlein;
 
-import java.io.IOException;
-
 import model.RGBImage;
 import model.RGBImageInterface;
 import model.enums.ColorMapping;
 
 public class SplitBuffer implements ImageOperation{
 
-  private final int  splitPercentage;
+  private final double  splitPercentage;
 
   private final ImageOperation imageOperation;
 
-  public SplitBuffer(int splitPercentage, ImageOperation imageOperation){
+  public SplitBuffer(double splitPercentage, ImageOperation imageOperation){
     this.splitPercentage=splitPercentage;
     this.imageOperation=imageOperation;
   }
@@ -20,7 +18,7 @@ public class SplitBuffer implements ImageOperation{
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     int [][][] rgbPixel= rgbImage.getPixel();
-    double estimation=((double)splitPercentage*rgbImage.getImageWidth())/100.0;
+    double estimation=(splitPercentage*rgbImage.getImageWidth())/100.0;
     int splitWidth=(int)Math.round(estimation);
     try{
       int [][][] imageOperationMatrix=getPixelMatSubset(rgbPixel,rgbImage.getImageHeight(), splitWidth);
@@ -43,9 +41,7 @@ public class SplitBuffer implements ImageOperation{
   private void copyContentsMatrix(int [][][] NonUpdatedMatrix, int [][][] updatedMatrix, int height, int width){
     for(int i=0;i<height;i++){
       for(int j=0;j<width;j++){
-        for(int k=0;k<ColorMapping.values().length;k++){
-          NonUpdatedMatrix[i][j][k]=updatedMatrix[i][j][k];
-        }
+        System.arraycopy(updatedMatrix[i][j], 0, NonUpdatedMatrix[i][j], 0, ColorMapping.values().length);
       }
     }
   }
@@ -54,7 +50,7 @@ public class SplitBuffer implements ImageOperation{
 ////    SplitBuffer(int splitPercentage, RGBImageInterface rgbImage,ImageOperation imageOperation)
 //    RGBImageInterface rgbImage=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Koala.ppm");
 //    ImageOperation operation=new Flip(1);
-//    SplitBuffer buff=new SplitBuffer(70,operation);
+//    SplitBuffer buff=new SplitBuffer(50,operation);
 //    RGBImageInterface result=buff.operation(rgbImage);
 //    result.saveImage("/Users/omagarwal/Desktop/Koala-split-verticalFlip.ppm");
 //  }

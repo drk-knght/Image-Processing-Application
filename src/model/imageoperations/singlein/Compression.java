@@ -41,9 +41,9 @@ import model.enums.ColorMapping;
 
 public class Compression implements ImageOperation{
 
-  private final int compressionPercentage;
+  private final double compressionPercentage;
 
-  public Compression(int compressionPercentage){
+  public Compression(double compressionPercentage){
     this.compressionPercentage=compressionPercentage;
   }
 

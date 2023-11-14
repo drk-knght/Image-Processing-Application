@@ -1,5 +1,6 @@
 package model.imageoperations.singlein;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import model.RGBImage;
@@ -10,9 +11,6 @@ public class ColorCorrection implements ImageOperation{
 
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
-    // 1. Compute the peaks of r,g,b values of the image
-    // 2. Calculate the avg of the peaks >10, <245
-    // 3. for each r,g,b calculate the delta and shift the pixel values by delta.
     int [] peaksValue=new int[ColorMapping.values().length];
     Arrays.fill(peaksValue,0);
     int [][][] imgMatrix=rgbImage.getPixel();
@@ -40,10 +38,9 @@ public class ColorCorrection implements ImageOperation{
   private int calculateAvgPeakForImage(int [] colorPeaks){
     int cntMeaningfulPeaks=0;
     int peaksSum=0;
-    for(int i=0;i<colorPeaks.length;i++){
-
-      if(colorPeaks[i]>10 && colorPeaks[i]<245){
-        peaksSum+=colorPeaks[i];
+    for (int colorPeak : colorPeaks) {
+      if (colorPeak > 10 && colorPeak < 245) {
+        peaksSum += colorPeak;
         cntMeaningfulPeaks++;
       }
     }
@@ -58,9 +55,9 @@ public class ColorCorrection implements ImageOperation{
     Arrays.fill(channelDepthAr,0);
     int maxPeakFreq=0;
     int peakChannelDepth=0;
-    for(int i=0;i<pixelMatrix.length;i++){
-      for(int j=0;j<pixelMatrix[i].length;j++){
-        int channelDepthValue=pixelMatrix[i][j][channelIndex];
+    for (int[][] matrix : pixelMatrix) {
+      for (int[] ints : matrix) {
+        int channelDepthValue = ints[channelIndex];
         channelDepthAr[channelDepthValue]++;
       }
     }
@@ -77,6 +74,6 @@ public class ColorCorrection implements ImageOperation{
 //    RGBImageInterface img=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-red-tint.png");
 //    ColorCorrection cr=new ColorCorrection();
 //    RGBImageInterface res=cr.operation(img);
-//    res.saveImage("/Users/omagarwal/Desktop/Tiger-Color-Corrected.png");
+//    res.saveImage("/Users/omagarwal/Desktop/Koala-Color-Corrected.png");
 //  }
 }

@@ -27,11 +27,10 @@ public class FlipImageCommand extends AbstractCommandSingleIP {
    * @param existingImage            Image presently in the memory of the application.
    * @param imageOperationValueIndex Operation index that needs to be performed for single input.
    * @return A new image from the model methods after the operation passed from the controller.
-   * @throws IOException Throws exception if it's not able to perform the read and write operation.
    */
   @Override
   protected RGBImageInterface defineImageOperation(RGBImageInterface existingImage,
-                                                 int imageOperationValueIndex) throws IOException {
+                                                 int imageOperationValueIndex) {
     return existingImage.flipImage(imageOperationValueIndex);
   }
 

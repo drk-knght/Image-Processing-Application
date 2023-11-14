@@ -10,6 +10,7 @@ import model.RGBImageInterface;
  */
 public class SharpnessCommand extends AbstractCommandSingleIP {
 
+  private final double splitPercentage;
   /**
    * Constructor takes the cmd args as an input and assign the file names to the fields.
    *
@@ -18,6 +19,12 @@ public class SharpnessCommand extends AbstractCommandSingleIP {
    */
   public SharpnessCommand(String[] commandArguments) throws IllegalArgumentException {
     super(commandArguments);
+    if(commandArguments.length==3){
+      this.splitPercentage=100;
+    }
+    else {
+      this.splitPercentage=Double.parseDouble(commandArguments[4]);
+    }
   }
 
 
@@ -27,12 +34,11 @@ public class SharpnessCommand extends AbstractCommandSingleIP {
    * @param existingImage            Image presently in the memory of the application.
    * @param imageOperationValueIndex Operation index that needs to be performed for single input.
    * @return A new image from the model methods after the operation passed from the controller.
-   * @throws IOException Throws exception if it's not able to perform the read and write operation.
    */
   @Override
   protected RGBImageInterface defineImageOperation(RGBImageInterface existingImage,
-                                                 int imageOperationValueIndex) throws IOException {
-    return existingImage.changeSharpness(imageOperationValueIndex);
+                                                 int imageOperationValueIndex) {
+    return existingImage.changeSharpness(imageOperationValueIndex,splitPercentage);
   }
 
 

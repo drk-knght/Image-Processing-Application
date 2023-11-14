@@ -1,16 +1,12 @@
 package controller.imagecommands.singleincommands;
 
+import java.io.IOException;
 import java.util.Map;
 
 import controller.imagecommands.RGBImageCommandInterface;
-
 import model.RGBImageInterface;
 
-/**
- * The class represents the color transformation controller command of the main controller.
- * The command takes an array of strings as input and sends the command to change the sepia of img.
- */
-public class ColorTransformationCommand implements RGBImageCommandInterface {
+public class ColorCorrectionCommand implements RGBImageCommandInterface {
 
   private final String rgbExistingImage;
 
@@ -19,32 +15,33 @@ public class ColorTransformationCommand implements RGBImageCommandInterface {
   private final double splitPercentage;
 
   /**
-   * Constructor takes the cmd args as an input and assign the file names to the fields.
+   * Constructor takes the cmd args as an input and assign the image names to the fields
+   * It assigns the split percentage of the image that is used for the split operation.
    *
-   * @param commandArguments Array of strings containing the information about the file names.
+   * @param commandArguments Array of strings containing the information about the image names.
    * @throws IllegalArgumentException Throws exception if the string array is not of required len.
    */
-  public ColorTransformationCommand(String[] commandArguments) throws IllegalArgumentException {
-    if (commandArguments.length != 2 && commandArguments.length!=4) {
+  public ColorCorrectionCommand(String [] commandArguments) throws IllegalArgumentException{
+    if(commandArguments.length!=2 && commandArguments.length!=4){
       throw new IllegalArgumentException("The number of parameters does not match "
               + "with the expected number of parameters for the passed operation.");
     }
-    this.rgbExistingImage = commandArguments[0];
-    this.rgbModifiedImage = commandArguments[1];
+    this.rgbExistingImage=commandArguments[0];
+    this.rgbModifiedImage=commandArguments[1];
     if(commandArguments.length==2){
-      splitPercentage=100;
+      this.splitPercentage=100;
     }
-    else {
-      splitPercentage=Double.parseDouble(commandArguments[3]);
+    else{
+      this.splitPercentage=Double.parseDouble(commandArguments[3]);
     }
   }
 
-
   /**
-   * The command calls the applying sepia method from the model class to get new image.
+   * The command calls the color correction method from the model class to get new corrected image.
+   * The new image contains the color correction for all the r,g,b pixels channels of present image.
    *
    * @param cachedImage The set of images presently in use in the memory of this application.
-   * @throws NullPointerException Throws exception if the input is of null type.
+   * @throws IllegalArgumentException Throws exception if the input is of null type.
    */
   @Override
   public void execute(Map<String, RGBImageInterface> cachedImage) throws IllegalArgumentException {
@@ -57,7 +54,7 @@ public class ColorTransformationCommand implements RGBImageCommandInterface {
     if (existingImage == null) {
       return;
     }
-    RGBImageInterface rgbImage = existingImage.sepiaImage(this.splitPercentage);
+    RGBImageInterface rgbImage = existingImage.colorCorrectionImage(splitPercentage);
     cachedImage.put(rgbModifiedImage, rgbImage);
   }
 }

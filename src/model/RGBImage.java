@@ -14,16 +14,21 @@ import model.enums.ColorMapping;
 import model.enums.GreyScaleType;
 import model.enums.KernelImage;
 import model.imageoperations.singlein.Brightness;
+import model.imageoperations.singlein.ColorCorrection;
 import model.imageoperations.singlein.ColorTransformation;
 import model.imageoperations.multiin.CombineChannelImage;
+import model.imageoperations.singlein.Compression;
 import model.imageoperations.singlein.Flip;
 import model.imageoperations.singlein.GreyScale;
+import model.imageoperations.singlein.Histogram;
 import model.imageoperations.singlein.ImageOperation;
+import model.imageoperations.singlein.LevelsAdjustment;
 import model.imageoperations.singlein.Monochrome;
 import model.imageoperations.multiin.MultipleImagesSingleOperation;
 import model.imageoperations.multiout.MultipleOperationImages;
 import model.imageoperations.singlein.Sharpness;
 import model.imageoperations.multiout.SplitChannelImage;
+import model.imageoperations.singlein.SplitBuffer;
 
 /**
  * This class represents an image. The image class can contain different fields like height, width.
@@ -183,13 +188,13 @@ public class RGBImage implements RGBImageInterface {
    * @throws IllegalArgumentException Throws exception if kernel mapping is invalid or not exists.
    */
   @Override
-  public RGBImageInterface changeSharpness(int kernelType) throws IllegalArgumentException {
+  public RGBImageInterface changeSharpness(int kernelType,double splitPercentage) throws IllegalArgumentException {
     if (kernelType >= KernelImage.values().length) {
       throw new IllegalArgumentException("Wrong kernel value passed to model for "
               + "changing the sharpness operation on the image. Aborting!!");
     }
     ImageOperation imageOperation = new Sharpness(kernelType);
-    return imageOperation.operation(this);
+    return bufferImageOperation(splitPercentage,imageOperation);
   }
 
   /**
@@ -250,13 +255,13 @@ public class RGBImage implements RGBImageInterface {
    * @throws IllegalArgumentException Exception is thrown If the greyScaleType is not a valid input.
    */
   @Override
-  public RGBImageInterface greyScaleImage(int greyScaleType) throws IllegalArgumentException {
+  public RGBImageInterface greyScaleImage(int greyScaleType,double splitPercentage) throws IllegalArgumentException {
     if (greyScaleType >= GreyScaleType.values().length) {
       throw new IllegalArgumentException("Wrong greyscale value passed to model for "
               + "greyscale operation on image. Aborting!!");
     }
     ImageOperation imageOperation = new GreyScale(greyScaleType);
-    return imageOperation.operation(this);
+    return bufferImageOperation(splitPercentage,imageOperation);
   }
 
   /**
@@ -265,10 +270,44 @@ public class RGBImage implements RGBImageInterface {
    * @return An image as the result of the action performed on the present image.
    */
   @Override
-  public RGBImageInterface sepiaImage() {
+  public RGBImageInterface sepiaImage(double splitPercentage) {
     ImageOperation imageOperation = new ColorTransformation();
+    return bufferImageOperation(splitPercentage,imageOperation);
+  }
+
+  @Override
+  public RGBImageInterface levelsAdjustment(double b, double m, double w, double splitPercentage) {
+    if(b>m || m>w){
+      throw new IllegalArgumentException("Wrong values for levels "
+              + "adjustment operation. Check values of B, M, W again.");
+    }
+    ImageOperation imageOperation=new LevelsAdjustment(b,m,w);
+    return bufferImageOperation(splitPercentage,imageOperation);
+  }
+
+  @Override
+  public RGBImageInterface getPixelHistogram() {
+    ImageOperation imageOperation=new Histogram();
     return imageOperation.operation(this);
   }
+
+  @Override
+  public RGBImageInterface compressImage(double compressionPercentage) throws IllegalArgumentException {
+    if(compressionPercentage<0){
+      throw new IllegalArgumentException("Illegal compression percentage"
+              + " passed to the application. Please check and try again.");
+
+    }
+    ImageOperation imageOperation=new Compression(compressionPercentage);
+    return imageOperation.operation(this);
+  }
+
+  @Override
+  public RGBImageInterface colorCorrectionImage(double splitPercentage) {
+    ImageOperation imageOperation=new ColorCorrection();
+    return bufferImageOperation(splitPercentage,imageOperation);
+  }
+
 
   /**
    * Getter method to get the height of the image currently in use.
@@ -300,12 +339,15 @@ public class RGBImage implements RGBImageInterface {
     int[][][] copyPixelMatrix = new int[height][width][ColorMapping.values().length];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        for (int k = 0; k < ColorMapping.values().length; k++) {
-          copyPixelMatrix[i][j][k] = pixelMatrix[i][j][k];
-        }
+        System.arraycopy(pixelMatrix[i][j], 0, copyPixelMatrix[i][j], 0, ColorMapping.values().length);
       }
     }
     return copyPixelMatrix;
+  }
+
+  private RGBImageInterface bufferImageOperation(double splitPercentage, ImageOperation imageOperation){
+    ImageOperation bufferOperation=new SplitBuffer(splitPercentage,imageOperation);
+    return bufferOperation.operation(this);
   }
 
 }

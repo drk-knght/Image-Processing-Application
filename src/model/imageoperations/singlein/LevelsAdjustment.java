@@ -8,13 +8,13 @@ import model.enums.ColorMapping;
 
 public class LevelsAdjustment implements ImageOperation{
 
-  private final int blackPoint;
+  private final double blackPoint;
 
-  private final int midPoint;
+  private final double midPoint;
 
-  private final int highlightPoint;
+  private final double highlightPoint;
 
-  public LevelsAdjustment(int blackPoint, int midPoint, int highlightPoint){
+  public LevelsAdjustment(double blackPoint, double midPoint, double highlightPoint){
     this.blackPoint=blackPoint;
     this.midPoint=midPoint;
     this.highlightPoint=highlightPoint;
@@ -70,17 +70,17 @@ public class LevelsAdjustment implements ImageOperation{
     return numerator/denominator;
   }
 
-  public static void main(String[] args) throws IOException {
-    RGBImageInterface img=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/galaxy.png");
-    LevelsAdjustment hr=new LevelsAdjustment(20,100,255);
-    RGBImageInterface res=hr.operation(img);
-    Histogram h=new Histogram();
-    RGBImageInterface graph=h.operation(res);
-    String trying="/Users/omagarwal/Desktop/Level-Adjustment.png";
-    res.saveImage(trying);
-    String histogram="/Users/omagarwal/Desktop/Level-Adjustment-Histogram.png";
-    graph.saveImage(histogram);
+//  public static void main(String[] args) throws IOException {
+//    RGBImageInterface img=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/galaxy.png");
+//    LevelsAdjustment hr=new LevelsAdjustment(20,100,255);
+//    RGBImageInterface res=hr.operation(img);
+//    Histogram h=new Histogram();
+//    RGBImageInterface graph=h.operation(res);
+//    String trying="/Users/omagarwal/Desktop/Level-Adjustment.png";
+//    res.saveImage(trying);
+//    String histogram="/Users/omagarwal/Desktop/Level-Adjustment-Histogram.png";
+//    graph.saveImage(histogram);
 //    File outputfile = new File("/Users/omagarwal/Desktop/Histogram-galaxy-new.jpg");
 //    ImageIO.write(hr.rgbHistogramGraph, "jpg", outputfile);
-  }
+//  }
 }

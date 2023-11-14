@@ -24,9 +24,13 @@ import controller.imagecommands.multiincommand.CombineChannelsCommand;
 import controller.imagecommands.multioutcommand.SplitChannelsCommand;
 import controller.imagecommands.RGBImageCommandInterface;
 import controller.imagecommands.singleincommands.BrightnessCommand;
+import controller.imagecommands.singleincommands.ColorCorrectionCommand;
 import controller.imagecommands.singleincommands.ColorTransformationCommand;
+import controller.imagecommands.singleincommands.CompressCommand;
 import controller.imagecommands.singleincommands.FlipImageCommand;
 import controller.imagecommands.singleincommands.GreyScaleCommand;
+import controller.imagecommands.singleincommands.HistogramCommand;
+import controller.imagecommands.singleincommands.LevelAdjustmentCommand;
 import controller.imagecommands.singleincommands.RGBFilterCommand;
 import controller.imagecommands.singleincommands.SharpnessCommand;
 import model.enums.AxisName;
@@ -142,6 +146,10 @@ public class RGBImageController implements RGBImageControllerInterface {
         });
 
     knownCommands.put("sepia", args -> new ColorTransformationCommand(args));
+    knownCommands.put("compress", args-> new CompressCommand(args));
+    knownCommands.put("histogram",args->new HistogramCommand(args));
+    knownCommands.put("color-correct",args->new ColorCorrectionCommand(args));
+    knownCommands.put("levels-adjust", args->new LevelAdjustmentCommand(args));
     return knownCommands;
   }
 

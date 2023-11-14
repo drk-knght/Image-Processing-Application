@@ -18,7 +18,7 @@ public abstract class AbstractCommandSingleIP implements RGBImageCommandInterfac
   private final String rgbModifiedImage;
 
   AbstractCommandSingleIP(String[] commandArguments) throws IllegalArgumentException {
-    if (commandArguments.length != 3) {
+    if (commandArguments.length != 3 && commandArguments.length != 5) {
       throw new IllegalArgumentException("The number of parameters does not match "
               + "with the expected number of parameters for the passed operation.");
     }
@@ -33,11 +33,10 @@ public abstract class AbstractCommandSingleIP implements RGBImageCommandInterfac
    *
    * @param cachedImage The set of images presently in use in the memory of this application.
    * @throws NullPointerException Throws exception if the input is of null type.
-   * @throws IOException          throws exception if there is an error when reading files for op.
    */
   @Override
   public void execute(Map<String, RGBImageInterface> cachedImage)
-          throws IllegalArgumentException, IOException {
+          throws IllegalArgumentException {
     if (cachedImage == null) {
       throw new IllegalArgumentException("The lookup table passed "
               + "for the image processing app does not exists.");
@@ -59,9 +58,7 @@ public abstract class AbstractCommandSingleIP implements RGBImageCommandInterfac
    * @param existingImage            Image presently in the memory of the application.
    * @param imageOperationValueIndex Operation index that needs to be performed for single input.
    * @return A new image from the model methods after the operation passed from the controller.
-   * @throws IOException Throws exception if it's not able to perform the read and write operation.
    */
   abstract protected RGBImageInterface defineImageOperation(RGBImageInterface existingImage,
-                                                            int imageOperationValueIndex)
-          throws IOException;
+                                                            int imageOperationValueIndex);
 }

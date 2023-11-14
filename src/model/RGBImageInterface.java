@@ -50,7 +50,7 @@ public interface RGBImageInterface {
    * @return Modified img which contains the data of the changed sharpness version of the prev img.
    * @throws IllegalArgumentException Throws exception if kernel mapping is invalid or not exists.
    */
-  RGBImageInterface changeSharpness(int kernelType) throws IllegalArgumentException;
+  RGBImageInterface changeSharpness(int kernelType, double splitPercentage) throws IllegalArgumentException;
 
   /**
    * The method represents the combining different channeled images into a single image.
@@ -88,14 +88,22 @@ public interface RGBImageInterface {
    * @return An image as the result of the action performed on the present image.
    * @throws IllegalArgumentException Exception is thrown If the greyScaleType is not a valid input.
    */
-  RGBImageInterface greyScaleImage(int greyScaleType) throws IllegalArgumentException;
+  RGBImageInterface greyScaleImage(int greyScaleType, double splitPercentage) throws IllegalArgumentException;
 
   /**
    * Method represents the sepia color transformation on the present single image currently in use.
    *
    * @return An image as the result of the action performed on the present image.
    */
-  RGBImageInterface sepiaImage();
+  RGBImageInterface sepiaImage(double splitPercentage);
+
+  RGBImageInterface levelsAdjustment(double b, double m, double w, double splitPercentage) throws IllegalArgumentException;
+
+  RGBImageInterface getPixelHistogram();
+
+  RGBImageInterface compressImage(double compressionPercentage) throws IllegalArgumentException;
+
+  RGBImageInterface colorCorrectionImage(double splitPercentage);
 
   /**
    * Getter method to get the height of the image currently in use.
