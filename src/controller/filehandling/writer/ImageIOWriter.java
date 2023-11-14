@@ -12,16 +12,15 @@ import model.enums.ColorMapping;
 
 public class ImageIOWriter {
 
-//  private final OutputStream out;
-//
-//  private final String fileExtension;
-//
-//  public ImageIOWriter(OutputStream out,String fileExtension){
-//    this.out=out;
-//    this.fileExtension=fileExtension;
-//  }
-
-
+  /**
+   * The static methods performs the write operation to save the image to a specified output stream.
+   * The method also throws exception if the info could not be written to the specified file path.
+   *
+   * @param image RGB image which needs to be written to the storage disk of the local machine.
+   * @param out OutputStream where the data of the image is to be saved from the application.
+   * @param fileExtension String representing the extension of the saved file (jpg, png, etc.).
+   * @throws IOException Throws exception if the image data cannot be written to the output stream.
+   */
   public static void writeToStorageDisk(RGBImageInterface image,OutputStream out, String fileExtension) throws IOException {
     checkDimensionMatrix(image.getPixel());
     BufferedImage imageSavingElement = getBufferedImage(image.getImageWidth(), image.getImageHeight(), image.getPixel());

@@ -1,6 +1,5 @@
 package model.imageoperations.singlein;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import model.RGBImage;

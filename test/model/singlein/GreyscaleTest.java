@@ -7,12 +7,12 @@ import java.io.IOException;
 
 import model.enums.ColorMapping;
 import model.enums.GreyScaleType;
-import model.imageoperations.singlein.GreyScaleImage;
+import model.imageoperations.singlein.GreyScale;
 import model.imageoperations.singlein.ImageOperation;
 import model.RGBImage;
 import model.RGBImageInterface;
 
-import static model.filehandling.PPMUtil.convertImageMatrixToString;
+import static controller.filehandling.writer.PPMWriter.convertImageMatrixToString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -52,7 +52,7 @@ public class GreyscaleTest {
    */
   @Test
   public void testNullImage() {
-    ImageOperation imageOperation = new GreyScaleImage(1);
+    ImageOperation imageOperation = new GreyScale(1);
     try {
       imageOperation.operation(null);
       fail("Test for null object passing failed.");
@@ -66,7 +66,7 @@ public class GreyscaleTest {
    */
   @Test
   public void testInvalidImageHeight() {
-    ImageOperation imageOperation = new GreyScaleImage(0);
+    ImageOperation imageOperation = new GreyScale(0);
     try {
       int[][][] arZeroLength = new int[0][][];
       imageOperation.operation(new RGBImage(arZeroLength));
@@ -81,7 +81,7 @@ public class GreyscaleTest {
    */
   @Test
   public void testInvalidImageWidth() {
-    ImageOperation imageOperation = new GreyScaleImage(2);
+    ImageOperation imageOperation = new GreyScale(2);
     try {
       int[][][] arZeroWidth = new int[40][0][];
       imageOperation.operation(new RGBImage(arZeroWidth));
@@ -97,7 +97,7 @@ public class GreyscaleTest {
   @Test
   public void testIllegalGreyscale() {
     try {
-      ImageOperation imageOperation = new GreyScaleImage(
+      ImageOperation imageOperation = new GreyScale(
               GreyScaleType.values().length + 100);
       fail("Positive illegal greyscale operation test failed.");
     } catch (IllegalArgumentException ex) {
@@ -105,7 +105,7 @@ public class GreyscaleTest {
     }
 
     try {
-      ImageOperation imageOperation = new GreyScaleImage(-94);
+      ImageOperation imageOperation = new GreyScale(-94);
       fail("Negative illegal greyscale operation test failed.");
     } catch (IllegalArgumentException ex) {
       // test passes if exception is thrown.
@@ -125,7 +125,7 @@ public class GreyscaleTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new GreyScaleImage(GreyScaleType.value.ordinal());
+    ImageOperation imageOperation = new GreyScale(GreyScaleType.value.ordinal());
     RGBImageInterface greyscaleValueImage = imageOperation.operation(rgbImage);
     int[][][] actualMat = greyscaleValueImage.getPixel();
     int[][][] expectedMat = new int[][][]{
@@ -156,7 +156,7 @@ public class GreyscaleTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new GreyScaleImage(GreyScaleType.luma.ordinal());
+    ImageOperation imageOperation = new GreyScale(GreyScaleType.luma.ordinal());
     RGBImageInterface greyscaleLumaImage = imageOperation.operation(rgbImage);
     int[][][] actualMat = greyscaleLumaImage.getPixel();
     int[][][] expectedMat = new int[][][]{
@@ -187,7 +187,7 @@ public class GreyscaleTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new GreyScaleImage(GreyScaleType.intensity.ordinal());
+    ImageOperation imageOperation = new GreyScale(GreyScaleType.intensity.ordinal());
     RGBImageInterface greyscaleIntensityImage = imageOperation.operation(rgbImage);
     int[][][] actualMat = greyscaleIntensityImage.getPixel();
     int[][][] expectedMat = new int[][][]{

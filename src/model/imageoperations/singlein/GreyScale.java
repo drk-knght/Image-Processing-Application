@@ -9,7 +9,7 @@ import model.RGBImageInterface;
  * Takes the greyscale type and performs the action on it to get a new black-white image.
  * It checks for validity of inputs passed to it and exception is thrown if invalid.
  */
-public class GreyScaleImage implements ImageOperation {
+public class GreyScale implements ImageOperation {
 
   private final int greyScaleOperationType;
 
@@ -19,7 +19,7 @@ public class GreyScaleImage implements ImageOperation {
    * @param greyScaleOperationType Integer signifying the greyscale mapping with the Enum.
    * @throws IllegalArgumentException Throws exception if an invalid greyscale is passed as args.
    */
-  public GreyScaleImage(int greyScaleOperationType) throws IllegalArgumentException {
+  public GreyScale(int greyScaleOperationType) throws IllegalArgumentException {
     if (greyScaleOperationType < 0 || greyScaleOperationType >= GreyScaleType.values().length) {
       throw new IllegalArgumentException("Grey scale operation is not defined. Please try again.");
     }

@@ -6,13 +6,13 @@ import org.junit.Test;
 import java.io.IOException;
 
 import model.enums.ColorMapping;
-import model.imageoperations.singlein.BrightnessProfilerImage;
+import model.imageoperations.singlein.Brightness;
 import model.imageoperations.singlein.ImageOperation;
 import model.RGBImage;
 import model.RGBImageInterface;
 
-import static model.filehandling.PPMUtil.convertImageMatrixToString;
 
+import static controller.filehandling.writer.PPMWriter.convertImageMatrixToString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -52,7 +52,7 @@ public class BrightnessProfilerTest {
    */
   @Test
   public void testNullImage() {
-    ImageOperation imageOperation = new BrightnessProfilerImage(100);
+    ImageOperation imageOperation = new Brightness(100);
     try {
       imageOperation.operation(null);
       fail("Test for null object passing failed.");
@@ -66,7 +66,7 @@ public class BrightnessProfilerTest {
    */
   @Test
   public void testInvalidImageHeight() {
-    ImageOperation imageOperation = new BrightnessProfilerImage(340);
+    ImageOperation imageOperation = new Brightness(340);
     try {
       int[][][] arZeroLength = new int[0][][];
       imageOperation.operation(new RGBImage(arZeroLength));
@@ -82,7 +82,7 @@ public class BrightnessProfilerTest {
 
   @Test
   public void testInvalidImageWidth() {
-    ImageOperation imageOperation = new BrightnessProfilerImage(-90);
+    ImageOperation imageOperation = new Brightness(-90);
     try {
       int[][][] arZeroWidth = new int[40][0][];
       imageOperation.operation(new RGBImage(arZeroWidth));
@@ -105,7 +105,7 @@ public class BrightnessProfilerTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new BrightnessProfilerImage(900);
+    ImageOperation imageOperation = new Brightness(900);
     RGBImageInterface brighterImg = imageOperation.operation(rgbImage);
     assertTrue(checkBrightness(brighterImg, smallResImage, 900));
     assertTrue(checkImageStringFormat(brighterImg, 900, smallResImage));
@@ -159,7 +159,7 @@ public class BrightnessProfilerTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new BrightnessProfilerImage(-300);
+    ImageOperation imageOperation = new Brightness(-300);
     RGBImageInterface brighterImg = imageOperation.operation(rgbImage);
     assertTrue(checkBrightness(brighterImg, smallResImage, -300));
     assertTrue(checkImageStringFormat(brighterImg, -300, smallResImage));
@@ -179,7 +179,7 @@ public class BrightnessProfilerTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new BrightnessProfilerImage(30);
+    ImageOperation imageOperation = new Brightness(30);
     RGBImageInterface brighterImg = imageOperation.operation(rgbImage);
     assertTrue(checkBrightness(brighterImg, smallResImage, 30));
     assertTrue(checkImageStringFormat(brighterImg, 30, smallResImage));
@@ -199,7 +199,7 @@ public class BrightnessProfilerTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new BrightnessProfilerImage(-5);
+    ImageOperation imageOperation = new Brightness(-5);
     RGBImageInterface brighterImg = imageOperation.operation(rgbImage);
     assertTrue(checkBrightness(brighterImg, smallResImage, -5));
     assertTrue(checkImageStringFormat(brighterImg, -5, smallResImage));
@@ -218,7 +218,7 @@ public class BrightnessProfilerTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new BrightnessProfilerImage(+0);
+    ImageOperation imageOperation = new Brightness(+0);
     RGBImageInterface brighterImg = imageOperation.operation(rgbImage);
     assertTrue(checkBrightness(brighterImg, smallResImage, +0));
     assertTrue(checkImageStringFormat(brighterImg, +0, smallResImage));
@@ -237,7 +237,7 @@ public class BrightnessProfilerTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new BrightnessProfilerImage(-0);
+    ImageOperation imageOperation = new Brightness(-0);
     RGBImageInterface brighterImg = imageOperation.operation(rgbImage);
     assertTrue(checkBrightness(brighterImg, smallResImage, -0));
     assertTrue(checkImageStringFormat(brighterImg, -0, smallResImage));

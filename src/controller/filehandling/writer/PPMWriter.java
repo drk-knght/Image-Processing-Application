@@ -9,13 +9,15 @@ import model.enums.ColorMapping;
 
 public class PPMWriter {
 
-//  private final OutputStream out;
-//
-//  public PPMWriter(OutputStream out){
-//    this.out=out;
-//  }
 
-
+  /**
+   * The static methods performs the write operation to write the image to a specified OutputStream.
+   * The method also throws exception if the info could not be written to the specified file path.
+   *
+   * @param image RGB Image whose data needs to be saved to a particular Output stream path.
+   * @param out Output stream where the data of the image is transferred in the PPM format.
+   * @throws IOException Throws exception if the image data cannot be written to the output stream.
+   */
   public static void writeToStorageDisk(RGBImageInterface image,OutputStream out) throws IOException {
     StringBuilder ppmImageData = convertImageMatrixToString(image.getImageHeight(), image.getImageWidth(), image.getPixel());
     try {

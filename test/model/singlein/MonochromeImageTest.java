@@ -8,11 +8,11 @@ import java.io.IOException;
 import model.enums.AxisName;
 import model.enums.ColorMapping;
 import model.imageoperations.singlein.ImageOperation;
-import model.imageoperations.singlein.MonochromeImage;
+import model.imageoperations.singlein.Monochrome;
 import model.RGBImage;
 import model.RGBImageInterface;
 
-import static model.filehandling.PPMUtil.convertImageMatrixToString;
+import static controller.filehandling.writer.PPMWriter.convertImageMatrixToString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -52,7 +52,7 @@ public class MonochromeImageTest {
    */
   @Test
   public void testNullImage() {
-    ImageOperation imageOperation = new MonochromeImage(0);
+    ImageOperation imageOperation = new Monochrome(0);
     try {
       imageOperation.operation(null);
       fail("Test for null object passing failed.");
@@ -67,7 +67,7 @@ public class MonochromeImageTest {
 
   @Test
   public void testInvalidImageHeight() {
-    ImageOperation imageOperation = new MonochromeImage(1);
+    ImageOperation imageOperation = new Monochrome(1);
     try {
       int[][][] arZeroLength = new int[0][][];
       imageOperation.operation(new RGBImage(arZeroLength));
@@ -82,7 +82,7 @@ public class MonochromeImageTest {
    */
   @Test
   public void testInvalidImageWidth() {
-    ImageOperation imageOperation = new MonochromeImage(2);
+    ImageOperation imageOperation = new Monochrome(2);
     try {
       int[][][] arZeroWidth = new int[40][0][];
       imageOperation.operation(new RGBImage(arZeroWidth));
@@ -99,14 +99,14 @@ public class MonochromeImageTest {
   public void testIllegalSingleComponent() {
 
     try {
-      ImageOperation imageOperation = new MonochromeImage(AxisName.values().length + 55);
+      ImageOperation imageOperation = new Monochrome(AxisName.values().length + 55);
       fail("Positive illegal single channel image operation test failed.");
     } catch (IllegalArgumentException ex) {
       // test passes if exception is thrown.
     }
 
     try {
-      ImageOperation imageOperation = new MonochromeImage(-744);
+      ImageOperation imageOperation = new Monochrome(-744);
       fail("Negative illegal single channel image operation test failed.");
     } catch (IllegalArgumentException ex) {
       // test passes if exception is thrown.
@@ -126,7 +126,7 @@ public class MonochromeImageTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new MonochromeImage(ColorMapping.red.ordinal());
+    ImageOperation imageOperation = new Monochrome(ColorMapping.red.ordinal());
     RGBImageInterface redChannelImage = imageOperation.operation(rgbImage);
     int[][][] actualMat = redChannelImage.getPixel();
     int[][][] expectedMat = new int[][][]{
@@ -157,7 +157,7 @@ public class MonochromeImageTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new MonochromeImage(ColorMapping.green.ordinal());
+    ImageOperation imageOperation = new Monochrome(ColorMapping.green.ordinal());
     RGBImageInterface greenChannelImage = imageOperation.operation(rgbImage);
     int[][][] actualMat = greenChannelImage.getPixel();
     int[][][] expectedMat = new int[][][]{
@@ -188,7 +188,7 @@ public class MonochromeImageTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new MonochromeImage(ColorMapping.blue.ordinal());
+    ImageOperation imageOperation = new Monochrome(ColorMapping.blue.ordinal());
     RGBImageInterface blueChannelImage = imageOperation.operation(rgbImage);
     int[][][] actualMat = blueChannelImage.getPixel();
     int[][][] expectedMat = new int[][][]{

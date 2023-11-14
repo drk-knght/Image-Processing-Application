@@ -10,7 +10,7 @@ import model.RGBImageInterface;
  * Takes the color component type and performs the action on it to get a new color-greyscale image.
  * It checks for validity of inputs passed to it and exception is thrown if invalid.
  */
-public class MonochromeImage implements ImageOperation {
+public class Monochrome implements ImageOperation {
 
   private final int colorComponent;
 
@@ -20,7 +20,7 @@ public class MonochromeImage implements ImageOperation {
    * @param colorComponent Integer signifying the color component for which greyscale is done.
    * @throws IllegalArgumentException Throws exception if an invalid kernel type is passed as args.
    */
-  public MonochromeImage(int colorComponent) throws IllegalArgumentException {
+  public Monochrome(int colorComponent) throws IllegalArgumentException {
     if (colorComponent < 0 || colorComponent >= ColorMapping.values().length) {
       throw new IllegalArgumentException("Single channel operation value passed "
               + "is not defined in the system. Try again.");

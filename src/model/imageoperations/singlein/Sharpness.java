@@ -10,7 +10,7 @@ import model.RGBImageInterface;
  * It takes the kernel type (blur / sharpen) and performs the action on it to get a new image.
  * It checks for validity of inputs passed to it and exception is thrown if invalid.
  */
-public class SharpenImage implements ImageOperation {
+public class Sharpness implements ImageOperation {
 
   private final int kernelOperation;
 
@@ -20,7 +20,7 @@ public class SharpenImage implements ImageOperation {
    * @param kernelOperation Integer representing the kernel operation which needs to be performed.
    * @throws IllegalArgumentException Throws exception if an invalid kernel type is passed as args.
    */
-  public SharpenImage(int kernelOperation) throws IllegalArgumentException {
+  public Sharpness(int kernelOperation) throws IllegalArgumentException {
     if (kernelOperation < 0 || kernelOperation >= KernelImage.values().length) {
       throw new IllegalArgumentException("Sharpening operation value passed "
               + "is not defined in the system. Try again.");

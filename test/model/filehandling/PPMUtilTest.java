@@ -14,6 +14,7 @@ import model.RGBImage;
 import model.RGBImageInterface;
 
 
+import static controller.filehandling.writer.PPMWriter.convertImageMatrixToString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -62,7 +63,7 @@ public class PPMUtilTest {
         }
       }
     }
-    String actualFormat = PPMUtil.convertImageMatrixToString(actualPixelMat.length,
+    String actualFormat = convertImageMatrixToString(actualPixelMat.length,
             actualPixelMat[0].length, actualPixelMat).toString();
     assertTrue(checkImageStringFormat(actualFormat, pixelMatrix));
   }

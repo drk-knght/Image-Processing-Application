@@ -12,7 +12,7 @@ public class SplitBuffer implements ImageOperation{
 
   private final ImageOperation imageOperation;
 
-  public SplitBuffer(int splitPercentage,ImageOperation imageOperation){
+  public SplitBuffer(int splitPercentage, ImageOperation imageOperation){
     this.splitPercentage=splitPercentage;
     this.imageOperation=imageOperation;
   }
@@ -50,14 +50,14 @@ public class SplitBuffer implements ImageOperation{
     }
   }
 
-  public static void main(String [] args) throws IOException {
-//    SplitBuffer(int splitPercentage, RGBImageInterface rgbImage,ImageOperation imageOperation)
-    RGBImageInterface rgbImage=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Koala.ppm");
-    ImageOperation operation=new BrightnessProfilerImage(100);
-    SplitBuffer buff=new SplitBuffer(5,operation);
-    RGBImageInterface result=buff.operation(rgbImage);
-    result.saveImage("/Users/omagarwal/Desktop/Koala-split-brighter-10.ppm");
-  }
+//  public static void main(String [] args) throws IOException {
+////    SplitBuffer(int splitPercentage, RGBImageInterface rgbImage,ImageOperation imageOperation)
+//    RGBImageInterface rgbImage=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Koala.ppm");
+//    ImageOperation operation=new Flip(1);
+//    SplitBuffer buff=new SplitBuffer(70,operation);
+//    RGBImageInterface result=buff.operation(rgbImage);
+//    result.saveImage("/Users/omagarwal/Desktop/Koala-split-verticalFlip.ppm");
+//  }
 
 
 }

@@ -10,7 +10,7 @@ import model.RGBImageInterface;
  * It takes the image and flip along any of the existing axis as required by the client using this.
  * It checks for validity of inputs passed to it and exception is thrown if invalid.
  */
-public class FlipImage implements ImageOperation {
+public class Flip implements ImageOperation {
 
   private final int axisValue;
 
@@ -20,7 +20,7 @@ public class FlipImage implements ImageOperation {
    * @param axisValue Integer signifying the Axis name mapping with the Enum.
    * @throws IllegalArgumentException Throws exception if an invalid axis type is passed as args.
    */
-  public FlipImage(int axisValue) {
+  public Flip(int axisValue) {
     if (axisValue < 0 || axisValue >= AxisName.values().length) {
       throw new IllegalArgumentException("Flipping operation value "
               + "passed is not defined in the system. Try again.");

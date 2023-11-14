@@ -1,24 +1,28 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import controller.filehandling.reader.ImageIOReader;
+import controller.filehandling.reader.PPMReader;
+import controller.filehandling.writer.ImageIOWriter;
+import controller.filehandling.writer.PPMWriter;
 import model.enums.AxisName;
 import model.enums.ColorMapping;
 import model.enums.GreyScaleType;
 import model.enums.KernelImage;
-import model.filehandling.ImageIOUtil;
-import model.filehandling.PPMUtil;
-import model.imageoperations.singlein.BrightnessProfilerImage;
+import model.imageoperations.singlein.Brightness;
 import model.imageoperations.singlein.ColorTransformation;
 import model.imageoperations.multiin.CombineChannelImage;
-import model.imageoperations.singlein.FlipImage;
-import model.imageoperations.singlein.GreyScaleImage;
+import model.imageoperations.singlein.Flip;
+import model.imageoperations.singlein.GreyScale;
 import model.imageoperations.singlein.ImageOperation;
-import model.imageoperations.singlein.MonochromeImage;
+import model.imageoperations.singlein.Monochrome;
 import model.imageoperations.multiin.MultipleImagesSingleOperation;
 import model.imageoperations.multiout.MultipleOperationImages;
-import model.imageoperations.singlein.SharpenImage;
+import model.imageoperations.singlein.Sharpness;
 import model.imageoperations.multiout.SplitChannelImage;
 
 /**
@@ -50,9 +54,9 @@ public class RGBImage implements RGBImageInterface {
     int[][][] pixelMatrix = null;
     String extension = getFileExtension(filePath);
     if (extension.equals("ppm")) {
-      pixelMatrix = PPMUtil.ppmFileReader(filePath);
+      pixelMatrix = PPMReader.readFileContent(new FileInputStream(filePath));
     } else {
-      pixelMatrix = ImageIOUtil.imageIOFileReader(filePath);
+      pixelMatrix = ImageIOReader.readFileContent(new FileInputStream(filePath));
     }
     checkAndAssignValues(pixelMatrix);
   }
@@ -128,10 +132,12 @@ public class RGBImage implements RGBImageInterface {
   public void saveImage(String imagePath) throws IOException {
     String imageExtension = getFileExtension(imagePath);
     if (imageExtension.equals("ppm")) {
-      PPMUtil.savePPMImage(this.height, this.width, this.pixelMatrix, imagePath);
+//      PPMUtil.savePPMImage(this.height, this.width, this.pixelMatrix, imagePath);
+      PPMWriter.writeToStorageDisk(this,new FileOutputStream(imagePath));
     } else {
-      ImageIOUtil.saveImageIOFile(this.height, this.width,
-              this.pixelMatrix, imagePath, imageExtension);
+//      ImageIOUtil.saveImageIOFile(this.height, this.width,
+//              this.pixelMatrix, imagePath, imageExtension);
+      ImageIOWriter.writeToStorageDisk(this,new FileOutputStream(imagePath),imageExtension);
     }
   }
 
@@ -150,7 +156,7 @@ public class RGBImage implements RGBImageInterface {
       throw new IllegalArgumentException("Wrong axis value passed to the model "
               + "for flipping the image. Aborting!!");
     }
-    ImageOperation imageOperation = new FlipImage(axisDirection);
+    ImageOperation imageOperation = new Flip(axisDirection);
     return imageOperation.operation(this);
   }
 
@@ -164,7 +170,7 @@ public class RGBImage implements RGBImageInterface {
    */
   @Override
   public RGBImageInterface changeBrightness(int deltaChangeValue) {
-    ImageOperation imageOperation = new BrightnessProfilerImage(deltaChangeValue);
+    ImageOperation imageOperation = new Brightness(deltaChangeValue);
     return imageOperation.operation(this);
   }
 
@@ -182,7 +188,7 @@ public class RGBImage implements RGBImageInterface {
       throw new IllegalArgumentException("Wrong kernel value passed to model for "
               + "changing the sharpness operation on the image. Aborting!!");
     }
-    ImageOperation imageOperation = new SharpenImage(kernelType);
+    ImageOperation imageOperation = new Sharpness(kernelType);
     return imageOperation.operation(this);
   }
 
@@ -232,7 +238,7 @@ public class RGBImage implements RGBImageInterface {
       throw new IllegalArgumentException("Wrong color value passed to model for "
               + "performing the monochrome operation on the image. Aborting!!");
     }
-    ImageOperation imageOperation = new MonochromeImage(colorValue);
+    ImageOperation imageOperation = new Monochrome(colorValue);
     return imageOperation.operation(this);
   }
 
@@ -249,7 +255,7 @@ public class RGBImage implements RGBImageInterface {
       throw new IllegalArgumentException("Wrong greyscale value passed to model for "
               + "greyscale operation on image. Aborting!!");
     }
-    ImageOperation imageOperation = new GreyScaleImage(greyScaleType);
+    ImageOperation imageOperation = new GreyScale(greyScaleType);
     return imageOperation.operation(this);
   }
 

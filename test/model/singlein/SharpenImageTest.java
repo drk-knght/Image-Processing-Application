@@ -10,11 +10,11 @@ import model.enums.ColorMapping;
 import model.enums.KernelImage;
 
 import model.imageoperations.singlein.ImageOperation;
-import model.imageoperations.singlein.SharpenImage;
+import model.imageoperations.singlein.Sharpness;
 import model.RGBImage;
 import model.RGBImageInterface;
 
-import static model.filehandling.PPMUtil.convertImageMatrixToString;
+import static controller.filehandling.writer.PPMWriter.convertImageMatrixToString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -53,7 +53,7 @@ public class SharpenImageTest {
    */
   @Test
   public void testNullImage() {
-    ImageOperation imageOperation = new SharpenImage(0);
+    ImageOperation imageOperation = new Sharpness(0);
     try {
       imageOperation.operation(null);
       fail("Test for null object passing failed.");
@@ -67,7 +67,7 @@ public class SharpenImageTest {
    */
   @Test
   public void testInvalidImageHeight() {
-    ImageOperation imageOperation = new SharpenImage(1);
+    ImageOperation imageOperation = new Sharpness(1);
     try {
       int[][][] arZeroLength = new int[0][][];
       imageOperation.operation(new RGBImage(arZeroLength));
@@ -83,7 +83,7 @@ public class SharpenImageTest {
 
   @Test
   public void testInvalidImageWidth() {
-    ImageOperation imageOperation = new SharpenImage(0);
+    ImageOperation imageOperation = new Sharpness(0);
     try {
       int[][][] arZeroWidth = new int[40][0][];
       imageOperation.operation(new RGBImage(arZeroWidth));
@@ -101,14 +101,14 @@ public class SharpenImageTest {
   public void testIllegalSharpen() {
 
     try {
-      ImageOperation imageOperation = new SharpenImage(KernelImage.values().length + 570);
+      ImageOperation imageOperation = new Sharpness(KernelImage.values().length + 570);
       fail("Positive illegal sharpen operation test failed.");
     } catch (IllegalArgumentException ex) {
       // test passes if exception is thrown.
     }
 
     try {
-      ImageOperation imageOperation = new SharpenImage(-69);
+      ImageOperation imageOperation = new Sharpness(-69);
       fail("Negative illegal sharpen operation test failed.");
     } catch (IllegalArgumentException ex) {
       // test passes if exception is thrown.
@@ -128,7 +128,7 @@ public class SharpenImageTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new SharpenImage(KernelImage.Blur.ordinal());
+    ImageOperation imageOperation = new Sharpness(KernelImage.Blur.ordinal());
     RGBImageInterface blurredImage = imageOperation.operation(rgbImage);
     int[][][] actualMat = blurredImage.getPixel();
     int[][][] expectedMat = new int[][][]{
@@ -160,7 +160,7 @@ public class SharpenImageTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new SharpenImage(KernelImage.Sharpen.ordinal());
+    ImageOperation imageOperation = new Sharpness(KernelImage.Sharpen.ordinal());
     RGBImageInterface sharpenedImage = imageOperation.operation(rgbImage);
     int[][][] actualMat = sharpenedImage.getPixel();
     int[][][] expectedMat = new int[][][]{

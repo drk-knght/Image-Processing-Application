@@ -8,12 +8,12 @@ import java.io.IOException;
 
 import model.enums.AxisName;
 import model.enums.ColorMapping;
-import model.imageoperations.singlein.FlipImage;
+import model.imageoperations.singlein.Flip;
 import model.imageoperations.singlein.ImageOperation;
 import model.RGBImage;
 import model.RGBImageInterface;
 
-import static model.filehandling.PPMUtil.convertImageMatrixToString;
+import static controller.filehandling.writer.PPMWriter.convertImageMatrixToString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -54,7 +54,7 @@ public class FlipImageTest {
    */
   @Test
   public void testNullImage() {
-    ImageOperation imageOperation = new FlipImage(0);
+    ImageOperation imageOperation = new Flip(0);
     try {
       imageOperation.operation(null);
       fail("Test for null object passing failed.");
@@ -68,7 +68,7 @@ public class FlipImageTest {
    */
   @Test
   public void testInvalidImageHeight() {
-    ImageOperation imageOperation = new FlipImage(1);
+    ImageOperation imageOperation = new Flip(1);
     try {
       int[][][] arZeroLength = new int[0][][];
       imageOperation.operation(new RGBImage(arZeroLength));
@@ -83,7 +83,7 @@ public class FlipImageTest {
    */
   @Test
   public void testInvalidImageWidth() {
-    ImageOperation imageOperation = new FlipImage(0);
+    ImageOperation imageOperation = new Flip(0);
     try {
       int[][][] arZeroWidth = new int[40][0][];
       imageOperation.operation(new RGBImage(arZeroWidth));
@@ -107,7 +107,7 @@ public class FlipImageTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new FlipImage(AxisName.horizontal.ordinal());
+    ImageOperation imageOperation = new Flip(AxisName.horizontal.ordinal());
     RGBImageInterface horizontalFlippedImage = imageOperation.operation(rgbImage);
     int[][][] actualMat = horizontalFlippedImage.getPixel();
     int[][][] expectedMat = new int[][][]{
@@ -158,7 +158,7 @@ public class FlipImageTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
-    ImageOperation imageOperation = new FlipImage(AxisName.vertical.ordinal());
+    ImageOperation imageOperation = new Flip(AxisName.vertical.ordinal());
     RGBImageInterface verticalFlippedImage = imageOperation.operation(rgbImage);
     int[][][] actualMat = verticalFlippedImage.getPixel();
     int[][][] expectedMat = new int[][][]{
@@ -183,14 +183,14 @@ public class FlipImageTest {
   public void testIllegalFlip() {
 
     try {
-      ImageOperation imageOperation = new FlipImage(AxisName.values().length + 100);
+      ImageOperation imageOperation = new Flip(AxisName.values().length + 100);
       fail("Positive illegal flipping operation test failed.");
     } catch (IllegalArgumentException ex) {
       // test passes if exception is thrown.
     }
 
     try {
-      ImageOperation imageOperation = new FlipImage(-54);
+      ImageOperation imageOperation = new Flip(-54);
       fail("Negative illegal flipping operation test failed.");
     } catch (IllegalArgumentException ex) {
       // test passes if exception is thrown.

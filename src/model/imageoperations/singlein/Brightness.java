@@ -9,7 +9,7 @@ import model.RGBImageInterface;
  * It takes the image and change the brightness of the image as required by the client using this.
  * It checks for validity of inputs passed to it and exception is thrown if invalid.
  */
-public class BrightnessProfilerImage implements ImageOperation {
+public class Brightness implements ImageOperation {
 
   private final int deltaChangeValue;
 
@@ -19,7 +19,7 @@ public class BrightnessProfilerImage implements ImageOperation {
    * @param deltaChangeValue Integer signifying the change in the pixel value that needs to be done.
    * @throws IllegalArgumentException Throws exception if an invalid axis type is passed as args.
    */
-  public BrightnessProfilerImage(int deltaChangeValue) {
+  public Brightness(int deltaChangeValue) {
     this.deltaChangeValue = deltaChangeValue;
   }
 

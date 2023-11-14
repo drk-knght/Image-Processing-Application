@@ -9,6 +9,14 @@ import model.enums.ColorMapping;
 
 public class PPMReader{
 
+  /**
+   * The static methods performs the read operation to get the image from a specified inputStream.
+   * The method also throws exception if an invalid file path is passed.
+   * It also throws exception if an error occurred while reading the inputs stored in the file.
+   *
+   * @param in InputStream from where the data of the image is read to load it in the application.
+   * @return A 3-d matrix which contains the information about the individual rgb image pixels.
+   */
   public static int[][][] readFileContent(InputStream in) {
     Scanner sc = new Scanner(in);
     StringBuilder builder = getBuilderFromFile(sc);

@@ -6,7 +6,7 @@ import model.RGBImage;
 import model.RGBImageInterface;
 import model.enums.ColorMapping;
 
-public class LevelAdjustment implements ImageOperation{
+public class LevelsAdjustment implements ImageOperation{
 
   private final int blackPoint;
 
@@ -14,7 +14,7 @@ public class LevelAdjustment implements ImageOperation{
 
   private final int highlightPoint;
 
-  public LevelAdjustment(int blackPoint,int midPoint,int highlightPoint){
+  public LevelsAdjustment(int blackPoint, int midPoint, int highlightPoint){
     this.blackPoint=blackPoint;
     this.midPoint=midPoint;
     this.highlightPoint=highlightPoint;
@@ -72,7 +72,7 @@ public class LevelAdjustment implements ImageOperation{
 
   public static void main(String[] args) throws IOException {
     RGBImageInterface img=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/galaxy.png");
-    LevelAdjustment hr=new LevelAdjustment(20,100,255);
+    LevelsAdjustment hr=new LevelsAdjustment(20,100,255);
     RGBImageInterface res=hr.operation(img);
     Histogram h=new Histogram();
     RGBImageInterface graph=h.operation(res);
