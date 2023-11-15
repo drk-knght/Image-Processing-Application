@@ -275,6 +275,17 @@ public class RGBImage implements RGBImageInterface {
     return bufferImageOperation(splitPercentage,imageOperation);
   }
 
+  /**
+   * Method represents the level adjustment operation on an existing image currently present in use.
+   * The values of the individual pixels is changed as per the quadratic equation.
+   *
+   * @param b Shadow-point where the intensity of the pixel decreases around that range.
+   * @param m Mid-point where the intensity of the pixel changes non-linearly as per the curve eq.
+   * @param w Highlight-point where the intensity of the pixel is increased which satisfy the curve.
+   * @param splitPercentage Double value representing the split ratio of original and modified img.
+   * @return An image as the result of the action performed on the present image.
+   * @throws IllegalArgumentException Exception is thrown If the b,m,w are not in ascending order.
+   */
   @Override
   public RGBImageInterface levelsAdjustment(double b, double m, double w, double splitPercentage) {
     if(b>m || m>w){
@@ -285,12 +296,24 @@ public class RGBImage implements RGBImageInterface {
     return bufferImageOperation(splitPercentage,imageOperation);
   }
 
+  /**
+   * Method represents the histogram plotting of the r,g,b pixel operation on an image.
+   * The histogram represents the intensity values Vs frequency of those values on the axes.
+   * @return An image as the result of the action performed on the present image.
+   */
   @Override
   public RGBImageInterface getPixelHistogram() {
     ImageOperation imageOperation=new Histogram();
     return imageOperation.operation(this);
   }
 
+  /**
+   * Method represents the compression operation part on the image, and it is a lossy one.
+   * The data of the pixels is lost when it is reverted back to its original size.
+   * @param compressionPercentage Percent of the image that needs to be thrown on the operation.
+   * @return An image as the result of the action performed on the present image.
+   * @throws IllegalArgumentException Exception is thrown if the % of compression is non-positive.
+   */
   @Override
   public RGBImageInterface compressImage(double compressionPercentage) throws IllegalArgumentException {
     if(compressionPercentage<0){
@@ -302,6 +325,12 @@ public class RGBImage implements RGBImageInterface {
     return imageOperation.operation(this);
   }
 
+  /**
+   * Method represents the color correction part on an existing image.
+   * The intensity values for different channels are aligned long the common global max peak.
+   * @param splitPercentage Double value representing the split ratio of original and modified img.
+   * @return An image as the result of the action performed on the present image.
+   */
   @Override
   public RGBImageInterface colorCorrectionImage(double splitPercentage) {
     ImageOperation imageOperation=new ColorCorrection();
