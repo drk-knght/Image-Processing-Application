@@ -9,6 +9,7 @@ import model.RGBImageInterface;
 /**
  * The class represents the color transformation controller command of the main controller.
  * The command takes an array of strings as input and sends the command to change the sepia of img.
+ * It also takes the split % if the user want to compare the original and the updated image.
  */
 public class ColorTransformationCommand implements RGBImageCommandInterface {
 
@@ -44,7 +45,7 @@ public class ColorTransformationCommand implements RGBImageCommandInterface {
    * The command calls the applying sepia method from the model class to get new image.
    *
    * @param cachedImage The set of images presently in use in the memory of this application.
-   * @throws NullPointerException Throws exception if the input is of null type.
+   * @throws IllegalArgumentException Throws exception if the input is of null type.
    */
   @Override
   public void execute(Map<String, RGBImageInterface> cachedImage) throws IllegalArgumentException {

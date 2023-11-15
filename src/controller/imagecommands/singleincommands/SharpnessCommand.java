@@ -1,18 +1,19 @@
 package controller.imagecommands.singleincommands;
 
-import java.io.IOException;
-
 import model.RGBImageInterface;
 
 /**
  * The class represents the sharpness image controller command of the main controller.
  * The command takes an array of strings as input and sends the command to flip method of the img.
+ * It also takes the split % if the user want to compare the original and the updated image.
  */
 public class SharpnessCommand extends AbstractCommandSingleIP {
 
   private final double splitPercentage;
+
   /**
-   * Constructor takes the cmd args as an input and assign the file names to the fields.
+   * Constructor takes the cmd args as an input and assign the image names to the fields.
+   * It also assigns the split value % to show the preview of the image after and before operation.
    *
    * @param commandArguments Array of strings containing the information about the file names.
    * @throws IllegalArgumentException Throws exception if the string array is not of required len.

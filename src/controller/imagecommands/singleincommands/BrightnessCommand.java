@@ -1,7 +1,5 @@
 package controller.imagecommands.singleincommands;
 
-import java.io.IOException;
-
 import model.RGBImageInterface;
 
 /**

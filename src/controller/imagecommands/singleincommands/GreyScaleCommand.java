@@ -4,7 +4,8 @@ import model.RGBImageInterface;
 
 /**
  * The class represents the greyscale image controller command of the main controller.
- * The command takes an array of strings as input and sends the command to flip method of the img.
+ * The command takes an array of strings as input and sends the command to grey method of the img.
+ * It also takes the split % if the user want to compare the original and the updated image.
  */
 public class GreyScaleCommand extends AbstractCommandSingleIP {
 

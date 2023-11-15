@@ -1,11 +1,15 @@
 package controller.imagecommands.singleincommands;
 
-import java.io.IOException;
 import java.util.Map;
 
 import controller.imagecommands.RGBImageCommandInterface;
 import model.RGBImageInterface;
 
+/**
+ * The class represents the color correction command of the main controller.
+ * The command takes an array of strings as input and sends the command to correct the color.
+ * It also takes the split % if the user want to compare the original and the updated image.
+ */
 public class ColorCorrectionCommand implements RGBImageCommandInterface {
 
   private final String rgbExistingImage;

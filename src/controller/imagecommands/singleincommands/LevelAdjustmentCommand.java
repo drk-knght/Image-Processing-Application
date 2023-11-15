@@ -1,11 +1,15 @@
 package controller.imagecommands.singleincommands;
 
-import java.io.IOException;
 import java.util.Map;
 
 import controller.imagecommands.RGBImageCommandInterface;
 import model.RGBImageInterface;
 
+/**
+ * The class represents the level adjustment image controller command of the main controller.
+ * The command takes an array of strings as input and sends the command to level adjust method.
+ * It also takes the split % if the user want to compare the original and the updated image.
+ */
 public class LevelAdjustmentCommand implements RGBImageCommandInterface {
 
   private final String rgbExistingImage;

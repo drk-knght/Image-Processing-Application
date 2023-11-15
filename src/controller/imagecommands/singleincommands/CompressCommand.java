@@ -5,6 +5,11 @@ import java.util.Map;
 import controller.imagecommands.RGBImageCommandInterface;
 import model.RGBImageInterface;
 
+/**
+ * The class represents the image compression command of the main controller.
+ * The command takes an array of strings as input and sends the command to compress the image.
+ * It also takes the split % if the user want to compare the original and the updated image.
+ */
 public class CompressCommand implements RGBImageCommandInterface {
 
   private final double compressPercentage;

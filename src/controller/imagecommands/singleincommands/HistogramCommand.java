@@ -6,6 +6,11 @@ import java.util.Map;
 import controller.imagecommands.RGBImageCommandInterface;
 import model.RGBImageInterface;
 
+/**
+ * The class represents the image command operation for plotting line-graph of r,g,b values.
+ * The r,g,b values for an image is plotted by model from this command class.
+ * The command takes an array of strings as input and sends the command to plot gram of the image.
+ */
 public class HistogramCommand implements RGBImageCommandInterface {
 
   private final String rgbExistingImage;
