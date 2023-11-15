@@ -4,7 +4,12 @@ import java.io.IOException;
 
 import model.RGBImageInterface;
 
-public interface FileWriterInterface {
+/**
+ * The interface represents the write operation performed on an output stream.
+ * It handles the write part of the I/O operation from controller in the MVC architecture.
+ * The method performs the write operation to write contents of the image object to the stream.
+ */
+public interface OutputWriterInterface {
 
   /**
    * The methods represent the saving operation of the image.

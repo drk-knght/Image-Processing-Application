@@ -7,6 +7,10 @@ import java.util.Scanner;
 import model.RGBImage;
 import model.enums.ColorMapping;
 
+/**
+ * The class represents PPM read functionalities required while performing the I/O operations.
+ * The methods for reading the document are static so no object creation is required for func calls.
+ */
 public class PPMReader{
 
   /**

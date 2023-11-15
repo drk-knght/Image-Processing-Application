@@ -7,6 +7,10 @@ import java.io.OutputStream;
 import model.RGBImageInterface;
 import model.enums.ColorMapping;
 
+/**
+ * The class represents PPM write functionalities required while performing the I/O operations.
+ * The methods for writing the document are static so no object creation is required for func calls.
+ */
 public class PPMWriter {
 
 

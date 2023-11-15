@@ -3,9 +3,8 @@ package controller.imagecommands.iocommands;
 import java.io.IOException;
 import java.util.Map;
 
-import controller.filehandling.reader.FileReaderInterface;
 import controller.filehandling.writer.FileWriter;
-import controller.filehandling.writer.FileWriterInterface;
+import controller.filehandling.writer.OutputWriterInterface;
 import controller.imagecommands.RGBImageCommandInterface;
 import model.RGBImageInterface;
 
@@ -55,7 +54,7 @@ public class SaveCommand implements RGBImageCommandInterface {
       System.out.println("No such images named: " + this.imageName + " exists in the memory");
       return;
     }
-    FileWriterInterface writer=new FileWriter(imageFilePath);
+    OutputWriterInterface writer=new FileWriter(imageFilePath);
     writer.write(rgbCachedImage);
 //    rgbCachedImage.saveImage(imageFilePath);
   }

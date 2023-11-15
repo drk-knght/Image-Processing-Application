@@ -9,6 +9,10 @@ import javax.imageio.ImageIO;
 
 import model.enums.ColorMapping;
 
+/**
+ * The class represents ImageIO read functionalities required while performing the I/O operations.
+ * The methods for reading the document are static so no object creation is required for func calls.
+ */
 public class ImageIOReader{
 
 
