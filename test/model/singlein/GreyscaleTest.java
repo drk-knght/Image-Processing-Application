@@ -3,8 +3,10 @@ package model.singlein;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 
+import controller.filehandling.writer.PPMWriter;
 import model.enums.ColorMapping;
 import model.enums.GreyScaleType;
 import model.imageoperations.singlein.GreyScale;
@@ -22,30 +24,6 @@ import static org.junit.Assert.fail;
  * greyscale.
  */
 public class GreyscaleTest {
-  String imagePathImageIO;
-
-  String imagePathPPM;
-
-  RGBImageInterface testingImageIO;
-
-  RGBImageInterface testingImagePPM;
-
-  /**
-   * SetUp() is used to load a test image which is used to for comparing test results.
-   */
-  @Before
-  public void setUp() {
-    imagePathImageIO = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/"
-            + "Image Processing/src/res/Koala.png";
-    imagePathPPM = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/"
-            + "Image Processing/src/res/Koala.ppm";
-    try {
-      testingImageIO = new RGBImage(imagePathImageIO);
-      testingImagePPM = new RGBImage(imagePathPPM);
-    } catch (IOException err) {
-      fail("file for testing not found while environment set up for brightness ");
-    }
-  }
 
   /**
    * The test is used to check if the input passed is null.
@@ -209,9 +187,10 @@ public class GreyscaleTest {
 
   private boolean checkImageStringFormat(RGBImageInterface greyscaleImage, int[][][] mat)
           throws IOException {
-    greyscaleImage.saveImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/"
+    PPMWriter.writeToStorageDisk(greyscaleImage,new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/"
             + "CS 5010 PDP/"
-            + "Labs/Image Processing/src/res/small-Res-greyscale-Testing.ppm");
+            + "Labs/Image Processing/res/small-Res-greyscale-Testing.ppm"));
+
     StringBuilder savedRes = convertImageMatrixToString(greyscaleImage.getImageHeight(),
             greyscaleImage.getImageWidth(), greyscaleImage.getPixel());
     String savedFormat = new String(savedRes);

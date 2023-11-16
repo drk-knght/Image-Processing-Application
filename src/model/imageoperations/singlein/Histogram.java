@@ -11,6 +11,11 @@ import model.RGBImage;
 import model.RGBImageInterface;
 import model.enums.ColorMapping;
 
+/**
+ * This class represents the histogram plotting operation on rbg pixel values of the image.
+ * The classes use a graphics 2d object on buffer image and draws the line graph on it.
+ * The graph represents the pixel intensity values Vs. frequency of its occurrences for r,b and b.
+ */
 public class Histogram implements ImageOperation{
 
   private final BufferedImage rgbHistogramGraph;
@@ -23,14 +28,31 @@ public class Histogram implements ImageOperation{
 
   private final int [][] colorDepthFreqMap;
 
+  /**
+   * The constructor creates the buffer image on which the graph is to be drawn.
+   * It also creates graphics 2d object which draws on the buffer object for the individual pixels.
+   * A new array is created to store the freq of occurrences of each of the channels' intensity.
+   */
   public Histogram(){
     rgbHistogramGraph=new BufferedImage(histogramImageWidth,histogramImageHeight,BufferedImage.TYPE_3BYTE_BGR);
     g=rgbHistogramGraph.createGraphics();
     colorDepthFreqMap=new int [ColorMapping.values().length][256];
   }
 
+  /**
+   * The method performs an action on the existing image in memory of the image processing app.
+   * It plots the line-graph containing the freq and 256-greyscale values for all the channels.
+   * Returns the images containing the data that can be accessed and operated by this interface.
+   * @param rgbImage Image currently in memory on which the working is to be done.
+   * @return An image as the result of the action performed on the former image.
+   * @throws IllegalArgumentException Throws exception if the parameter passed is invalid.
+   */
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
+    if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
+      throw new IllegalArgumentException("Image passed for histogram image "
+              + "transformation is not as expected, check again. Aborting!!");
+    }
     setBackground();
     int [][][] pixelMatrix= rgbImage.getPixel();
     int cumulativePeakMaxVal=0;

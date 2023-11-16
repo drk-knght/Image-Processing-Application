@@ -19,7 +19,7 @@ public interface RGBImageInterface {
    * @param imagePath The file path where the image needs to be stored in the present file system.
    * @throws IOException Throws exception if the image data could not be written to that path.
    */
-  void saveImage(String imagePath) throws IOException;
+//  void saveImage(String imagePath) throws IOException;
 
   /**
    * The method represents the flipping action carried out by an image on itself.

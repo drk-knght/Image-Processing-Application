@@ -5,12 +5,18 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
+import controller.filehandling.reader.FileReader;
+import controller.filehandling.reader.PPMReader;
+import model.RGBImage;
 import model.enums.ColorMapping;
 
 import static org.junit.Assert.assertEquals;
@@ -154,9 +160,9 @@ public class ControllerModelIntegratedTest {
 
   private String checkImageStringFormat(int[][][] mat, int offset) throws IOException {
     StringBuilder expectedFormat = new StringBuilder();
-    expectedFormat.append("P3 ").append(4).append(" ").append(3).append("\n255\n");
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 4; j++) {
+    expectedFormat.append("P3 ").append(mat[0].length).append(" ").append(mat.length).append("\n255\n");
+    for (int i = 0; i < mat.length; i++) {
+      for (int j = 0; j < mat[i].length; j++) {
         for (int k = 0; k < ColorMapping.values().length; k++) {
           int sum = Math.min(255, Math.max(0, mat[i][j][k] + offset));
           expectedFormat.append(" ").append(sum).append(" ");
@@ -649,6 +655,120 @@ public class ControllerModelIntegratedTest {
     String readScriptFilePath = "/Users/omagarwal/Desktop/ErrorFile.txt";
     String saveImgPath = "/Users/omagarwal/Desktop/Image-saveFileTest.ppm";
     String command = "run " + readScriptFilePath;
+    InputStream in = new ByteArrayInputStream(command.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    RGBImageControllerInterface controller = new RGBImageController(in, out);
+    controller.goCall();
+    String content = Files.readString(Paths.get(saveImgPath));
+    String expectedValue = checkImageStringFormat(smallResImage, 0);
+    assertEquals(expectedValue, content);
+  }
+
+  @Test
+  public void testLevelAdjustment() throws IOException{
+    int[][][] smallResImage = new int[][][]{
+            {{187, 255, 170}, {255, 85, 100}, {16, 79, 125}, {13, 1, 255}},
+            {{121, 255, 232}, {255, 138, 222}, {123, 4, 122}, {219, 252, 255}},
+            {{64, 255, 5}, {132, 110, 31}, {255, 219, 157}, {214, 96, 141}}
+    };
+    String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
+    String saveImgPath = "/Users/omagarwal/Desktop/SavingLevelAdjustmentImg.ppm";
+    String command = "load " + readImgPath + " image" + "\nlevels-adjust 10 100 200"
+            + " image image-adjust\nsave " + saveImgPath + " image-adjust";
+    InputStream in = new ByteArrayInputStream(command.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    RGBImageControllerInterface controller = new RGBImageController(in, out);
+    controller.goCall();
+    String content = Files.readString(Paths.get(saveImgPath));
+    String expectedValue = checkImageStringFormat(smallResImage, 0);
+    assertEquals(expectedValue, content);
+  }
+
+  @Test
+  public void testColorCorrection() throws IOException{
+    int[][][] smallResImage = new int[][][]{
+            {{140, 206, 132}, {243, 72, 80}, {16, 68, 98}, {14, 14, 211}},
+            {{90, 219, 181}, {238, 111, 173}, {92, 16, 96}, {166, 201, 224}},
+            {{49, 218, 14}, {98, 90, 31}, {242, 174, 122}, {162, 80, 110}}
+    };
+    String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
+    String saveImgPath = "/Users/omagarwal/Desktop/SavingColorCorrectedImg.ppm";
+    String command = "load " + readImgPath + " image" + "\ncolor-correct"
+            + " image image-correct\nsave " + saveImgPath + " image-correct";
+    InputStream in = new ByteArrayInputStream(command.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    RGBImageControllerInterface controller = new RGBImageController(in, out);
+    controller.goCall();
+
+    String content = Files.readString(Paths.get(saveImgPath));
+    String expectedValue = checkImageStringFormat(smallResImage, 0);
+    assertEquals(expectedValue, content);
+  }
+
+  @Test
+  public void testCompression() throws IOException{
+    int[][][] smallResImage = new int[][][]{
+            {{145, 196, 116}, {248, 76, 96}, {20, 70, 94}, {20, 6, 215}},
+            {{95, 222, 187}, {243, 102, 167}, {96, 18, 100}, {172, 193, 220}},
+            {{54, 208, 13}, {103, 80, 32}, {246, 182, 119}, {168, 79, 113}}
+    };
+    String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
+    String saveImgPath = "/Users/omagarwal/Desktop/SavingCompressedImg.ppm";
+    String command = "load " + readImgPath + " image" + "\ncompress 20"
+            + " image image-correct\nsave " + saveImgPath + " image-correct";
+    InputStream in = new ByteArrayInputStream(command.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    RGBImageControllerInterface controller = new RGBImageController(in, out);
+    controller.goCall();
+
+    String content = Files.readString(Paths.get(saveImgPath));
+    String expectedValue = checkImageStringFormat(smallResImage, 0);
+    assertEquals(expectedValue, content);
+  }
+
+  @Test
+  public void testHistogram() throws IOException{
+    int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/Histogram-Test.ppm"));
+    String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
+    String saveImgPath = "/Users/omagarwal/Desktop/Histogram.ppm";
+    String command = "load " + readImgPath + " image" + "\nhistogram"
+            + " image image-histogram\nsave " + saveImgPath + " image-histogram";
+    InputStream in = new ByteArrayInputStream(command.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    RGBImageControllerInterface controller = new RGBImageController(in, out);
+    controller.goCall();
+    String content = Files.readString(Paths.get(saveImgPath));
+    String expectedValue = checkImageStringFormat(smallResImage, 0);
+    assertEquals(expectedValue, content);
+  }
+
+  @Test
+  public void testCascadeGreySharpen() throws IOException{
+    int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/CascadeGreySharpen.ppm"));
+    String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
+    String saveImgPath = "/Users/omagarwal/Desktop/GreySharpen.ppm";
+    String command = "load " + readImgPath + " image"
+            + "\nluma-component image image-luma split 50"
+            +"\n sharpen image-luma image-luma-sharpen split 20"
+            +"\nsave " + saveImgPath + " image-luma-sharpen";
+    InputStream in = new ByteArrayInputStream(command.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    RGBImageControllerInterface controller = new RGBImageController(in, out);
+    controller.goCall();
+    String content = Files.readString(Paths.get(saveImgPath));
+    String expectedValue = checkImageStringFormat(smallResImage, 0);
+    assertEquals(expectedValue, content);
+  }
+
+  @Test
+  public void testCascadeColorCorrectionLevelAdjust() throws IOException{
+    int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/CascadeColorCorrectionLevelAdjust.ppm"));
+    String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
+    String saveImgPath = "/Users/omagarwal/Desktop/ColorCorrectionLevelAdjust.ppm";
+    String command = "load " + readImgPath + " image"
+            + "\ncolor-correct image image-color split 80"
+            +"\nlevels-adjust 10 20 30 image-color image-color-levels split 40"
+            +"\nsave " + saveImgPath + " image-color-levels";
     InputStream in = new ByteArrayInputStream(command.getBytes());
     OutputStream out = new ByteArrayOutputStream();
     RGBImageControllerInterface controller = new RGBImageController(in, out);

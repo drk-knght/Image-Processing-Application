@@ -39,7 +39,7 @@ public class SaveCommand implements RGBImageCommandInterface {
    * Method represents the save image operations which needs to be performed by the application.
    *
    * @param cachedImage The set of images presently in use in the memory of this application.
-   * @throws NullPointerException Throws exception if the input is of null type.
+   * @throws IllegalArgumentException Throws exception if the input is of null type.
    * @throws IOException          throws exception if there is an error when reading files of op.
    */
   @Override

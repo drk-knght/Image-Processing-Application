@@ -28,7 +28,7 @@ public class Brightness implements ImageOperation {
    * Returns the images containing the data that can be accessed and operated by this interface.
    *
    * @param rgbImage Image currently in memory on which the working is to be done.
-   * @return An image as the result of the action performed n the former image.
+   * @return An image as the result of the action performed on the former image.
    * @throws IllegalArgumentException Throws exception if the parameter passed is invalid.
    */
 

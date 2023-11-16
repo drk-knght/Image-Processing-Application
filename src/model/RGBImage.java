@@ -52,19 +52,19 @@ public class RGBImage implements RGBImageInterface {
    * @throws IOException              Throws exception if the file path is invalid or no access.
    * @throws IllegalArgumentException Throws exception if the file path is empty.
    */
-  public RGBImage(String filePath) throws IOException, NullPointerException {
-    if (filePath.isEmpty()) {
-      throw new IllegalArgumentException("No file path passed. Aborting!!!");
-    }
-    int[][][] pixelMatrix = null;
-    String extension = getFileExtension(filePath);
-    if (extension.equals("ppm")) {
-      pixelMatrix = PPMReader.readFileContent(new FileInputStream(filePath));
-    } else {
-      pixelMatrix = ImageIOReader.readFileContent(new FileInputStream(filePath));
-    }
-    checkAndAssignValues(pixelMatrix);
-  }
+//  public RGBImage(String filePath) throws IOException, NullPointerException {
+//    if (filePath.isEmpty()) {
+//      throw new IllegalArgumentException("No file path passed. Aborting!!!");
+//    }
+//    int[][][] pixelMatrix = null;
+//    String extension = getFileExtension(filePath);
+//    if (extension.equals("ppm")) {
+//      pixelMatrix = PPMReader.readFileContent(new FileInputStream(filePath));
+//    } else {
+//      pixelMatrix = ImageIOReader.readFileContent(new FileInputStream(filePath));
+//    }
+//    checkAndAssignValues(pixelMatrix);
+//  }
 
   /**
    * Constructor to create an image object using the pixel image matrix passed as args to it.
@@ -133,18 +133,18 @@ public class RGBImage implements RGBImageInterface {
    * @param imagePath The file path where the image needs to be stored in the present file system.
    * @throws IOException Throws exception if the image data could not be written to that path.
    */
-  @Override
-  public void saveImage(String imagePath) throws IOException {
-    String imageExtension = getFileExtension(imagePath);
-    if (imageExtension.equals("ppm")) {
-//      PPMUtil.savePPMImage(this.height, this.width, this.pixelMatrix, imagePath);
-      PPMWriter.writeToStorageDisk(this,new FileOutputStream(imagePath));
-    } else {
-//      ImageIOUtil.saveImageIOFile(this.height, this.width,
-//              this.pixelMatrix, imagePath, imageExtension);
-      ImageIOWriter.writeToStorageDisk(this,new FileOutputStream(imagePath),imageExtension);
-    }
-  }
+//  @Override
+//  public void saveImage(String imagePath) throws IOException {
+//    String imageExtension = getFileExtension(imagePath);
+//    if (imageExtension.equals("ppm")) {
+////      PPMUtil.savePPMImage(this.height, this.width, this.pixelMatrix, imagePath);
+//      PPMWriter.writeToStorageDisk(this,new FileOutputStream(imagePath));
+//    } else {
+////      ImageIOUtil.saveImageIOFile(this.height, this.width,
+////              this.pixelMatrix, imagePath, imageExtension);
+//      ImageIOWriter.writeToStorageDisk(this,new FileOutputStream(imagePath),imageExtension);
+//    }
+//  }
 
   /**
    * The method represents the flipping action carried out by an image on itself.
@@ -288,7 +288,7 @@ public class RGBImage implements RGBImageInterface {
    */
   @Override
   public RGBImageInterface levelsAdjustment(double b, double m, double w, double splitPercentage) {
-    if(b>m || m>w){
+    if(b>=m || m>=w || b<0 ){
       throw new IllegalArgumentException("Wrong values for levels "
               + "adjustment operation. Check values of B, M, W again.");
     }

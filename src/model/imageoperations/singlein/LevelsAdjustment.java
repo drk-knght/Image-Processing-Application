@@ -1,7 +1,5 @@
 package model.imageoperations.singlein;
 
-import java.io.IOException;
-
 import model.RGBImage;
 import model.RGBImageInterface;
 import model.enums.ColorMapping;
@@ -15,6 +13,10 @@ public class LevelsAdjustment implements ImageOperation{
   private final double highlightPoint;
 
   public LevelsAdjustment(double blackPoint, double midPoint, double highlightPoint){
+    if(blackPoint>=midPoint || midPoint>=highlightPoint || blackPoint<0 ){
+      throw new IllegalArgumentException("Wrong values for levels "
+              + "adjustment operation. Check values of B, M, W again.");
+    }
     this.blackPoint=blackPoint;
     this.midPoint=midPoint;
     this.highlightPoint=highlightPoint;
@@ -22,6 +24,10 @@ public class LevelsAdjustment implements ImageOperation{
 
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
+    if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
+      throw new IllegalArgumentException("Image passed for levels adjustment image "
+              + "transformation is not as expected, check again. Aborting!!");
+    }
     int [][][] pixelMatrix= rgbImage.getPixel();
     double denominator=computeDenominator();
     double a=computeA(denominator);

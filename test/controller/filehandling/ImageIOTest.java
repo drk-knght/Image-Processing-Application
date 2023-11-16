@@ -1,18 +1,23 @@
-package model.filehandling;
+package controller.filehandling;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.InputMismatchException;
 
-import model.enums.ColorMapping;
+import controller.filehandling.reader.FileReader;
+import controller.filehandling.reader.InputReaderInterface;
+import controller.filehandling.writer.FileWriter;
+import controller.filehandling.writer.ImageIOWriter;
+import controller.filehandling.writer.OutputWriterInterface;
 import model.RGBImage;
 import model.RGBImageInterface;
+import model.enums.ColorMapping;
 
 import static org.junit.Assert.assertEquals;
-
 import static org.junit.Assert.fail;
 
 /**
@@ -34,7 +39,7 @@ public class ImageIOTest {
   @Before
   public void setUp() throws IOException {
     imageSavedPath = "/Users/omagarwal/Desktop/Grad@NEU/Acads/"
-            + "Sem-1/CS 5010 PDP/Labs/Image Processing/src/"
+            + "Sem-1/CS 5010 PDP/Labs/Image Processing/"
             + "res/small-Res-combineChannel-Testing.png";
     pixelMatrix = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {21, 65, 98}, {19, 11, 211}},
@@ -42,7 +47,7 @@ public class ImageIOTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     rgbImage = new RGBImage(pixelMatrix);
-    rgbImage.saveImage(imageSavedPath);
+    ImageIOWriter.writeToStorageDisk(rgbImage,new FileOutputStream(imageSavedPath),"png");
   }
 
   /**
@@ -52,7 +57,8 @@ public class ImageIOTest {
    */
   @Test
   public void testValidReadOperation() throws IOException {
-    int[][][] actualPixelMat = ImageIOUtil.imageIOFileReader(imageSavedPath);
+    InputReaderInterface reader= new FileReader(imageSavedPath);
+    int[][][] actualPixelMat = reader.read();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 4; j++) {
         for (int color = 0; color < ColorMapping.values().length; color++) {
@@ -70,7 +76,8 @@ public class ImageIOTest {
     imageSavedPath = "/Users/omagarwal/Desktop/Grad@NEU/"
             + "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-abc-Testing.jpg";
     try {
-      int[][][] res = ImageIOUtil.imageIOFileReader(imageSavedPath);
+      InputReaderInterface reader= new FileReader(imageSavedPath);
+      int[][][] res = reader.read();
       fail("Illegal file path test failed.");
     } catch (FileNotFoundException ex) {
       // to catch the illegal file path.
@@ -88,8 +95,12 @@ public class ImageIOTest {
   public void testValidWriteOperation() throws IOException {
     String imagePath = "/Users/omagarwal/Desktop/Grad@NEU/"
             + "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/SavingImg.png";
-    ImageIOUtil.saveImageIOFile(3, 4, pixelMatrix, imagePath, "png");
-    int[][][] actualMat = ImageIOUtil.imageIOFileReader(imagePath);
+    OutputWriterInterface writer=new FileWriter(imagePath);
+    writer.write(new RGBImage(pixelMatrix));
+//    ImageIOUtil.saveImageIOFile(3, 4, pixelMatrix, imagePath, "png");
+//    int[][][] actualMat = ImageIOUtil.imageIOFileReader(imagePath);
+    InputReaderInterface reader= new FileReader(imageSavedPath);
+    int [][][] actualMat=reader.read();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 4; j++) {
         for (int k = 0; k < 3; k++) {
@@ -114,9 +125,11 @@ public class ImageIOTest {
     String imagePath = "/Users/omagarwal/Desktop/Grad@NEU/"
             + "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/IllegalImageIOImg.png";
     try {
-      ImageIOUtil.saveImageIOFile(3, 4, newMat, imagePath, "png");
+      OutputWriterInterface writer=new FileWriter(imagePath);
+      writer.write(new RGBImage(newMat));
+//      ImageIOUtil.saveImageIOFile(3, 4, newMat, imagePath, "png");
       fail("Test failed");
-    } catch (InputMismatchException ex) {
+    } catch (IllegalArgumentException ex) {
       // to catch mismatched input image matrix.
     }
   }

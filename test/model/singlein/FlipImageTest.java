@@ -4,8 +4,10 @@ package model.singlein;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 
+import controller.filehandling.writer.PPMWriter;
 import model.enums.AxisName;
 import model.enums.ColorMapping;
 import model.imageoperations.singlein.Flip;
@@ -23,31 +25,6 @@ import static org.junit.Assert.fail;
  * vertically/horizontally.
  */
 public class FlipImageTest {
-
-  String imagePathImageIO;
-
-  String imagePathPPM;
-
-  RGBImageInterface testingImageIO;
-
-  RGBImageInterface testingImagePPM;
-
-  /**
-   * SetUp() is used to load a test image which is used to for comparing test results.
-   */
-  @Before
-  public void setUp() {
-    imagePathImageIO = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/"
-            + "Image Processing/src/res/Koala.png";
-    imagePathPPM = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/"
-            + "Image Processing/src/res/Koala.ppm";
-    try {
-      testingImageIO = new RGBImage(imagePathImageIO);
-      testingImagePPM = new RGBImage(imagePathPPM);
-    } catch (IOException err) {
-      fail("file for testing not found while environment set up for brightness ");
-    }
-  }
 
   /**
    * The test is used to check if the input passed is null.
@@ -127,8 +104,10 @@ public class FlipImageTest {
 
   private boolean checkImageStringFormat(RGBImageInterface flippedImage, int[][][] mat)
           throws IOException {
-    flippedImage.saveImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/"
-            + "Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-flip-Testing.ppm");
+    PPMWriter.writeToStorageDisk(flippedImage,new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/\"\n" +
+            "            + \"Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-flip-Testing.ppm"));
+//    flippedImage.saveImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/"
+//            + "Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-flip-Testing.ppm");
     StringBuilder savedRes = convertImageMatrixToString(flippedImage.getImageHeight(),
             flippedImage.getImageWidth(), flippedImage.getPixel());
     String savedFormat = new String(savedRes);

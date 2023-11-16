@@ -1,6 +1,5 @@
 package controller.imagecommands.singleincommands;
 
-import java.io.IOException;
 import java.util.Map;
 
 import controller.imagecommands.RGBImageCommandInterface;

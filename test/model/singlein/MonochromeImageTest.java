@@ -3,8 +3,10 @@ package model.singlein;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 
+import controller.filehandling.writer.PPMWriter;
 import model.enums.AxisName;
 import model.enums.ColorMapping;
 import model.imageoperations.singlein.ImageOperation;
@@ -13,6 +15,7 @@ import model.RGBImage;
 import model.RGBImageInterface;
 
 import static controller.filehandling.writer.PPMWriter.convertImageMatrixToString;
+import static controller.filehandling.writer.PPMWriter.writeToStorageDisk;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -22,30 +25,6 @@ import static org.junit.Assert.fail;
  * individually.
  */
 public class MonochromeImageTest {
-  String imagePathImageIO;
-
-  String imagePathPPM;
-
-  RGBImageInterface testingImageIO;
-
-  RGBImageInterface testingImagePPM;
-
-  /**
-   * SetUp() is used to load a test image which is used to for comparing test results.
-   */
-  @Before
-  public void setUp() {
-    imagePathImageIO = "/Users/omagarwal/Desktop/Grad@NEU/"
-            + "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/Koala.png";
-    imagePathPPM = "/Users/omagarwal/Desktop/Grad@NEU/Acads/"
-           + "Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/Koala.ppm";
-    try {
-      testingImageIO = new RGBImage(imagePathImageIO);
-      testingImagePPM = new RGBImage(imagePathPPM);
-    } catch (IOException err) {
-      fail("file for testing not found while environment set up for brightness ");
-    }
-  }
 
   /**
    * The test is used to check if the input passed is null.
@@ -209,8 +188,8 @@ public class MonochromeImageTest {
 
   private boolean checkImageStringFormat(RGBImageInterface greyscaleImage, int[][][] mat)
           throws IOException {
-    greyscaleImage.saveImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/"
-            + "CS 5010 PDP/Labs/Image Processing/src/res/small-Res-Channel-Testing.ppm");
+    PPMWriter.writeToStorageDisk(greyscaleImage, new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/"
+            + "CS 5010 PDP/Labs/Image Processing/src/res/small-Res-Channel-Testing.ppm"));
     StringBuilder savedRes = convertImageMatrixToString(greyscaleImage.getImageHeight(),
             greyscaleImage.getImageWidth(), greyscaleImage.getPixel());
     String savedFormat = new String(savedRes);

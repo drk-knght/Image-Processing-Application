@@ -1,16 +1,33 @@
 package model.imageoperations.singlein;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import model.RGBImage;
 import model.RGBImageInterface;
 import model.enums.ColorMapping;
 
+/**
+ * This class represents the color correction operation on a single image currently in the memory.
+ * It takes the image and realigns the pixel intensity peaks of the image to a common value.
+ * It checks for validity of inputs passed to it and exception is thrown if invalid.
+ */
 public class ColorCorrection implements ImageOperation{
 
+  /**
+   * The method performs an action on the existing image in memory of the image processing app.
+   * It performs the color correction part of the image presently in the cached collection.
+   * Returns the images containing the data that can be accessed and operated by this interface.
+   *
+   * @param rgbImage Image currently in memory on which the working is to be done.
+   * @return An image as the result of the action performed on the former image.
+   * @throws IllegalArgumentException Throws exception if the parameter passed is invalid.
+   */
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
+    if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
+      throw new IllegalArgumentException("Image passed for Color Correction image "
+              + "transformation is not as expected, check again. Aborting!!");
+    }
     int [] peaksValue=new int[ColorMapping.values().length];
     Arrays.fill(peaksValue,0);
     int [][][] imgMatrix=rgbImage.getPixel();
@@ -20,7 +37,10 @@ public class ColorCorrection implements ImageOperation{
     }
     int avg=calculateAvgPeakForImage(peaksValue);
     for(int color=0;color<ColorMapping.values().length;color++){
-      int deltaShift=avg-peaksValue[color];
+      int deltaShift=0;
+      if (avg!=Integer.MAX_VALUE){
+        deltaShift=avg-peaksValue[color];
+      }
       colorCorrectedImageMatrix(imgMatrix,color,deltaShift);
     }
     return new RGBImage(imgMatrix);
@@ -39,7 +59,7 @@ public class ColorCorrection implements ImageOperation{
     int cntMeaningfulPeaks=0;
     int peaksSum=0;
     for (int colorPeak : colorPeaks) {
-      if (colorPeak > 10 && colorPeak < 245) {
+      if (colorPeak >= 10 && colorPeak <= 245) {
         peaksSum += colorPeak;
         cntMeaningfulPeaks++;
       }
@@ -47,7 +67,7 @@ public class ColorCorrection implements ImageOperation{
     if(cntMeaningfulPeaks!=0){
       return (peaksSum/cntMeaningfulPeaks);
     }
-    else return 0;
+    else return Integer.MAX_VALUE;
   }
 
   private int getPeakFreqForSingleChannel(int [][][] pixelMatrix, int channelIndex){

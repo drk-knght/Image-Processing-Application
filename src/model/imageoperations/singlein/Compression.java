@@ -1,6 +1,5 @@
 package model.imageoperations.singlein;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
@@ -39,16 +38,41 @@ import model.enums.ColorMapping;
 // 3. copy back the result to the original array to that position.
 // 4. return back to calling point.
 
+/**
+ * This class represents the compression operation on an image.
+ * The class takes the percentage of values to be removed for the compression as a field.
+ * The new image has lower definition compared to its original one.
+ */
 public class Compression implements ImageOperation{
 
   private final double compressionPercentage;
 
-  public Compression(double compressionPercentage){
+  /**
+   * The constructor of the class takes the percentage by which image needs to be compressed.
+   * Assigns back the value to its private field for the operation
+   * @param compressionPercentage Double representing the ratio by which img needs to be compressed.
+   */
+  public Compression(double compressionPercentage) throws IllegalArgumentException{
+    if(compressionPercentage < 0 || compressionPercentage > 100){
+      throw new IllegalArgumentException("Compression percentage is invalid");
+    }
     this.compressionPercentage=compressionPercentage;
   }
 
+  /**
+   * The method performs an action on the existing image in memory of the image processing app.
+   * It performs the compression part of the image where the image becomes more pixelated.
+   * Returns the images containing the data that can be accessed and operated by this interface.
+   * @param rgbImage Image currently in memory on which the working is to be done.
+   * @return An image as the result of the action performed on the former image.
+   * @throws IllegalArgumentException Throws exception if the parameter passed is invalid.
+   */
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
+    if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
+      throw new IllegalArgumentException("Image passed for compression image "
+              + "transformation is not as expected, check again. Aborting!!");
+    }
     double [][][] operatedImageMatrix=getSquareMatrix(rgbImage);
     getCompressedSquareMatrix(operatedImageMatrix);
     int [][][] pixelMat=rgbImage.getPixel();

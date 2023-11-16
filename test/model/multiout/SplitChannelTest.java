@@ -3,9 +3,11 @@ package model.multiout;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import controller.filehandling.writer.PPMWriter;
 import model.enums.ColorMapping;
 
 import model.imageoperations.multiout.MultipleOperationImages;
@@ -24,30 +26,6 @@ import static org.junit.Assert.fail;
  */
 public class SplitChannelTest {
 
-  String imagePathImageIO;
-
-  String imagePathPPM;
-
-  RGBImageInterface testingImageIO;
-
-  RGBImageInterface testingImagePPM;
-
-  /**
-   * SetUp() is used to load a test image which is used to for comparing test results.
-   */
-  @Before
-  public void setUp() {
-    imagePathImageIO = "/Users/omagarwal/Desktop/Grad@NEU/" +
-            "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/Koala.png";
-    imagePathPPM = "/Users/omagarwal/Desktop/Grad@NEU/" +
-            "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/Koala.ppm";
-    try {
-      testingImageIO = new RGBImage(imagePathImageIO);
-      testingImagePPM = new RGBImage(imagePathPPM);
-    } catch (IOException err) {
-      fail("file for testing not found while environment set up for brightness ");
-    }
-  }
 
   /**
    * The test is used to check if the input passed is null.
@@ -128,9 +106,9 @@ public class SplitChannelTest {
 
   private boolean checkImageStringFormat(RGBImageInterface singleChannelImage,
                                          int[][][] mat, int color) throws IOException {
-    singleChannelImage.saveImage("/Users/omagarwal/Desktop/"
+    PPMWriter.writeToStorageDisk(singleChannelImage,new FileOutputStream("/Users/omagarwal/Desktop/"
             + "Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/"
-            + "res/small-Res-singleChannel-Testing.ppm");
+            + "res/small-Res-singleChannel-Testing.ppm"));
     StringBuilder savedRes = convertImageMatrixToString(singleChannelImage.getImageHeight(),
             singleChannelImage.getImageWidth(), singleChannelImage.getPixel());
     String savedFormat = new String(savedRes);
