@@ -2,8 +2,6 @@ package model.singlein;
 
 import org.junit.Test;
 
-import java.io.IOException;
-
 import model.RGBImage;
 import model.RGBImageInterface;
 import model.enums.ColorMapping;
@@ -15,6 +13,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Junit test class checks for the correctness of the functionality of the compression operation.
+ * It checks for basics illegal parameters along with the edge cases for compression functionality.
+ */
 public class CompressionTest {
 
 
@@ -62,8 +64,12 @@ public class CompressionTest {
     }
   }
 
+  /**
+   * The test is used to check zero compression functionality on an image.
+   * The result should be same as the original image. If not the test fails.
+   */
   @Test
-  public void testZeroCompression() throws IOException {
+  public void testZeroCompression() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -75,6 +81,10 @@ public class CompressionTest {
     assertTrue(checkCompression(compressedImg, smallResImage, 0));
   }
 
+  /**
+   * The test is used to check fifty percent compression functionality on an image.
+   * The result matrix should be same as the expected matrix . If not the test fails.
+   */
   @Test
   public void testFiftyCompression(){
     int[][][] smallResImage = new int[][][]{
@@ -93,6 +103,10 @@ public class CompressionTest {
     assertTrue(checkCompression(compressedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check hundred percent compression functionality on an image.
+   * The result matrix should have zeros at every pixel cells . If not the test fails.
+   */
   @Test
   public void testHundredCompression(){
     int[][][] smallResImage = new int[][][]{
@@ -111,6 +125,10 @@ public class CompressionTest {
     assertTrue(checkCompression(compressedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check negative percent compression functionality on an image.
+   * The test passes if an Illegal argument exception is thrown else the test fails.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testNegativeCompression(){
     int[][][] smallResImage = new int[][][]{
@@ -120,15 +138,12 @@ public class CompressionTest {
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
     ImageOperation imageOperation = new Compression(-40);
-    RGBImageInterface compressedImg = imageOperation.operation(rgbImage);
-    int [][][] resultMat= new int[][][]{
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
-    };
-    assertTrue(checkCompression(compressedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check more than 100 percent compression functionality on an image.
+   * The test passes if an Illegal argument exception is thrown else the test fails.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testAboveHundredCompression(){
     int[][][] smallResImage = new int[][][]{
@@ -138,15 +153,12 @@ public class CompressionTest {
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
     ImageOperation imageOperation = new Compression(140);
-    RGBImageInterface compressedImg = imageOperation.operation(rgbImage);
-    int [][][] resultMat= new int[][][]{
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
-    };
-    assertTrue(checkCompression(compressedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check fractional(double val) percent compression functionality on an image.
+   * The test passes if the value of the compressed matrix is same as expected matrix else fails.
+   */
   @Test
   public void testFractionalCompression(){
     int[][][] smallResImage = new int[][][]{
@@ -165,6 +177,10 @@ public class CompressionTest {
     assertTrue(checkCompression(compressedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check whether multiple compression method calls work correctly on an img.
+   * The test passes if the value of the compressed matrix is same as expected matrix else fails.
+   */
   @Test
   public void testReCompression(){
     int[][][] smallResImage = new int[][][]{

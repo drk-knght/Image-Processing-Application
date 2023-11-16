@@ -16,6 +16,10 @@ import model.imageoperations.singlein.ImageOperation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Junit test class checks for the working of the histogram plotting operation on an image model.
+ * It checks for basics legal parameters along with the pixel values of the image matrix.
+ */
 public class HistogramTest {
 
   /**
@@ -62,6 +66,11 @@ public class HistogramTest {
     }
   }
 
+  /**
+   * The test is used to check the dimension of the image.
+   * If the image generated has both height and width of dimension length 256.
+   * Values are checked against the assertion. If the assertion passes test is success else fails.
+   */
   @Test
   public void testDimensionHistogram(){
     int[][][] smallResImage = new int[][][]{
@@ -76,6 +85,11 @@ public class HistogramTest {
     assertEquals(256,histogramImg.getImageWidth());
   }
 
+  /**
+   * Test checks the individual pixel values of the histogram generated against the expected one.
+   * Values are checked against the assertion. If the assertion passes test is success else fails.
+   * @throws IOException If an error occurs while reading the input from a file in local storage.
+   */
   @Test
   public void testNormalHistogram() throws IOException {
     int[][][] smallResImage = new int[][][]{

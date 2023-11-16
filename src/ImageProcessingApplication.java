@@ -33,7 +33,7 @@ public class ImageProcessingApplication {
       String filePath = args[1];
       if(!fileFlag.equals("-file")){
         String wrongFlag="Wrong flag parameter passed as input through the input source."
-                + " Exiting the code.\n";
+                + " Try again.\n";
         out.write(wrongFlag.getBytes());
         return;
       }

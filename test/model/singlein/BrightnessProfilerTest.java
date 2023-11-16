@@ -92,8 +92,6 @@ public class BrightnessProfilerTest {
           throws IOException {
     PPMWriter.writeToStorageDisk(brighterImg,new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/"
             + "Labs/Image Processing/src/res/small-Res-Brighter-" + num + "-Testing.ppm"));
-//    brighterImg.saveImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/"
-//            + "Labs/Image Processing/src/res/small-Res-Brighter-" + num + "-Testing.ppm");
     StringBuilder savedRes = convertImageMatrixToString(brighterImg.getImageHeight(),
             brighterImg.getImageWidth(), brighterImg.getPixel());
     String savedFormat = new String(savedRes);

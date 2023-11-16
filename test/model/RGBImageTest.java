@@ -31,8 +31,11 @@ public class RGBImageTest {
 
   int[][][] pixelMatrix;
 
+  /**
+   * The test checks whether an exception is thrown if null is passed as image matrix to the model.
+   */
   @Test
-  public void testEmptyFilePath() throws IOException {
+  public void testEmptyFilePath() {
     try {
       RGBImageInterface rgbImage = new RGBImage(null);
       fail("Test failed");
@@ -190,6 +193,9 @@ public class RGBImageTest {
     }
   }
 
+  /**
+   * The test checks the getter methods present in the model class like height, width and matrix.
+   */
   @Test
   public void testGetters() {
     RGBImageInterface rgbImg = new RGBImage(pixelMatrix);

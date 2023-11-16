@@ -661,6 +661,11 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue, content);
   }
 
+  /**
+   * The test to check if the application works correctly for level adjustment operation an image.
+   *
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testLevelAdjustment() throws IOException{
     int[][][] smallResImage = new int[][][]{
@@ -681,6 +686,11 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue, content);
   }
 
+  /**
+   * The test to check if the application works correctly for color correction operation an image.
+   *
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testColorCorrection() throws IOException{
     int[][][] smallResImage = new int[][][]{
@@ -702,6 +712,11 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue, content);
   }
 
+  /**
+   * The test to check if the application works correctly for compression operation on an image.
+   *
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testCompression() throws IOException{
     int[][][] smallResImage = new int[][][]{
@@ -723,6 +738,11 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue, content);
   }
 
+  /**
+   * Test to check if the application works correctly for histogram plotting operation of an image.
+   *
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testHistogram() throws IOException{
     int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/Histogram-Test.ppm"));
@@ -739,6 +759,12 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue, content);
   }
 
+  /**
+   * The test to check if the application works correctly for cascading operation on an image.
+   * For this test the image is operated on grey scale and sharpen operation one after another.
+   *
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testCascadeGreySharpen() throws IOException{
     int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/CascadeGreySharpen.ppm"));
@@ -757,6 +783,12 @@ public class ControllerModelIntegratedTest {
     assertEquals(expectedValue, content);
   }
 
+  /**
+   * The test to check if the application works correctly for cascading operation on an image.
+   * For this test the image is operated on color correction and level adjustment one after another.
+   *
+   * @throws IOException Throws exception if the input/output is invalid.
+   */
   @Test
   public void testCascadeColorCorrectionLevelAdjust() throws IOException{
     int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/CascadeColorCorrectionLevelAdjust.ppm"));

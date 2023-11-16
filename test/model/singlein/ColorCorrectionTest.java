@@ -13,6 +13,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Junit test class checks for the correctness of the color correction operation on an image model.
+ * It checks for basics illegal parameters like null image, illegal width and height.
+ * Along with that it also checks for the edge cases for color correction functionality.
+ */
 public class ColorCorrectionTest {
 
   /**
@@ -59,6 +64,10 @@ public class ColorCorrectionTest {
     }
   }
 
+  /**
+   * The test is used to checks the normal color correction operation on an image.
+   * The result matrix should be same as the expected matrix . If not the test fails.
+   */
   @Test
   public void testColorCorrection(){
     int[][][] smallResImage = new int[][][]{
@@ -78,6 +87,10 @@ public class ColorCorrectionTest {
     assertTrue(checkColorCorrection(colorCorrectedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check cascading color correction operation applied on the same image.
+   * The result matrix should be same as the expected matrix . If not the test fails.
+   */
   @Test
   public void testMultipleColorCorrection(){
     int[][][] smallResImage = new int[][][]{
@@ -107,6 +120,11 @@ public class ColorCorrectionTest {
     assertTrue(checkColorCorrection(colorCorrectedImg1, resultMat1, 0));
   }
 
+  /**
+   * The test is used to check whether the color correction operation for pixel values <10 & >245.
+   * The operation should not take into account for the peaks which is <10 & >245.
+   * The result should be same as the original image. If not the test fails.
+   */
   @Test
   public void testPeakColorCorrection(){
     int[][][] smallResImage = new int[][][]{
@@ -121,6 +139,11 @@ public class ColorCorrectionTest {
     assertTrue(checkColorCorrection(colorCorrectedImg, smallResImage, 0));
   }
 
+  /**
+   * The test is used to check whether the color correction operation for pixel values =10 & =245.
+   * The operation should not take into account for the peaks which is =10 & =245.
+   * The result should be same as the expected image. If not the test fails.
+   */
   @Test
   public void testExtremeColorCorrection(){
     int[][][] smallResImage = new int[][][]{
@@ -140,6 +163,11 @@ public class ColorCorrectionTest {
     assertTrue(checkColorCorrection(colorCorrectedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check the color correction operation for red-greyscale image.
+   * The operation should take the image and shift the rest of the channels pixel val by the avg.
+   * The result should be same as the expected image. If not the test fails.
+   */
   @Test
   public void testRedTint() {
     int[][][] smallResImage = new int[][][]{
@@ -158,6 +186,11 @@ public class ColorCorrectionTest {
     assertTrue(checkColorCorrection(colorCorrectedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check the color correction operation for green-greyscale image.
+   * The operation should take the image and shift the rest of the channels pixel val by the avg.
+   * The result should be same as the expected image. If not the test fails.
+   */
   @Test
   public void testGreenTint() {
     int[][][] smallResImage = new int[][][]{
@@ -177,6 +210,11 @@ public class ColorCorrectionTest {
     assertTrue(checkColorCorrection(colorCorrectedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check the color correction operation for blue-greyscale image.
+   * The operation should take the image and shift the rest of the channels pixel val by the avg.
+   * The result should be same as the expected image. If not the test fails.
+   */
   @Test
   public void testBlueTint() {
     int[][][] smallResImage = new int[][][]{
@@ -196,6 +234,11 @@ public class ColorCorrectionTest {
     assertTrue(checkColorCorrection(colorCorrectedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check the color correction operation for greyscale image.
+   * The operation should take the image and shift the channels pixel val by the avg of the peaks.
+   * The result should be same as the expected image. If not the test fails.
+   */
   @Test
   public void testGreyscaleColorCorrection() {
     int[][][] smallResImage = new int[][][]{
@@ -211,10 +254,14 @@ public class ColorCorrectionTest {
             {{ 95, 95,95}, { 243, 243, 243}, { 96, 96,96}, { 172, 172,172}},
             {{ 54, 54,54}, { 103, 103, 103}, { 24, 24,24}, { 168, 168, 168}}
     };
-
     assertTrue(checkColorCorrection(colorCorrectedImg, resultMat, 0));
   }
 
+  /**
+   * The test is used to check the color correction operation for images pixel val<=10.
+   * In this case as there is no peak >10 & <245 so no change in the image should take place.
+   * The result should be same as the original image. If not the test fails.
+   */
   @Test
   public void testPeakLessThanTen(){
     int[][][] smallResImage = new int[][][]{
@@ -228,12 +275,17 @@ public class ColorCorrectionTest {
     assertTrue(checkColorCorrection(colorCorrectedImg, smallResImage, 0));
   }
 
+  /**
+   * The test is used to check the color correction operation for images pixel val>=245.
+   * In this case as there is no peak >10 & <245 so no change in the image should take place.
+   * The result should be same as the original image. If not the test fails.
+   */
   @Test
   public void testPeakGreaterThan245(){
     int[][][] smallResImage = new int[][][]{
             {{ 251,252, 255 }, { 252, 248, 249}, { 251, 246, 249}, { 254, 255,254}},
             {{ 245, 249,249}, { 253, 246, 253}, { 250, 249,246}, { 253, 247,247}},
-            {{ 255, 250,247}, { 253, 250, 251}, { 248, 250,252}, { 246, 251, 248}}
+            {{ 255, 250,247}, { 253, 250, 251}, { 245, 250,252}, { 246, 251, 248}}
     };
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
     ImageOperation imageOperation = new ColorCorrection();
@@ -241,6 +293,10 @@ public class ColorCorrectionTest {
     assertTrue(checkColorCorrection(colorCorrectedImg, smallResImage, 0));
   }
 
+  /**
+   * The test is used to check if the image pixel changes if it is already color corrected image.
+   * The result should be same as the original image. If not the test fails.
+   */
   @Test
   public void testColorCorrectedImg(){
     int[][][] smallResImage = new int[][][]{

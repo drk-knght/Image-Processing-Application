@@ -56,16 +56,6 @@ public class ControllerModelMock {
       this.logData.append("loading the image.");
     }
 
-    /**
-     * Save image operation on an image.
-     *
-     * @param imagePath The file path where the image needs to be stored in the present file system.
-     * @throws IOException If error occurs while saving the path.
-     */
-//    @Override
-//    public void saveImage(String imagePath) throws IOException {
-//      logData.append("Save path:" + imagePath);
-//    }
 
     /**
      * Flip image operation on an image.

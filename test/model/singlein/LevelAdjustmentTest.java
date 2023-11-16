@@ -15,6 +15,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Junit test class checks for the correctness of the level adjustment operation on an image model.
+ * It checks for basics illegal parameters like null image, illegal width and height.
+ * Along with that it also checks for the edge cases for level adjustment functionality.
+ */
 public class LevelAdjustmentTest {
 
   /**
@@ -61,6 +66,10 @@ public class LevelAdjustmentTest {
     }
   }
 
+  /**
+   * Test to check for the non-ascending input for of b,m,w values in level adjustment operation.
+   * If an exception is thrown for the illegal order of values then the test passes else it fails.
+   */
   @Test
   public void testNonAscValues(){
     int[][][] smallResImage = new int[][][]{
@@ -89,6 +98,10 @@ public class LevelAdjustmentTest {
 
   }
 
+  /**
+   * Test to check for the equal values input for of b,m,w values in level adjustment operation.
+   * If an exception is thrown for the illegal order of values then the test passes else it fails.
+   */
   @Test
   public void testEqualValues(){
     int[][][] smallResImage = new int[][][]{
@@ -123,6 +136,10 @@ public class LevelAdjustmentTest {
     }
   }
 
+  /**
+   * The test to check if the level adjustment operation works correctly for a set of input b,m,w.
+   * The result matrix should be same as the expected matrix . If not the test fails.
+   */
   @Test
   public void testNormalAdjustment(){
     int[][][] smallResImage = new int[][][]{
@@ -142,6 +159,10 @@ public class LevelAdjustmentTest {
     assertTrue(checkCompression(resultImg, resultMat, 0));
   }
 
+  /**
+   * Test to check for the negative input values for black point values in level adjustment op.
+   * If an exception is thrown for the illegal order of values then the test passes else it fails.
+   */
   @Test
   public void testNegativeBlackPoint(){
     int[][][] smallResImage = new int[][][]{
@@ -158,6 +179,10 @@ public class LevelAdjustmentTest {
     }
   }
 
+  /**
+   * Test to check for the negative input values for mid point values in level adjustment op.
+   * If an exception is thrown for the illegal order of values then the test passes else it fails.
+   */
   @Test
   public void testNegativeMidPoint(){
     int[][][] smallResImage = new int[][][]{
@@ -174,6 +199,10 @@ public class LevelAdjustmentTest {
     }
   }
 
+  /**
+   * Test to check for the negative input values for highlight point values in level adjustment op.
+   * If an exception is thrown for the illegal order of values then the test passes else it fails.
+   */
   @Test
   public void testNegativeHighlightPoint(){
     int[][][] smallResImage = new int[][][]{
@@ -190,6 +219,10 @@ public class LevelAdjustmentTest {
     }
   }
 
+  /**
+   * Test to check for the linear level adjustment function for the image transformation operation.
+   * The result matrix should be same as the expected matrix . If not the test fails.
+   */
   @Test
   public void testLinearAdjustment(){
     int[][][] smallResImage = new int[][][]{
@@ -208,6 +241,10 @@ public class LevelAdjustmentTest {
     assertTrue(checkCompression(resultImg, resultMat, 0));
   }
 
+  /**
+   * The Test to check when the values of b,m,w are 0,128,255 then the original img is generated.
+   * The result matrix should be same as the original matrix . If not the test fails.
+   */
   @Test
   public void testLevelAdjustOriginalImage(){
     int[][][] smallResImage = new int[][][]{

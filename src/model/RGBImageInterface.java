@@ -12,16 +12,6 @@ import java.util.List;
 public interface RGBImageInterface {
 
   /**
-   * The methods represent the saving operation of the image.
-   * An image can save itself to a specified file path in different formats like .ppm, .png, .jpg.
-   * The old and new image both are retained in the memory.
-   *
-   * @param imagePath The file path where the image needs to be stored in the present file system.
-   * @throws IOException Throws exception if the image data could not be written to that path.
-   */
-//  void saveImage(String imagePath) throws IOException;
-
-  /**
    * The method represents the flipping action carried out by an image on itself.
    * Image can flip along different axis like horizontal or vertical depending on the requirement.
    * The old and new image both are retained in the memory.
