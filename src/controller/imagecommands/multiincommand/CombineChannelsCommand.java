@@ -28,7 +28,7 @@ public class CombineChannelsCommand implements RGBImageCommandInterface {
   public CombineChannelsCommand(String[] commandArguments) throws IllegalArgumentException {
     if (commandArguments.length != 4) {
       throw new IllegalArgumentException("The number of arguments expected for RGB combine "
-              + "operation does not match with the passed command.");
+              + "operation does not match with the passed command.\n");
     }
     this.modifiedImage = commandArguments[0];
     channelImages = Arrays.copyOfRange(commandArguments, 1, commandArguments.length);
@@ -47,7 +47,7 @@ public class CombineChannelsCommand implements RGBImageCommandInterface {
 
     if (firstImage == null) {
       throw new IllegalArgumentException("One of the file name passed: "
-              + this.channelImages[0] + " does not exists in the cached Image");
+              + this.channelImages[0] + " does not exists in the cached Image\n");
     }
 
     ArrayList<RGBImageInterface> arrayList = new ArrayList<>();

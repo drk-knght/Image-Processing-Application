@@ -31,23 +31,23 @@ public class ImageIOWriter {
     try {
       ImageIO.write(imageSavingElement, fileExtension, out);
     } catch (IOException e) {
-      throw new IOException("Unable to save the image to the particular outStream passed to the ImageIO writer.");
+      throw new IOException("Unable to save the image to the particular outStream passed to the ImageIO writer.\n");
     }
   }
 
   private static void checkDimensionMatrix(int[][][] mat) {
     if (mat.length == 0 || mat[0].length == 0) {
-      throw new InputMismatchException("The dimension of all the pixel arrays are not same");
+      throw new InputMismatchException("The dimension of all the pixel arrays are not same\n");
     }
     int height = mat.length;
     int width = mat[0].length;
     for (int i = 0; i < height; i++) {
       if (mat[i].length != width) {
-        throw new InputMismatchException("The dimension of all the pixel arrays are not same");
+        throw new InputMismatchException("The dimension of all the pixel arrays are not same\n");
       }
       for (int j = 0; j < width; j++) {
         if (mat[i][j].length != ColorMapping.values().length) {
-          throw new InputMismatchException("The dimension of all the pixel arrays are not same");
+          throw new InputMismatchException("The dimension of all the pixel arrays are not same\n");
         }
       }
     }

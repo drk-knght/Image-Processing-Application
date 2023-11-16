@@ -32,7 +32,7 @@ public class LoadCommand implements RGBImageCommandInterface {
    */
   public LoadCommand(String[] commandArguments) throws IllegalArgumentException {
     if (commandArguments.length != 2) {
-      throw new IllegalArgumentException("Wrong number of parameters passed for load command.");
+      throw new IllegalArgumentException("Wrong number of parameters passed for load command.\n");
     }
     imageFilePath = commandArguments[0];
     imageName = commandArguments[1];

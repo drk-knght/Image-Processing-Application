@@ -45,26 +45,6 @@ public class RGBImage implements RGBImageInterface {
 
   public static final int MAX = 255;
 
-  /**
-   * Constructor takes the file path of image as arguments and loads the image to the app memory.
-   *
-   * @param filePath String containing the file path where the img is present in the disk.
-   * @throws IOException              Throws exception if the file path is invalid or no access.
-   * @throws IllegalArgumentException Throws exception if the file path is empty.
-   */
-//  public RGBImage(String filePath) throws IOException, NullPointerException {
-//    if (filePath.isEmpty()) {
-//      throw new IllegalArgumentException("No file path passed. Aborting!!!");
-//    }
-//    int[][][] pixelMatrix = null;
-//    String extension = getFileExtension(filePath);
-//    if (extension.equals("ppm")) {
-//      pixelMatrix = PPMReader.readFileContent(new FileInputStream(filePath));
-//    } else {
-//      pixelMatrix = ImageIOReader.readFileContent(new FileInputStream(filePath));
-//    }
-//    checkAndAssignValues(pixelMatrix);
-//  }
 
   /**
    * Constructor to create an image object using the pixel image matrix passed as args to it.
@@ -85,7 +65,7 @@ public class RGBImage implements RGBImageInterface {
   private void checkValidDimensionImage(int[][][] pixelMatrix) {
     if (pixelMatrix == null) {
       throw new IllegalArgumentException("The image matrix passed is a null reference. "
-              + "Aborting the program.");
+              + "Aborting the program.\n");
     }
 
     checkInitialDim(pixelMatrix);
@@ -96,7 +76,7 @@ public class RGBImage implements RGBImageInterface {
         if (pixelMatrix[i].length != width
                 || pixelMatrix[i][j].length != ColorMapping.values().length) {
           throw new IllegalArgumentException("Input values of the "
-                  + "array does not match as expected.");
+                  + "array does not match as expected.\n");
         }
       }
     }
@@ -105,46 +85,15 @@ public class RGBImage implements RGBImageInterface {
   private void checkInitialDim(int[][][] pixelMatrix) {
     int height = pixelMatrix.length;
     if (height == 0) {
-      throw new IllegalArgumentException("Input values of the array does not match as expected.");
+      throw new IllegalArgumentException("Input values of the array does not match as expected.\n");
     }
     int width = 0;
     if (pixelMatrix[0] != null && pixelMatrix[0].length > 0) {
       width = pixelMatrix[0].length;
     } else {
-      throw new IllegalArgumentException("Input values of the array does not match as expected.");
+      throw new IllegalArgumentException("Input values of the array does not match as expected.\n");
     }
   }
-
-  private String getFileExtension(String filePath) {
-
-    int index = filePath.lastIndexOf('.');
-    if (index != -1) {
-      return filePath.substring(index + 1);
-    } else {
-      return "";
-    }
-  }
-
-  /**
-   * The methods represent the saving operation of the image.
-   * An image can save itself to a specified file path in different formats like .ppm, .png, .jpg.
-   * The old and new image both are retained in the memory.
-   *
-   * @param imagePath The file path where the image needs to be stored in the present file system.
-   * @throws IOException Throws exception if the image data could not be written to that path.
-   */
-//  @Override
-//  public void saveImage(String imagePath) throws IOException {
-//    String imageExtension = getFileExtension(imagePath);
-//    if (imageExtension.equals("ppm")) {
-////      PPMUtil.savePPMImage(this.height, this.width, this.pixelMatrix, imagePath);
-//      PPMWriter.writeToStorageDisk(this,new FileOutputStream(imagePath));
-//    } else {
-////      ImageIOUtil.saveImageIOFile(this.height, this.width,
-////              this.pixelMatrix, imagePath, imageExtension);
-//      ImageIOWriter.writeToStorageDisk(this,new FileOutputStream(imagePath),imageExtension);
-//    }
-//  }
 
   /**
    * The method represents the flipping action carried out by an image on itself.
@@ -159,7 +108,7 @@ public class RGBImage implements RGBImageInterface {
   public RGBImageInterface flipImage(int axisDirection) throws IllegalArgumentException {
     if (axisDirection >= AxisName.values().length) {
       throw new IllegalArgumentException("Wrong axis value passed to the model "
-              + "for flipping the image. Aborting!!");
+              + "for flipping the image.\n");
     }
     ImageOperation imageOperation = new Flip(axisDirection);
     return imageOperation.operation(this);
@@ -191,7 +140,7 @@ public class RGBImage implements RGBImageInterface {
   public RGBImageInterface changeSharpness(int kernelType,double splitPercentage) throws IllegalArgumentException {
     if (kernelType >= KernelImage.values().length) {
       throw new IllegalArgumentException("Wrong kernel value passed to model for "
-              + "changing the sharpness operation on the image. Aborting!!");
+              + "changing the sharpness operation on the image.\n");
     }
     ImageOperation imageOperation = new Sharpness(kernelType);
     return bufferImageOperation(splitPercentage,imageOperation);
@@ -210,7 +159,7 @@ public class RGBImage implements RGBImageInterface {
           throws IllegalArgumentException {
     if (imageComponents == null) {
       throw new IllegalArgumentException("Image set for channel combination "
-              + "cannot be null. aborting!!");
+              + "cannot be null.\n");
     }
     MultipleImagesSingleOperation imageOperation = new CombineChannelImage();
     imageComponents.add(0, this);
@@ -241,7 +190,7 @@ public class RGBImage implements RGBImageInterface {
           throws IllegalArgumentException {
     if (colorValue >= ColorMapping.values().length) {
       throw new IllegalArgumentException("Wrong color value passed to model for "
-              + "performing the monochrome operation on the image. Aborting!!");
+              + "performing the monochrome operation on the image.\n");
     }
     ImageOperation imageOperation = new Monochrome(colorValue);
     return imageOperation.operation(this);
@@ -258,7 +207,7 @@ public class RGBImage implements RGBImageInterface {
   public RGBImageInterface greyScaleImage(int greyScaleType,double splitPercentage) throws IllegalArgumentException {
     if (greyScaleType >= GreyScaleType.values().length) {
       throw new IllegalArgumentException("Wrong greyscale value passed to model for "
-              + "greyscale operation on image. Aborting!!");
+              + "greyscale operation on image.\n");
     }
     ImageOperation imageOperation = new GreyScale(greyScaleType);
     return bufferImageOperation(splitPercentage,imageOperation);
@@ -287,10 +236,10 @@ public class RGBImage implements RGBImageInterface {
    * @throws IllegalArgumentException Exception is thrown If the b,m,w are not in ascending order.
    */
   @Override
-  public RGBImageInterface levelsAdjustment(double b, double m, double w, double splitPercentage) {
+  public RGBImageInterface levelsAdjustment(double b, double m, double w, double splitPercentage) throws IllegalArgumentException {
     if(b>=m || m>=w || b<0 ){
       throw new IllegalArgumentException("Wrong values for levels "
-              + "adjustment operation. Check values of B, M, W again.");
+              + "adjustment operation. Check values of B, M, W again.\n");
     }
     ImageOperation imageOperation=new LevelsAdjustment(b,m,w);
     return bufferImageOperation(splitPercentage,imageOperation);
@@ -318,7 +267,7 @@ public class RGBImage implements RGBImageInterface {
   public RGBImageInterface compressImage(double compressionPercentage) throws IllegalArgumentException {
     if(compressionPercentage<0){
       throw new IllegalArgumentException("Illegal compression percentage"
-              + " passed to the application. Please check and try again.");
+              + " passed to the application. Please check and try again.\n");
 
     }
     ImageOperation imageOperation=new Compression(compressionPercentage);

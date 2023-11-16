@@ -24,7 +24,7 @@ public class SplitBuffer implements ImageOperation{
    */
   public SplitBuffer(double splitPercentage, ImageOperation imageOperation) throws IllegalArgumentException{
     if(splitPercentage<0 || splitPercentage>100 || imageOperation==null){
-      throw new IllegalArgumentException("Illegal parameters passed for the split preview operation on an image");
+      throw new IllegalArgumentException("Illegal parameters passed for the split preview operation on an image.\n");
     }
     this.splitPercentage=splitPercentage;
     this.imageOperation=imageOperation;
@@ -42,6 +42,10 @@ public class SplitBuffer implements ImageOperation{
    */
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
+    if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
+      throw new IllegalArgumentException("Image passed for to the "
+              + "buffer is not as expected, check again.\n");
+    }
     int [][][] rgbPixel= rgbImage.getPixel();
     double estimation=(splitPercentage*rgbImage.getImageWidth())/100.0;
     int splitWidth=(int)Math.round(estimation);

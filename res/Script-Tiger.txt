@@ -1,26 +1,27 @@
 #load Tiger.png and call it 'Tiger'
-load "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Koala.ppm" Tiger
+load "../res/galaxy.png" Tiger
 
 #brighten Tiger by adding 10
 brighten 10 Tiger Tiger-brighter
 
-brighten -60 Tiger Tiger
+brighten -30 Tiger Tiger-darker
 
 #save Tiger-brighter
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-brighter.png" Tiger-brighter
+save "../res/Tiger-brighter.png" Tiger-brighter
 
+save "../res/Tiger-darker.jpg" Tiger-darker
 
 #flip Tiger vertically
 vertical-flip Tiger Tiger-vertical
 
 #save Tiger-vertical
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-vertical.png" Tiger-vertical
+save "../res/Tiger-vertical.png" Tiger-vertical
 
 #flip the vertically flipped Tiger horizontally
 horizontal-flip Tiger Tiger-horizontal
 
 #save Tiger-horizontally
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-horizontal.png" Tiger-horizontal
+save "../res/Tiger-horizontal.png" Tiger-horizontal
 
 #create a greyscale using only the value component, as an image Tiger-greyscale
 value-component Tiger Tiger-value-greyscale
@@ -30,36 +31,58 @@ luma-component Tiger Tiger-luma-greyscale
 intensity-component Tiger Tiger-intensity-greyscale
 
 #save Tiger-greyscale
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-value-greyscale.png" Tiger-value-greyscale
+save "../res/Tiger-value-greyscale.png" Tiger-value-greyscale
 
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-luma-greyscale.png" Tiger-luma-greyscale
+save "../res/Tiger-luma-greyscale.png" Tiger-luma-greyscale
 
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-intensity-greyscale.png" Tiger-intensity-greyscale
+save "../res/Tiger-intensity-greyscale.png" Tiger-intensity-greyscale
 
 blur Tiger Tiger-blur
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-blur.png" Tiger-blur
+save "../res/Tiger-blur.png" Tiger-blur
 
 sharpen Tiger Tiger-sharpen
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-sharpen.png" Tiger-sharpen
+save "../res/Tiger-sharpen.png" Tiger-sharpen
 
 sepia Tiger Tiger-sepia
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-sepia.png" Tiger-sepia
+save "../res/Tiger-sepia.png" Tiger-sepia
 
 
 #overwrite Tiger with another file
-load "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-horizontal.png" Tiger
+load "../res/Tiger-horizontal.png" Tiger
 
 #give the Tiger a red tint, green tint, and blue tint
 rgb-split Tiger Tiger-red Tiger-green Tiger-blue
 
 #save Tiger-red Tiger-green Tiger-blue
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-red.png" Tiger-red
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-green.png" Tiger-green
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-blue.png" Tiger-blue
+save "../res/Tiger-red.png" Tiger-red
+save "../res/Tiger-green.png" Tiger-green
+save "../res/Tiger-blue.png" Tiger-blue
 
 #brighten just the red image
-brighten 20 Tiger-red Tiger-red
+brighten 50 Tiger-red Tiger-red
 
 #combine them back, but by using the brightened red we get a red tint
 rgb-combine Tiger-red-tint Tiger-red Tiger-green Tiger-blue
-save "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger-red-tint.png" Tiger-red-tint
+save "../res/Tiger-red-tint.png" Tiger-red-tint
+
+# Compress the image
+compress 35.6 Tiger Tiger-compressed-35
+save "../res/Tiger-compressed-35.png" Tiger-compressed-35
+
+compress 90 Tiger Tiger-compressed-90
+save "../res/Tiger-compressed-90.png" Tiger-compressed-90
+
+# Histogram
+histogram Tiger Tiger-Histogram
+save "../res/Tiger-Histogram.png" Tiger-Histogram
+
+# Color correction
+color-correct Tiger Tiger-Color-Correct
+save "../res/Tiger-Color-Correct.png" Tiger-Color-Correct
+
+# Level Adjustment
+levels-adjust 10 100 150 Tiger Tiger-Level-Adjustment-10
+save "../res/Tiger-Level-Adjustment-10.png" Tiger-Level-Adjustment-10
+
+levels-adjust 1 150 200 Tiger Tiger-Level-Adjustment-1
+save "../res/Tiger-Level-Adjustment-1.png" Tiger-Level-Adjustment-1

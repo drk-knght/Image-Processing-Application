@@ -15,7 +15,7 @@ public class LevelsAdjustment implements ImageOperation{
   public LevelsAdjustment(double blackPoint, double midPoint, double highlightPoint){
     if(blackPoint>=midPoint || midPoint>=highlightPoint || blackPoint<0 ){
       throw new IllegalArgumentException("Wrong values for levels "
-              + "adjustment operation. Check values of B, M, W again.");
+              + "adjustment operation. Check values of B, M, W again.\n");
     }
     this.blackPoint=blackPoint;
     this.midPoint=midPoint;
@@ -26,7 +26,7 @@ public class LevelsAdjustment implements ImageOperation{
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
       throw new IllegalArgumentException("Image passed for levels adjustment image "
-              + "transformation is not as expected, check again. Aborting!!");
+              + "transformation is not as expected, check again.\n");
     }
     int [][][] pixelMatrix= rgbImage.getPixel();
     double denominator=computeDenominator();

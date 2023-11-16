@@ -27,7 +27,7 @@ public class PPMWriter {
     try {
       out.write(new String(ppmImageData).getBytes());
     } catch (IOException e) {
-      throw new IOException("Unable to save the image to the particular outStream passed to the PPM writer.");
+      throw new IOException("Unable to save the image to the particular outStream passed to the PPM writer.\n");
     }
   }
 

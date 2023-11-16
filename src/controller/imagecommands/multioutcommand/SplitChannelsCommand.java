@@ -28,7 +28,7 @@ public class SplitChannelsCommand implements RGBImageCommandInterface {
   public SplitChannelsCommand(String[] commandArguments) throws IllegalArgumentException {
     if (commandArguments.length != 4) {
       throw new IllegalArgumentException("The number of arguments expected for "
-              + "RGB split operation does not match with the passed command.");
+              + "RGB split operation does not match with the passed command.\n");
     }
     this.existingImage = commandArguments[0];
     channelImages = Arrays.copyOfRange(commandArguments, 1, commandArguments.length);
@@ -46,12 +46,12 @@ public class SplitChannelsCommand implements RGBImageCommandInterface {
           throws IllegalArgumentException, IOException {
     if (cachedImage == null) {
       throw new IllegalArgumentException("The lookup table passed for the "
-              + "image processing app does not exists.");
+              + "image processing app does not exists.\n");
     }
     RGBImageInterface rgbExistingImage = cachedImage.get(existingImage);
     if (rgbExistingImage == null) {
       throw new IllegalArgumentException("The image name: "
-              + this.existingImage + " does not exists in the cached memory.");
+              + this.existingImage + " does not exists in the cached memory.\n");
     }
     List<RGBImageInterface> rgbImages = rgbExistingImage.splitImageComponents();
     for (int i = 0; i < rgbImages.size(); i++) {

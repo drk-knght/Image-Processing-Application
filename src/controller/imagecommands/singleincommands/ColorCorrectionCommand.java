@@ -28,7 +28,7 @@ public class ColorCorrectionCommand implements RGBImageCommandInterface {
   public ColorCorrectionCommand(String [] commandArguments) throws IllegalArgumentException{
     if(commandArguments.length!=2 && commandArguments.length!=4){
       throw new IllegalArgumentException("The number of parameters does not match "
-              + "with the expected number of parameters for the passed operation.");
+              + "with the expected number of parameters for the passed operation.\n");
     }
     this.rgbExistingImage=commandArguments[0];
     this.rgbModifiedImage=commandArguments[1];
@@ -51,7 +51,7 @@ public class ColorCorrectionCommand implements RGBImageCommandInterface {
   public void execute(Map<String, RGBImageInterface> cachedImage) throws IllegalArgumentException {
     if (cachedImage == null) {
       throw new IllegalArgumentException("The lookup table passed for "
-              + "the image processing app does not exists.");
+              + "the image processing app does not exists.\n");
     }
     RGBImageInterface existingImage = cachedImage.get(rgbExistingImage);
 

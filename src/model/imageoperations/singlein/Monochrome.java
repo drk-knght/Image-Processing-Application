@@ -23,7 +23,7 @@ public class Monochrome implements ImageOperation {
   public Monochrome(int colorComponent) throws IllegalArgumentException {
     if (colorComponent < 0 || colorComponent >= ColorMapping.values().length) {
       throw new IllegalArgumentException("Single channel operation value passed "
-              + "is not defined in the system. Try again.");
+              + "is not defined in the system. Try again.\n");
     }
     this.colorComponent = colorComponent;
   }
@@ -40,7 +40,7 @@ public class Monochrome implements ImageOperation {
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
       throw new IllegalArgumentException("Image passed for monochrome images "
-              + "is not as expected, check again. Aborting!!");
+              + "is not as expected, check again.\n");
     }
     int height = rgbImage.getImageHeight();
     int width = rgbImage.getImageWidth();

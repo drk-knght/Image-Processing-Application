@@ -1,10 +1,8 @@
 package model.singlein;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import model.RGBImage;
 import model.RGBImageInterface;

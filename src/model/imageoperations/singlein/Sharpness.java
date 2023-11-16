@@ -23,7 +23,7 @@ public class Sharpness implements ImageOperation {
   public Sharpness(int kernelOperation) throws IllegalArgumentException {
     if (kernelOperation < 0 || kernelOperation >= KernelImage.values().length) {
       throw new IllegalArgumentException("Sharpening operation value passed "
-              + "is not defined in the system. Try again.");
+              + "is not defined in the system. Try again.\n");
     }
     this.kernelOperation = kernelOperation;
   }
@@ -49,13 +49,13 @@ public class Sharpness implements ImageOperation {
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
       throw new IllegalArgumentException("Image passed for changing the "
-              + "sharpness is not as expected, check again. Aborting!!");
+              + "sharpness is not as expected, check again.\n");
     }
     int[][][] pixelMatrix = rgbImage.getPixel();
     KernelImage kernelType = getKernelType(kernelOperation);
     int[][][] resultMat = null;
     if (kernelType == null) {
-      throw new IllegalArgumentException("Wrong parameter passed for kernel type.");
+      throw new IllegalArgumentException("Wrong parameter passed for kernel type.\n");
     }
     resultMat = applyFilter(kernelType.kernel, pixelMatrix);
     return new RGBImage(resultMat);

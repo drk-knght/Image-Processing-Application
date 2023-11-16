@@ -23,7 +23,7 @@ public class Flip implements ImageOperation {
   public Flip(int axisValue) {
     if (axisValue < 0 || axisValue >= AxisName.values().length) {
       throw new IllegalArgumentException("Flipping operation value "
-              + "passed is not defined in the system. Try again.");
+              + "passed is not defined in the system. Try again.\n");
     }
     this.axisValue = axisValue;
 
@@ -41,7 +41,7 @@ public class Flip implements ImageOperation {
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
       throw new IllegalArgumentException("Image passed for flip is not as "
-              + "expected, check again. Aborting!!");
+              + "expected, check again.\n");
     }
     int height = rgbImage.getImageHeight();
     int width = rgbImage.getImageWidth();

@@ -36,7 +36,7 @@ public class RGBImageTest {
     try {
       RGBImageInterface rgbImage = new RGBImage(null);
       fail("Test failed");
-    } catch (NullPointerException ex) {
+    } catch (IllegalArgumentException ex) {
       // catch the exception to pass the test.
     }
 

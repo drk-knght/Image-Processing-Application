@@ -42,7 +42,7 @@ public class ColorTransformation implements ImageOperation {
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
       throw new IllegalArgumentException("Image passed for sepia image "
-              + "transformation is not as expected, check again. Aborting!!");
+              + "transformation is not as expected, check again. \n");
     }
     int height = rgbImage.getImageHeight();
     int width = rgbImage.getImageWidth();

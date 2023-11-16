@@ -6,17 +6,14 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
-import controller.filehandling.reader.FileReader;
 import controller.filehandling.reader.PPMReader;
-import model.RGBImage;
 import model.enums.ColorMapping;
 
 import static org.junit.Assert.assertEquals;

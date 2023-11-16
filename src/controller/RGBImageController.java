@@ -204,12 +204,15 @@ public class RGBImageController implements RGBImageControllerInterface {
         String op = "Illegal arguments passed for the operations." + "Do you want to try again?\n";
         out.write(op.getBytes());
       } else {
-        c = cmd.apply(Arrays.copyOfRange(tokenizedCommandStrings, 1,
-                tokenizedCommandStrings.length));
+
         try {
+          c = cmd.apply(Arrays.copyOfRange(tokenizedCommandStrings, 1,
+                  tokenizedCommandStrings.length));
           c.execute(cachedImages);
-        } catch (IOException ex) {
-          throw new IOException("Exception occurred while executing the command.\n");
+        } catch (Exception ex) {
+          String msg=ex.getMessage();
+          out.write(msg.getBytes());
+//          throw new IOException("Exception occurred while executing the command.\n");
         }
       }
     }

@@ -25,7 +25,7 @@ public class CombineChannelImage implements MultipleImagesSingleOperation {
           throws IllegalArgumentException {
     if (rgbImages == null) {
       throw new IllegalArgumentException("Image passed for the combine operation "
-              + "on image is not as expected, check again. Aborting!!");
+              + "on image is not as expected, check again.\n");
     }
     checkValidDimImages(rgbImages);
     int[][][] pixelMatrix = rgbImages.get(0).getPixel();
@@ -50,7 +50,7 @@ public class CombineChannelImage implements MultipleImagesSingleOperation {
       RGBImageInterface rgbImage = rgbImages.get(i);
       checkIllegalArguments(rgbImage.getImageHeight(), rgbImage.getImageWidth());
       if (height != rgbImage.getImageHeight() || width != rgbImage.getImageWidth()) {
-        throw new IllegalArgumentException("Images dimensions in the list doesn't match.");
+        throw new IllegalArgumentException("Images dimensions in the list doesn't match.\n");
       }
     }
   }
@@ -58,7 +58,7 @@ public class CombineChannelImage implements MultipleImagesSingleOperation {
   private void checkIllegalArguments(int height, int width) {
     if (height <= 0 || width <= 0) {
       throw new IllegalArgumentException("Image passed for channel combination operations "
-              + "does not have valid dimensions, check again. Aborting!!");
+              + "does not have valid dimensions, check again.\n");
     }
   }
 }

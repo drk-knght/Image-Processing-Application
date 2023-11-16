@@ -28,7 +28,7 @@ public class SaveCommand implements RGBImageCommandInterface {
   public SaveCommand(String[] commandArguments) {
     if (commandArguments.length != 2) {
       throw new IllegalArgumentException("Number of parameters passed for the save command "
-              + "does not match as per the syntax.");
+              + "does not match as per the syntax.\n");
     }
     imageFilePath = commandArguments[0];
     imageName = commandArguments[1];
@@ -47,11 +47,11 @@ public class SaveCommand implements RGBImageCommandInterface {
           throws IllegalArgumentException, IOException {
     if (cachedImage == null) {
       throw new IllegalArgumentException("The lookup table passed for the "
-              + "image processing app does not exists.");
+              + "image processing app does not exists.\n");
     }
     RGBImageInterface rgbCachedImage = cachedImage.get(this.imageName);
     if (rgbCachedImage == null) {
-      System.out.println("No such images named: " + this.imageName + " exists in the memory");
+      System.out.println("No such images named: " + this.imageName + " exists in the memory\n");
       return;
     }
     OutputWriterInterface writer=new FileWriter(imageFilePath);

@@ -21,7 +21,7 @@ public class GreyScale implements ImageOperation {
    */
   public GreyScale(int greyScaleOperationType) throws IllegalArgumentException {
     if (greyScaleOperationType < 0 || greyScaleOperationType >= GreyScaleType.values().length) {
-      throw new IllegalArgumentException("Grey scale operation is not defined. Please try again.");
+      throw new IllegalArgumentException("Grey scale operation is not defined. Please try again.\n");
     }
     this.greyScaleOperationType = greyScaleOperationType;
   }
@@ -38,7 +38,7 @@ public class GreyScale implements ImageOperation {
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
       throw new IllegalArgumentException("Image passed for grey scale "
-              + "images conversion is not as expected, check again. Aborting!!");
+              + "images conversion is not as expected, check again. \n");
     }
     int height = rgbImage.getImageHeight();
     int width = rgbImage.getImageWidth();

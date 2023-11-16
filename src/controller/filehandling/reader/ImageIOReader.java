@@ -29,7 +29,7 @@ public class ImageIOReader{
     try {
       imageElement = ImageIO.read(in);
     } catch (IOException ex) {
-      throw new IOException("Unable to get image from the mentioned inputStream path for ImageIO Reader.");
+      throw new IOException("Unable to get image from the mentioned inputStream path for ImageIO Reader.\n");
     }
     return getPixelMatrixBuffer(imageElement);
   }
@@ -52,17 +52,17 @@ public class ImageIOReader{
 
   private static void checkDimensionMatrix(int[][][] mat) {
     if (mat.length == 0 || mat[0].length == 0) {
-      throw new InputMismatchException("The dimension of all the pixel arrays are not same");
+      throw new InputMismatchException("The dimension of all the pixel arrays are not same\n");
     }
     int height = mat.length;
     int width = mat[0].length;
     for (int i = 0; i < height; i++) {
       if (mat[i].length != width) {
-        throw new InputMismatchException("The dimension of all the pixel arrays are not same");
+        throw new InputMismatchException("The dimension of all the pixel arrays are not same\n");
       }
       for (int j = 0; j < width; j++) {
         if (mat[i][j].length != ColorMapping.values().length) {
-          throw new InputMismatchException("The dimension of all the pixel arrays are not same");
+          throw new InputMismatchException("The dimension of all the pixel arrays are not same\n");
         }
       }
     }

@@ -26,7 +26,7 @@ public class ColorCorrection implements ImageOperation{
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
       throw new IllegalArgumentException("Image passed for Color Correction image "
-              + "transformation is not as expected, check again. Aborting!!");
+              + "transformation is not as expected, check again.\n");
     }
     int [] peaksValue=new int[ColorMapping.values().length];
     Arrays.fill(peaksValue,0);

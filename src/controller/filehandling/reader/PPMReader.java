@@ -38,11 +38,11 @@ public class PPMReader{
       height = sc.nextInt();
       maxValue = sc.nextInt();
     } catch (InputMismatchException ex) {
-      throw new InputMismatchException("Found illegal format in the passed inputStream. The input is corrupted.");
+      throw new InputMismatchException("Found illegal format in the passed inputStream. The input is corrupted.\n");
     }
     if (maxValue != RGBImage.MAX) {
       throw new IllegalArgumentException("Max value for PPM file reading: " +
-              maxValue + " does not match the expected value(255)");
+              maxValue + " does not match the expected value(255)\n");
     }
     int[][][] pixelMatrix = new int[height][width][ColorMapping.values().length];
     return helperImageMatrix(sc, height, width, pixelMatrix);
@@ -53,7 +53,7 @@ public class PPMReader{
 
     for (int i = 0; i < height; i++) {
       if (pixelMatrix[i].length != width) {
-        throw new InputMismatchException("The width of all the pixel arrays are not same");
+        throw new InputMismatchException("The width of all the pixel arrays are not same\n");
       }
       for (int j = 0; j < width; j++) {
         pixelMatrix[i][j][ColorMapping.red.ordinal()] = sc.nextInt();
@@ -64,7 +64,7 @@ public class PPMReader{
 
     if (sc.hasNext()) {
       throw new InputMismatchException("Inputs are more than expected "
-              + "for given width and height dimensions");
+              + "for given width and height dimensions\n");
     }
     return pixelMatrix;
   }
@@ -85,7 +85,7 @@ public class PPMReader{
     token = sc.next();
     if (!token.equals("P3")) {
       throw new InputMismatchException("Invalid PPM file: plain RAW "
-              + "file should begin with P3 but stated with:" + token);
+              + "file should begin with P3 but stated with:" + token+"\n");
     }
   }
 

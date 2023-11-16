@@ -54,7 +54,7 @@ public class Compression implements ImageOperation{
    */
   public Compression(double compressionPercentage) throws IllegalArgumentException{
     if(compressionPercentage < 0 || compressionPercentage > 100){
-      throw new IllegalArgumentException("Compression percentage is invalid");
+      throw new IllegalArgumentException("Compression percentage is invalid\n");
     }
     this.compressionPercentage=compressionPercentage;
   }
@@ -71,7 +71,7 @@ public class Compression implements ImageOperation{
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {
       throw new IllegalArgumentException("Image passed for compression image "
-              + "transformation is not as expected, check again. Aborting!!");
+              + "transformation is not as expected, check again.\n");
     }
     double [][][] operatedImageMatrix=getSquareMatrix(rgbImage);
     getCompressedSquareMatrix(operatedImageMatrix);

@@ -19,7 +19,7 @@ public abstract class AbstractCommandSingleIP implements RGBImageCommandInterfac
   AbstractCommandSingleIP(String[] commandArguments) throws IllegalArgumentException {
     if (commandArguments.length != 3 && commandArguments.length != 5) {
       throw new IllegalArgumentException("The number of parameters does not match "
-              + "with the expected number of parameters for the passed operation.");
+              + "with the expected number of parameters for the passed operation.\n");
     }
     this.imageOperationValueIndex = Integer.parseInt(commandArguments[0]);
     this.rgbExistingImage = commandArguments[1];
@@ -38,7 +38,7 @@ public abstract class AbstractCommandSingleIP implements RGBImageCommandInterfac
           throws IllegalArgumentException {
     if (cachedImage == null) {
       throw new IllegalArgumentException("The lookup table passed "
-              + "for the image processing app does not exists.");
+              + "for the image processing app does not exists.\n");
     }
     RGBImageInterface existingImage = cachedImage.get(rgbExistingImage);
 
