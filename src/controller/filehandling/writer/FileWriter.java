@@ -19,11 +19,11 @@ public class FileWriter implements OutputWriterInterface {
    *
    * @param saveFilePath String representing the path of file where the image data is to be stored.
    */
-  public FileWriter(String saveFilePath){
-    this.saveFilePath=saveFilePath;
+  public FileWriter(String saveFilePath) {
+    this.saveFilePath = saveFilePath;
   }
 
-  private String getFileExtension(String filePath){
+  private String getFileExtension(String filePath) {
     int index = filePath.lastIndexOf('.');
     if (index != -1) {
       return filePath.substring(index + 1);
@@ -43,12 +43,11 @@ public class FileWriter implements OutputWriterInterface {
    */
   @Override
   public void write(RGBImageInterface image) throws IOException {
-    String extension=getFileExtension(saveFilePath);
-    if(extension.equals("ppm")){
-      PPMWriter.writeToStorageDisk(image,new FileOutputStream(saveFilePath));
-    }
-    else{
-      ImageIOWriter.writeToStorageDisk(image,new FileOutputStream(saveFilePath),extension);
+    String extension = getFileExtension(saveFilePath);
+    if (extension.equals("ppm")) {
+      PPMWriter.writeToStorageDisk(image, new FileOutputStream(saveFilePath));
+    } else {
+      ImageIOWriter.writeToStorageDisk(image, new FileOutputStream(saveFilePath), extension);
     }
   }
 }

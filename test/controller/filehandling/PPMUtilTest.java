@@ -44,7 +44,8 @@ public class PPMUtilTest {
     imageSavedPath = "/Users/omagarwal/Desktop/Grad@NEU/Acads/"
             + "Sem-1/CS 5010 PDP/Labs/Image Processing/"
             + "res/small-Res-combineChannel-Testing.ppm";
-    rgbImage = new RGBImage(PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/"
+    rgbImage = new RGBImage(PPMReader.readFileContent(new FileInputStream("/Users/"
+            + "omagarwal/Desktop/Grad@NEU/Acads/"
             + "Sem-1/CS 5010 PDP/Labs/Image Processing/"
             + "res/small-Res-greyscale-Testing.ppm")));
     pixelMatrix = new int[][][]{
@@ -61,7 +62,7 @@ public class PPMUtilTest {
    */
   @Test
   public void testValidReadOperation() throws IOException {
-    InputReaderInterface reader=new FileReader(imageSavedPath);
+    InputReaderInterface reader = new FileReader(imageSavedPath);
 
     int[][][] actualPixelMat = reader.read();
     for (int i = 0; i < 3; i++) {
@@ -76,7 +77,7 @@ public class PPMUtilTest {
     assertTrue(checkImageStringFormat(actualFormat, pixelMatrix));
   }
 
-  private boolean checkImageStringFormat(String actualFormat, int[][][] mat) throws IOException {
+  private boolean checkImageStringFormat(String actualFormat, int[][][] mat) {
 
     StringBuilder expectedFormat = generate(mat, false);
     assertEquals(expectedFormat.toString(), actualFormat);
@@ -110,7 +111,7 @@ public class PPMUtilTest {
     imageSavedPath = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs"
             + "/Image Processing/src/res/small-Res-abc-Testing.ppm";
     try {
-      InputReaderInterface reader=new FileReader(imageSavedPath);
+      InputReaderInterface reader = new FileReader(imageSavedPath);
       int[][][] res = reader.read();
       fail("Illegal file path test failed.");
     } catch (IOException e) {
@@ -136,7 +137,7 @@ public class PPMUtilTest {
     generateWriteContentsFile(content, imageSavedPath);
 
     try {
-      InputReaderInterface reader=new FileReader(imageSavedPath);
+      InputReaderInterface reader = new FileReader(imageSavedPath);
       int[][][] res = reader.read();
       fail("Corrupted file test failed.");
     } catch (InputMismatchException e) {
@@ -155,7 +156,7 @@ public class PPMUtilTest {
     String imageCommentPath = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1"
             + "/CS 5010 PDP/Labs/Image Processing/res/CommentImg.ppm";
     generateWriteContentsFile(fileContentComment, imageCommentPath);
-    InputReaderInterface reader=new FileReader(imageCommentPath);
+    InputReaderInterface reader = new FileReader(imageCommentPath);
     int[][][] mat = reader.read();
     for (int i = 0; i < mat.length; i++) {
       for (int j = 0; j < mat[i].length; j++) {
@@ -173,7 +174,7 @@ public class PPMUtilTest {
    */
   @Test
   public void testValidImgDimensions() throws IOException {
-    InputReaderInterface reader=new FileReader(imageSavedPath);
+    InputReaderInterface reader = new FileReader(imageSavedPath);
     int[][][] actualMatrix = reader.read();
     RGBImageInterface rgbImage = new RGBImage(actualMatrix);
     int height = 3;
@@ -199,9 +200,9 @@ public class PPMUtilTest {
   public void testValidWriteOperation() throws IOException {
     String imagePath = "/Users/omagarwal/Desktop/Grad@NEU"
             + "/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/SavingImg.ppm";
-    OutputWriterInterface writer=new controller.filehandling.writer.FileWriter(imagePath);
+    OutputWriterInterface writer = new controller.filehandling.writer.FileWriter(imagePath);
     writer.write(new RGBImage(pixelMatrix));
-    InputReaderInterface reader= new FileReader(imagePath);
+    InputReaderInterface reader = new FileReader(imagePath);
     int[][][] actualMat = reader.read();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 4; j++) {

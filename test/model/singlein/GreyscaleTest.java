@@ -1,6 +1,5 @@
 package model.singlein;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
@@ -187,7 +186,8 @@ public class GreyscaleTest {
 
   private boolean checkImageStringFormat(RGBImageInterface greyscaleImage, int[][][] mat)
           throws IOException {
-    PPMWriter.writeToStorageDisk(greyscaleImage,new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/"
+    PPMWriter.writeToStorageDisk(greyscaleImage,new FileOutputStream("/Users/omagarwal"
+            + "/Desktop/Grad@NEU/Acads/Sem-1/"
             + "CS 5010 PDP/"
             + "Labs/Image Processing/res/small-Res-greyscale-Testing.ppm"));
 

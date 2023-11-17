@@ -13,6 +13,7 @@ import model.imageoperations.multiin.MultipleImagesSingleOperation;
 
 import model.RGBImage;
 import model.RGBImageInterface;
+
 import static controller.filehandling.writer.PPMWriter.convertImageMatrixToString;
 
 import static org.junit.Assert.assertEquals;
@@ -118,7 +119,8 @@ public class CombineChannelTest {
 
   private boolean checkImageStringFormat(RGBImageInterface resultCombination, int[][][] mat)
           throws IOException {
-    PPMWriter.writeToStorageDisk(resultCombination,new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/"
+    PPMWriter.writeToStorageDisk(resultCombination, new FileOutputStream("/Users/omagarwal/"
+            + "Desktop/Grad@NEU/"
             + "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/"
             + "src/res/small-Res-combineChannel-Testing.ppm"));
     StringBuilder savedRes = convertImageMatrixToString(resultCombination.getImageHeight(),

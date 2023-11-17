@@ -86,7 +86,7 @@ public class CompressionTest {
    * The result matrix should be same as the expected matrix . If not the test fails.
    */
   @Test
-  public void testFiftyCompression(){
+  public void testFiftyCompression() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -95,7 +95,7 @@ public class CompressionTest {
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
     ImageOperation imageOperation = new Compression(50);
     RGBImageInterface compressedImg = imageOperation.operation(rgbImage);
-    int [][][] resultMat= new int[][][]{
+    int[][][] resultMat = new int[][][]{
             {{145, 172, 149}, {255, 79, 149}, {52, 80, 89}, {52, 17, 210}},
             {{74, 219, 149}, {200, 126, 149}, {123, 7, 89}, {123, 183, 210}},
             {{56, 222, 46}, {80, 66, 46}, {217, 159, 96}, {217, 103, 90}}
@@ -108,7 +108,7 @@ public class CompressionTest {
    * The result matrix should have zeros at every pixel cells . If not the test fails.
    */
   @Test
-  public void testHundredCompression(){
+  public void testHundredCompression() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -117,7 +117,7 @@ public class CompressionTest {
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
     ImageOperation imageOperation = new Compression(100);
     RGBImageInterface compressedImg = imageOperation.operation(rgbImage);
-    int [][][] resultMat= new int[][][]{
+    int[][][] resultMat = new int[][][]{
             {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
             {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
             {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
@@ -130,7 +130,7 @@ public class CompressionTest {
    * The test passes if an Illegal argument exception is thrown else the test fails.
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testNegativeCompression(){
+  public void testNegativeCompression() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -145,7 +145,7 @@ public class CompressionTest {
    * The test passes if an Illegal argument exception is thrown else the test fails.
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testAboveHundredCompression(){
+  public void testAboveHundredCompression() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -160,7 +160,7 @@ public class CompressionTest {
    * The test passes if the value of the compressed matrix is same as expected matrix else fails.
    */
   @Test
-  public void testFractionalCompression(){
+  public void testFractionalCompression() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -169,7 +169,7 @@ public class CompressionTest {
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
     ImageOperation imageOperation = new Compression(40.789);
     RGBImageInterface compressedImg = imageOperation.operation(rgbImage);
-    int [][][] resultMat= new int[][][]{
+    int[][][] resultMat = new int[][][]{
             {{123, 172, 115}, {249, 79, 115}, {11, 80, 86}, {50, 17, 206}},
             {{96, 219, 153}, {221, 126, 153}, {125, 7, 124}, {164, 183, 244}},
             {{56, 222, 30}, {80, 66, 30}, {237, 159, 111}, {198, 103, 105}}
@@ -182,7 +182,7 @@ public class CompressionTest {
    * The test passes if the value of the compressed matrix is same as expected matrix else fails.
    */
   @Test
-  public void testReCompression(){
+  public void testReCompression() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -191,7 +191,7 @@ public class CompressionTest {
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
     ImageOperation imageOperation = new Compression(40.789);
     RGBImageInterface compressedImg = imageOperation.operation(rgbImage);
-    int [][][] resultMat1= new int[][][]{
+    int[][][] resultMat1 = new int[][][]{
             {{140, 90, 149}, {140, 90, 149}, {61, 90, 149}, {61, 90, 149}},
             {{140, 90, 149}, {140, 90, 149}, {61, 90, 149}, {61, 90, 149}},
             {{132, 158, 34}, {132, 158, 34}, {212, 158, 34}, {212, 158, 34}}

@@ -1,7 +1,5 @@
 package model.singlein;
 
-
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
@@ -104,8 +102,10 @@ public class FlipImageTest {
 
   private boolean checkImageStringFormat(RGBImageInterface flippedImage, int[][][] mat)
           throws IOException {
-    PPMWriter.writeToStorageDisk(flippedImage,new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/\"\n" +
-            "            + \"Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-flip-Testing.ppm"));
+    PPMWriter.writeToStorageDisk(flippedImage, new FileOutputStream("/Users/omagarwal"
+            + "/Desktop/Grad@NEU/Acads/\"\n"
+            + "            + \"Sem-1/CS 5010 PDP/Labs/Image Processing/"
+                    + "src/res/small-Res-flip-Testing.ppm"));
 
     StringBuilder savedRes = convertImageMatrixToString(flippedImage.getImageHeight(),
             flippedImage.getImageWidth(), flippedImage.getPixel());

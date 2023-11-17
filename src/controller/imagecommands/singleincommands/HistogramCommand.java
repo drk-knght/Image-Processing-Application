@@ -23,7 +23,7 @@ public class HistogramCommand implements RGBImageCommandInterface {
    * @param commandArguments Array of strings containing the information about the image names.
    * @throws IllegalArgumentException Throws exception if the string array is not of required len.
    */
-  public HistogramCommand(String[] commandArguments) throws IllegalArgumentException{
+  public HistogramCommand(String[] commandArguments) throws IllegalArgumentException {
     if (commandArguments.length != 2) {
       throw new IllegalArgumentException("The number of parameters does not match "
               + "with the expected number of parameters for the passed operation.\n");

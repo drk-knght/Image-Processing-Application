@@ -19,11 +19,10 @@ public class GreyScaleCommand extends AbstractCommandSingleIP {
    */
   public GreyScaleCommand(String[] commandArguments) throws IllegalArgumentException {
     super(commandArguments);
-    if(commandArguments.length==3){
-      this.splitPercentage=100;
-    }
-    else {
-      this.splitPercentage=Double.parseDouble(commandArguments[4]);
+    if (commandArguments.length == 3) {
+      this.splitPercentage = 100;
+    } else {
+      this.splitPercentage = Double.parseDouble(commandArguments[4]);
     }
   }
 
@@ -37,8 +36,8 @@ public class GreyScaleCommand extends AbstractCommandSingleIP {
    */
   @Override
   protected RGBImageInterface defineImageOperation(RGBImageInterface existingImage,
-                                                 int imageOperationValueIndex) {
-    return existingImage.greyScaleImage(imageOperationValueIndex,splitPercentage);
+                                                   int imageOperationValueIndex) {
+    return existingImage.greyScaleImage(imageOperationValueIndex, splitPercentage);
   }
 
 

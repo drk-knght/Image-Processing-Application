@@ -90,8 +90,10 @@ public class ControllerModelMock {
      * @throws IllegalArgumentException If the arguments passed are not valid.
      */
     @Override
-    public RGBImageInterface changeSharpness(int kernelType,double splitPercentage) throws IllegalArgumentException {
-      logData.append("Sharpness image operation KernelType: " + kernelType+" split percent:"+splitPercentage);
+    public RGBImageInterface changeSharpness(int kernelType, double splitPercentage)
+            throws IllegalArgumentException {
+      logData.append("Sharpness image operation KernelType: " + kernelType
+              + " split percent:" + splitPercentage);
       return this.imageObj;
     }
 
@@ -117,7 +119,7 @@ public class ControllerModelMock {
      * @throws IOException If the arguments passed are not valid.
      */
     @Override
-    public List<RGBImageInterface> splitImageComponents() throws IOException {
+    public List<RGBImageInterface> splitImageComponents() {
       logData.append("Split operation on an image.");
       ArrayList<RGBImageInterface> arr = new ArrayList<>();
       arr.add(imageObj);
@@ -147,8 +149,11 @@ public class ControllerModelMock {
      * @throws IllegalArgumentException If the arguments passed are not valid.
      */
     @Override
-    public RGBImageInterface greyScaleImage(int greyScaleType,double splitPercentage) throws IllegalArgumentException {
-      logData.append("Get greyscale component on an image: " + greyScaleType+" split percent:"+splitPercentage);
+    public RGBImageInterface greyScaleImage(int greyScaleType,
+                                            double splitPercentage)
+            throws IllegalArgumentException {
+      logData.append("Get greyscale component on an image: "
+              + greyScaleType + " split percent:" + splitPercentage);
       return this.imageObj;
     }
 
@@ -159,24 +164,31 @@ public class ControllerModelMock {
      */
     @Override
     public RGBImageInterface sepiaImage(double splitPercentage) {
-      logData.append("Apply sepia color transformation on an image."+" split percent:"+splitPercentage);
+      logData.append("Apply sepia color transformation on an image."
+              + " split percent:" + splitPercentage);
       return this.imageObj;
     }
 
     /**
-     * Method represents the level adjustment operation on an existing image currently present in use.
+     * Method represents the level adjustment operation on an image currently present in use.
      * This method is used to log the data for the mock model.
      *
-     * @param b Shadow-point where the intensity of the pixel decreases around that range.
-     * @param m Mid-point where the intensity of the pixel changes non-linearly as per the curve eq.
-     * @param w Highlight-point where the intensity of the pixel is increased which satisfy the curve.
-     * @param splitPercentage Double value representing the split ratio of original and modified img.
+     * @param b               Shadow-point where the intensity of the pixel decreases around that.
+     * @param m               Mid-point where the intensity of the pixel
+     *                        changes non-linearly as per the curve eq.
+     * @param w               Highlight-point where the intensity of the pixel
+     *                        is increased which satisfy the curve.
+     * @param splitPercentage Double value representing the split ratio
+     *                        of original and modified img.
      * @return An image as the result of the action performed on the present image.
      * @throws IllegalArgumentException Exception is thrown If the b,m,w are not in ascending order.
      */
     @Override
-    public RGBImageInterface levelsAdjustment(double b, double m, double w, double splitPercentage) throws IllegalArgumentException {
-      logData.append("Level adjustment of an image. B:"+ b+" M:"+m+" W:"+w+" split percent:"+splitPercentage);
+    public RGBImageInterface levelsAdjustment(double b, double m,
+                                              double w, double splitPercentage)
+            throws IllegalArgumentException {
+      logData.append("Level adjustment of an image. B:" + b + " M:" + m
+              + " W:" + w + " split percent:" + splitPercentage);
       return this.imageObj;
     }
 
@@ -201,20 +213,23 @@ public class ControllerModelMock {
      * @throws IllegalArgumentException Exception is thrown if the % of compression is non-positive.
      */
     @Override
-    public RGBImageInterface compressImage(double compressionPercentage) throws IllegalArgumentException {
-      logData.append("Image compression Operation. Compression Percentage: " + compressionPercentage);
+    public RGBImageInterface compressImage(double compressionPercentage)
+            throws IllegalArgumentException {
+      logData.append("Image compression Operation. "
+              + "Compression Percentage: " + compressionPercentage);
       return this.imageObj;
     }
 
     /**
      * Method represents the color correction part on an existing image.
      * The intensity values for different channels are aligned long the common global max peak.
-     * @param splitPercentage Double value representing the split ratio of original and modified img.
+     *
+     * @param splitPercentage Double value representing the split ratio of original & modified img.
      * @return An image as the result of the action performed on the present image.
      */
     @Override
     public RGBImageInterface colorCorrectionImage(double splitPercentage) {
-      logData.append("Color correction on an image. Split percent: "+splitPercentage);
+      logData.append("Color correction on an image. Split percent: " + splitPercentage);
       return this.imageObj;
     }
 
@@ -305,15 +320,17 @@ public class ControllerModelMock {
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
-    assertEquals("loading the image.Sharpness image operation KernelType: 0 split percent:100.0", mockModel.logData.toString());
+    assertEquals("loading the image.Sharpness image operation KernelType: "
+            + "0 split percent:100.0", mockModel.logData.toString());
 
-    ar = new String[]{"1","Koala", "Koala-sharp","split","30"};
-    log=new StringBuilder();
-    mockModel=new MockModel(log,null);
-    mp.put("Koala",mockModel);
+    ar = new String[]{"1", "Koala", "Koala-sharp", "split", "30"};
+    log = new StringBuilder();
+    mockModel = new MockModel(log, null);
+    mp.put("Koala", mockModel);
     controller = new SharpnessCommand(ar);
     controller.execute(mp);
-    assertEquals("loading the image.Sharpness image operation KernelType: 1 split percent:30.0", mockModel.logData.toString());
+    assertEquals("loading the image.Sharpness image operation KernelType: "
+            + "1 split percent:30.0", mockModel.logData.toString());
   }
 
   /**
@@ -331,15 +348,17 @@ public class ControllerModelMock {
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
-    assertEquals("loading the image.Get greyscale component on an image: 0 split percent:100.0", mockModel.logData.toString());
+    assertEquals("loading the image.Get greyscale component on an image: "
+            + "0 split percent:100.0", mockModel.logData.toString());
 
-    ar = new String[]{"1","Koala", "Koala-grey","split","50"};
-    log=new StringBuilder();
-    mockModel=new MockModel(log,null);
-    mp.put("Koala",mockModel);
+    ar = new String[]{"1", "Koala", "Koala-grey", "split", "50"};
+    log = new StringBuilder();
+    mockModel = new MockModel(log, null);
+    mp.put("Koala", mockModel);
     controller = new GreyScaleCommand(ar);
     controller.execute(mp);
-    assertEquals("loading the image.Get greyscale component on an image: 1 split percent:50.0", mockModel.logData.toString());
+    assertEquals("loading the image.Get greyscale component on an image: "
+            + "1 split percent:50.0", mockModel.logData.toString());
   }
 
   /**
@@ -367,7 +386,7 @@ public class ControllerModelMock {
    * @throws IOException Throws exception if the input is invalid.
    */
   @Test
-  public void testSepiaController() throws  IOException{
+  public void testSepiaController() throws IOException {
     StringBuilder log = new StringBuilder();
     MockModel mockModel = new MockModel(log, null);
     String[] ar = new String[]{"Koala", "Koala-sepia"};
@@ -375,15 +394,17 @@ public class ControllerModelMock {
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
-    assertEquals("loading the image.Apply sepia color transformation on an image. split percent:100.0", mockModel.logData.toString());
+    assertEquals("loading the image.Apply sepia color transformation on an image. "
+            + "split percent:100.0", mockModel.logData.toString());
 
-    ar = new String[]{"Koala", "Koala-sepia","split","50"};
-    log=new StringBuilder();
-    mockModel=new MockModel(log,null);
-    mp.put("Koala",mockModel);
+    ar = new String[]{"Koala", "Koala-sepia", "split", "50"};
+    log = new StringBuilder();
+    mockModel = new MockModel(log, null);
+    mp.put("Koala", mockModel);
     controller = new ColorTransformationCommand(ar);
     controller.execute(mp);
-    assertEquals("loading the image.Apply sepia color transformation on an image. split percent:50.0", mockModel.logData.toString());
+    assertEquals("loading the image.Apply sepia color transformation on an image. "
+            + "split percent:50.0", mockModel.logData.toString());
   }
 
   /**
@@ -433,21 +454,23 @@ public class ControllerModelMock {
   public void testLevelsAdjustment() throws IOException {
     StringBuilder log = new StringBuilder();
     MockModel mockModel = new MockModel(log, null);
-    String[] ar = new String[]{"10", "100" ,"200","Koala", "Koala-level-adjusted"};
+    String[] ar = new String[]{"10", "100", "200", "Koala", "Koala-level-adjusted"};
     RGBImageCommandInterface controller = new LevelAdjustmentCommand(ar);
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
-    assertEquals("loading the image.Level adjustment of an image. B:10.0 M:100.0 W:200.0 split percent:100.0", mockModel.logData.toString());
+    assertEquals("loading the image.Level adjustment of an image. B:10.0 M:100.0 W:200.0 "
+            + "split percent:100.0", mockModel.logData.toString());
 
 
-    ar = new String[]{"10", "100" ,"200","Koala", "Koala-level-adjusted","split","20"};
-    log=new StringBuilder();
-    mockModel=new MockModel(log,null);
-    mp.put("Koala",mockModel);
+    ar = new String[]{"10", "100", "200", "Koala", "Koala-level-adjusted", "split", "20"};
+    log = new StringBuilder();
+    mockModel = new MockModel(log, null);
+    mp.put("Koala", mockModel);
     controller = new LevelAdjustmentCommand(ar);
     controller.execute(mp);
-    assertEquals("loading the image.Level adjustment of an image. B:10.0 M:100.0 W:200.0 split percent:20.0", mockModel.logData.toString());
+    assertEquals("loading the image.Level adjustment of an image. "
+            + "B:10.0 M:100.0 W:200.0 split percent:20.0", mockModel.logData.toString());
   }
 
   /**
@@ -464,15 +487,17 @@ public class ControllerModelMock {
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
-    assertEquals("loading the image.Color correction on an image. Split percent: 100.0", mockModel.logData.toString());
+    assertEquals("loading the image.Color correction on an image. "
+            + "Split percent: 100.0", mockModel.logData.toString());
 
-    ar = new String[]{"Koala", "Koala-level-adjusted","split","20"};
-    log=new StringBuilder();
-    mockModel=new MockModel(log,null);
-    mp.put("Koala",mockModel);
+    ar = new String[]{"Koala", "Koala-level-adjusted", "split", "20"};
+    log = new StringBuilder();
+    mockModel = new MockModel(log, null);
+    mp.put("Koala", mockModel);
     controller = new ColorCorrectionCommand(ar);
     controller.execute(mp);
-    assertEquals("loading the image.Color correction on an image. Split percent: 20.0", mockModel.logData.toString());
+    assertEquals("loading the image.Color correction on an image. "
+            + "Split percent: 20.0", mockModel.logData.toString());
   }
 
   /**
@@ -481,7 +506,7 @@ public class ControllerModelMock {
    * @throws IOException Throws exception if the input is invalid.
    */
   @Test
-  public void testHistogram() throws IOException{
+  public void testHistogram() throws IOException {
     StringBuilder log = new StringBuilder();
     MockModel mockModel = new MockModel(log, null);
     String[] ar = new String[]{"Koala", "Koala-histogram"};
@@ -489,7 +514,8 @@ public class ControllerModelMock {
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
-    assertEquals("loading the image.Histogram operation on an image.", mockModel.logData.toString());
+    assertEquals("loading the image.Histogram operation on an image.",
+            mockModel.logData.toString());
   }
 
   /**
@@ -498,15 +524,16 @@ public class ControllerModelMock {
    * @throws IOException Throws exception if the input is invalid.
    */
   @Test
-  public void testCompression() throws IOException{
+  public void testCompression() throws IOException {
     StringBuilder log = new StringBuilder();
     MockModel mockModel = new MockModel(log, null);
-    String[] ar = new String[]{"40","Koala","Koala-compressed"};
+    String[] ar = new String[]{"40", "Koala", "Koala-compressed"};
     RGBImageCommandInterface controller = new CompressCommand(ar);
     Map<String, RGBImageInterface> mp = new HashMap<>();
     mp.put("Koala", mockModel);
     controller.execute(mp);
-    assertEquals("loading the image.Image compression Operation. Compression Percentage: 40.0", mockModel.logData.toString());
+    assertEquals("loading the image.Image compression Operation. "
+            + "Compression Percentage: 40.0", mockModel.logData.toString());
   }
 
 }

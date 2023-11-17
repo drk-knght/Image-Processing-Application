@@ -100,8 +100,8 @@ public class Sharpness implements ImageOperation {
     for (int xOffset = -rowMidPoint; xOffset <= rowMidPoint; xOffset++) {
       for (int yOffset = -colMidPoint; yOffset <= colMidPoint; yOffset++) {
         if (i + xOffset >= 0 && i + xOffset < height && j + yOffset >= 0 && j + yOffset < width) {
-          sum += (double) imageMatrix[i + xOffset][j + yOffset][color] *
-                  kernel[rowMidPoint + xOffset][colMidPoint + yOffset];
+          sum += (double) imageMatrix[i + xOffset][j + yOffset][color]
+                  * kernel[rowMidPoint + xOffset][colMidPoint + yOffset];
         }
       }
     }

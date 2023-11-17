@@ -25,18 +25,17 @@ public class ColorCorrectionCommand implements RGBImageCommandInterface {
    * @param commandArguments Array of strings containing the information about the image names.
    * @throws IllegalArgumentException Throws exception if the string array is not of required len.
    */
-  public ColorCorrectionCommand(String [] commandArguments) throws IllegalArgumentException{
-    if(commandArguments.length!=2 && commandArguments.length!=4){
+  public ColorCorrectionCommand(String[] commandArguments) throws IllegalArgumentException {
+    if (commandArguments.length != 2 && commandArguments.length != 4) {
       throw new IllegalArgumentException("The number of parameters does not match "
               + "with the expected number of parameters for the passed operation.\n");
     }
-    this.rgbExistingImage=commandArguments[0];
-    this.rgbModifiedImage=commandArguments[1];
-    if(commandArguments.length==2){
-      this.splitPercentage=100;
-    }
-    else{
-      this.splitPercentage=Double.parseDouble(commandArguments[3]);
+    this.rgbExistingImage = commandArguments[0];
+    this.rgbModifiedImage = commandArguments[1];
+    if (commandArguments.length == 2) {
+      this.splitPercentage = 100;
+    } else {
+      this.splitPercentage = Double.parseDouble(commandArguments[3]);
     }
   }
 

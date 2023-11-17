@@ -25,14 +25,14 @@ public class CompressCommand implements RGBImageCommandInterface {
    * @param commandArguments Array of strings containing the information about the image names.
    * @throws IllegalArgumentException Throws exception if the string array is not of required len.
    */
-  public CompressCommand(String [] commandArguments) throws IllegalArgumentException{
-    if(commandArguments.length!=3){
+  public CompressCommand(String[] commandArguments) throws IllegalArgumentException {
+    if (commandArguments.length != 3) {
       throw new IllegalArgumentException("The number of parameters does not match "
               + "with the expected number of parameters for the passed operation.\n");
     }
-    this.compressPercentage=Double.parseDouble(commandArguments[0]);
-    this.rgbExistingImage=commandArguments[1];
-    this.rgbModifiedImage=commandArguments[2];
+    this.compressPercentage = Double.parseDouble(commandArguments[0]);
+    this.rgbExistingImage = commandArguments[1];
+    this.rgbModifiedImage = commandArguments[2];
   }
 
   /**

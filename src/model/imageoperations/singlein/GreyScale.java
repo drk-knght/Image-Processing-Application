@@ -21,7 +21,8 @@ public class GreyScale implements ImageOperation {
    */
   public GreyScale(int greyScaleOperationType) throws IllegalArgumentException {
     if (greyScaleOperationType < 0 || greyScaleOperationType >= GreyScaleType.values().length) {
-      throw new IllegalArgumentException("Grey scale operation is not defined. Please try again.\n");
+      throw new IllegalArgumentException("Grey scale operation is "
+              + "not defined. Please try again.\n");
     }
     this.greyScaleOperationType = greyScaleOperationType;
   }

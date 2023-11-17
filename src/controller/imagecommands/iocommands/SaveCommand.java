@@ -40,7 +40,8 @@ public class SaveCommand implements RGBImageCommandInterface {
    *
    * @param cachedImage The set of images presently in use in the memory of this application.
    * @throws IllegalArgumentException Throws exception if the input is of null type.
-   * @throws IOException          throws exception if there is an error when reading files of op.
+   * @throws IOException              throws exception if there is an error
+   *                                  when reading files of op.
    */
   @Override
   public void execute(Map<String, RGBImageInterface> cachedImage)
@@ -54,8 +55,7 @@ public class SaveCommand implements RGBImageCommandInterface {
       System.out.println("No such images named: " + this.imageName + " exists in the memory\n");
       return;
     }
-    OutputWriterInterface writer=new FileWriter(imageFilePath);
+    OutputWriterInterface writer = new FileWriter(imageFilePath);
     writer.write(rgbCachedImage);
-//    rgbCachedImage.saveImage(imageFilePath);
   }
 }

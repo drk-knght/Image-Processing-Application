@@ -19,15 +19,18 @@ public class PPMWriter {
    * The method also throws exception if the info could not be written to the specified file path.
    *
    * @param image RGB Image whose data needs to be saved to a particular Output stream path.
-   * @param out Output stream where the data of the image is transferred in the PPM format.
+   * @param out   Output stream where the data of the image is transferred in the PPM format.
    * @throws IOException Throws exception if the image data cannot be written to the output stream.
    */
-  public static void writeToStorageDisk(RGBImageInterface image,OutputStream out) throws IOException {
-    StringBuilder ppmImageData = convertImageMatrixToString(image.getImageHeight(), image.getImageWidth(), image.getPixel());
+  public static void writeToStorageDisk(RGBImageInterface image,
+                                        OutputStream out) throws IOException {
+    StringBuilder ppmImageData = convertImageMatrixToString(image.getImageHeight(),
+            image.getImageWidth(), image.getPixel());
     try {
       out.write(new String(ppmImageData).getBytes());
     } catch (IOException e) {
-      throw new IOException("Unable to save the image to the particular outStream passed to the PPM writer.\n");
+      throw new IOException("Unable to save the image to the particular "
+              + "outStream passed to the PPM writer.\n");
     }
   }
 

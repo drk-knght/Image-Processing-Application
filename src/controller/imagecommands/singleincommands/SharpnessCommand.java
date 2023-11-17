@@ -20,11 +20,10 @@ public class SharpnessCommand extends AbstractCommandSingleIP {
    */
   public SharpnessCommand(String[] commandArguments) throws IllegalArgumentException {
     super(commandArguments);
-    if(commandArguments.length==3){
-      this.splitPercentage=100;
-    }
-    else {
-      this.splitPercentage=Double.parseDouble(commandArguments[4]);
+    if (commandArguments.length == 3) {
+      this.splitPercentage = 100;
+    } else {
+      this.splitPercentage = Double.parseDouble(commandArguments[4]);
     }
   }
 
@@ -38,8 +37,8 @@ public class SharpnessCommand extends AbstractCommandSingleIP {
    */
   @Override
   protected RGBImageInterface defineImageOperation(RGBImageInterface existingImage,
-                                                 int imageOperationValueIndex) {
-    return existingImage.changeSharpness(imageOperationValueIndex,splitPercentage);
+                                                   int imageOperationValueIndex) {
+    return existingImage.changeSharpness(imageOperationValueIndex, splitPercentage);
   }
 
 

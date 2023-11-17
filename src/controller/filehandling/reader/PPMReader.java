@@ -11,7 +11,7 @@ import model.enums.ColorMapping;
  * The class represents PPM read functionalities required while performing the I/O operations.
  * The methods for reading the document are static so no object creation is required for func calls.
  */
-public class PPMReader{
+public class PPMReader {
 
   /**
    * The static methods performs the read operation to get the image from a specified inputStream.
@@ -29,7 +29,7 @@ public class PPMReader{
     return checkMetaDataGetImgData(sc);
   }
 
-  private static int [][][] checkMetaDataGetImgData(Scanner sc) {
+  private static int[][][] checkMetaDataGetImgData(Scanner sc) {
     int width;
     int height;
     int maxValue;
@@ -38,11 +38,12 @@ public class PPMReader{
       height = sc.nextInt();
       maxValue = sc.nextInt();
     } catch (InputMismatchException ex) {
-      throw new InputMismatchException("Found illegal format in the passed inputStream. The input is corrupted.\n");
+      throw new InputMismatchException("Found illegal format in the "
+              + "passed inputStream. The input is corrupted.\n");
     }
     if (maxValue != RGBImage.MAX) {
-      throw new IllegalArgumentException("Max value for PPM file reading: " +
-              maxValue + " does not match the expected value(255)\n");
+      throw new IllegalArgumentException("Max value for PPM file reading: "
+              + maxValue + " does not match the expected value(255)\n");
     }
     int[][][] pixelMatrix = new int[height][width][ColorMapping.values().length];
     return helperImageMatrix(sc, height, width, pixelMatrix);
@@ -85,7 +86,7 @@ public class PPMReader{
     token = sc.next();
     if (!token.equals("P3")) {
       throw new InputMismatchException("Invalid PPM file: plain RAW "
-              + "file should begin with P3 but stated with:" + token+"\n");
+              + "file should begin with P3 but stated with:" + token + "\n");
     }
   }
 

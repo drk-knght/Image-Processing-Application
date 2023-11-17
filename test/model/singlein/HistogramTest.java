@@ -73,7 +73,7 @@ public class HistogramTest {
    * Values are checked against the assertion. If the assertion passes test is success else fails.
    */
   @Test
-  public void testDimensionHistogram(){
+  public void testDimensionHistogram() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -82,13 +82,14 @@ public class HistogramTest {
     RGBImageInterface rgbImage = new RGBImage(smallResImage);
     ImageOperation imageOperation = new Histogram();
     RGBImageInterface histogramImg = imageOperation.operation(rgbImage);
-    assertEquals(256,histogramImg.getImageHeight());
-    assertEquals(256,histogramImg.getImageWidth());
+    assertEquals(256, histogramImg.getImageHeight());
+    assertEquals(256, histogramImg.getImageWidth());
   }
 
   /**
    * Test checks the individual pixel values of the histogram generated against the expected one.
    * Values are checked against the assertion. If the assertion passes test is success else fails.
+   *
    * @throws IOException If an error occurs while reading the input from a file in local storage.
    */
   @Test
@@ -98,11 +99,11 @@ public class HistogramTest {
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    ImageOperation op=new Histogram();
-    RGBImageInterface img=op.operation(new RGBImage(smallResImage));
-    String storagePath="/Users/omagarwal/Desktop/gram.ppm";
-    int [][][] resultMat= PPMReader.readFileContent(new FileInputStream(storagePath));
-    assertTrue(checkHistogram(img,resultMat));
+    ImageOperation op = new Histogram();
+    RGBImageInterface img = op.operation(new RGBImage(smallResImage));
+    String storagePath = "/Users/omagarwal/Desktop/gram.ppm";
+    int[][][] resultMat = PPMReader.readFileContent(new FileInputStream(storagePath));
+    assertTrue(checkHistogram(img, resultMat));
   }
 
   private boolean checkHistogram(RGBImageInterface imgMatrix, int[][][] smallMat) {

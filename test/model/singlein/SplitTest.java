@@ -13,7 +13,6 @@ import static org.junit.Assert.fail;
 /**
  * The class is used to test operations related to split view.
  * Split view consists of modified image in the first part and the original image in the next part.
- *
  * Various test cases have been considered including different values for split percentage.
  */
 public class SplitTest {
@@ -25,7 +24,7 @@ public class SplitTest {
   public void testNullImage() {
 
     try {
-      RGBImageInterface image=new RGBImage(null);
+      RGBImageInterface image = new RGBImage(null);
       fail("Test for null object passing failed.");
     } catch (IllegalArgumentException ex) {
       // test passes if the exception is thrown
@@ -39,12 +38,12 @@ public class SplitTest {
   public void testInvalidImageHeight() {
     try {
       int[][][] arZeroLength = new int[0][][];
-      RGBImageInterface image=new RGBImage(arZeroLength);
-      RGBImageInterface res=image.greyScaleImage(0,10);
-      res=image.levelsAdjustment(10,20,30,0.53);
-      res=image.sepiaImage(4.5);
-      res=image.changeSharpness(0,2.78);
-      res=image.colorCorrectionImage(31.1);
+      RGBImageInterface image = new RGBImage(arZeroLength);
+      RGBImageInterface res = image.greyScaleImage(0, 10);
+      res = image.levelsAdjustment(10, 20, 30, 0.53);
+      res = image.sepiaImage(4.5);
+      res = image.changeSharpness(0, 2.78);
+      res = image.colorCorrectionImage(31.1);
 
       fail("Zero length test failed for split operation.");
     } catch (IllegalArgumentException ex) {
@@ -60,12 +59,12 @@ public class SplitTest {
 
     try {
       int[][][] arZeroLength = new int[0][][];
-      RGBImageInterface image=new RGBImage(arZeroLength);
-      RGBImageInterface res=image.greyScaleImage(0,10);
-      res=image.levelsAdjustment(10,20,30,0.53);
-      res=image.sepiaImage(4.5);
-      res=image.changeSharpness(0,2.78);
-      res=image.colorCorrectionImage(31.1);
+      RGBImageInterface image = new RGBImage(arZeroLength);
+      RGBImageInterface res = image.greyScaleImage(0, 10);
+      res = image.levelsAdjustment(10, 20, 30, 0.53);
+      res = image.sepiaImage(4.5);
+      res = image.changeSharpness(0, 2.78);
+      res = image.colorCorrectionImage(31.1);
       int[][][] arZeroWidth = new int[40][0][];
       fail("Zero width test failed for split operation.");
     } catch (IllegalArgumentException ex) {
@@ -77,22 +76,21 @@ public class SplitTest {
    * The test is used to check if the split percentage given is negative - invalid.
    */
   @Test
-  public void testIllegalNegativeSplit(){
+  public void testIllegalNegativeSplit() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    try{
-      RGBImageInterface res=image.greyScaleImage(0,-30.65);
-      res=image.levelsAdjustment(10,20,30,-35);
-      res=image.sepiaImage(-0.56);
-      res=image.changeSharpness(0,-7.08);
-      res=image.colorCorrectionImage(-11);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    try {
+      RGBImageInterface res = image.greyScaleImage(0, -30.65);
+      res = image.levelsAdjustment(10, 20, 30, -35);
+      res = image.sepiaImage(-0.56);
+      res = image.changeSharpness(0, -7.08);
+      res = image.colorCorrectionImage(-11);
       fail("Negative split operation failed for the image operations");
-    }
-    catch (IllegalArgumentException ex){
+    } catch (IllegalArgumentException ex) {
       // catch the exception to pass the test.
     }
   }
@@ -101,22 +99,21 @@ public class SplitTest {
    * The test is used to check if the split percentage is greater than 100% - invalid.
    */
   @Test
-  public void testIllegalPositiveSplit(){
+  public void testIllegalPositiveSplit() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    try{
-      RGBImageInterface res=image.greyScaleImage(0,130.123);
-      res=image.levelsAdjustment(10,20,30,535.87);
-      res=image.sepiaImage(456);
-      res=image.changeSharpness(0,278);
-      res=image.colorCorrectionImage(131.1);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    try {
+      RGBImageInterface res = image.greyScaleImage(0, 130.123);
+      res = image.levelsAdjustment(10, 20, 30, 535.87);
+      res = image.sepiaImage(456);
+      res = image.changeSharpness(0, 278);
+      res = image.colorCorrectionImage(131.1);
       fail("More than 100% split operation failed for the image operations");
-    }
-    catch (IllegalArgumentException ex){
+    } catch (IllegalArgumentException ex) {
       // catch the exception to pass the test.
     }
   }
@@ -125,14 +122,14 @@ public class SplitTest {
    * The test is used to check if the split percentage is working correctly for sharpness.
    */
   @Test
-  public void testSplitMidSplitSharpness(){
+  public void testSplitMidSplitSharpness() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.changeSharpness(0,40.69);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.changeSharpness(0, 40.69);
     int[][][] resultMat = new int[][][]{
             {{94, 93, 76}, {116, 69, 69}, {20, 65, 98}, {20, 11, 211}},
             {{100, 129, 92}, {128, 99, 88}, {96, 13, 96}, {172, 198, 224}},
@@ -141,7 +138,7 @@ public class SplitTest {
 
     assertTrue(checkSplitPreview(res, resultMat, 0));
 
-    res=image.changeSharpness(0,0.69);
+    res = image.changeSharpness(0, 0.69);
     resultMat = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -155,14 +152,14 @@ public class SplitTest {
    * To check if the split is working correctly for sharpness when the split percentage is 0.
    */
   @Test
-  public void testSplitZeroSplitSharpness(){
+  public void testSplitZeroSplitSharpness() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.changeSharpness(0,0.0);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.changeSharpness(0, 0.0);
     int[][][] resultMat = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -175,14 +172,14 @@ public class SplitTest {
    * To check if the split is working correctly for sharpness when the split percentage is 100.
    */
   @Test
-  public void testSplitHundredSplitSharpness(){
+  public void testSplitHundredSplitSharpness() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.changeSharpness(0,100.0);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.changeSharpness(0, 100.0);
     int[][][] resultMat = new int[][][]{
             {{94, 93, 76}, {124, 78, 87}, {76, 47, 97}, {35, 36, 99}},
             {{100, 129, 92}, {157, 116, 114}, {142, 86, 128}, {95, 76, 121}},
@@ -195,14 +192,14 @@ public class SplitTest {
    * To check if the split is working correctly for blur.
    */
   @Test
-  public void testSplitMidSplitBlur(){
+  public void testSplitMidSplitBlur() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.changeSharpness(1,4.034);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.changeSharpness(1, 4.034);
     int[][][] resultMat = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -211,7 +208,7 @@ public class SplitTest {
 
     assertTrue(checkSplitPreview(res, resultMat, 0));
 
-    res=image.changeSharpness(1,0.034);
+    res = image.changeSharpness(1, 0.034);
     resultMat = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -225,14 +222,14 @@ public class SplitTest {
    * To check if the split is working correctly for blur when the split percentage is 0.
    */
   @Test
-  public void testSplitZeroSplitBlur(){
+  public void testSplitZeroSplitBlur() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.changeSharpness(1,0.0);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.changeSharpness(1, 0.0);
     int[][][] resultMat = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -246,14 +243,14 @@ public class SplitTest {
    * To check if the split is working correctly for blur when the split percentage is 100.
    */
   @Test
-  public void testSplitHundredSplitBlur(){
+  public void testSplitHundredSplitBlur() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.changeSharpness(1,100.0);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.changeSharpness(1, 100.0);
     int[][][] resultMat = new int[][][]{
             {{226, 232, 195}, {255, 125, 161}, {113, 43, 220}, {0, 16, 251}},
             {{248, 255, 249}, {255, 255, 255}, {255, 130, 255}, {235, 249, 255}},
@@ -267,14 +264,14 @@ public class SplitTest {
    * To check if the split is working correctly for sepia.
    */
   @Test
-  public void testSplitMidSplitSepia(){
+  public void testSplitMidSplitSepia() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.sepiaImage(51.53);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.sepiaImage(51.53);
     int[][][] resultMat = new int[][][]{
             {{238, 212, 165}, {165, 147, 114}, {20, 65, 98}, {20, 11, 211}},
             {{237, 211, 164}, {211, 187, 146}, {96, 13, 96}, {172, 198, 224}},
@@ -283,7 +280,7 @@ public class SplitTest {
 
     assertTrue(checkSplitPreview(res, resultMat, 0));
 
-    res=image.sepiaImage(0.5153);
+    res = image.sepiaImage(0.5153);
     resultMat = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -297,14 +294,14 @@ public class SplitTest {
    * To check if the split is working correctly for sepia when the split percentage is 0.
    */
   @Test
-  public void testSplitZeroSplitSepia(){
+  public void testSplitZeroSplitSepia() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.sepiaImage(0);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.sepiaImage(0);
     int[][][] resultMat = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -318,14 +315,14 @@ public class SplitTest {
    * To check if the split is working correctly for sepia when the split percentage is 100.
    */
   @Test
-  public void testSplitHundredSplitSepia(){
+  public void testSplitHundredSplitSepia() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.sepiaImage(100);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.sepiaImage(100);
     int[][][] resultMat = new int[][][]{
             {{238, 212, 165}, {165, 147, 114}, {76, 68, 52}, {56, 49, 38}},
             {{237, 211, 164}, {211, 187, 146}, {65, 58, 45}, {255, 233, 181}},
@@ -339,14 +336,14 @@ public class SplitTest {
    * To check if the split is working correctly for luma.
    */
   @Test
-  public void testSplitMidSplitLuma(){
+  public void testSplitMidSplitLuma() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.greyScaleImage(1,40);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.greyScaleImage(1, 40);
     int[][][] resultMat = new int[][][]{
             {{185, 185, 185}, {107, 107, 107}, {20, 65, 98}, {20, 11, 211}},
             {{187, 187, 187}, {141, 141, 141}, {96, 13, 96}, {172, 198, 224}},
@@ -360,14 +357,14 @@ public class SplitTest {
    * To check if the split is working correctly for luma when the split percentage is 0.
    */
   @Test
-  public void testSplitZeroSplitLuma(){
+  public void testSplitZeroSplitLuma() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.greyScaleImage(1,0);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.greyScaleImage(1, 0);
     int[][][] resultMat = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -380,14 +377,14 @@ public class SplitTest {
    * To check if the split is working correctly for luma when the split percentage is 100.
    */
   @Test
-  public void testSplitHundredSplitLuma(){
+  public void testSplitHundredSplitLuma() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.greyScaleImage(1,100);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.greyScaleImage(1, 100);
     int[][][] resultMat = new int[][][]{
             {{185, 185, 185}, {107, 107, 107}, {57, 57, 57}, {27, 27, 27}},
             {{187, 187, 187}, {141, 141, 141}, {36, 36, 36}, {194, 194, 194}},
@@ -401,14 +398,14 @@ public class SplitTest {
    * To check if the split is working correctly for color correction.
    */
   @Test
-  public void testSplitMidSplitColorCorrection(){
+  public void testSplitMidSplitColorCorrection() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.colorCorrectionImage(29.6);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.colorCorrectionImage(29.6);
     int[][][] resultMat = new int[][][]{
             {{181, 90, 208}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{131, 103, 255}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -422,14 +419,14 @@ public class SplitTest {
    * To check if the split is working correctly for color correction when the split percentage is 0.
    */
   @Test
-  public void testSplitZeroSplitColorCorrection(){
+  public void testSplitZeroSplitColorCorrection() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.colorCorrectionImage(0);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.colorCorrectionImage(0);
     int[][][] resultMat = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -442,14 +439,14 @@ public class SplitTest {
    * To check if the split is working correctly for color correction if the split percentage is 100.
    */
   @Test
-  public void testSplitHundredSplitColorCorrection(){
+  public void testSplitHundredSplitColorCorrection() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.colorCorrectionImage(100);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.colorCorrectionImage(100);
     int[][][] resultMat = new int[][][]{
             {{140, 207, 133}, {243, 73, 81}, {15, 69, 99}, {15, 15, 212}},
             {{90, 220, 182}, {238, 112, 174}, {91, 17, 97}, {167, 202, 225}},
@@ -463,14 +460,14 @@ public class SplitTest {
    * To check if the split is working correctly for level adjustment.
    */
   @Test
-  public void testSplitMidSplitLevelAdjustment(){
+  public void testSplitMidSplitLevelAdjustment() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.levelsAdjustment(2,5,8,69.6);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.levelsAdjustment(2, 5, 8, 69.6);
     int[][][] resultMat = new int[][][]{
             {{255, 255, 255}, {255, 255, 255}, {255, 255, 255}, {20, 11, 211}},
             {{255, 255, 255}, {255, 255, 255}, {255, 255, 255}, {172, 198, 224}},
@@ -484,14 +481,14 @@ public class SplitTest {
    * To check if the split is working correctly for level adjustment when the split percentage is 0.
    */
   @Test
-  public void testSplitZeroSplitLevelAdjustment(){
+  public void testSplitZeroSplitLevelAdjustment() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.levelsAdjustment(10.5, 43.6, 78.14,0);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.levelsAdjustment(10.5, 43.6, 78.14, 0);
     int[][][] resultMat = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -504,14 +501,14 @@ public class SplitTest {
    * To check if the split is working correctly for level adjustment if the split percentage is 100.
    */
   @Test
-  public void testSplitHundredSplitLevelAdjustment(){
+  public void testSplitHundredSplitLevelAdjustment() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
             {{54, 215, 14}, {103, 87, 31}, {246, 171, 122}, {168, 77, 110}}
     };
-    RGBImageInterface image=new RGBImage(smallResImage);
-    RGBImageInterface res=image.levelsAdjustment(23.5,67.9,123.5,100);
+    RGBImageInterface image = new RGBImage(smallResImage);
+    RGBImageInterface res = image.levelsAdjustment(23.5, 67.9, 123.5, 100);
     int[][][] resultMat = new int[][][]{
             {{255, 255, 2553}, {255, 130, 158}, {0, 120, 201}, {0, 0, 255}},
             {{194, 255, 255}, {255, 223, 255}, {196, 0, 196}, {255, 255, 255}},

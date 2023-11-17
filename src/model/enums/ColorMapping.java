@@ -10,8 +10,8 @@ import java.awt.*;
  * Blue color is assigned a numerical value of 2 for any color related uses in the application.
  */
 public enum ColorMapping {
-  red(0,Color.RED),
-  green(1,Color.GREEN),
+  red(0, Color.RED),
+  green(1, Color.GREEN),
   blue(2, Color.BLUE);
 
   final int colorCoding;
@@ -20,6 +20,6 @@ public enum ColorMapping {
 
   ColorMapping(int colorCoding, Color color) {
     this.colorCoding = colorCoding;
-    this.color=color;
+    this.color = color;
   }
 }

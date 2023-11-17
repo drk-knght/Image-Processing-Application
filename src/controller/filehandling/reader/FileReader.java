@@ -17,11 +17,11 @@ public class FileReader implements InputReaderInterface {
    *
    * @param filePath String representing the path of the file where the image data is stored.
    */
-  public FileReader(String filePath){
-    this.filePath=filePath;
+  public FileReader(String filePath) {
+    this.filePath = filePath;
   }
 
-  private String getFileExtension(String filePath){
+  private String getFileExtension(String filePath) {
     int index = filePath.lastIndexOf('.');
     if (index != -1) {
       return filePath.substring(index + 1);
@@ -40,11 +40,10 @@ public class FileReader implements InputReaderInterface {
    */
   @Override
   public int[][][] read() throws IOException {
-    String fileExtension=getFileExtension(this.filePath);
-    if(fileExtension.equals("ppm")){
+    String fileExtension = getFileExtension(this.filePath);
+    if (fileExtension.equals("ppm")) {
       return PPMReader.readFileContent(new FileInputStream(filePath));
-    }
-    else{
+    } else {
       return ImageIOReader.readFileContent(new FileInputStream(filePath));
     }
   }

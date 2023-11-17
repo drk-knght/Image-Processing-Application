@@ -100,9 +100,9 @@ public class RGBImageTest {
             + "Image Processing/src/res/small-Res-combineChannel-Testing.png";
     String newImgPath = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/"
             + "Image Processing/src/res/small-MSave-Testing.png";
-    int [][][] imagePathMat=ImageIOReader.readFileContent(new FileInputStream(imagePath));
+    int[][][] imagePathMat = ImageIOReader.readFileContent(new FileInputStream(imagePath));
     RGBImageInterface rgbImage = new RGBImage(imagePathMat);
-    ImageIOWriter.writeToStorageDisk(rgbImage,new FileOutputStream(newImgPath),"png");
+    ImageIOWriter.writeToStorageDisk(rgbImage, new FileOutputStream(newImgPath), "png");
     rgbImage = new RGBImage(ImageIOReader.readFileContent(new FileInputStream(newImgPath)));
     int[][][] actualMatrix = rgbImage.getPixel();
     for (int i = 0; i < 3; i++) {
@@ -222,7 +222,7 @@ public class RGBImageTest {
             {{100, 129, 92}, {157, 116, 114}, {143, 86, 128}, {94, 76, 121}},
             {{53, 98, 40}, {105, 97, 63}, {133, 84, 84}, {100, 66, 76}}
     };
-    int[][][] actualMat = rgbImage.changeSharpness(KernelImage.Blur.ordinal(),100).getPixel();
+    int[][][] actualMat = rgbImage.changeSharpness(KernelImage.Blur.ordinal(), 100).getPixel();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 4; j++) {
         for (int k = 0; k < 3; k++) {
@@ -243,7 +243,7 @@ public class RGBImageTest {
             {{247, 255, 249}, {255, 255, 255}, {255, 130, 255}, {234, 249, 255}},
             {{69, 252, 44}, {190, 189, 70}, {255, 194, 191}, {216, 130, 146}}
     };
-    int[][][] actualMat = rgbImage.changeSharpness(KernelImage.Sharpen.ordinal(),100).getPixel();
+    int[][][] actualMat = rgbImage.changeSharpness(KernelImage.Sharpen.ordinal(), 100).getPixel();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 4; j++) {
         for (int k = 0; k < 3; k++) {
@@ -285,7 +285,7 @@ public class RGBImageTest {
             {{215, 215, 215}, {103, 103, 103}, {247, 247, 247}, {167, 167, 167}}
     };
     RGBImageInterface rgbImage = new RGBImage(pixelMatrix);
-    int[][][] actualMatrixGrey = rgbImage.greyScaleImage(0,100).getPixel();
+    int[][][] actualMatrixGrey = rgbImage.greyScaleImage(0, 100).getPixel();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 4; j++) {
         for (int k = 0; k < 3; k++) {
@@ -306,7 +306,7 @@ public class RGBImageTest {
             {{166, 166, 166}, {86, 86, 86}, {183, 183, 183}, {98, 98, 98}}
     };
     RGBImageInterface rgbImage = new RGBImage(pixelMatrix);
-    int[][][] actualMatrixGrey = rgbImage.greyScaleImage(1,100).getPixel();
+    int[][][] actualMatrixGrey = rgbImage.greyScaleImage(1, 100).getPixel();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 4; j++) {
         for (int k = 0; k < 3; k++) {
@@ -327,7 +327,7 @@ public class RGBImageTest {
             {{94, 94, 94}, {73, 73, 73}, {180, 180, 180}, {118, 118, 118}}
     };
     RGBImageInterface rgbImage = new RGBImage(pixelMatrix);
-    int[][][] actualMatrixGrey = rgbImage.greyScaleImage(2,100).getPixel();
+    int[][][] actualMatrixGrey = rgbImage.greyScaleImage(2, 100).getPixel();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 4; j++) {
         for (int k = 0; k < 3; k++) {

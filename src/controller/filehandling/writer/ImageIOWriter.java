@@ -20,18 +20,23 @@ public class ImageIOWriter {
    * The static methods performs the write operation to save the image to a specified output stream.
    * The method also throws exception if the info could not be written to the specified file path.
    *
-   * @param image RGB image which needs to be written to the storage disk of the local machine.
-   * @param out OutputStream where the data of the image is to be saved from the application.
+   * @param image         RGB image which needs to be written to the storage disk
+   *                      of the local machine.
+   * @param out           OutputStream where the data of the image is to be saved from the app.
    * @param fileExtension String representing the extension of the saved file (jpg, png, etc.).
    * @throws IOException Throws exception if the image data cannot be written to the output stream.
    */
-  public static void writeToStorageDisk(RGBImageInterface image,OutputStream out, String fileExtension) throws IOException {
+  public static void writeToStorageDisk(RGBImageInterface image,
+                                        OutputStream out,
+                                        String fileExtension) throws IOException {
     checkDimensionMatrix(image.getPixel());
-    BufferedImage imageSavingElement = getBufferedImage(image.getImageWidth(), image.getImageHeight(), image.getPixel());
+    BufferedImage imageSavingElement = getBufferedImage(image.getImageWidth(),
+            image.getImageHeight(), image.getPixel());
     try {
       ImageIO.write(imageSavingElement, fileExtension, out);
     } catch (IOException e) {
-      throw new IOException("Unable to save the image to the particular outStream passed to the ImageIO writer.\n");
+      throw new IOException("Unable to save the image to the "
+              + "particular outStream passed to the ImageIO writer.\n");
     }
   }
 

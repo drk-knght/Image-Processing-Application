@@ -1,6 +1,5 @@
 package model.singlein;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
@@ -15,7 +14,6 @@ import model.RGBImage;
 import model.RGBImageInterface;
 
 import static controller.filehandling.writer.PPMWriter.convertImageMatrixToString;
-import static controller.filehandling.writer.PPMWriter.writeToStorageDisk;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -188,7 +186,8 @@ public class MonochromeImageTest {
 
   private boolean checkImageStringFormat(RGBImageInterface greyscaleImage, int[][][] mat)
           throws IOException {
-    PPMWriter.writeToStorageDisk(greyscaleImage, new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/"
+    PPMWriter.writeToStorageDisk(greyscaleImage, new FileOutputStream("/Users/"
+            + "omagarwal/Desktop/Grad@NEU/Acads/Sem-1/"
             + "CS 5010 PDP/Labs/Image Processing/src/res/small-Res-Channel-Testing.ppm"));
     StringBuilder savedRes = convertImageMatrixToString(greyscaleImage.getImageHeight(),
             greyscaleImage.getImageWidth(), greyscaleImage.getPixel());

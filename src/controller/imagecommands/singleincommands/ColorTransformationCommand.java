@@ -26,17 +26,16 @@ public class ColorTransformationCommand implements RGBImageCommandInterface {
    * @throws IllegalArgumentException Throws exception if the string array is not of required len.
    */
   public ColorTransformationCommand(String[] commandArguments) throws IllegalArgumentException {
-    if (commandArguments.length != 2 && commandArguments.length!=4) {
+    if (commandArguments.length != 2 && commandArguments.length != 4) {
       throw new IllegalArgumentException("The number of parameters does not match "
               + "with the expected number of parameters for the passed operation.\n");
     }
     this.rgbExistingImage = commandArguments[0];
     this.rgbModifiedImage = commandArguments[1];
-    if(commandArguments.length==2){
-      splitPercentage=100;
-    }
-    else {
-      splitPercentage=Double.parseDouble(commandArguments[3]);
+    if (commandArguments.length == 2) {
+      splitPercentage = 100;
+    } else {
+      splitPercentage = Double.parseDouble(commandArguments[3]);
     }
   }
 

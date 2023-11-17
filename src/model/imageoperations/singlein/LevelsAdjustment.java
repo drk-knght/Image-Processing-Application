@@ -10,7 +10,7 @@ import model.enums.ColorMapping;
  * quadratic equation to get the desired curve.
  * It implements the ImageOperation interface.
  */
-public class LevelsAdjustment implements ImageOperation{
+public class LevelsAdjustment implements ImageOperation {
 
   private final double blackPoint;
 
@@ -19,19 +19,23 @@ public class LevelsAdjustment implements ImageOperation{
   private final double highlightPoint;
 
   /**
-   * This method is the constructor of the LevelsAdjustment class which implements ImageOperation interface.
-   * @param blackPoint Represents the dark regions which contribute to the value on the left of the histogram.
-   * @param midPoint Represents the midpoint on a histogram which signifies values closer to the average of a channel.
-   * @param highlightPoint Represents the bright regions which contribute to the value on the right of the histogram.
+   * This method is the constructor of the class which implements ImageOperation interface.
+   *
+   * @param blackPoint     Represents the dark regions which contribute to the value on the left
+   *                       of the histogram.
+   * @param midPoint       Represents the midpoint on a histogram which signifies
+   *                       values closer to the average of a channel.
+   * @param highlightPoint Represents the bright regions which contribute to the
+   *                       value on the right of the histogram.
    */
-  public LevelsAdjustment(double blackPoint, double midPoint, double highlightPoint){
-    if(blackPoint>=midPoint || midPoint>=highlightPoint || blackPoint<0 ){
+  public LevelsAdjustment(double blackPoint, double midPoint, double highlightPoint) {
+    if (blackPoint >= midPoint || midPoint >= highlightPoint || blackPoint < 0) {
       throw new IllegalArgumentException("Wrong values for levels "
               + "adjustment operation. Check values of B, M, W again.\n");
     }
-    this.blackPoint=blackPoint;
-    this.midPoint=midPoint;
-    this.highlightPoint=highlightPoint;
+    this.blackPoint = blackPoint;
+    this.midPoint = midPoint;
+    this.highlightPoint = highlightPoint;
   }
 
   /**
@@ -48,65 +52,55 @@ public class LevelsAdjustment implements ImageOperation{
       throw new IllegalArgumentException("Image passed for levels adjustment image "
               + "transformation is not as expected, check again.\n");
     }
-    int [][][] pixelMatrix= rgbImage.getPixel();
-    double denominator=computeDenominator();
-    double a=computeA(denominator);
-    double b=computeB(denominator);
-    double c=computeC(denominator);
-    adjustLevelImage(pixelMatrix,a,b,c);
+    int[][][] pixelMatrix = rgbImage.getPixel();
+    double denominator = computeDenominator();
+    double a = computeA(denominator);
+    double b = computeB(denominator);
+    double c = computeC(denominator);
+    adjustLevelImage(pixelMatrix, a, b, c);
     return new RGBImage(pixelMatrix);
   }
 
-  private void adjustLevelImage(int [][][] pixelMatrix, double a, double b, double c){
-    for(int i=0;i<pixelMatrix.length;i++){
-      for(int j=0;j<pixelMatrix[i].length;j++){
-        for(int k=0;k< ColorMapping.values().length;k++){
-          pixelMatrix[i][j][k]=computePixelAdjustment(pixelMatrix[i][j][k],a,b,c);
-          pixelMatrix[i][j][k]=Math.max(0,Math.min(255,pixelMatrix[i][j][k]));
+  private void adjustLevelImage(int[][][] pixelMatrix, double a, double b, double c) {
+    for (int i = 0; i < pixelMatrix.length; i++) {
+      for (int j = 0; j < pixelMatrix[i].length; j++) {
+        for (int k = 0; k < ColorMapping.values().length; k++) {
+          pixelMatrix[i][j][k] = computePixelAdjustment(pixelMatrix[i][j][k], a, b, c);
+          pixelMatrix[i][j][k] = Math.max(0, Math.min(255, pixelMatrix[i][j][k]));
         }
       }
     }
   }
 
-  private int computePixelAdjustment(int oldValue, double a, double b,double c){
-    double res=(a*oldValue*oldValue)+(b*oldValue)+c;
-    return (int)res;
+  private int computePixelAdjustment(int oldValue, double a, double b, double c) {
+    double res = (a * oldValue * oldValue) + (b * oldValue) + c;
+    return (int) res;
   }
 
-  private double computeDenominator(){
-    double commonPart=midPoint-highlightPoint;
-    double simplifiedPart=((blackPoint*blackPoint)-(blackPoint*(midPoint+highlightPoint))+midPoint*highlightPoint);
-    return commonPart*simplifiedPart;
+  private double computeDenominator() {
+    double commonPart = midPoint - highlightPoint;
+    double simplifiedPart = ((blackPoint * blackPoint) - (blackPoint * (midPoint + highlightPoint))
+            + midPoint * highlightPoint);
+    return commonPart * simplifiedPart;
   }
 
-  private double computeA(double denominator){
-    double numerator=127*blackPoint+128*highlightPoint-255*midPoint;
-    return numerator/denominator;
+  private double computeA(double denominator) {
+    double numerator = 127 * blackPoint + 128 * highlightPoint - 255 * midPoint;
+    return numerator / denominator;
   }
 
-  private double computeB(double denominator){
-    double numerator=(-127*blackPoint*blackPoint)+(255*midPoint*midPoint)-(128*highlightPoint*highlightPoint);
-    return numerator/denominator;
+  private double computeB(double denominator) {
+    double numerator = (-127 * blackPoint * blackPoint) + (255 * midPoint * midPoint)
+            - (128 * highlightPoint * highlightPoint);
+    return numerator / denominator;
   }
 
-  private double computeC(double denominator){
-    double numeratorPartA=(blackPoint*blackPoint)*(255*midPoint-128*highlightPoint);
-    double numeratorPartB=(-blackPoint)*((255*midPoint*midPoint)-(128*highlightPoint*highlightPoint));
-    double numerator= numeratorPartA+numeratorPartB;
-    return numerator/denominator;
+  private double computeC(double denominator) {
+    double numeratorPartA = (blackPoint * blackPoint) * (255 * midPoint - 128 * highlightPoint);
+    double numeratorPartB = (-blackPoint) * ((255 * midPoint * midPoint)
+            - (128 * highlightPoint * highlightPoint));
+    double numerator = numeratorPartA + numeratorPartB;
+    return numerator / denominator;
   }
 
-//  public static void main(String[] args) throws IOException {
-//    RGBImageInterface img=new RGBImage("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/galaxy.png");
-//    LevelsAdjustment hr=new LevelsAdjustment(20,100,255);
-//    RGBImageInterface res=hr.operation(img);
-//    Histogram h=new Histogram();
-//    RGBImageInterface graph=h.operation(res);
-//    String trying="/Users/omagarwal/Desktop/Level-Adjustment.png";
-//    res.saveImage(trying);
-//    String histogram="/Users/omagarwal/Desktop/Level-Adjustment-Histogram.png";
-//    graph.saveImage(histogram);
-//    File outputfile = new File("/Users/omagarwal/Desktop/Histogram-galaxy-new.jpg");
-//    ImageIO.write(hr.rgbHistogramGraph, "jpg", outputfile);
-//  }
 }

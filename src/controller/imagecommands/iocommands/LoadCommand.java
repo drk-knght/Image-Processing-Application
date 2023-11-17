@@ -43,9 +43,9 @@ public class LoadCommand implements RGBImageCommandInterface {
    * Method represents the load image operations which needs to be performed by the application.
    *
    * @param cachedImage The set of images presently in use in the memory of this application.
-   * @throws NullPointerException Throws exception if the input is of null type.
-   * @throws IOException          throws exception if there is an error when reading files during
-   *                              operation.
+   * @throws IllegalArgumentException Throws exception if the input is of null type.
+   * @throws IOException              throws exception if there is an error when reading files
+   *                                  during operation.
    */
   @Override
   public void execute(Map<String, RGBImageInterface> cachedImage)
@@ -58,9 +58,8 @@ public class LoadCommand implements RGBImageCommandInterface {
     if (rgbImage != null) {
       System.out.println("Changing the existing image present in Cache.");
     }
-//    rgbImage = new RGBImage(imageFilePath);
-    InputReaderInterface reader=new FileReader(imageFilePath);
-    rgbImage=new RGBImage(reader.read());
+    InputReaderInterface reader = new FileReader(imageFilePath);
+    rgbImage = new RGBImage(reader.read());
     cachedImage.put(imageName, rgbImage);
   }
 }

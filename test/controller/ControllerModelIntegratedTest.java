@@ -105,9 +105,9 @@ public class ControllerModelIntegratedTest {
   @Test
   public void testIncompleteCommands() {
     String[] cmd = new String[]{"load", "save", "red-component",
-        "green-component", "blue-component", "value-component",
-        "luma-component", "intensity-component", "horizontal-flip", "vertical-flip", "brighten",
-        "rgb-split", "rgb-combine", "blur", "sharpen", "sepia"};
+            "green-component", "blue-component", "value-component",
+            "luma-component", "intensity-component", "horizontal-flip", "vertical-flip", "brighten",
+            "rgb-split", "rgb-combine", "blur", "sharpen", "sepia"};
 
     for (int i = 0; i < cmd.length; i++) {
       try {
@@ -132,9 +132,9 @@ public class ControllerModelIntegratedTest {
   @Test
   public void testExcessArgs() {
     String[] cmd = new String[]{"load", "save", "red-component",
-        "green-component", "blue-component", "value-component",
-        "luma-component", "intensity-component", "horizontal-flip", "vertical-flip", "brighten",
-        "rgb-split", "rgb-combine", "blur", "sharpen", "sepia"};
+            "green-component", "blue-component", "value-component",
+            "luma-component", "intensity-component", "horizontal-flip", "vertical-flip", "brighten",
+            "rgb-split", "rgb-combine", "blur", "sharpen", "sepia"};
     StringBuilder s = new StringBuilder();
     for (int i = 0; i < cmd.length; i++) {
       s.append(cmd[i]);
@@ -155,9 +155,10 @@ public class ControllerModelIntegratedTest {
     }
   }
 
-  private String checkImageStringFormat(int[][][] mat, int offset) throws IOException {
+  private String checkImageStringFormat(int[][][] mat, int offset) {
     StringBuilder expectedFormat = new StringBuilder();
-    expectedFormat.append("P3 ").append(mat[0].length).append(" ").append(mat.length).append("\n255\n");
+    expectedFormat.append("P3 ").append(mat[0].length).append(" ")
+            .append(mat.length).append("\n255\n");
     for (int i = 0; i < mat.length; i++) {
       for (int j = 0; j < mat[i].length; j++) {
         for (int k = 0; k < ColorMapping.values().length; k++) {
@@ -234,7 +235,7 @@ public class ControllerModelIntegratedTest {
     String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
     String saveImgPath = "/Users/omagarwal/Desktop/SavingImg.ppm";
     String command = "load " + readImgPath + " image" + "\nred-component "
-           + "image image-red\nsave " + saveImgPath + " image-red";
+            + "image image-red\nsave " + saveImgPath + " image-red";
     InputStream in = new ByteArrayInputStream(command.getBytes());
     OutputStream out = new ByteArrayOutputStream();
     RGBImageControllerInterface controller = new RGBImageController(in, out);
@@ -667,7 +668,7 @@ public class ControllerModelIntegratedTest {
    * @throws IOException Throws exception if the input/output is invalid.
    */
   @Test
-  public void testLevelAdjustment() throws IOException{
+  public void testLevelAdjustment() throws IOException {
     int[][][] smallResImage = new int[][][]{
             {{187, 255, 170}, {255, 85, 100}, {16, 79, 125}, {13, 1, 255}},
             {{121, 255, 232}, {255, 138, 222}, {123, 4, 122}, {219, 252, 255}},
@@ -692,7 +693,7 @@ public class ControllerModelIntegratedTest {
    * @throws IOException Throws exception if the input/output is invalid.
    */
   @Test
-  public void testColorCorrection() throws IOException{
+  public void testColorCorrection() throws IOException {
     int[][][] smallResImage = new int[][][]{
             {{140, 206, 132}, {243, 72, 80}, {16, 68, 98}, {14, 14, 211}},
             {{90, 219, 181}, {238, 111, 173}, {92, 16, 96}, {166, 201, 224}},
@@ -718,7 +719,7 @@ public class ControllerModelIntegratedTest {
    * @throws IOException Throws exception if the input/output is invalid.
    */
   @Test
-  public void testCompression() throws IOException{
+  public void testCompression() throws IOException {
     int[][][] smallResImage = new int[][][]{
             {{145, 196, 116}, {248, 76, 96}, {20, 70, 94}, {20, 6, 215}},
             {{95, 222, 187}, {243, 102, 167}, {96, 18, 100}, {172, 193, 220}},
@@ -744,7 +745,7 @@ public class ControllerModelIntegratedTest {
    * @throws IOException Throws exception if the input/output is invalid.
    */
   @Test
-  public void testHistogram() throws IOException{
+  public void testHistogram() throws IOException {
     int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/Histogram-Test.ppm"));
     String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
     String saveImgPath = "/Users/omagarwal/Desktop/Histogram.ppm";
@@ -766,14 +767,14 @@ public class ControllerModelIntegratedTest {
    * @throws IOException Throws exception if the input/output is invalid.
    */
   @Test
-  public void testCascadeGreySharpen() throws IOException{
+  public void testCascadeGreySharpen() throws IOException {
     int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/CascadeGreySharpen.ppm"));
     String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
     String saveImgPath = "/Users/omagarwal/Desktop/GreySharpen.ppm";
     String command = "load " + readImgPath + " image"
             + "\nluma-component image image-luma split 50"
-            +"\n sharpen image-luma image-luma-sharpen split 20"
-            +"\nsave " + saveImgPath + " image-luma-sharpen";
+            + "\n sharpen image-luma image-luma-sharpen split 20"
+            + "\nsave " + saveImgPath + " image-luma-sharpen";
     InputStream in = new ByteArrayInputStream(command.getBytes());
     OutputStream out = new ByteArrayOutputStream();
     RGBImageControllerInterface controller = new RGBImageController(in, out);
@@ -790,14 +791,14 @@ public class ControllerModelIntegratedTest {
    * @throws IOException Throws exception if the input/output is invalid.
    */
   @Test
-  public void testCascadeColorCorrectionLevelAdjust() throws IOException{
+  public void testCascadeColorCorrectionLevelAdjust() throws IOException {
     int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/CascadeColorCorrectionLevelAdjust.ppm"));
     String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
     String saveImgPath = "/Users/omagarwal/Desktop/ColorCorrectionLevelAdjust.ppm";
     String command = "load " + readImgPath + " image"
             + "\ncolor-correct image image-color split 80"
-            +"\nlevels-adjust 10 20 30 image-color image-color-levels split 40"
-            +"\nsave " + saveImgPath + " image-color-levels";
+            + "\nlevels-adjust 10 20 30 image-color image-color-levels split 40"
+            + "\nsave " + saveImgPath + " image-color-levels";
     InputStream in = new ByteArrayInputStream(command.getBytes());
     OutputStream out = new ByteArrayOutputStream();
     RGBImageControllerInterface controller = new RGBImageController(in, out);

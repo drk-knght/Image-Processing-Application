@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.InputMismatchException;
 
 import controller.filehandling.reader.FileReader;
 import controller.filehandling.reader.InputReaderInterface;
@@ -47,7 +46,8 @@ public class ImageIOTest {
             {{54, 215, 14}, {103, 87, 31}, {247, 171, 122}, {167, 77, 110}}
     };
     rgbImage = new RGBImage(pixelMatrix);
-    ImageIOWriter.writeToStorageDisk(rgbImage,new FileOutputStream(imageSavedPath),"png");
+    ImageIOWriter.writeToStorageDisk(rgbImage, new FileOutputStream(imageSavedPath),
+            "png");
   }
 
   /**
@@ -57,7 +57,7 @@ public class ImageIOTest {
    */
   @Test
   public void testValidReadOperation() throws IOException {
-    InputReaderInterface reader= new FileReader(imageSavedPath);
+    InputReaderInterface reader = new FileReader(imageSavedPath);
     int[][][] actualPixelMat = reader.read();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 4; j++) {
@@ -76,7 +76,7 @@ public class ImageIOTest {
     imageSavedPath = "/Users/omagarwal/Desktop/Grad@NEU/"
             + "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/src/res/small-Res-abc-Testing.jpg";
     try {
-      InputReaderInterface reader= new FileReader(imageSavedPath);
+      InputReaderInterface reader = new FileReader(imageSavedPath);
       int[][][] res = reader.read();
       fail("Illegal file path test failed.");
     } catch (FileNotFoundException ex) {
@@ -95,12 +95,12 @@ public class ImageIOTest {
   public void testValidWriteOperation() throws IOException {
     String imagePath = "/Users/omagarwal/Desktop/Grad@NEU/"
             + "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/SavingImg.png";
-    OutputWriterInterface writer=new FileWriter(imagePath);
+    OutputWriterInterface writer = new FileWriter(imagePath);
     writer.write(new RGBImage(pixelMatrix));
 //    ImageIOUtil.saveImageIOFile(3, 4, pixelMatrix, imagePath, "png");
 //    int[][][] actualMat = ImageIOUtil.imageIOFileReader(imagePath);
-    InputReaderInterface reader= new FileReader(imageSavedPath);
-    int [][][] actualMat=reader.read();
+    InputReaderInterface reader = new FileReader(imageSavedPath);
+    int[][][] actualMat = reader.read();
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 4; j++) {
         for (int k = 0; k < 3; k++) {
@@ -125,7 +125,7 @@ public class ImageIOTest {
     String imagePath = "/Users/omagarwal/Desktop/Grad@NEU/"
             + "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/IllegalImageIOImg.png";
     try {
-      OutputWriterInterface writer=new FileWriter(imagePath);
+      OutputWriterInterface writer = new FileWriter(imagePath);
       writer.write(new RGBImage(newMat));
 //      ImageIOUtil.saveImageIOFile(3, 4, newMat, imagePath, "png");
       fail("Test failed");

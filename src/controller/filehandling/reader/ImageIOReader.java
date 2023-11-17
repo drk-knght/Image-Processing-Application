@@ -13,13 +13,14 @@ import model.enums.ColorMapping;
  * The class represents ImageIO read functionalities required while performing the I/O operations.
  * The methods for reading the document are static so no object creation is required for func calls.
  */
-public class ImageIOReader{
+public class ImageIOReader {
 
 
   /**
    * The method performs the read operation to get the image from a specified inputStream path.
    * The method also throws exception if an invalid inputStream path is passed.
    * It also throws exception if an error occurred while reading the inputs from the passed stream.
+   *
    * @return A 3-d matrix which contains the information about the individual rgb image pixels.
    * @throws IOException Throws exception if an error occurs while reading the stream.
    */
@@ -29,7 +30,8 @@ public class ImageIOReader{
     try {
       imageElement = ImageIO.read(in);
     } catch (IOException ex) {
-      throw new IOException("Unable to get image from the mentioned inputStream path for ImageIO Reader.\n");
+      throw new IOException("Unable to get image from the mentioned "
+              + "inputStream path for ImageIO Reader.\n");
     }
     return getPixelMatrixBuffer(imageElement);
   }

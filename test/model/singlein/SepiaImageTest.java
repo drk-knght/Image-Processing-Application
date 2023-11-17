@@ -1,6 +1,5 @@
 package model.singlein;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
@@ -103,7 +102,8 @@ public class SepiaImageTest {
 
   private boolean checkImageStringFormat(RGBImageInterface sepiaImage, int[][][] mat)
           throws IOException {
-    PPMWriter.writeToStorageDisk(sepiaImage,new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/"
+    PPMWriter.writeToStorageDisk(sepiaImage,new FileOutputStream("/Users/"
+            + "omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/"
             + "Labs/Image Processing/src/res/small-Res-Sepia-Testing.ppm"));
     StringBuilder savedRes = convertImageMatrixToString(sepiaImage.getImageHeight(),
             sepiaImage.getImageWidth(), sepiaImage.getPixel());

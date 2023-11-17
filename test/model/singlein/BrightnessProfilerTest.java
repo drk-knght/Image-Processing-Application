@@ -1,6 +1,5 @@
 package model.singlein;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
@@ -90,7 +89,8 @@ public class BrightnessProfilerTest {
 
   private boolean checkImageStringFormat(RGBImageInterface brighterImg, int num, int[][][] mat)
           throws IOException {
-    PPMWriter.writeToStorageDisk(brighterImg,new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/"
+    PPMWriter.writeToStorageDisk(brighterImg, new FileOutputStream("/Users/omagarwal/"
+            + "Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/"
             + "Labs/Image Processing/src/res/small-Res-Brighter-" + num + "-Testing.ppm"));
     StringBuilder savedRes = convertImageMatrixToString(brighterImg.getImageHeight(),
             brighterImg.getImageWidth(), brighterImg.getPixel());

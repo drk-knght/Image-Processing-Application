@@ -1,6 +1,5 @@
 package model.singlein;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
@@ -158,7 +157,8 @@ public class SharpenImageTest {
 
   private boolean checkImageStringFormat(RGBImageInterface sharpenedImage, int[][][] mat)
           throws IOException {
-    PPMWriter.writeToStorageDisk(sharpenedImage,new FileOutputStream("/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/"
+    PPMWriter.writeToStorageDisk(sharpenedImage,new FileOutputStream("/Users"
+            + "/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/"
             + "CS 5010 PDP/"
             + "Labs/Image Processing/src/res/small-Res-Sharp-Testing.ppm"));
     StringBuilder savedRes = convertImageMatrixToString(sharpenedImage.getImageHeight(),

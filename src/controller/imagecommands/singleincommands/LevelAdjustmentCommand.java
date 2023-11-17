@@ -32,21 +32,20 @@ public class LevelAdjustmentCommand implements RGBImageCommandInterface {
    * @param commandArguments Array of strings containing the information about the image names.
    * @throws IllegalArgumentException Throws exception if the string array is not of required len.
    */
-  public LevelAdjustmentCommand(String [] commandArguments) throws IllegalArgumentException{
-    if(commandArguments.length!=5 && commandArguments.length!=7){
+  public LevelAdjustmentCommand(String[] commandArguments) throws IllegalArgumentException {
+    if (commandArguments.length != 5 && commandArguments.length != 7) {
       throw new IllegalArgumentException("The number of parameters does not match "
               + "with the expected number of parameters for the passed operation.\n");
     }
-    this.shadowPoint=Double.parseDouble(commandArguments[0]);
-    this.midPoint=Double.parseDouble(commandArguments[1]);
-    this.highlightPoint=Double.parseDouble(commandArguments[2]);
-    this.rgbExistingImage=commandArguments[3];
-    this.rgbModifiedImage=commandArguments[4];
-    if(commandArguments.length==5){
-      this.splitPercentage=100;
-    }
-    else {
-      this.splitPercentage=Double.parseDouble(commandArguments[6]);
+    this.shadowPoint = Double.parseDouble(commandArguments[0]);
+    this.midPoint = Double.parseDouble(commandArguments[1]);
+    this.highlightPoint = Double.parseDouble(commandArguments[2]);
+    this.rgbExistingImage = commandArguments[3];
+    this.rgbModifiedImage = commandArguments[4];
+    if (commandArguments.length == 5) {
+      this.splitPercentage = 100;
+    } else {
+      this.splitPercentage = Double.parseDouble(commandArguments[6]);
     }
   }
 
@@ -69,7 +68,8 @@ public class LevelAdjustmentCommand implements RGBImageCommandInterface {
       return;
     }
 
-    RGBImageInterface rgbImage = existingImage.levelsAdjustment(shadowPoint,midPoint,highlightPoint,splitPercentage);
+    RGBImageInterface rgbImage = existingImage.levelsAdjustment(shadowPoint, midPoint,
+            highlightPoint, splitPercentage);
     cachedImage.put(rgbModifiedImage, rgbImage);
   }
 }

@@ -22,17 +22,17 @@ public class ImageProcessingApplication {
    * @throws IOException Throws exception if the file path in args in invalid or not exists.
    */
   public static void main(String[] args) throws IOException {
-    InputStream in=System.in;
+    InputStream in = System.in;
 
     OutputStream out = System.out;
 
     RGBImageControllerInterface controller = null;
 
     if (args.length > 0) {
-      String fileFlag=args[0];
+      String fileFlag = args[0];
       String filePath = args[1];
-      if(!fileFlag.equals("-file")){
-        String wrongFlag="Wrong flag parameter passed as input through the input source."
+      if (!fileFlag.equals("-file")) {
+        String wrongFlag = "Wrong flag parameter passed as input through the input source."
                 + " Try again.\n";
         out.write(wrongFlag.getBytes());
         return;
@@ -41,7 +41,7 @@ public class ImageProcessingApplication {
         File commandFile = new File(filePath);
         in = new FileInputStream(commandFile);
       } catch (FileNotFoundException ex) {
-        String msg="File was not found at the passed location.\n";
+        String msg = "File was not found at the passed location.\n";
         out.write(msg.getBytes());
       }
     }
