@@ -198,11 +198,11 @@ public class LevelAdjustmentTest {
   }
 
   /**
-   * Test to check for the negative input values for highlight point values in level adjustment op.
+   * Test to check for the illegal input values for highlight point values in level adjustment op.
    * If an exception is thrown for the illegal order of values then the test passes else it fails.
    */
   @Test
-  public void testNegativeHighlightPoint() {
+  public void testIllegalHighlightPoint() {
     int[][][] smallResImage = new int[][][]{
             {{145, 203, 132}, {248, 69, 80}, {20, 65, 98}, {20, 11, 211}},
             {{95, 216, 181}, {243, 108, 173}, {96, 13, 96}, {172, 198, 224}},
@@ -211,6 +211,9 @@ public class LevelAdjustmentTest {
     try {
       ImageOperation imageOperation = new LevelsAdjustment(10,
               34.5, -56.78);
+      imageOperation.operation(new RGBImage(smallResImage));
+      imageOperation = new LevelsAdjustment(10,
+              34.5, 300);
       imageOperation.operation(new RGBImage(smallResImage));
       fail("Zero length test failed for compression operation.");
     } catch (IllegalArgumentException ex) {

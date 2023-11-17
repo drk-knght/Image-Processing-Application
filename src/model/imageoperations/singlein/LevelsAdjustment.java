@@ -29,7 +29,8 @@ public class LevelsAdjustment implements ImageOperation {
    *                       value on the right of the histogram.
    */
   public LevelsAdjustment(double blackPoint, double midPoint, double highlightPoint) {
-    if (blackPoint >= midPoint || midPoint >= highlightPoint || blackPoint < 0) {
+    if (blackPoint >= midPoint || midPoint >= highlightPoint || blackPoint < 0
+            || highlightPoint>255) {
       throw new IllegalArgumentException("Wrong values for levels "
               + "adjustment operation. Check values of B, M, W again.\n");
     }
