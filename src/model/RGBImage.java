@@ -222,9 +222,12 @@ public class RGBImage implements RGBImageInterface {
    * Method represents the level adjustment operation on an existing image currently present in use.
    * The values of the individual pixels is changed as per the quadratic equation.
    *
-   * @param b               Shadow-point where the intensity of the pixel decreases around that range.
-   * @param m               Mid-point where the intensity of the pixel changes non-linearly as per the curve eq.
-   * @param w               Highlight-point where the intensity of the pixel is increased which satisfy the curve.
+   * @param b               Shadow-point where the intensity of the
+   *                        pixel decreases around that range.
+   * @param m               Mid-point where the intensity of the pixel
+   *                        changes non-linearly as per the curve eq.
+   * @param w               Highlight-point where the intensity of the pixel
+   *                        is increased which satisfy the curve.
    * @param splitPercentage Double value representing the split ratio of original and modified img.
    * @return An image as the result of the action performed on the present image.
    * @throws IllegalArgumentException Exception is thrown If the b,m,w are not in ascending order.
@@ -264,7 +267,8 @@ public class RGBImage implements RGBImageInterface {
    * @throws IllegalArgumentException Exception is thrown if the % of compression is non-positive.
    */
   @Override
-  public RGBImageInterface compressImage(double compressionPercentage) throws IllegalArgumentException {
+  public RGBImageInterface compressImage(double compressionPercentage)
+          throws IllegalArgumentException {
     if (compressionPercentage < 0) {
       throw new IllegalArgumentException("Illegal compression percentage"
               + " passed to the application. Please check and try again.\n");

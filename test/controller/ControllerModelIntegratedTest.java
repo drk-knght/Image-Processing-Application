@@ -132,9 +132,9 @@ public class ControllerModelIntegratedTest {
   @Test
   public void testExcessArgs() {
     String[] cmd = new String[]{"load", "save", "red-component",
-            "green-component", "blue-component", "value-component",
-            "luma-component", "intensity-component", "horizontal-flip", "vertical-flip", "brighten",
-            "rgb-split", "rgb-combine", "blur", "sharpen", "sepia"};
+      "green-component", "blue-component", "value-component",
+      "luma-component", "intensity-component", "horizontal-flip", "vertical-flip", "brighten",
+      "rgb-split", "rgb-combine", "blur", "sharpen", "sepia"};
     StringBuilder s = new StringBuilder();
     for (int i = 0; i < cmd.length; i++) {
       s.append(cmd[i]);
@@ -746,7 +746,8 @@ public class ControllerModelIntegratedTest {
    */
   @Test
   public void testHistogram() throws IOException {
-    int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/Histogram-Test.ppm"));
+    int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/"
+            + "omagarwal/Desktop/Histogram-Test.ppm"));
     String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
     String saveImgPath = "/Users/omagarwal/Desktop/Histogram.ppm";
     String command = "load " + readImgPath + " image" + "\nhistogram"
@@ -768,7 +769,8 @@ public class ControllerModelIntegratedTest {
    */
   @Test
   public void testCascadeGreySharpen() throws IOException {
-    int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/CascadeGreySharpen.ppm"));
+    int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users"
+            + "/omagarwal/Desktop/CascadeGreySharpen.ppm"));
     String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
     String saveImgPath = "/Users/omagarwal/Desktop/GreySharpen.ppm";
     String command = "load " + readImgPath + " image"
@@ -792,7 +794,8 @@ public class ControllerModelIntegratedTest {
    */
   @Test
   public void testCascadeColorCorrectionLevelAdjust() throws IOException {
-    int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/omagarwal/Desktop/CascadeColorCorrectionLevelAdjust.ppm"));
+    int[][][] smallResImage = PPMReader.readFileContent(new FileInputStream("/Users/"
+            + "omagarwal/Desktop/CascadeColorCorrectionLevelAdjust.ppm"));
     String readImgPath = "/Users/omagarwal/Desktop/Img.ppm";
     String saveImgPath = "/Users/omagarwal/Desktop/ColorCorrectionLevelAdjust.ppm";
     String command = "load " + readImgPath + " image"

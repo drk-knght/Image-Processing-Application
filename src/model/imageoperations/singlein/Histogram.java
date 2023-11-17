@@ -1,6 +1,7 @@
 package model.imageoperations.singlein;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import java.util.Arrays;
@@ -76,7 +77,8 @@ public class Histogram implements ImageOperation {
   private void drawSingleChannel(int[] channelFreq, int maxPeakFreq, Color penColor) {
     g.setColor(penColor);
     for (int i = 0; i + 1 < channelFreq.length; i++) {
-      g.drawLine(i, 255 - (channelFreq[i] * 256) / maxPeakFreq, i + 1, 255 - (channelFreq[i + 1] * 256) / maxPeakFreq);
+      g.drawLine(i, 255 - (channelFreq[i] * 256) / maxPeakFreq,
+              i + 1, 255 - (channelFreq[i + 1] * 256) / maxPeakFreq);
     }
   }
 
@@ -115,7 +117,8 @@ public class Histogram implements ImageOperation {
   }
 
   private int[][][] convertBufferToPixelMat() {
-    int[][][] resultImgMat = new int[histogramImageHeight][histogramImageWidth][ColorMapping.values().length];
+    int[][][] resultImgMat = new int
+            [histogramImageHeight][histogramImageWidth][ColorMapping.values().length];
     for (int i = 0; i < histogramImageHeight; i++) {
       for (int j = 0; j < histogramImageWidth; j++) {
         int rgbCellValue = rgbHistogramGraph.getRGB(j, i);

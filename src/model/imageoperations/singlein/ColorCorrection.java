@@ -66,7 +66,9 @@ public class ColorCorrection implements ImageOperation {
     }
     if (cntMeaningfulPeaks != 0) {
       return (peaksSum / cntMeaningfulPeaks);
-    } else return Integer.MAX_VALUE;
+    } else {
+      return Integer.MAX_VALUE;
+    }
   }
 
   private int getPeakFreqForSingleChannel(int[][][] pixelMatrix, int channelIndex) {

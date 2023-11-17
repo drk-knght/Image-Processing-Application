@@ -140,9 +140,9 @@ public class Compression implements ImageOperation {
 
   private double[] transform(double[] originalPixel) {
     double[] avgPixelArray = getTransformationArray(originalPixel,
-            (a, b) -> ((a + b) / Math.sqrt(2)));
+      (a, b) -> ((a + b) / Math.sqrt(2)));
     double[] diffPixelArray = getTransformationArray(originalPixel,
-            (a, b) -> ((a - b) / Math.sqrt(2)));
+      (a, b) -> ((a - b) / Math.sqrt(2)));
     double[] resultArray = new double[avgPixelArray.length + diffPixelArray.length];
     System.arraycopy(avgPixelArray, 0, resultArray, 0, avgPixelArray.length);
     System.arraycopy(diffPixelArray, 0, resultArray,

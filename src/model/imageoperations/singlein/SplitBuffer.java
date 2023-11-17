@@ -72,11 +72,11 @@ public class SplitBuffer implements ImageOperation {
     return resultMat;
   }
 
-  private void copyContentsMatrix(int[][][] NonUpdatedMatrix,
+  private void copyContentsMatrix(int[][][] nonUpdatedMatrix,
                                   int[][][] updatedMatrix, int height, int width) {
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        System.arraycopy(updatedMatrix[i][j], 0, NonUpdatedMatrix[i][j],
+        System.arraycopy(updatedMatrix[i][j], 0, nonUpdatedMatrix[i][j],
                 0, ColorMapping.values().length);
       }
     }

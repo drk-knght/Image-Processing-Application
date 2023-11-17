@@ -97,8 +97,6 @@ public class ImageIOTest {
             + "Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/SavingImg.png";
     OutputWriterInterface writer = new FileWriter(imagePath);
     writer.write(new RGBImage(pixelMatrix));
-//    ImageIOUtil.saveImageIOFile(3, 4, pixelMatrix, imagePath, "png");
-//    int[][][] actualMat = ImageIOUtil.imageIOFileReader(imagePath);
     InputReaderInterface reader = new FileReader(imageSavedPath);
     int[][][] actualMat = reader.read();
     for (int i = 0; i < 3; i++) {
@@ -127,7 +125,6 @@ public class ImageIOTest {
     try {
       OutputWriterInterface writer = new FileWriter(imagePath);
       writer.write(new RGBImage(newMat));
-//      ImageIOUtil.saveImageIOFile(3, 4, newMat, imagePath, "png");
       fail("Test failed");
     } catch (IllegalArgumentException ex) {
       // to catch mismatched input image matrix.
