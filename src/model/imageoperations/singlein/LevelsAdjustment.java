@@ -30,7 +30,7 @@ public class LevelsAdjustment implements ImageOperation {
    */
   public LevelsAdjustment(double blackPoint, double midPoint, double highlightPoint) {
     if (blackPoint >= midPoint || midPoint >= highlightPoint || blackPoint < 0
-            || highlightPoint>255) {
+            || highlightPoint > 255) {
       throw new IllegalArgumentException("Wrong values for levels "
               + "adjustment operation. Check values of B, M, W again.\n");
     }
