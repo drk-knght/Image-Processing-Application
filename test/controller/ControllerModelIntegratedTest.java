@@ -105,9 +105,9 @@ public class ControllerModelIntegratedTest {
   @Test
   public void testIncompleteCommands() {
     String[] cmd = new String[]{"load", "save", "red-component",
-            "green-component", "blue-component", "value-component",
-            "luma-component", "intensity-component", "horizontal-flip", "vertical-flip", "brighten",
-            "rgb-split", "rgb-combine", "blur", "sharpen", "sepia"};
+      "green-component", "blue-component", "value-component",
+      "luma-component", "intensity-component", "horizontal-flip", "vertical-flip", "brighten",
+      "rgb-split", "rgb-combine", "blur", "sharpen", "sepia"};
 
     for (int i = 0; i < cmd.length; i++) {
       try {

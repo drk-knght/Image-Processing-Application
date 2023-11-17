@@ -131,7 +131,8 @@ public class RGBImage implements RGBImageInterface {
    * @throws IllegalArgumentException Throws exception if kernel mapping is invalid or not exists.
    */
   @Override
-  public RGBImageInterface changeSharpness(int kernelType, double splitPercentage) throws IllegalArgumentException {
+  public RGBImageInterface changeSharpness(int kernelType, double splitPercentage)
+          throws IllegalArgumentException {
     if (kernelType >= KernelImage.values().length) {
       throw new IllegalArgumentException("Wrong kernel value passed to model for "
               + "changing the sharpness operation on the image.\n");
@@ -198,7 +199,8 @@ public class RGBImage implements RGBImageInterface {
    * @throws IllegalArgumentException Exception is thrown If the greyScaleType is not a valid input.
    */
   @Override
-  public RGBImageInterface greyScaleImage(int greyScaleType, double splitPercentage) throws IllegalArgumentException {
+  public RGBImageInterface greyScaleImage(int greyScaleType, double splitPercentage)
+          throws IllegalArgumentException {
     if (greyScaleType >= GreyScaleType.values().length) {
       throw new IllegalArgumentException("Wrong greyscale value passed to model for "
               + "greyscale operation on image.\n");

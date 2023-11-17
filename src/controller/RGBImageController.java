@@ -87,44 +87,44 @@ public class RGBImageController implements RGBImageControllerInterface {
     knownCommands.put("save", args -> new SaveCommand(args));
 
     knownCommands.put("red-component",
-      args -> {
+        args -> {
         String[] newArgs = concatenateStringArrays(args, ColorMapping.red.ordinal());
         return new RGBFilterCommand(newArgs);
       });
     knownCommands.put("green-component",
-      args -> {
+        args -> {
         String[] newArgs = concatenateStringArrays(args, ColorMapping.green.ordinal());
         return new RGBFilterCommand(newArgs);
       });
     knownCommands.put("blue-component",
-      args -> {
+        args -> {
         String[] newArgs = concatenateStringArrays(args, ColorMapping.blue.ordinal());
         return new RGBFilterCommand(newArgs);
       });
 
     knownCommands.put("value-component",
-      args -> {
+        args -> {
         String[] newArgs = concatenateStringArrays(args, GreyScaleType.value.ordinal());
         return new GreyScaleCommand(newArgs);
       });
     knownCommands.put("luma-component",
-      args -> {
+        args -> {
         String[] newArgs = concatenateStringArrays(args, GreyScaleType.luma.ordinal());
         return new GreyScaleCommand(newArgs);
       });
     knownCommands.put("intensity-component",
-      args -> {
+        args -> {
         String[] newArgs = concatenateStringArrays(args, GreyScaleType.intensity.ordinal());
         return new GreyScaleCommand(newArgs);
       });
 
     knownCommands.put("horizontal-flip",
-      args -> {
+        args -> {
         String[] newArgs = concatenateStringArrays(args, AxisName.horizontal.ordinal());
         return new FlipImageCommand(newArgs);
       });
     knownCommands.put("vertical-flip",
-      args -> {
+        args -> {
         String[] newArgs = concatenateStringArrays(args, AxisName.vertical.ordinal());
         return new FlipImageCommand(newArgs);
       });
@@ -135,12 +135,12 @@ public class RGBImageController implements RGBImageControllerInterface {
     knownCommands.put("rgb-combine", args -> new CombineChannelsCommand(args));
 
     knownCommands.put("blur",
-      args -> {
+        args -> {
         String[] newArgs = concatenateStringArrays(args, KernelImage.Blur.ordinal());
         return new SharpnessCommand(newArgs);
       });
     knownCommands.put("sharpen",
-      args -> {
+        args -> {
         String[] newArgs = concatenateStringArrays(args, KernelImage.Sharpen.ordinal());
         return new SharpnessCommand(newArgs);
       });
