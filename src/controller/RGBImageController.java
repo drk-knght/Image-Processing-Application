@@ -171,7 +171,7 @@ public class RGBImageController implements RGBImageControllerInterface {
       String commandLine = sc.nextLine().trim();
 
       if (commandLine.equals("")) {
-        String op = "\nEncountered a space.\n";
+        String op = "\nEncountered a new line or space token.\n";
         out.write(op.getBytes());
         continue;
       }
@@ -221,20 +221,20 @@ public class RGBImageController implements RGBImageControllerInterface {
         }
       }
     }
-    String endMessage = "\n\nLooks like we are at the end of program. See you soon.";
+    String endMessage = "\n\nLooks like we are at the end of program. See you soon.\n\n";
     out.write(endMessage.getBytes());
   }
 
   private Scanner checkFileStreamExists(String[] tokenizedCommandStrings)
           throws FileNotFoundException {
     if (tokenizedCommandStrings.length != 2) {
-      throw new IllegalArgumentException(" Illegal arguments passed for the run file operation.");
+      throw new IllegalArgumentException(" Illegal arguments passed for the run file operation.\n");
     }
     try {
       File commandFile = new File(tokenizedCommandStrings[1]);
       return new Scanner(new FileInputStream(commandFile));
     } catch (FileNotFoundException ex) {
-      throw new FileNotFoundException("Run File does not exists. Wrong Input. Aborting...");
+      throw new FileNotFoundException("Run File does not exists. Wrong Input. Aborting...\n");
     }
   }
 
