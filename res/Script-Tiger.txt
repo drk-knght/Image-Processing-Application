@@ -1,5 +1,5 @@
 #load Tiger.png and call it 'Tiger'
-load "../res/galaxy.png" Tiger
+load "../res/Tiger.png" Tiger
 
 #brighten Tiger by adding 10
 brighten 10 Tiger Tiger-brighter
@@ -50,6 +50,18 @@ save "../res/Tiger-sepia.png" Tiger-sepia
 #overwrite Tiger with another file
 load "../res/Tiger-horizontal.png" Tiger
 
+#red-component
+red-component Tiger Tiger-red-component
+save "../res/Tiger-red-component.png" Tiger-red-component
+
+#blue-component
+blue-component Tiger Tiger-blue-component
+save "../res/Tiger-blue-component.png" Tiger-blue-component
+
+#green-component
+green-component Tiger Tiger-green-component
+save "../res/Tiger-green-component.png" Tiger-green-component
+
 #give the Tiger a red tint, green tint, and blue tint
 rgb-split Tiger Tiger-red Tiger-green Tiger-blue
 
@@ -68,9 +80,13 @@ save "../res/Tiger-red-tint.png" Tiger-red-tint
 # Compress the image
 compress 35.6 Tiger Tiger-compressed-35
 save "../res/Tiger-compressed-35.png" Tiger-compressed-35
+histogram Tiger-compressed-35 Tiger-Compressed-Histogram-35
+save "../res/Tiger-Compressed-Histogram-35.png" Tiger-Compressed-Histogram-35
 
 compress 90 Tiger Tiger-compressed-90
 save "../res/Tiger-compressed-90.png" Tiger-compressed-90
+histogram Tiger-compressed-90 Tiger-Compressed-Histogram-90
+save "../res/Tiger-Compressed-Histogram-90.png" Tiger-Compressed-Histogram-90
 
 # Histogram
 histogram Tiger Tiger-Histogram
@@ -79,10 +95,56 @@ save "../res/Tiger-Histogram.png" Tiger-Histogram
 # Color correction
 color-correct Tiger Tiger-Color-Correct
 save "../res/Tiger-Color-Correct.png" Tiger-Color-Correct
+histogram Tiger-Color-Correct Tiger-Color-Correct-Histogram
+save "../res/Tiger-Color-Correct-Histogram.png" Tiger-Color-Correct-Histogram
+
 
 # Level Adjustment
 levels-adjust 10 100 150 Tiger Tiger-Level-Adjustment-10
 save "../res/Tiger-Level-Adjustment-10.png" Tiger-Level-Adjustment-10
+histogram Tiger-Level-Adjustment-10 Tiger-Level-Adjustment-Histogram-10
+save "../res/Tiger-Level-Adjustment-Histogram-10.png" Tiger-Level-Adjustment-Histogram-10
 
 levels-adjust 1 150 200 Tiger Tiger-Level-Adjustment-1
 save "../res/Tiger-Level-Adjustment-1.png" Tiger-Level-Adjustment-1
+histogram Tiger-Level-Adjustment-1 Tiger-Level-Adjustment-Histogram-1
+save "../res/Tiger-Level-Adjustment-Histogram-1.png" Tiger-Level-Adjustment-Histogram-1
+
+# Cascading operations : Color Correct-histogram
+color-correct Tiger Tiger-Color-Correct-Cascading
+histogram Tiger-Color-Correct-Cascading Tiger-ColorCorrect-Histogram-Cascading
+save "../res/Tiger-ColorCorrect-Histogram-Cascading.png" Tiger-ColorCorrect-Histogram-Cascading
+
+#Cascading operations : Re-compression
+compress 40.5 Tiger Tiger-compressed-40.5
+compress 80 Tiger-compressed-40.5 Tiger-Re-compressed-80
+save "../res/Tiger-Re-compressed-80.png" Tiger-Re-compressed-80
+
+#Cascading operations : Compression-Level Adjustment
+compress 50 Tiger Tiger-compressed-50
+levels-adjust 10 100 150 Tiger Tiger-Compression-Level-Adjustment
+save "../res/Tiger-Compression-Level-Adjustment.png" Tiger-Compression-Level-Adjustment
+
+#Split preview
+
+blur Tiger Tiger-blur-split split 35.6
+save "../res/Tiger-blur-split.png" Tiger-blur-split
+
+sharpen Tiger Tiger-sharpen-split split 50.78
+save "../res/Tiger-sharpen-split.png" Tiger-sharpen-split
+
+
+sepia Tiger Tiger-sepia-split split 55
+save "../res/Tiger-sepia-split.png" Tiger-sepia-split
+
+luma-component Tiger Tiger-luma-greyscale-split split 78.5
+save "../res/Tiger-luma-greyscale-split.png" Tiger-luma-greyscale-split
+
+color-correct Tiger Tiger-Color-Correct-Cascading-split split 30
+save "../res/Tiger-Color-Correct-Cascading-split.png" Tiger-Color-Correct-Cascading-split
+
+levels-adjust 10 100 150 Tiger Tiger-Compression-Level-Adjustment-split split 30
+save "../res/Tiger-Compression-Level-Adjustment-split.png" Tiger-Compression-Level-Adjustment-split
+
+#run
+run "../res/sample-file.txt"

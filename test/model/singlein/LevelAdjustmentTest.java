@@ -156,7 +156,7 @@ public class LevelAdjustmentTest {
             {{192, 0, 0}, {251, 255, 75}, {0, 0, 204}, {0, 251, 238}}
     };
 
-    assertTrue(checkCompression(resultImg, resultMat, 0));
+    assertTrue(checkLevelAdjustment(resultImg, resultMat, 0));
   }
 
   /**
@@ -238,7 +238,7 @@ public class LevelAdjustmentTest {
             {{237, 255, 41}, {255, 255, 111}, {255, 255, 255}, {255, 255, 255}}
     };
 
-    assertTrue(checkCompression(resultImg, resultMat, 0));
+    assertTrue(checkLevelAdjustment(resultImg, resultMat, 0));
   }
 
   /**
@@ -255,11 +255,11 @@ public class LevelAdjustmentTest {
     ImageOperation imageOperation = new LevelsAdjustment(0,128,255);
     RGBImageInterface resultImg=imageOperation.operation(new RGBImage(smallResImage));
 
-    assertTrue(checkCompression(resultImg, smallResImage, 0));
+    assertTrue(checkLevelAdjustment(resultImg, smallResImage, 0));
   }
 
 
-  private boolean checkCompression(RGBImageInterface imgMatrix, int[][][] smallMat, int delta) {
+  private boolean checkLevelAdjustment(RGBImageInterface imgMatrix, int[][][] smallMat, int delta) {
     int[][][] resultMatrixBright = imgMatrix.getPixel();
     for (int i = 0; i < resultMatrixBright.length; i++) {
       for (int j = 0; j < resultMatrixBright[i].length; j++) {

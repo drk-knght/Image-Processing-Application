@@ -14,6 +14,7 @@ import model.imageoperations.singlein.Histogram;
 import model.imageoperations.singlein.ImageOperation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
@@ -101,10 +102,10 @@ public class HistogramTest {
     RGBImageInterface img=op.operation(new RGBImage(smallResImage));
     String storagePath="/Users/omagarwal/Desktop/gram.ppm";
     int [][][] resultMat= PPMReader.readFileContent(new FileInputStream(storagePath));
-    checkCompression(img,resultMat);
+    assertTrue(checkHistogram(img,resultMat));
   }
 
-  private boolean checkCompression(RGBImageInterface imgMatrix, int[][][] smallMat) {
+  private boolean checkHistogram(RGBImageInterface imgMatrix, int[][][] smallMat) {
     int[][][] resultMatrixBright = imgMatrix.getPixel();
     for (int i = 0; i < resultMatrixBright.length; i++) {
       for (int j = 0; j < resultMatrixBright[i].length; j++) {

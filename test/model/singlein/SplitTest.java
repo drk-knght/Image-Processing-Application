@@ -10,6 +10,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * The class is used to test operations related to split view.
+ * Split view consists of modified image in the first part and the original image in the next part.
+ *
+ * Various test cases have been considered including different values for split percentage.
+ */
 public class SplitTest {
 
   /**
@@ -67,6 +73,9 @@ public class SplitTest {
     }
   }
 
+  /**
+   * The test is used to check if the split percentage given is negative - invalid.
+   */
   @Test
   public void testIllegalNegativeSplit(){
     int[][][] smallResImage = new int[][][]{
@@ -88,6 +97,9 @@ public class SplitTest {
     }
   }
 
+  /**
+   * The test is used to check if the split percentage is greater than 100% - invalid.
+   */
   @Test
   public void testIllegalPositiveSplit(){
     int[][][] smallResImage = new int[][][]{
@@ -109,6 +121,9 @@ public class SplitTest {
     }
   }
 
+  /**
+   * The test is used to check if the split percentage is working correctly for sharpness.
+   */
   @Test
   public void testSplitMidSplitSharpness(){
     int[][][] smallResImage = new int[][][]{
@@ -136,6 +151,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for sharpness when the split percentage is 0.
+   */
   @Test
   public void testSplitZeroSplitSharpness(){
     int[][][] smallResImage = new int[][][]{
@@ -153,6 +171,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for sharpness when the split percentage is 100.
+   */
   @Test
   public void testSplitHundredSplitSharpness(){
     int[][][] smallResImage = new int[][][]{
@@ -170,6 +191,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for blur.
+   */
   @Test
   public void testSplitMidSplitBlur(){
     int[][][] smallResImage = new int[][][]{
@@ -197,6 +221,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for blur when the split percentage is 0.
+   */
   @Test
   public void testSplitZeroSplitBlur(){
     int[][][] smallResImage = new int[][][]{
@@ -215,6 +242,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for blur when the split percentage is 100.
+   */
   @Test
   public void testSplitHundredSplitBlur(){
     int[][][] smallResImage = new int[][][]{
@@ -233,6 +263,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for sepia.
+   */
   @Test
   public void testSplitMidSplitSepia(){
     int[][][] smallResImage = new int[][][]{
@@ -260,6 +293,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for sepia when the split percentage is 0.
+   */
   @Test
   public void testSplitZeroSplitSepia(){
     int[][][] smallResImage = new int[][][]{
@@ -278,6 +314,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for sepia when the split percentage is 100.
+   */
   @Test
   public void testSplitHundredSplitSepia(){
     int[][][] smallResImage = new int[][][]{
@@ -296,6 +335,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for luma.
+   */
   @Test
   public void testSplitMidSplitLuma(){
     int[][][] smallResImage = new int[][][]{
@@ -314,6 +356,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for luma when the split percentage is 0.
+   */
   @Test
   public void testSplitZeroSplitLuma(){
     int[][][] smallResImage = new int[][][]{
@@ -331,6 +376,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for luma when the split percentage is 100.
+   */
   @Test
   public void testSplitHundredSplitLuma(){
     int[][][] smallResImage = new int[][][]{
@@ -349,6 +397,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for color correction.
+   */
   @Test
   public void testSplitMidSplitColorCorrection(){
     int[][][] smallResImage = new int[][][]{
@@ -367,6 +418,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for color correction when the split percentage is 0.
+   */
   @Test
   public void testSplitZeroSplitColorCorrection(){
     int[][][] smallResImage = new int[][][]{
@@ -384,6 +438,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for color correction if the split percentage is 100.
+   */
   @Test
   public void testSplitHundredSplitColorCorrection(){
     int[][][] smallResImage = new int[][][]{
@@ -402,6 +459,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for level adjustment.
+   */
   @Test
   public void testSplitMidSplitLevelAdjustment(){
     int[][][] smallResImage = new int[][][]{
@@ -420,6 +480,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for level adjustment when the split percentage is 0.
+   */
   @Test
   public void testSplitZeroSplitLevelAdjustment(){
     int[][][] smallResImage = new int[][][]{
@@ -437,6 +500,9 @@ public class SplitTest {
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
 
+  /**
+   * To check if the split is working correctly for level adjustment if the split percentage is 100.
+   */
   @Test
   public void testSplitHundredSplitLevelAdjustment(){
     int[][][] smallResImage = new int[][][]{
@@ -454,7 +520,6 @@ public class SplitTest {
 
     assertTrue(checkSplitPreview(res, resultMat, 0));
   }
-
 
   private boolean checkSplitPreview(RGBImageInterface imgMatrix, int[][][] smallMat, int delta) {
     int[][][] resultMatrixBright = imgMatrix.getPixel();

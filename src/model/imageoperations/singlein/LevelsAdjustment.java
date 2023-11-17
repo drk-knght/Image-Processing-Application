@@ -4,6 +4,12 @@ import model.RGBImage;
 import model.RGBImageInterface;
 import model.enums.ColorMapping;
 
+/**
+ * This class represents the level adjustment operation on rbg pixel values of the image.
+ * The class uses three points black point, midpoint and white point which are to be fit in the
+ * quadratic equation to get the desired curve.
+ * It implements the ImageOperation interface.
+ */
 public class LevelsAdjustment implements ImageOperation{
 
   private final double blackPoint;
@@ -12,6 +18,12 @@ public class LevelsAdjustment implements ImageOperation{
 
   private final double highlightPoint;
 
+  /**
+   * This method is the constructor of the LevelsAdjustment class which implements ImageOperation interface.
+   * @param blackPoint Represents the dark regions which contribute to the value on the left of the histogram.
+   * @param midPoint Represents the midpoint on a histogram which signifies values closer to the average of a channel.
+   * @param highlightPoint Represents the bright regions which contribute to the value on the right of the histogram.
+   */
   public LevelsAdjustment(double blackPoint, double midPoint, double highlightPoint){
     if(blackPoint>=midPoint || midPoint>=highlightPoint || blackPoint<0 ){
       throw new IllegalArgumentException("Wrong values for levels "
@@ -22,6 +34,14 @@ public class LevelsAdjustment implements ImageOperation{
     this.highlightPoint=highlightPoint;
   }
 
+  /**
+   * The method performs an action on the existing image in memory of the image processing app.
+   * It performs various mathematical calculations to return a level adjusted image.
+   *
+   * @param rgbImage Image currently in memory on which the working is to be done.
+   * @return Returns an image which is level adjusted.
+   * @throws IllegalArgumentException Throws exception if the parameter passed is invalid.
+   */
   @Override
   public RGBImageInterface operation(RGBImageInterface rgbImage) throws IllegalArgumentException {
     if (rgbImage == null || rgbImage.getImageWidth() <= 0 || rgbImage.getImageHeight() <= 0) {

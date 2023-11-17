@@ -1,7 +1,5 @@
 package model.multiin;
 
-
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileOutputStream;
