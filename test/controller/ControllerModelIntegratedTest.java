@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -659,6 +658,34 @@ public class ControllerModelIntegratedTest {
     controller.goCall();
     String content = Files.readString(Paths.get(saveImgPath));
     String expectedValue = checkImageStringFormat(smallResImage, 0);
+    assertEquals(expectedValue, content);
+  }
+
+  /**
+   * The test checks whether the java application reads the scripts as expected.
+   * Inputs are given into the script.
+   * The expected output image matrix is compared with the actual image matrix.
+   * If the matrix value matches then the test passes else it fails.
+   *
+   * @throws IOException Throws exception if an illegal arg is passed to image object.
+   */
+  @Test
+  public void testFileScriptParse() throws IOException {
+    int[][][] resultMat = new int[][][]{
+            {{145, 172, 149}, {255, 79, 149}, {52, 80, 89}, {52, 17, 210}},
+            {{74, 219, 149}, {200, 126, 149}, {123, 7, 89}, {123, 183, 210}},
+            {{56, 222, 46}, {80, 66, 46}, {217, 159, 96}, {217, 103, 90}}
+    };
+    String readScriptFilePath = "/Users/omagarwal/Desktop/ScriptTest.txt";
+    String saveImgPath = "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs"
+            + "/Image Processing/res/Man-Compressed.ppm";
+    String command = "run " + readScriptFilePath;
+    InputStream in = new ByteArrayInputStream(command.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    RGBImageControllerInterface controller = new RGBImageController(in, out);
+    controller.goCall();
+    String content = Files.readString(Paths.get(saveImgPath));
+    String expectedValue = checkImageStringFormat(resultMat, 0);
     assertEquals(expectedValue, content);
   }
 
