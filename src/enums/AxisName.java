@@ -1,4 +1,4 @@
-package model.enums;
+package enums;
 
 /**
  * Enum to store the axis names and their mapping to fixed value for flip operation.

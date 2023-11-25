@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 
 /**
  * The class represents PPM write functionalities required while performing the I/O operations.

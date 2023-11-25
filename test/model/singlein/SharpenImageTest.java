@@ -7,8 +7,8 @@ import java.io.IOException;
 
 
 import controller.filehandling.writer.PPMWriter;
-import model.enums.ColorMapping;
-import model.enums.KernelImage;
+import enums.ColorMapping;
+import enums.KernelImage;
 
 import model.imageoperations.singlein.ImageOperation;
 import model.imageoperations.singlein.Sharpness;

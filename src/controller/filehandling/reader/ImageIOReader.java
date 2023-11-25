@@ -7,7 +7,7 @@ import java.util.InputMismatchException;
 
 import javax.imageio.ImageIO;
 
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 
 /**
  * The class represents ImageIO read functionalities required while performing the I/O operations.

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import controller.filehandling.writer.PPMWriter;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 import model.imageoperations.multiin.CombineChannelImage;
 import model.imageoperations.multiin.MultipleImagesSingleOperation;
 

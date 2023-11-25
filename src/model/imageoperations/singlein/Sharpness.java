@@ -1,7 +1,7 @@
 package model.imageoperations.singlein;
 
-import model.enums.ColorMapping;
-import model.enums.KernelImage;
+import enums.ColorMapping;
+import enums.KernelImage;
 import model.RGBImage;
 import model.RGBImageInterface;
 

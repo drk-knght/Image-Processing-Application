@@ -3,7 +3,7 @@ package model.imageoperations.multiout;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 import model.RGBImageInterface;
 
 /**

@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 import javax.imageio.ImageIO;
 
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 
 /**
  * The class represents ImageIO write functionalities required while performing the I/O operations.
@@ -58,7 +58,7 @@ public class ImageIOWriter {
     }
   }
 
-  private static BufferedImage getBufferedImage(int width, int height, int[][][] imageMatrix) {
+  public static BufferedImage getBufferedImage(int width, int height, int[][][] imageMatrix) {
     BufferedImage imageSavingElement = new BufferedImage(width,
             height, BufferedImage.TYPE_3BYTE_BGR);
     for (int i = 0; i < height; i++) {

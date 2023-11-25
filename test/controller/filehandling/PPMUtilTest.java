@@ -16,7 +16,7 @@ import controller.filehandling.reader.PPMReader;
 import controller.filehandling.writer.OutputWriterInterface;
 import model.RGBImage;
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 
 import static controller.filehandling.writer.PPMWriter.convertImageMatrixToString;
 import static org.junit.Assert.assertEquals;

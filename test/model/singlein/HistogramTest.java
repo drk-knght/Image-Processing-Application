@@ -9,7 +9,7 @@ import java.io.IOException;
 import controller.filehandling.reader.PPMReader;
 import model.RGBImage;
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 import model.imageoperations.singlein.Histogram;
 import model.imageoperations.singlein.ImageOperation;
 

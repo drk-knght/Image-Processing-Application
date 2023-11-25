@@ -33,10 +33,10 @@ import controller.imagecommands.singleincommands.HistogramCommand;
 import controller.imagecommands.singleincommands.LevelAdjustmentCommand;
 import controller.imagecommands.singleincommands.RGBFilterCommand;
 import controller.imagecommands.singleincommands.SharpnessCommand;
-import model.enums.AxisName;
-import model.enums.ColorMapping;
-import model.enums.GreyScaleType;
-import model.enums.KernelImage;
+import enums.AxisName;
+import enums.ColorMapping;
+import enums.GreyScaleType;
+import enums.KernelImage;
 import model.RGBImageInterface;
 
 /**

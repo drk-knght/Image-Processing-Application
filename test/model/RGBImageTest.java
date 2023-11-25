@@ -12,9 +12,9 @@ import java.util.List;
 
 import controller.filehandling.reader.ImageIOReader;
 import controller.filehandling.writer.ImageIOWriter;
-import model.enums.AxisName;
-import model.enums.ColorMapping;
-import model.enums.KernelImage;
+import enums.AxisName;
+import enums.ColorMapping;
+import enums.KernelImage;
 import model.imageoperations.multiin.CombineChannelImage;
 import model.imageoperations.multiin.MultipleImagesSingleOperation;
 import model.imageoperations.multiout.MultipleOperationImages;

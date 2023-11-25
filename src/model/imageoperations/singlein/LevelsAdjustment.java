@@ -2,7 +2,7 @@ package model.imageoperations.singlein;
 
 import model.RGBImage;
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 
 /**
  * This class represents the level adjustment operation on rbg pixel values of the image.

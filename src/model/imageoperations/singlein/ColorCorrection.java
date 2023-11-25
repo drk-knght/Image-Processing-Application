@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import model.RGBImage;
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 
 /**
  * This class represents the color correction operation on a single image currently in the memory.

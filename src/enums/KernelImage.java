@@ -1,4 +1,4 @@
-package model.enums;
+package enums;
 
 /**
  * Enum which had the set of existing kernels for image operations like blur, sharpness.

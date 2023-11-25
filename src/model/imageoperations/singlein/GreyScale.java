@@ -1,6 +1,6 @@
 package model.imageoperations.singlein;
 
-import model.enums.GreyScaleType;
+import enums.GreyScaleType;
 import model.RGBImage;
 import model.RGBImageInterface;
 

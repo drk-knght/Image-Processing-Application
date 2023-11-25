@@ -2,7 +2,7 @@ package model.imageoperations.singlein;
 
 import model.RGBImage;
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 
 /**
  * This class represents a buffer/ intermediate between main model class and image operations.

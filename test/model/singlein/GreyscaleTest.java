@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import controller.filehandling.writer.PPMWriter;
-import model.enums.ColorMapping;
-import model.enums.GreyScaleType;
+import enums.ColorMapping;
+import enums.GreyScaleType;
 import model.imageoperations.singlein.GreyScale;
 import model.imageoperations.singlein.ImageOperation;
 import model.RGBImage;

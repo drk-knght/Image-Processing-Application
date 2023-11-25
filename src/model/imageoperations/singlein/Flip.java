@@ -1,7 +1,7 @@
 package model.imageoperations.singlein;
 
-import model.enums.AxisName;
-import model.enums.ColorMapping;
+import enums.AxisName;
+import enums.ColorMapping;
 import model.RGBImage;
 import model.RGBImageInterface;
 

@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import model.RGBImage;
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

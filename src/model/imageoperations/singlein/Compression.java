@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 import model.RGBImage;
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 
 /**
  * This class represents the compression operation on an image.

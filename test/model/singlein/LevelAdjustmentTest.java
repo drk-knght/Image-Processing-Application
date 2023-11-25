@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import model.RGBImage;
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 import model.imageoperations.singlein.ImageOperation;
 import model.imageoperations.singlein.LevelsAdjustment;
 

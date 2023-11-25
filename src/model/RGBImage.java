@@ -3,10 +3,10 @@ package model;
 import java.util.List;
 
 
-import model.enums.AxisName;
-import model.enums.ColorMapping;
-import model.enums.GreyScaleType;
-import model.enums.KernelImage;
+import enums.AxisName;
+import enums.ColorMapping;
+import enums.GreyScaleType;
+import enums.KernelImage;
 import model.imageoperations.singlein.Brightness;
 import model.imageoperations.singlein.ColorCorrection;
 import model.imageoperations.singlein.ColorTransformation;

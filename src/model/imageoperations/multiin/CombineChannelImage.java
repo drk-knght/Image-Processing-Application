@@ -2,7 +2,7 @@ package model.imageoperations.multiin;
 
 import java.util.List;
 
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 import model.RGBImage;
 import model.RGBImageInterface;
 

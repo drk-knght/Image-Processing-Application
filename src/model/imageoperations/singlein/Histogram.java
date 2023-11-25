@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import model.RGBImage;
 import model.RGBImageInterface;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 
 /**
  * This class represents the histogram plotting operation on rbg pixel values of the image.

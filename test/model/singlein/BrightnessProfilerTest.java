@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import controller.filehandling.writer.PPMWriter;
-import model.enums.ColorMapping;
+import enums.ColorMapping;
 import model.imageoperations.singlein.Brightness;
 import model.imageoperations.singlein.ImageOperation;
 import model.RGBImage;
