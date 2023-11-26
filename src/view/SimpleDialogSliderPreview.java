@@ -16,24 +16,20 @@ public class SimpleDialogSliderPreview extends JDialog implements SimpleDialogSl
 
   private int sliderPercentage;
 
-  private JButton applyButton;
-
-  private JPanel displayPanel;
-
   private boolean result;
 
 
   public SimpleDialogSliderPreview(JFrame parentFrame, String title){
     super(parentFrame,title,true);
     this.result=false;
-    displayPanel=new JPanel();
-    this.displayPanel.setLayout(new BorderLayout(30,15));
+    JPanel displayPanel = new JPanel();
+    displayPanel.setLayout(new BorderLayout(30,15));
     JScrollPane displayScrollPane=new JScrollPane(displayPanel);
     this.add(displayScrollPane);
     JPanel sliderPanel=getSliderPanel();
     JPanel applyButton=getApplyButton();
-    this.displayPanel.add(sliderPanel,BorderLayout.CENTER);
-    this.displayPanel.add(applyButton,BorderLayout.PAGE_END);
+    displayPanel.add(sliderPanel,BorderLayout.CENTER);
+    displayPanel.add(applyButton,BorderLayout.PAGE_END);
     this.setSize(new Dimension(500,200));
     this.setVisible(true);
   }
@@ -62,20 +58,20 @@ public class SimpleDialogSliderPreview extends JDialog implements SimpleDialogSl
     slider.setPaintLabels(true);
     slider.setPaintTicks(true);
     slider.setMajorTickSpacing(10);
-    slider.setMajorTickSpacing(1);
+    slider.setMinorTickSpacing(1);
     slider.addChangeListener(evt->{setLabelText(this.splitPreviewSlider.getValue());});
     return slider;
   }
 
   private JPanel getApplyButton(){
     JPanel buttonPanel=new JPanel();
-    this.applyButton=new JButton("Apply Operation");
-    this.applyButton.addActionListener(evt->{
+    JButton applyButton = new JButton("Apply Operation");
+    applyButton.addActionListener(evt->{
       setSliderPercentage();
       this.result=true;
       this.setVisible(false);
     });
-    buttonPanel.add(this.applyButton);
+    buttonPanel.add(applyButton);
     return buttonPanel;
   }
 

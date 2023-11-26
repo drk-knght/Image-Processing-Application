@@ -74,8 +74,8 @@ public class GraphicalController implements GraphicalControllerInterface{
     }
     RGBImageInterface displayImage=null;
     try{
-      displayImage=this.currentPreviewImage.changeSharpness(kernelMap,splitPercentage);
-      currentPreviewImage=this.currentPreviewImage.changeSharpness(kernelMap,100);
+      displayImage=this.liveImageModel.changeSharpness(kernelMap,splitPercentage);
+      currentPreviewImage=this.liveImageModel.changeSharpness(kernelMap,100);
     }
     catch (Exception ex){
       view.setErrorMessage("Error occurred while changing the sharpness of the image");
@@ -91,8 +91,8 @@ public class GraphicalController implements GraphicalControllerInterface{
     }
     RGBImageInterface displayImage=null;
     try{
-      displayImage=this.currentPreviewImage.greyScaleImage(greyScaleType,splitPercentage);
-      currentPreviewImage=this.currentPreviewImage.greyScaleImage(greyScaleType,100);
+      displayImage=this.liveImageModel.greyScaleImage(greyScaleType,splitPercentage);
+      currentPreviewImage=this.liveImageModel.greyScaleImage(greyScaleType,100);
     }
     catch (Exception ex){
       view.setErrorMessage("Grey scale operation failed while applying on the image");
@@ -108,8 +108,8 @@ public class GraphicalController implements GraphicalControllerInterface{
     }
     RGBImageInterface displayImage=null;
     try {
-      displayImage=this.currentPreviewImage.sepiaImage(splitPercentage);
-      currentPreviewImage=this.currentPreviewImage.sepiaImage(100);
+      displayImage=this.liveImageModel.sepiaImage(splitPercentage);
+      currentPreviewImage=this.liveImageModel.sepiaImage(100);
     }
     catch (Exception ex){
       view.setErrorMessage("Grey scale operation failed while applying on the image");
@@ -125,8 +125,8 @@ public class GraphicalController implements GraphicalControllerInterface{
     }
     RGBImageInterface displayImage=null;
     try {
-      displayImage=this.currentPreviewImage.colorCorrectionImage(splitPercentage);
-      currentPreviewImage=this.currentPreviewImage.colorCorrectionImage(100);
+      displayImage=this.liveImageModel.colorCorrectionImage(splitPercentage);
+      currentPreviewImage=this.liveImageModel.colorCorrectionImage(100);
     }
     catch (Exception ex){
       view.setErrorMessage("Color correction operation failed while applying on the image");
@@ -142,8 +142,8 @@ public class GraphicalController implements GraphicalControllerInterface{
     }
     RGBImageInterface displayImage=null;
     try {
-      displayImage=this.currentPreviewImage.levelsAdjustment(black,mid,highlight,splitPercentage);
-      currentPreviewImage=this.currentPreviewImage.levelsAdjustment(black,mid,highlight,100);
+      displayImage=this.liveImageModel.levelsAdjustment(black,mid,highlight,splitPercentage);
+      currentPreviewImage=this.liveImageModel.levelsAdjustment(black,mid,highlight,100);
     }
     catch (Exception ex){
       view.setErrorMessage("Level adjustment operation failed. \nReason: "+ex.getMessage());

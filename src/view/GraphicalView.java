@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -18,6 +19,7 @@ import controller.graphicalcontroller.GraphicalControllerInterface;
 import enums.AxisName;
 import enums.ColorMapping;
 import enums.KernelImage;
+import enums.LevelAdjustment;
 
 public class GraphicalView extends JFrame implements IView {
 
@@ -93,6 +95,15 @@ public class GraphicalView extends JFrame implements IView {
       int compressionFactor=getSplitPercentage("Image Compression Factor");
       this.features.compressImage(compressionFactor);
     });
+    buttonActions.put("Level Adjustment", evt->
+    {
+      List<Integer>levelAdjustmentValues=getLevelAdjustmentValues("Level Adjustment Split");
+      int blackPoint=levelAdjustmentValues.get(LevelAdjustment.BLACK.levelValue);
+      int midPoint=levelAdjustmentValues.get(LevelAdjustment.MID.levelValue);
+      int highlightPoint=levelAdjustmentValues.get(LevelAdjustment.HIGHLIGHT.levelValue);
+      int splitPercentage=levelAdjustmentValues.get(0);
+      this.features.levelAdjustment(blackPoint,midPoint,highlightPoint,splitPercentage);
+    });
   }
 
   private int getSplitPercentage(String operationTitle){
@@ -103,6 +114,16 @@ public class GraphicalView extends JFrame implements IView {
     }
     simpleJDialog.dispose();
     return splitPercentage;
+  }
+
+  private List<Integer> getLevelAdjustmentValues(String operationTitle){
+    InputSliderDialogInterface levelAdjustDialog=new LevelAdjust(this,operationTitle);
+    List<Integer> resultList=null;
+    if(levelAdjustDialog.getResultOperationFlag()){
+      resultList=levelAdjustDialog.getListOfInputValues();
+    }
+    levelAdjustDialog.dispose();
+    return resultList;
   }
   private String getUploadedFilePath(){
     JFileChooser selectFile=new JFileChooser(".");
