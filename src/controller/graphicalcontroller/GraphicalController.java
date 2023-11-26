@@ -72,17 +72,16 @@ public class GraphicalController implements GraphicalControllerInterface{
     if(checkNullImage()){
       return;
     }
+    RGBImageInterface displayImage=null;
     try{
-      currentPreviewImage=this.currentPreviewImage.changeSharpness(kernelMap,splitPercentage);
+      displayImage=this.currentPreviewImage.changeSharpness(kernelMap,splitPercentage);
+      currentPreviewImage=this.currentPreviewImage.changeSharpness(kernelMap,100);
     }
     catch (Exception ex){
       view.setErrorMessage("Error occurred while changing the sharpness of the image");
       return;
     }
-    refreshImageOnScreen(currentPreviewImage);
-//    if(this.liveImageModel!=null){
-//      refreshImageOnScreen();
-//    }
+    refreshImageOnScreen(displayImage);
   }
 
   @Override
@@ -90,14 +89,16 @@ public class GraphicalController implements GraphicalControllerInterface{
     if(checkNullImage()){
       return;
     }
+    RGBImageInterface displayImage=null;
     try{
-      currentPreviewImage=this.currentPreviewImage.greyScaleImage(greyScaleType,splitPercentage);
+      displayImage=this.currentPreviewImage.greyScaleImage(greyScaleType,splitPercentage);
+      currentPreviewImage=this.currentPreviewImage.greyScaleImage(greyScaleType,100);
     }
     catch (Exception ex){
       view.setErrorMessage("Grey scale operation failed while applying on the image");
       return;
     }
-    refreshImageOnScreen(currentPreviewImage);
+    refreshImageOnScreen(displayImage);
   }
 
   @Override
@@ -105,14 +106,16 @@ public class GraphicalController implements GraphicalControllerInterface{
     if(checkNullImage()){
       return;
     }
+    RGBImageInterface displayImage=null;
     try {
-      currentPreviewImage=this.currentPreviewImage.sepiaImage(splitPercentage);
+      displayImage=this.currentPreviewImage.sepiaImage(splitPercentage);
+      currentPreviewImage=this.currentPreviewImage.sepiaImage(100);
     }
     catch (Exception ex){
       view.setErrorMessage("Grey scale operation failed while applying on the image");
       return;
     }
-    refreshImageOnScreen(currentPreviewImage);
+    refreshImageOnScreen(displayImage);
   }
 
   @Override
@@ -120,14 +123,16 @@ public class GraphicalController implements GraphicalControllerInterface{
     if(checkNullImage()){
       return;
     }
+    RGBImageInterface displayImage=null;
     try {
-      currentPreviewImage=this.currentPreviewImage.colorCorrectionImage(splitPercentage);
+      displayImage=this.currentPreviewImage.colorCorrectionImage(splitPercentage);
+      currentPreviewImage=this.currentPreviewImage.colorCorrectionImage(100);
     }
     catch (Exception ex){
       view.setErrorMessage("Color correction operation failed while applying on the image");
       return;
     }
-    refreshImageOnScreen(currentPreviewImage);
+    refreshImageOnScreen(displayImage);
   }
 
   @Override
@@ -135,14 +140,16 @@ public class GraphicalController implements GraphicalControllerInterface{
     if(checkNullImage()){
       return;
     }
+    RGBImageInterface displayImage=null;
     try {
-      currentPreviewImage=this.currentPreviewImage.levelsAdjustment(black,mid,highlight,splitPercentage);
+      displayImage=this.currentPreviewImage.levelsAdjustment(black,mid,highlight,splitPercentage);
+      currentPreviewImage=this.currentPreviewImage.levelsAdjustment(black,mid,highlight,100);
     }
     catch (Exception ex){
-      view.setErrorMessage("Level adjustment operation failed while applying on the image");
+      view.setErrorMessage("Level adjustment operation failed. \nReason: "+ex.getMessage());
       return;
     }
-    refreshImageOnScreen(currentPreviewImage);
+    refreshImageOnScreen(displayImage);
   }
 
   @Override

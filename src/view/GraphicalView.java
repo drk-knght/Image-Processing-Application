@@ -68,11 +68,42 @@ public class GraphicalView extends JFrame implements IView {
     buttonActions.put("Cancel Operation",evt->{this.features.cancelOperation();});
 
     // Popup/Split operations
-    buttonActions.put("Blur",evt->{this.features.changeSharpness(KernelImage.Blur.ordinal(),100);});
-    buttonActions.put("Sharpen",evt->{this.features.changeSharpness(KernelImage.Sharpen.ordinal(),100);});
-    buttonActions.put("Sepia",evt->{this.features.sepia(100);});
+    buttonActions.put("Blur",evt->
+    {
+      int splitPercentage=getSplitPercentage("Blur Split");
+      this.features.changeSharpness(KernelImage.Blur.ordinal(),splitPercentage);
+    });
+    buttonActions.put("Sharpen",evt->
+    {
+      int splitPercentage=getSplitPercentage("Sharpen Split");
+      this.features.changeSharpness(KernelImage.Sharpen.ordinal(),splitPercentage);
+    });
+    buttonActions.put("Sepia",evt->
+    {
+      int splitPercentage=getSplitPercentage("Sepia Split");
+      this.features.sepia(splitPercentage);
+    });
+    buttonActions.put("Color Correction",evt->
+    {
+      int splitPercentage=getSplitPercentage("Color Correction Split");
+      this.features.colorCorrection(splitPercentage);
+    });
+    buttonActions.put("Compression",evt->
+    {
+      int compressionFactor=getSplitPercentage("Image Compression Factor");
+      this.features.compressImage(compressionFactor);
+    });
   }
 
+  private int getSplitPercentage(String operationTitle){
+    SimpleDialogSliderInterface simpleJDialog=new SimpleDialogSliderPreview(this,operationTitle);
+    int splitPercentage=100;
+    if(simpleJDialog.getResultOperationFlag()){
+      splitPercentage= simpleJDialog.getSliderPercentage();
+    }
+    simpleJDialog.dispose();
+    return splitPercentage;
+  }
   private String getUploadedFilePath(){
     JFileChooser selectFile=new JFileChooser(".");
     FileNameExtensionFilter fileExtensions=new FileNameExtensionFilter("PPM, JPG, JPEG, PNG Images",
