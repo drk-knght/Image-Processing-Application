@@ -27,11 +27,6 @@ public class GreyScaleDialog extends JDialog implements MultiInputSliderDialogIn
 
   private int greyScaleValue;
 
-  // 1. create a main panel using border layout.
-  // 2. make line start panel using radio buttons for greyscale.
-  // 3. Make center panel using slider and the label.
-  // 4. make page end panel apply operation.
-
 
   public GreyScaleDialog(JFrame parentFrame, String title){
     super(parentFrame,title,true);
@@ -55,6 +50,7 @@ public class GreyScaleDialog extends JDialog implements MultiInputSliderDialogIn
 
   private void initializeAndSetRadioButtons(){
     this.lumaButton=new JRadioButton("Luma Operation");
+    this.lumaButton.setSelected(true);
     this.lumaButton.addActionListener(evt->this.greyScaleValue= GreyScaleType.luma.ordinal());
 
     this.valueButton=new JRadioButton("Value Operation");
