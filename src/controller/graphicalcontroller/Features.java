@@ -1,6 +1,5 @@
 package controller.graphicalcontroller;
 
-import java.io.IOException;
 
 public interface Features {
 

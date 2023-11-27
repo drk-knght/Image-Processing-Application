@@ -78,7 +78,7 @@ public class GraphicalController implements GraphicalControllerInterface{
       currentPreviewImage=this.liveImageModel.changeSharpness(kernelMap,100);
     }
     catch (Exception ex){
-      view.setErrorMessage("Error occurred while changing the sharpness of the image");
+      view.setErrorMessage("Changing the sharpness of the image failed. \nReason: "+ex.getMessage());
       return;
     }
     refreshImageOnScreen(displayImage);
@@ -95,7 +95,7 @@ public class GraphicalController implements GraphicalControllerInterface{
       currentPreviewImage=this.liveImageModel.greyScaleImage(greyScaleType,100);
     }
     catch (Exception ex){
-      view.setErrorMessage("Grey scale operation failed while applying on the image");
+      view.setErrorMessage("Grey scale operation failed. \nReason: "+ex.getMessage());
       return;
     }
     refreshImageOnScreen(displayImage);
@@ -112,7 +112,7 @@ public class GraphicalController implements GraphicalControllerInterface{
       currentPreviewImage=this.liveImageModel.sepiaImage(100);
     }
     catch (Exception ex){
-      view.setErrorMessage("Grey scale operation failed while applying on the image");
+      view.setErrorMessage("Sepia Transformation operation failed. \nReason: "+ex.getMessage());
       return;
     }
     refreshImageOnScreen(displayImage);
@@ -129,7 +129,7 @@ public class GraphicalController implements GraphicalControllerInterface{
       currentPreviewImage=this.liveImageModel.colorCorrectionImage(100);
     }
     catch (Exception ex){
-      view.setErrorMessage("Color correction operation failed while applying on the image");
+      view.setErrorMessage("Color correction operation failed. \nReason: "+ex.getMessage());
       return;
     }
     refreshImageOnScreen(displayImage);
@@ -161,7 +161,7 @@ public class GraphicalController implements GraphicalControllerInterface{
       currentPreviewImage=this.currentPreviewImage.flipImage(axisNameMap);
     }
     catch (Exception ex){
-      view.setErrorMessage("Flip operation failed while applying on the image");
+      view.setErrorMessage("Flip operation failed. \nReason: "+ex.getMessage());
       return;
     }
     refreshImageOnScreen(currentPreviewImage);
@@ -176,7 +176,7 @@ public class GraphicalController implements GraphicalControllerInterface{
       currentPreviewImage=this.currentPreviewImage.getSingleComponentImage(colorType);
     }
     catch (Exception ex){
-      view.setErrorMessage("Single channel operation failed while applying on the image");
+      view.setErrorMessage("Single channel operation failed. \nReason: "+ex.getMessage());
       return;
     }
     refreshImageOnScreen(currentPreviewImage);
@@ -191,7 +191,7 @@ public class GraphicalController implements GraphicalControllerInterface{
       currentPreviewImage=this.currentPreviewImage.compressImage(compressionPercentage);
     }
     catch (Exception ex){
-      view.setErrorMessage("Compression operation failed while applying on the image");
+      view.setErrorMessage("Compression operation failed. \nReason: "+ex.getMessage());
       return;
     }
     refreshImageOnScreen(currentPreviewImage);
@@ -199,6 +199,9 @@ public class GraphicalController implements GraphicalControllerInterface{
 
   @Override
   public void setLiveImage(int updateType) {
+    if(checkNullImage()){
+      return;
+    }
     updateLiveImage(updateType);
     refreshImageOnScreen(currentPreviewImage);
   }
@@ -209,7 +212,8 @@ public class GraphicalController implements GraphicalControllerInterface{
 
   private boolean checkNullImage(){
     if(this.liveImageModel==null){
-      view.setErrorMessage("No image has been loaded but an operation has been attempted");
+      view.setErrorMessage("No image has been loaded but an action has been requested."
+              + "\nLoad an image to use the operations.");
       return true;
     }
     return false;
