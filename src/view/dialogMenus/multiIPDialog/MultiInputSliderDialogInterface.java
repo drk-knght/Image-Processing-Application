@@ -1,8 +1,8 @@
-package view;
+package view.dialogMenus.multiIPDialog;
 
 import java.util.List;
 
-public interface InputSliderDialogInterface {
+public interface MultiInputSliderDialogInterface {
 
   boolean getResultOperationFlag();
 

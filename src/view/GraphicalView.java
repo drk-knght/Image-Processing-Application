@@ -20,6 +20,11 @@ import enums.AxisName;
 import enums.ColorMapping;
 import enums.KernelImage;
 import enums.LevelAdjustment;
+import view.dialogMenus.multiIPDialog.GreyScaleDialog;
+import view.dialogMenus.multiIPDialog.LevelAdjustDialog;
+import view.dialogMenus.multiIPDialog.MultiInputSliderDialogInterface;
+import view.dialogMenus.SimpleDialogSliderInterface;
+import view.dialogMenus.SimpleDialogSliderPreview;
 
 public class GraphicalView extends JFrame implements IView {
 
@@ -97,12 +102,20 @@ public class GraphicalView extends JFrame implements IView {
     });
     buttonActions.put("Level Adjustment", evt->
     {
-      List<Integer>levelAdjustmentValues=getLevelAdjustmentValues("Level Adjustment Split");
+      List<Integer>levelAdjustmentValues=getLevelAdjustmentValues(new LevelAdjustDialog(this, "Level Adjustment Split"));
       int blackPoint=levelAdjustmentValues.get(LevelAdjustment.BLACK.levelValue);
       int midPoint=levelAdjustmentValues.get(LevelAdjustment.MID.levelValue);
       int highlightPoint=levelAdjustmentValues.get(LevelAdjustment.HIGHLIGHT.levelValue);
       int splitPercentage=levelAdjustmentValues.get(0);
       this.features.levelAdjustment(blackPoint,midPoint,highlightPoint,splitPercentage);
+    });
+
+    buttonActions.put("Greyscale", evt->
+    {
+      List<Integer>greyScaleValues=getLevelAdjustmentValues(new GreyScaleDialog(this, "Greyscale Split"));
+      int splitPercentage=greyScaleValues.get(0);
+      int greyScaleValueMap=greyScaleValues.get(1);
+      this.features.greyScale(greyScaleValueMap,splitPercentage);
     });
   }
 
@@ -116,8 +129,8 @@ public class GraphicalView extends JFrame implements IView {
     return splitPercentage;
   }
 
-  private List<Integer> getLevelAdjustmentValues(String operationTitle){
-    InputSliderDialogInterface levelAdjustDialog=new LevelAdjust(this,operationTitle);
+  private List<Integer> getLevelAdjustmentValues(MultiInputSliderDialogInterface levelAdjustDialog){
+//    MultiInputSliderDialogInterface levelAdjustDialog=new LevelAdjustDialog(this, "Level Adjustment Split");
     List<Integer> resultList=null;
     if(levelAdjustDialog.getResultOperationFlag()){
       resultList=levelAdjustDialog.getListOfInputValues();
@@ -125,6 +138,8 @@ public class GraphicalView extends JFrame implements IView {
     levelAdjustDialog.dispose();
     return resultList;
   }
+
+
   private String getUploadedFilePath(){
     JFileChooser selectFile=new JFileChooser(".");
     FileNameExtensionFilter fileExtensions=new FileNameExtensionFilter("PPM, JPG, JPEG, PNG Images",

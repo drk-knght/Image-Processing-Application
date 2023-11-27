@@ -1,4 +1,4 @@
-package view;
+package view.dialogMenus.multiIPDialog;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,9 +7,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-import enums.LevelAdjustment;
-
-public class LevelAdjust extends JDialog implements InputSliderDialogInterface {
+public class LevelAdjustDialog extends JDialog implements MultiInputSliderDialogInterface {
 
   private JLabel sliderSplitTextLabel;
 
@@ -30,7 +28,7 @@ public class LevelAdjust extends JDialog implements InputSliderDialogInterface {
   private boolean result;
 
 
-  public LevelAdjust(JFrame parentFrame, String title){
+  public LevelAdjustDialog(JFrame parentFrame, String title){
     super(parentFrame,title,true);
     this.result=false;
     initializeSliders();

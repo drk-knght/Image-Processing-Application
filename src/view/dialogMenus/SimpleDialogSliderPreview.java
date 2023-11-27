@@ -1,4 +1,4 @@
-package view;
+package view.dialogMenus;
 
 import java.awt.*;
 
