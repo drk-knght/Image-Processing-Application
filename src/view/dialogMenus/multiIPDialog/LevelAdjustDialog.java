@@ -76,25 +76,10 @@ public class LevelAdjustDialog extends JDialog implements MultiInputSliderDialog
   private JPanel getCombinedSlidersPanel(){
     JPanel displayPanel=new JPanel();
     displayPanel.setLayout(new GridLayout(4,1,1,40));
-
-//    JPanel blackPanel=new JPanel();
-//    blackPanel.setLayout(new BorderLayout());
-//    blackPanel.add(new JLabel("Black Point"),BorderLayout.PAGE_START);
-//    this.blackPointSlider=new JSlider();
-//    this.blackPointSlider.setMinimum(0);
-//    this.blackPointSlider.setMaximum(255);
-//    this.blackPointSlider.setPaintLabels(true);
-//    this.blackPointSlider.setPaintTicks(true);
-//    this.blackPointSlider.setMajorTickSpacing(5);
-//    this.blackPointSlider.setMinorTickSpacing(1);
-//    this.blackPointLabel=new JLabel();
-//    this.blackPointSlider.addChangeListener(evt->{setLabelText(this.blackPointLabel,this.blackPointSlider.getValue());});
-//    blackPanel.add(this.blackPointSlider,BorderLayout.CENTER);
-//    blackPanel.add(this.blackPointLabel,BorderLayout.PAGE_END);
-    JPanel blackPanel=getSingleJSliderPanel("Black Point",0,255,blackPointSlider,blackPointLabel);
-    JPanel midPanel=getSingleJSliderPanel("Mid Point",0,255,midPointSlider,midPointLabel);
-    JPanel highlightPanel=getSingleJSliderPanel("Highlight Point",0,255,highlightPointSlider,highlightPointLabel);
-    JPanel splitPanel=getSingleJSliderPanel("Split Preview %",0,100,splitPreviewSlider,sliderSplitTextLabel);
+    JPanel blackPanel=getSingleJSliderPanel("Black Point", 255,blackPointSlider,blackPointLabel);
+    JPanel midPanel=getSingleJSliderPanel("Mid Point", 255,midPointSlider,midPointLabel);
+    JPanel highlightPanel=getSingleJSliderPanel("Highlight Point", 255,highlightPointSlider,highlightPointLabel);
+    JPanel splitPanel=getSingleJSliderPanel("Split Preview %", 100,splitPreviewSlider,sliderSplitTextLabel);
     displayPanel.add(blackPanel,0);
     displayPanel.add(midPanel,1);
     displayPanel.add(highlightPanel,2);
@@ -102,18 +87,18 @@ public class LevelAdjustDialog extends JDialog implements MultiInputSliderDialog
     return displayPanel;
   }
 
-  private JPanel getSingleJSliderPanel(String headingLabel,int min, int max,JSlider presentSlider, JLabel actionChangeLabel){
+  private JPanel getSingleJSliderPanel(String headingLabel, int max, JSlider presentSlider, JLabel actionChangeLabel){
     JPanel panelInUse=new JPanel();
     panelInUse.setLayout(new BorderLayout());
     setTitleBorder(panelInUse,headingLabel);
-    setSliderProperties(presentSlider,min,max,actionChangeLabel);
+    setSliderProperties(presentSlider, max,actionChangeLabel);
     panelInUse.add(presentSlider,BorderLayout.CENTER);
     panelInUse.add(actionChangeLabel,BorderLayout.PAGE_END);
     return panelInUse;
   }
 
-  private void setSliderProperties(JSlider slider, int min, int max, JLabel actionChangeLabel){
-    slider.setMinimum(min);
+  private void setSliderProperties(JSlider slider, int max, JLabel actionChangeLabel){
+    slider.setMinimum(0);
     slider.setMaximum(max);
     slider.setPaintLabels(true);
     slider.setPaintTicks(true);
@@ -155,9 +140,6 @@ public class LevelAdjustDialog extends JDialog implements MultiInputSliderDialog
     sliderInputValues.add(blackPointSlider.getValue());
     sliderInputValues.add(midPointSlider.getValue());
     sliderInputValues.add(highlightPointSlider.getValue());
-//    sliderInputValues.set(LevelAdjustment.BLACK.ordinal(),blackPointSlider.getValue());
-//    sliderInputValues.set(LevelAdjustment.MID.ordinal(),midPointSlider.getValue());
-//    sliderInputValues.set(LevelAdjustment.HIGHLIGHT.ordinal(),highlightPointSlider.getValue());
     return sliderInputValues;
   }
 }
