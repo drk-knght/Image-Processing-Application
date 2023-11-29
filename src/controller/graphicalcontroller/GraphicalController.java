@@ -32,7 +32,6 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     this.view=view;
     this.features=new FeatureImpl(this);
     isSaved=true;
-//    this.view.setDisplay();
     setFeaturesInView();
   }
 

@@ -15,8 +15,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.features.Features;
-import controller.graphicalcontroller.GraphicalController;
-import controller.graphicalcontroller.GraphicalControllerInterface;
 import enums.AxisName;
 import enums.ColorMapping;
 import enums.KernelImage;
@@ -24,8 +22,8 @@ import enums.LevelAdjustment;
 import view.dialogMenus.multiIPDialog.GreyScaleDialog;
 import view.dialogMenus.multiIPDialog.LevelAdjustDialog;
 import view.dialogMenus.multiIPDialog.MultiInputSliderDialogInterface;
-import view.dialogMenus.SimpleDialogSliderInterface;
-import view.dialogMenus.SimpleDialogSliderPreview;
+import view.dialogMenus.simpledialog.SimpleDialogSliderInterface;
+import view.dialogMenus.simpledialog.SimpleDialogSliderPreview;
 
 public class GraphicalView extends JFrame implements IView {
 
@@ -51,21 +49,18 @@ public class GraphicalView extends JFrame implements IView {
   private final String [] changeImage={"Apply Operation", "Cancel Operation"};
 
   private void setButtonActions(){
-    // I/O operations
+
     addIOButtonListeners();
 
-    // Non-split operations:
     addNonPreviewListeners();
 
-    // Apply and cancel
     ModifyImageListeners();
 
-    // Popup/Split operations
     addPreviewListeners();
-    buttonActions.put("Compression",evt->
-    {
+    buttonActions.put("Compression",evt-> {
       try {
-        int compressionFactor=getSplitPercentage("Image Compression Factor");
+        int compressionFactor=getSplitPercentage("Image Compression Factor",
+                "The current compression factor of the image is");
         this.features.compressImage(compressionFactor);
       }
       catch (Exception ex){
@@ -80,40 +75,40 @@ public class GraphicalView extends JFrame implements IView {
   }
 
   private void addSingleSplitPreview(){
-    buttonActions.put("Blur",evt->
-    {
+    buttonActions.put("Blur",evt-> {
       try{
-        int splitPercentage=getSplitPercentage("Blur Split");
+        int splitPercentage=getSplitPercentage("Blur Split",
+                "The preview % of image on which Blur operation is visible");
         this.features.changeSharpness(KernelImage.Blur.ordinal(),splitPercentage);
       }
       catch (Exception ex){
         this.features.getExceptionFromView(ex);
       }
     });
-    buttonActions.put("Sharpen",evt->
-    {
+    buttonActions.put("Sharpen",evt-> {
       try{
-        int splitPercentage = getSplitPercentage("Sharpen Split");
+        int splitPercentage = getSplitPercentage("Sharpen Split",
+                "The  preview % of image on which Sharpen operation is visible");
         this.features.changeSharpness(KernelImage.Sharpen.ordinal(), splitPercentage);
       }
       catch (Exception ex){
         this.features.getExceptionFromView(ex);
       }
     });
-    buttonActions.put("Sepia",evt->
-    {
+    buttonActions.put("Sepia",evt-> {
       try{
-        int splitPercentage = getSplitPercentage("Sepia Split");
+        int splitPercentage = getSplitPercentage("Sepia Split",
+                "The preview % of image on which sepia operation is visible");
         this.features.sepia(splitPercentage);
       }
       catch (Exception ex){
         this.features.getExceptionFromView(ex);
       }
     });
-    buttonActions.put("Color Correction",evt->
-    {
+    buttonActions.put("Color Correction",evt-> {
       try{
-        int splitPercentage = getSplitPercentage("Color Correction Split");
+        int splitPercentage = getSplitPercentage("Color Correction Split",
+                "The preview % of image on which Color Correction operation is visible");
         this.features.colorCorrection(splitPercentage);
       }
       catch (Exception ex){
@@ -187,8 +182,8 @@ public class GraphicalView extends JFrame implements IView {
     buttonActions.put("Cancel Operation",evt->{this.features.cancelOperation();});
   }
 
-  private Integer getSplitPercentage(String operationTitle){
-    SimpleDialogSliderInterface simpleJDialog=new SimpleDialogSliderPreview(this,operationTitle);
+  private Integer getSplitPercentage(String operationTitle,String labelText){
+    SimpleDialogSliderInterface simpleJDialog=new SimpleDialogSliderPreview(this,operationTitle,labelText);
     Integer splitPercentage=null;
 
     if(simpleJDialog.getResultOperationFlag()){
@@ -350,9 +345,9 @@ public class GraphicalView extends JFrame implements IView {
     component.setVisible(isVisible);
   }
 
-  public static void main(String[] args){
-    IView view=new GraphicalView();
-    GraphicalControllerInterface controller=new GraphicalController(view);
-
-  }
+//  public static void main(String[] args){
+//    IView view=new GraphicalView();
+//    GraphicalControllerInterface controller=new GraphicalController(view);
+//
+//  }
 }

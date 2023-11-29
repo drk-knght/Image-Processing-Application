@@ -1,4 +1,4 @@
-package view.dialogMenus;
+package view.dialogMenus.simpledialog;
 
 public interface SimpleDialogSliderInterface {
 

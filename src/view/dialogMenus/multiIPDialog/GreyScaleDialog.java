@@ -87,7 +87,8 @@ public class GreyScaleDialog extends  AbstractMultiInputDialog{
 
   @Override
   protected void setLabelText(JLabel actionChangeLabel, JSlider slider) {
-    actionChangeLabel.setText("The % of image on which operation is visible: "+slider.getValue());
+    actionChangeLabel.setText("The preview % of image on which greyscale operation is visible: "
+            + slider.getValue());
   }
 
   @Override

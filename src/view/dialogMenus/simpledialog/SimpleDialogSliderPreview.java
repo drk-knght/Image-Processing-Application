@@ -1,12 +1,10 @@
-package view.dialogMenus;
+package view.dialogMenus.simpledialog;
 
 import java.awt.*;
 
 import javax.swing.*;
 
-// 1. When I click apply then
-// 2. the button should get the slider value.
-// 3. give a callback of the slider to the main view some method.
+
 
 public class SimpleDialogSliderPreview extends JDialog implements SimpleDialogSliderInterface {
 
@@ -16,12 +14,15 @@ public class SimpleDialogSliderPreview extends JDialog implements SimpleDialogSl
 
   private int sliderPercentage;
 
+  private String labelText;
+
   private boolean result;
 
 
-  public SimpleDialogSliderPreview(JFrame parentFrame, String title){
+  public SimpleDialogSliderPreview(JFrame parentFrame, String title,String labelText){
     super(parentFrame,title,true);
     this.result=false;
+    this.labelText=labelText;
 
     JPanel displayPanel = new JPanel();
     displayPanel.setLayout(new BorderLayout(30,15));
@@ -36,9 +37,7 @@ public class SimpleDialogSliderPreview extends JDialog implements SimpleDialogSl
     this.setSize(new Dimension(500,200));
     this.setVisible(true);
   }
-  // 1. add a horizontal slider to the frame and add it's label, ticks etc.
-  // 2. Add a label to display the percentage of value selected.
-  // 3. add an apply button to apply the split operation to the image
+
   private JPanel getSliderPanel(){
     JPanel sliderPanel=new JPanel();
     sliderPanel.setLayout(new BorderLayout(10,5));
@@ -51,7 +50,8 @@ public class SimpleDialogSliderPreview extends JDialog implements SimpleDialogSl
   }
 
   private void setLabelText(int value){
-    this.textLabel.setText("The % of image on which operation is visible: "+value);
+
+    this.textLabel.setText(this.labelText+": "+value);
   }
 
   private JSlider getJSlider(){
@@ -78,7 +78,6 @@ public class SimpleDialogSliderPreview extends JDialog implements SimpleDialogSl
     return buttonPanel;
   }
 
-
   private void setSliderPercentage(){
     this.sliderPercentage=this.splitPreviewSlider.getValue();
   }
@@ -91,9 +90,5 @@ public class SimpleDialogSliderPreview extends JDialog implements SimpleDialogSl
   public boolean getResultOperationFlag(){
     return this.result;
   }
-  public static void main(String []args){
-
-  }
-
 
 }
