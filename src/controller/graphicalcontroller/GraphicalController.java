@@ -4,7 +4,7 @@ import java.awt.*;
 import java.io.IOException;
 
 import controller.RGBImageControllerInterface;
-import controller.UpdateType;
+import enums.UpdateType;
 import controller.features.FeatureImpl;
 import controller.features.Features;
 import controller.filehandling.reader.FileReader;

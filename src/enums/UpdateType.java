@@ -1,4 +1,4 @@
-package controller;
+package enums;
 
 public enum UpdateType {
   OLD(0),

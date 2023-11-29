@@ -1,7 +1,7 @@
 package controller.features;
 
 
-import controller.UpdateType;
+import enums.UpdateType;
 import controller.graphicalcontroller.GraphicalControllerInterface;
 
 public class FeatureImpl implements Features{
