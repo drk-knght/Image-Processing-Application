@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +45,7 @@ public class GraphicalView extends JFrame implements IView {
           "Blur", "Sharpen","Greyscale","Sepia","Compression",
           "Color Correction","Level Adjustment"};
 
-  private final String [] changeImage={"Apply Operation", "Cancel Operation"};
+  private final String [] changeImage={"Save Operation", "Cancel Operation"};
 
   private void setButtonActions(){
 
@@ -158,8 +157,9 @@ public class GraphicalView extends JFrame implements IView {
   private void addIOButtonListeners(){
     buttonActions.put("Load Image",evt->{
       try{
-        String filePath=this.getUploadedFilePath();
-        this.features.load(filePath);
+//        String filePath=this.getUploadedFilePath();
+//        this.features.load(filePath);
+          this.features.load();
       }
       catch (Exception ex){
         this.features.getExceptionFromView(ex);
@@ -167,8 +167,9 @@ public class GraphicalView extends JFrame implements IView {
     });
     buttonActions.put("Save Image",evt->{
       try {
-        String filePath=this.getSavingFilePath();
-        this.features.save(filePath);
+//        String filePath=this.getSavingFilePath();
+//        this.features.save(filePath);
+          this.features.save();
       }
       catch (Exception ex){
         this.features.getExceptionFromView(ex);
@@ -178,7 +179,7 @@ public class GraphicalView extends JFrame implements IView {
   }
 
   private void ModifyImageListeners(){
-    buttonActions.put("Apply Operation",evt->{this.features.applyOperation();});
+    buttonActions.put("Save Operation",evt->{this.features.applyOperation();});
     buttonActions.put("Cancel Operation",evt->{this.features.cancelOperation();});
   }
 
@@ -202,7 +203,8 @@ public class GraphicalView extends JFrame implements IView {
     return resultList;
   }
 
-  private String getUploadedFilePath() throws IOException {
+  @Override
+  public String getInputFilePath() {
     JFileChooser selectFile=new JFileChooser(".");
     FileNameExtensionFilter fileExtensions=new FileNameExtensionFilter("PPM, JPG, JPEG, PNG Images",
             "jpg","jpeg","png","ppm");
@@ -212,12 +214,14 @@ public class GraphicalView extends JFrame implements IView {
       File f=selectFile.getSelectedFile();
       return f.getPath();
     }
-    else {
-      throw new IOException("Load operation cancelled by the user.");
-    }
+//    else {
+//      throw new IOException("Load operation cancelled by the user.");
+//    }
+    return null;
   }
 
-  private String getSavingFilePath() throws IOException {
+  @Override
+  public String getOutputFilePath() {
     JFileChooser selectFile=new JFileChooser(".");
     FileNameExtensionFilter fileExtensions=new FileNameExtensionFilter("PPM, JPG, JPEG, PNG Images",
             "jpg","jpeg","png","ppm");
@@ -226,15 +230,14 @@ public class GraphicalView extends JFrame implements IView {
     if(retrievalResult==JFileChooser.APPROVE_OPTION){
       File f=selectFile.getSelectedFile();
       return f.getPath();
-    }else {
-      throw new IOException("Save operation cancelled by the user.");
     }
+    return null;
   }
 
   public GraphicalView(){
     super();
     setTitle("Image Processing Application");
-    this.setSize(new Dimension(1000,1000));
+    this.setSize(new Dimension(700,500));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.buttonActions=new HashMap<>();
     setButtonActions();
@@ -269,7 +272,7 @@ public class GraphicalView extends JFrame implements IView {
   @Override
   public void displayImage(Image image) {
     setVisibility(false,this.centerPanel);
-    this.centerPanel=getLiveImagePanel(image,"Image Preview",1000,800);
+    this.centerPanel=getLiveImagePanel(image,"Image Preview",800,800);
     this.mainPanel.add(this.centerPanel,BorderLayout.CENTER);
     setVisibility(true,this);
   }
@@ -345,9 +348,4 @@ public class GraphicalView extends JFrame implements IView {
     component.setVisible(isVisible);
   }
 
-//  public static void main(String[] args){
-//    IView view=new GraphicalView();
-//    GraphicalControllerInterface controller=new GraphicalController(view);
-//
-//  }
 }

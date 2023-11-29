@@ -31,14 +31,14 @@ public class GreyScaleDialog extends  AbstractMultiInputDialog{
     JPanel displayPanel = new JPanel();
     displayPanel.setLayout(new BorderLayout(30,15));
     addScrollPaneToFrame(displayPanel);
-    this.setSize(new Dimension(1000,1000));
+//    this.setSize(new Dimension(500,500));
 
     JPanel sliderPanel=getSingleJSliderPanel("Select Split Percentage",100,splitViewSlider,sliderLabel);
     JPanel greyscalePanel=getGreyScaleMenu();
     JPanel applyButtonPanel=getApplyButton();
 
     addPanelsToDisplay(displayPanel,greyscalePanel,sliderPanel,applyButtonPanel);
-
+    this.pack();
     this.setVisible(true);
   }
 

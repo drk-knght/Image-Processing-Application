@@ -52,14 +52,25 @@ public class FeatureImpl implements Features{
     controller.compressImage(compressionFactor);
   }
 
+//  @Override
+//  public void load(String imagePath) {
+////    controller.loadImage(imagePath);
+//    controller.loadImage();
+//  }
   @Override
-  public void load(String imagePath) {
-    controller.loadImage(imagePath);
+  public void load() {
+//    controller.loadImage(imagePath);
+    controller.loadImage();
   }
 
+//  @Override
+//  public void save(String imagePath) {
+//    controller.saveImage(imagePath);
+//  }
+
   @Override
-  public void save(String imagePath) {
-    controller.saveImage(imagePath);
+  public void save() {
+    controller.saveImage();
   }
 
   @Override

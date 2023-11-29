@@ -19,9 +19,12 @@ public interface Features {
 
   void compressImage(int compressionFactor);
 
-  void load(String imagePath);
+//  void load(String imagePath);
 
-  void save(String imagePath);
+  void load();
+//  void save(String imagePath);
+
+  void save();
 
   void applyOperation();
 

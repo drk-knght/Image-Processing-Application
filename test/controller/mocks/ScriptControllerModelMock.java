@@ -1,4 +1,4 @@
-package controller;
+package controller.mocks;
 
 
 import org.junit.Test;
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertEquals;
  * The mock model is created and data passed to the mock model from controller is logged to test.
  * The log is asserted against the expected value to ensure that data is going correctly to model.
  */
-public class ControllerModelMock {
+public class ScriptControllerModelMock {
 
   /**
    * Static class representing the mock version of the model.

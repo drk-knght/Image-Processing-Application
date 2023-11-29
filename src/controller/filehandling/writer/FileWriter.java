@@ -46,8 +46,11 @@ public class FileWriter implements OutputWriterInterface {
     String extension = getFileExtension(saveFilePath);
     if (extension.equals("ppm")) {
       PPMWriter.writeToStorageDisk(image, new FileOutputStream(saveFilePath));
-    } else {
+    } else if(extension.equals("png") || extension.equals("jpg") || extension.equals("jpeg")){
       ImageIOWriter.writeToStorageDisk(image, new FileOutputStream(saveFilePath), extension);
+    }
+    else {
+      throw new IOException("Attempt to save in unknown file type extension");
     }
   }
 }

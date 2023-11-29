@@ -36,31 +36,49 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     setFeaturesInView();
   }
 
-  @Override
-  public void loadImage(String filePath) {
-//    messageForUnsavedImage();
-    try {
-      InputReaderInterface fileReader=new FileReader(filePath);
-      this.currentPreviewImage=new RGBImage(fileReader.read());
-//      isSaved=false;
-    }
-    catch (Exception ex){
-      view.setErrorMessage("Wrong or illegal value passed to the file load operation.");
-      return;
-    }
-    messageForUnsavedImage();
-    isSaved=false;
-    updateLiveImage(UpdateType.NEW.ordinal());
-    refreshImageOnScreen(this.currentPreviewImage);
-    view.setPopupMessage("Image Preview Loaded");
-
+@Override
+public void loadImage() {
+  String filePath= null;
+  try{
+    filePath= view.getInputFilePath();
+    checkNullFilePath(filePath);
   }
+  catch(Exception ex){
+    view.setPopupMessage(ex.getMessage());
+    return;
+  }
+  try {
+
+    InputReaderInterface fileReader=new FileReader(filePath);
+    this.currentPreviewImage=new RGBImage(fileReader.read());
+  }
+  catch (Exception ex){
+    view.setErrorMessage("Wrong or illegal value passed to the file load operation.");
+    return;
+  }
+  messageForUnsavedImage();
+  isSaved=false;
+  updateLiveImage(UpdateType.NEW.ordinal());
+  refreshImageOnScreen(this.currentPreviewImage);
+  view.setPopupMessage("Image Preview Loaded");
+
+}
 
   @Override
-  public void saveImage(String filePath) {
+  public void saveImage() {
     if(checkNullImage()){
       return;
     }
+    String filePath=null;
+    try {
+      filePath=view.getOutputFilePath();
+      checkNullFilePath(filePath);
+    }
+    catch (Exception ex){
+      view.setPopupMessage(ex.getMessage());
+      return;
+    }
+
     try {
       OutputWriterInterface fileWriter=new FileWriter(filePath);
       fileWriter.write(this.liveImageModel);
@@ -254,6 +272,12 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     }
     else{
       this.liveImageModel=new RGBImage(currentPreviewImage.getPixel());
+    }
+  }
+
+  private void checkNullFilePath(String filePath){
+    if(filePath==null || filePath.equals("")){
+      throw new IllegalArgumentException("Operation cancelled.");
     }
   }
 

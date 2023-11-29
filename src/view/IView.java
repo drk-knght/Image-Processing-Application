@@ -18,4 +18,8 @@ public interface IView {
 
   void setFeatures(Features features);
 
+  String getInputFilePath();
+
+  String getOutputFilePath();
+
 }

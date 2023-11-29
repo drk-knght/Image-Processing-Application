@@ -43,8 +43,11 @@ public class FileReader implements InputReaderInterface {
     String fileExtension = getFileExtension(this.filePath);
     if (fileExtension.equals("ppm")) {
       return PPMReader.readFileContent(new FileInputStream(filePath));
-    } else {
+    } else if(fileExtension.equals("png") || fileExtension.equals("jpg") || fileExtension.equals("jpeg")){
       return ImageIOReader.readFileContent(new FileInputStream(filePath));
+    }
+    else {
+      throw new IOException("Attempt to load in unknown file type extension");
     }
   }
 }

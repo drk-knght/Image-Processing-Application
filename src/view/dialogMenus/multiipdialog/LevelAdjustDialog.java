@@ -41,7 +41,7 @@ public class LevelAdjustDialog extends AbstractMultiInputDialog{
 //    displayPanel.add(applyButton,BorderLayout.PAGE_END);
     addPanelsToDisplay(displayPanel,sliderPanel,applyButton);
 
-    this.setSize(new Dimension(1000,1000));
+    this.setSize(new Dimension(900,500));
     this.setVisible(true);
   }
 

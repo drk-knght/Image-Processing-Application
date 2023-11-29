@@ -6,9 +6,12 @@ package controller.graphicalcontroller;
 
 public interface GraphicalControllerInterface {
 
-  void loadImage(String filePath);
+//  void loadImage(String filePath);
+  void loadImage();
 
-  void saveImage(String filePath);
+//  void saveImage(String filePath);
+
+  void saveImage();
 
   void changeSharpness(int kernelMap,int splitPercentage);
 
