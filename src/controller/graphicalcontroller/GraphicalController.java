@@ -16,6 +16,7 @@ import model.RGBImage;
 import model.RGBImageInterface;
 import view.IView;
 
+
 public class GraphicalController implements GraphicalControllerInterface, RGBImageControllerInterface {
 
   private RGBImageInterface liveImageModel;

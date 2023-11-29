@@ -1,5 +1,8 @@
 package controller.graphicalcontroller;
 
+/**
+ * This interface
+ */
 
 public interface GraphicalControllerInterface {
 

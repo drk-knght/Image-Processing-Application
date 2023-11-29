@@ -4,7 +4,8 @@ import java.io.IOException;
 
 /**
  * This interface represents the central part of controller.
- * The methods are based on command builder design patter.
+ * The methods are based on command builder design pattern.
+ * This interface is central part for interactive, file based and GUI based applications.
  */
 public interface RGBImageControllerInterface {
 
