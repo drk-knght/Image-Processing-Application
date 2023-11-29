@@ -35,13 +35,17 @@ public class ImageProcessingApplication {
         File commandFile = new File(filePath);
         InputStream in = new FileInputStream(commandFile);
         controller=new RGBImageController(in,out);
+        System.out.println("Great! Found a valid File script. Reading it now....");
       }
       else if(args[0].equals("-text")){
         InputStream in=System.in;
         controller=new RGBImageController(in,out);
+        System.out.println("Welcome to the interactive space :) "
+                + "Please type commands for me to work on your image.");
       }
       else{
-        System.out.println("Illegal flags passed for the script controller.Try again.");
+        System.out.println("Look like illegal flags passed for the script controller."
+                + "Try again.");
         return;
       }
     }
