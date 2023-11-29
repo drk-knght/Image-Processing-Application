@@ -30,19 +30,26 @@ public class GreyScaleDialog extends  AbstractMultiInputDialog{
 
     JPanel displayPanel = new JPanel();
     displayPanel.setLayout(new BorderLayout(30,15));
-    JScrollPane displayScrollPane=new JScrollPane(displayPanel);
-    this.add(displayScrollPane);
+    addScrollPaneToFrame(displayPanel);
     this.setSize(new Dimension(1000,1000));
 
     JPanel sliderPanel=getSingleJSliderPanel("Select Split Percentage",100,splitViewSlider,sliderLabel);
     JPanel greyscalePanel=getGreyScaleMenu();
     JPanel applyButtonPanel=getApplyButton();
 
+    addPanelsToDisplay(displayPanel,greyscalePanel,sliderPanel,applyButtonPanel);
+
+    this.setVisible(true);
+  }
+
+  private void addScrollPaneToFrame(JPanel displayPanel){
+    JScrollPane displayScrollPane=new JScrollPane(displayPanel);
+    this.add(displayScrollPane);
+  }
+  private void addPanelsToDisplay(JPanel displayPanel, JPanel greyscalePanel, JPanel sliderPanel, JPanel applyButtonPanel){
     displayPanel.add(greyscalePanel,BorderLayout.LINE_START);
     displayPanel.add(sliderPanel,BorderLayout.CENTER);
     displayPanel.add(applyButtonPanel,BorderLayout.PAGE_END);
-
-    this.setVisible(true);
   }
 
   private void initializeAndSetRadioButtons(){

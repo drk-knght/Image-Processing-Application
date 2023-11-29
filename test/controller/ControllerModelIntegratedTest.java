@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import controller.filehandling.reader.PPMReader;
+import controller.scriptcontroller.RGBImageController;
 import enums.ColorMapping;
 
 import static org.junit.Assert.assertEquals;

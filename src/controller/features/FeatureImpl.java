@@ -1,7 +1,8 @@
-package controller.graphicalcontroller;
+package controller.features;
 
 
 import controller.UpdateType;
+import controller.graphicalcontroller.GraphicalControllerInterface;
 
 public class FeatureImpl implements Features{
 
@@ -69,5 +70,10 @@ public class FeatureImpl implements Features{
   @Override
   public void cancelOperation() {
     controller.setLiveImage(UpdateType.OLD.ordinal());
+  }
+
+  @Override
+  public void getExceptionFromView(Exception ex) {
+    controller.getExceptionFromExternalEnv(ex);
   }
 }

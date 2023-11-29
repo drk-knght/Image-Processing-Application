@@ -37,11 +37,19 @@ public class LevelAdjustDialog extends AbstractMultiInputDialog{
     JPanel sliderPanel=getCombinedSlidersPanel();
     JPanel applyButton=getApplyButton();
 
-    displayPanel.add(sliderPanel,BorderLayout.CENTER);
-    displayPanel.add(applyButton,BorderLayout.PAGE_END);
+//    displayPanel.add(sliderPanel,BorderLayout.CENTER);
+//    displayPanel.add(applyButton,BorderLayout.PAGE_END);
+    addPanelsToDisplay(displayPanel,sliderPanel,applyButton);
 
     this.setSize(new Dimension(1000,1000));
     this.setVisible(true);
+  }
+
+//  private void addScrollT
+
+  private void addPanelsToDisplay(JPanel displayPanel, JPanel sliderPanel, JPanel applyButton){
+    displayPanel.add(sliderPanel,BorderLayout.CENTER);
+    displayPanel.add(applyButton,BorderLayout.PAGE_END);
   }
 
   private void initializeSliders(){

@@ -4,9 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Scanner;
 
-import controller.RGBImageController;
+import controller.graphicalcontroller.GraphicalController;
+import controller.scriptcontroller.RGBImageController;
 import controller.RGBImageControllerInterface;
+import view.GraphicalView;
+import view.IView;
 
 /**
  * The class represents the starting point of the image processing application.
@@ -21,31 +25,31 @@ public class ImageProcessingApplication {
    * @param args The command line arguments if any passed to the main method.
    * @throws IOException Throws exception if the file path in args in invalid or not exists.
    */
-  public static void main(String[] args) throws IOException {
-    InputStream in = System.in;
 
-    OutputStream out = System.out;
-
-    RGBImageControllerInterface controller = null;
-
-    if (args.length > 0) {
-      String fileFlag = args[0];
-      String filePath = args[1];
-      if (!fileFlag.equals("-file")) {
-        String wrongFlag = "Wrong flag parameter passed as input through the input source."
-                + " Try again.\n";
-        out.write(wrongFlag.getBytes());
+  public static void main(String [] args) throws IOException {
+    RGBImageControllerInterface controller=null;
+    if(args.length>0){
+      OutputStream out=System.out;
+      if(args[0].equals("-file")){
+        String filePath = args[1];
+        File commandFile = new File(filePath);
+        InputStream in = new FileInputStream(commandFile);
+        controller=new RGBImageController(in,out);
+      }
+      else if(args[0].equals("-text")){
+        InputStream in=System.in;
+        controller=new RGBImageController(in,out);
+      }
+      else{
+        System.out.println("Illegal flags passed for the script controller.Try again.");
         return;
       }
-      try {
-        File commandFile = new File(filePath);
-        in = new FileInputStream(commandFile);
-      } catch (FileNotFoundException ex) {
-        String msg = "File was not found at the passed location.\n";
-        out.write(msg.getBytes());
-      }
     }
-    controller = new RGBImageController(in, out);
+    else {
+      IView view=new GraphicalView();
+      controller=new GraphicalController(view);
+
+    }
     controller.goCall();
   }
 }

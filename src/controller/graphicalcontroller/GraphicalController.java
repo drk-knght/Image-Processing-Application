@@ -1,8 +1,12 @@
 package controller.graphicalcontroller;
 
 import java.awt.*;
+import java.io.IOException;
 
+import controller.RGBImageControllerInterface;
 import controller.UpdateType;
+import controller.features.FeatureImpl;
+import controller.features.Features;
 import controller.filehandling.reader.FileReader;
 import controller.filehandling.reader.InputReaderInterface;
 import controller.filehandling.writer.FileWriter;
@@ -12,7 +16,7 @@ import model.RGBImage;
 import model.RGBImageInterface;
 import view.IView;
 
-public class GraphicalController implements GraphicalControllerInterface{
+public class GraphicalController implements GraphicalControllerInterface, RGBImageControllerInterface {
 
   private RGBImageInterface liveImageModel;
 
@@ -28,22 +32,24 @@ public class GraphicalController implements GraphicalControllerInterface{
     this.view=view;
     this.features=new FeatureImpl(this);
     isSaved=true;
-    this.view.setDisplay();
+//    this.view.setDisplay();
     setFeaturesInView();
   }
 
   @Override
   public void loadImage(String filePath) {
-    messageForUnsavedImage();
+//    messageForUnsavedImage();
     try {
       InputReaderInterface fileReader=new FileReader(filePath);
       this.currentPreviewImage=new RGBImage(fileReader.read());
-      isSaved=false;
+//      isSaved=false;
     }
     catch (Exception ex){
-      view.setErrorMessage(ex.getMessage());
+      view.setErrorMessage("Wrong or illegal value passed to the file load operation.");
       return;
     }
+    messageForUnsavedImage();
+    isSaved=false;
     updateLiveImage(UpdateType.NEW.ordinal());
     refreshImageOnScreen(this.currentPreviewImage);
     view.setPopupMessage("Image Preview Loaded");
@@ -206,6 +212,11 @@ public class GraphicalController implements GraphicalControllerInterface{
     refreshImageOnScreen(currentPreviewImage);
   }
 
+  @Override
+  public void getExceptionFromExternalEnv(Exception ex) {
+    view.setPopupMessage("Looks like you have closed the pop up dialog.\nCurrent operation is being cancelled.");
+  }
+
   private void setFeaturesInView(){
     this.view.setFeatures(features);
   }
@@ -244,5 +255,10 @@ public class GraphicalController implements GraphicalControllerInterface{
     else{
       this.liveImageModel=new RGBImage(currentPreviewImage.getPixel());
     }
+  }
+
+  @Override
+  public void goCall() throws IOException {
+    this.view.setDisplay();
   }
 }

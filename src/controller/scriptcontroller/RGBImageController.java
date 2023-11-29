@@ -1,4 +1,4 @@
-package controller;
+package controller.scriptcontroller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import controller.RGBImageControllerInterface;
 import controller.imagecommands.iocommands.LoadCommand;
 import controller.imagecommands.iocommands.SaveCommand;
 import controller.imagecommands.multiincommand.CombineChannelsCommand;

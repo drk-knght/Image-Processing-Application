@@ -2,7 +2,7 @@ package view;
 
 import java.awt.*;
 
-import controller.graphicalcontroller.Features;
+import controller.features.Features;
 
 public interface IView {
 

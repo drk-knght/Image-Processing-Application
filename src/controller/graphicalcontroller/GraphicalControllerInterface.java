@@ -25,4 +25,6 @@ public interface GraphicalControllerInterface {
 
   void setLiveImage(int updateType);
 
+  void getExceptionFromExternalEnv(Exception ex);
+
 }

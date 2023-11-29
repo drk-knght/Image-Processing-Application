@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import controller.graphicalcontroller.Features;
+import controller.features.Features;
 import controller.graphicalcontroller.GraphicalController;
 import controller.graphicalcontroller.GraphicalControllerInterface;
 import enums.AxisName;
@@ -51,75 +52,145 @@ public class GraphicalView extends JFrame implements IView {
 
   private void setButtonActions(){
     // I/O operations
-    buttonActions.put("Load Image",evt->{
-      String filePath=this.getUploadedFilePath();
-      this.features.load(filePath);
-    });
-    buttonActions.put("Save Image",evt->{
-      String filePath=this.getSavingFilePath();
-      this.features.save(filePath);
-    });
-    buttonActions.put("Exit App",evt->System.exit(0));
+    addIOButtonListeners();
 
     // Non-split operations:
-    buttonActions.put("Visualize Red Component",evt->{this.features.getSingleComponent(ColorMapping.red.ordinal());});
-    buttonActions.put("Visualize Green Component",evt->{this.features.getSingleComponent(ColorMapping.green.ordinal());});
-    buttonActions.put("Visualize Blue Component",evt->{this.features.getSingleComponent(ColorMapping.blue.ordinal());});
-    buttonActions.put("Flip Horizontal", evt->{this.features.flip(AxisName.horizontal.ordinal());});
-    buttonActions.put("Flip Vertical", evt->{this.features.flip(AxisName.vertical.ordinal());});
+    addNonPreviewListeners();
 
     // Apply and cancel
-    buttonActions.put("Apply Operation",evt->{this.features.applyOperation();});
-    buttonActions.put("Cancel Operation",evt->{this.features.cancelOperation();});
+    ModifyImageListeners();
 
     // Popup/Split operations
+    addPreviewListeners();
+    buttonActions.put("Compression",evt->
+    {
+      try {
+        int compressionFactor=getSplitPercentage("Image Compression Factor");
+        this.features.compressImage(compressionFactor);
+      }
+      catch (Exception ex){
+        this.features.getExceptionFromView(ex);
+      }
+    });
+  }
+
+  private void addPreviewListeners(){
+    addSingleSplitPreview();
+    addMultiInSplitPreview();
+  }
+
+  private void addSingleSplitPreview(){
     buttonActions.put("Blur",evt->
     {
-      int splitPercentage=getSplitPercentage("Blur Split");
-      this.features.changeSharpness(KernelImage.Blur.ordinal(),splitPercentage);
+      try{
+        int splitPercentage=getSplitPercentage("Blur Split");
+        this.features.changeSharpness(KernelImage.Blur.ordinal(),splitPercentage);
+      }
+      catch (Exception ex){
+        this.features.getExceptionFromView(ex);
+      }
     });
     buttonActions.put("Sharpen",evt->
     {
-      int splitPercentage=getSplitPercentage("Sharpen Split");
-      this.features.changeSharpness(KernelImage.Sharpen.ordinal(),splitPercentage);
+      try{
+        int splitPercentage = getSplitPercentage("Sharpen Split");
+        this.features.changeSharpness(KernelImage.Sharpen.ordinal(), splitPercentage);
+      }
+      catch (Exception ex){
+        this.features.getExceptionFromView(ex);
+      }
     });
     buttonActions.put("Sepia",evt->
     {
-      int splitPercentage=getSplitPercentage("Sepia Split");
-      this.features.sepia(splitPercentage);
+      try{
+        int splitPercentage = getSplitPercentage("Sepia Split");
+        this.features.sepia(splitPercentage);
+      }
+      catch (Exception ex){
+        this.features.getExceptionFromView(ex);
+      }
     });
     buttonActions.put("Color Correction",evt->
     {
-      int splitPercentage=getSplitPercentage("Color Correction Split");
-      this.features.colorCorrection(splitPercentage);
+      try{
+        int splitPercentage = getSplitPercentage("Color Correction Split");
+        this.features.colorCorrection(splitPercentage);
+      }
+      catch (Exception ex){
+        this.features.getExceptionFromView(ex);
+      }
     });
-    buttonActions.put("Compression",evt->
-    {
-      int compressionFactor=getSplitPercentage("Image Compression Factor");
-      this.features.compressImage(compressionFactor);
-    });
+  }
+
+  private void addMultiInSplitPreview(){
     buttonActions.put("Level Adjustment", evt->
     {
-      List<Integer>levelAdjustmentValues=getLevelAdjustmentValues(new LevelAdjustDialog(this, "Level Adjustment Split"));
-      int blackPoint=levelAdjustmentValues.get(LevelAdjustment.BLACK.levelValue);
-      int midPoint=levelAdjustmentValues.get(LevelAdjustment.MID.levelValue);
-      int highlightPoint=levelAdjustmentValues.get(LevelAdjustment.HIGHLIGHT.levelValue);
-      int splitPercentage=levelAdjustmentValues.get(0);
-      this.features.levelAdjustment(blackPoint,midPoint,highlightPoint,splitPercentage);
+      try{
+        List<Integer>levelAdjustmentValues=getLevelAdjustmentValues(new LevelAdjustDialog(this, "Level Adjustment Split"));
+        int blackPoint=levelAdjustmentValues.get(LevelAdjustment.BLACK.levelValue);
+        int midPoint=levelAdjustmentValues.get(LevelAdjustment.MID.levelValue);
+        int highlightPoint=levelAdjustmentValues.get(LevelAdjustment.HIGHLIGHT.levelValue);
+        int splitPercentage=levelAdjustmentValues.get(0);
+        this.features.levelAdjustment(blackPoint,midPoint,highlightPoint,splitPercentage);
+      }
+      catch (Exception ex){
+        this.features.getExceptionFromView(ex);
+      }
     });
 
     buttonActions.put("Greyscale", evt->
     {
       List<Integer>greyScaleValues=getLevelAdjustmentValues(new GreyScaleDialog(this, "Greyscale Split"));
-      int splitPercentage=greyScaleValues.get(0);
-      int greyScaleValueMap=greyScaleValues.get(1);
-      this.features.greyScale(greyScaleValueMap,splitPercentage);
+      try{
+        int splitPercentage=greyScaleValues.get(0);
+        int greyScaleValueMap=greyScaleValues.get(1);
+        this.features.greyScale(greyScaleValueMap,splitPercentage);
+      }
+      catch (Exception ex){
+        this.features.getExceptionFromView(ex);
+      }
     });
   }
 
-  private int getSplitPercentage(String operationTitle){
+  private void addNonPreviewListeners(){
+    buttonActions.put("Visualize Red Component",evt->{this.features.getSingleComponent(ColorMapping.red.ordinal());});
+    buttonActions.put("Visualize Green Component",evt->{this.features.getSingleComponent(ColorMapping.green.ordinal());});
+    buttonActions.put("Visualize Blue Component",evt->{this.features.getSingleComponent(ColorMapping.blue.ordinal());});
+    buttonActions.put("Flip Horizontal", evt->{this.features.flip(AxisName.horizontal.ordinal());});
+    buttonActions.put("Flip Vertical", evt->{this.features.flip(AxisName.vertical.ordinal());});
+  }
+
+  private void addIOButtonListeners(){
+    buttonActions.put("Load Image",evt->{
+      try{
+        String filePath=this.getUploadedFilePath();
+        this.features.load(filePath);
+      }
+      catch (Exception ex){
+        this.features.getExceptionFromView(ex);
+      }
+    });
+    buttonActions.put("Save Image",evt->{
+      try {
+        String filePath=this.getSavingFilePath();
+        this.features.save(filePath);
+      }
+      catch (Exception ex){
+        this.features.getExceptionFromView(ex);
+      }
+    });
+    buttonActions.put("Exit App",evt->System.exit(0));
+  }
+
+  private void ModifyImageListeners(){
+    buttonActions.put("Apply Operation",evt->{this.features.applyOperation();});
+    buttonActions.put("Cancel Operation",evt->{this.features.cancelOperation();});
+  }
+
+  private Integer getSplitPercentage(String operationTitle){
     SimpleDialogSliderInterface simpleJDialog=new SimpleDialogSliderPreview(this,operationTitle);
-    int splitPercentage=100;
+    Integer splitPercentage=null;
+
     if(simpleJDialog.getResultOperationFlag()){
       splitPercentage= simpleJDialog.getSliderPercentage();
     }
@@ -136,7 +207,7 @@ public class GraphicalView extends JFrame implements IView {
     return resultList;
   }
 
-  private String getUploadedFilePath(){
+  private String getUploadedFilePath() throws IOException {
     JFileChooser selectFile=new JFileChooser(".");
     FileNameExtensionFilter fileExtensions=new FileNameExtensionFilter("PPM, JPG, JPEG, PNG Images",
             "jpg","jpeg","png","ppm");
@@ -146,10 +217,12 @@ public class GraphicalView extends JFrame implements IView {
       File f=selectFile.getSelectedFile();
       return f.getPath();
     }
-    return null;
+    else {
+      throw new IOException("Load operation cancelled by the user.");
+    }
   }
 
-  private String getSavingFilePath(){
+  private String getSavingFilePath() throws IOException {
     JFileChooser selectFile=new JFileChooser(".");
     FileNameExtensionFilter fileExtensions=new FileNameExtensionFilter("PPM, JPG, JPEG, PNG Images",
             "jpg","jpeg","png","ppm");
@@ -158,8 +231,9 @@ public class GraphicalView extends JFrame implements IView {
     if(retrievalResult==JFileChooser.APPROVE_OPTION){
       File f=selectFile.getSelectedFile();
       return f.getPath();
+    }else {
+      throw new IOException("Save operation cancelled by the user.");
     }
-    return null;
   }
 
   public GraphicalView(){
@@ -217,7 +291,6 @@ public class GraphicalView extends JFrame implements IView {
   public void setFeatures(Features features) {
     this.features=features;
   }
-
 
   private JPanel getLiveImagePanel(Image image, String title,int x,int y){
     JPanel imagePanel = new JPanel();

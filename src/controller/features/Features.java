@@ -1,4 +1,4 @@
-package controller.graphicalcontroller;
+package controller.features;
 
 
 public interface Features {
@@ -26,4 +26,6 @@ public interface Features {
   void applyOperation();
 
   void cancelOperation();
+
+  void getExceptionFromView(Exception ex);
 }
