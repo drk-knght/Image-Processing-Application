@@ -1,4 +1,4 @@
-package view.dialogMenus.multiIPDialog;
+package view.dialogMenus.multiipdialog;
 
 import java.awt.*;
 

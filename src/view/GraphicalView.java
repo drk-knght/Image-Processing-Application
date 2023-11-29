@@ -19,9 +19,9 @@ import enums.AxisName;
 import enums.ColorMapping;
 import enums.KernelImage;
 import enums.LevelAdjustment;
-import view.dialogMenus.multiIPDialog.GreyScaleDialog;
-import view.dialogMenus.multiIPDialog.LevelAdjustDialog;
-import view.dialogMenus.multiIPDialog.MultiInputSliderDialogInterface;
+import view.dialogMenus.multiipdialog.GreyScaleDialog;
+import view.dialogMenus.multiipdialog.LevelAdjustDialog;
+import view.dialogMenus.multiipdialog.MultiInputSliderDialogInterface;
 import view.dialogMenus.simpledialog.SimpleDialogSliderInterface;
 import view.dialogMenus.simpledialog.SimpleDialogSliderPreview;
 
