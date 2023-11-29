@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
-public class LevelAdjustDialog extends JDialog implements MultiInputSliderDialogInterface {
+public class LevelAdjustDialog extends AbstractMultiInputDialog{
 
   private JLabel sliderSplitTextLabel;
 
@@ -25,22 +24,22 @@ public class LevelAdjustDialog extends JDialog implements MultiInputSliderDialog
 
   private JSlider highlightPointSlider;
 
-  private boolean result;
-
-
   public LevelAdjustDialog(JFrame parentFrame, String title){
-    super(parentFrame,title,true);
-    this.result=false;
+    super(parentFrame,title);
     initializeSliders();
     initializeLabels();
+
     JPanel displayPanel = new JPanel();
     displayPanel.setLayout(new BorderLayout(30,15));
     JScrollPane displayScrollPane=new JScrollPane(displayPanel);
     this.add(displayScrollPane);
+
     JPanel sliderPanel=getCombinedSlidersPanel();
     JPanel applyButton=getApplyButton();
+
     displayPanel.add(sliderPanel,BorderLayout.CENTER);
     displayPanel.add(applyButton,BorderLayout.PAGE_END);
+
     this.setSize(new Dimension(1000,1000));
     this.setVisible(true);
   }
@@ -54,24 +53,17 @@ public class LevelAdjustDialog extends JDialog implements MultiInputSliderDialog
 
   private void initializeLabels(){
     this.blackPointLabel=new JLabel();
-    setLabelText(blackPointLabel,this.blackPointSlider.getValue());
+    setLabelText(this.blackPointLabel,this.blackPointSlider);
 
     this.midPointLabel=new JLabel();
-    setLabelText(midPointLabel,this.midPointSlider.getValue());
+    setLabelText(this.midPointLabel,this.midPointSlider);
 
     this.highlightPointLabel=new JLabel();
-    setLabelText(highlightPointLabel,this.highlightPointSlider.getValue());
+    setLabelText(this.highlightPointLabel,this.highlightPointSlider);
 
     this.sliderSplitTextLabel=new JLabel();
-    setLabelText(sliderSplitTextLabel,this.splitPreviewSlider.getValue());
+    setLabelText(this.sliderSplitTextLabel,this.splitPreviewSlider);
   }
-
-  // 1. Main panel will have a border layout structure with all sliders and their labels in the center panel
-  // 2. create a grid layout for all the sliders.
-  // 3. for each slider create a border layout-
-  // 3.1. label to show the heading of the slider like black, mid, highlight etc.
-  // 3.2. with min, max value in center panel.
-  // 3.3. label to show the current slider value in the page end panel.
 
   private JPanel getCombinedSlidersPanel(){
     JPanel displayPanel=new JPanel();
@@ -87,50 +79,10 @@ public class LevelAdjustDialog extends JDialog implements MultiInputSliderDialog
     return displayPanel;
   }
 
-  private JPanel getSingleJSliderPanel(String headingLabel, int max, JSlider presentSlider, JLabel actionChangeLabel){
-    JPanel panelInUse=new JPanel();
-    panelInUse.setLayout(new BorderLayout());
-    setTitleBorder(panelInUse,headingLabel);
-    setSliderProperties(presentSlider, max,actionChangeLabel);
-    panelInUse.add(presentSlider,BorderLayout.CENTER);
-    panelInUse.add(actionChangeLabel,BorderLayout.PAGE_END);
-    return panelInUse;
-  }
-
-  private void setSliderProperties(JSlider slider, int max, JLabel actionChangeLabel){
-    slider.setMinimum(0);
-    slider.setMaximum(max);
-    slider.setPaintLabels(true);
-    slider.setPaintTicks(true);
-    slider.setMajorTickSpacing(10);
-    slider.setMinorTickSpacing(5);
-    slider.addChangeListener(evt->{setLabelText(actionChangeLabel,slider.getValue());});
-  }
-
-  private void setTitleBorder(JPanel panel, String headingLabel){
-    TitledBorder sliderBorder=BorderFactory.createTitledBorder(headingLabel);
-    sliderBorder.setTitleJustification(TitledBorder.CENTER);
-    panel.setBorder(sliderBorder);
-  }
-
-  private void setLabelText(JLabel label, int value){
-    label.setText("The selected number is:"+value);
-  }
-
-  private JPanel getApplyButton(){
-    JPanel buttonPanel=new JPanel();
-    JButton applyButton = new JButton("Apply Operation");
-    applyButton.addActionListener(evt->{
-      this.result=true;
-      this.setVisible(false);
-    });
-    buttonPanel.add(applyButton);
-    return buttonPanel;
-  }
 
   @Override
-  public boolean getResultOperationFlag() {
-    return this.result;
+  protected void setLabelText(JLabel actionChangeLabel, JSlider slider) {
+    actionChangeLabel.setText("The number selected is: "+slider.getValue());
   }
 
   @Override

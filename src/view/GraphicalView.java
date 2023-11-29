@@ -32,8 +32,6 @@ public class GraphicalView extends JFrame implements IView {
 
   private  JPanel centerPanel;
 
-  private JPanel pageEndPanel;
-
   private JPanel mainPanel;
 
   private JPanel histogramPanel;
@@ -130,7 +128,6 @@ public class GraphicalView extends JFrame implements IView {
   }
 
   private List<Integer> getLevelAdjustmentValues(MultiInputSliderDialogInterface levelAdjustDialog){
-//    MultiInputSliderDialogInterface levelAdjustDialog=new LevelAdjustDialog(this, "Level Adjustment Split");
     List<Integer> resultList=null;
     if(levelAdjustDialog.getResultOperationFlag()){
       resultList=levelAdjustDialog.getListOfInputValues();
@@ -138,7 +135,6 @@ public class GraphicalView extends JFrame implements IView {
     levelAdjustDialog.dispose();
     return resultList;
   }
-
 
   private String getUploadedFilePath(){
     JFileChooser selectFile=new JFileChooser(".");
@@ -184,7 +180,7 @@ public class GraphicalView extends JFrame implements IView {
     Image image=new BufferedImage(1,1,BufferedImage.TYPE_INT_RGB);
     this.lineStartPanel=getLineStartPanel(image);
     this.centerPanel=getLiveImagePanel(image,"Image Preview",1000,800);
-    this.pageEndPanel=getPageEndPanel();
+    JPanel pageEndPanel = getPageEndPanel();
     this.mainPanel.add(lineStartPanel,BorderLayout.LINE_START);
     this.mainPanel.add(centerPanel,BorderLayout.CENTER);
     this.mainPanel.add(pageEndPanel,BorderLayout.PAGE_END);

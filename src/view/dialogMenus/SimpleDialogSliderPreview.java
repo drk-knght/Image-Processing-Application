@@ -22,14 +22,17 @@ public class SimpleDialogSliderPreview extends JDialog implements SimpleDialogSl
   public SimpleDialogSliderPreview(JFrame parentFrame, String title){
     super(parentFrame,title,true);
     this.result=false;
+
     JPanel displayPanel = new JPanel();
     displayPanel.setLayout(new BorderLayout(30,15));
     JScrollPane displayScrollPane=new JScrollPane(displayPanel);
     this.add(displayScrollPane);
+
     JPanel sliderPanel=getSliderPanel();
     JPanel applyButton=getApplyButton();
     displayPanel.add(sliderPanel,BorderLayout.CENTER);
     displayPanel.add(applyButton,BorderLayout.PAGE_END);
+
     this.setSize(new Dimension(500,200));
     this.setVisible(true);
   }
