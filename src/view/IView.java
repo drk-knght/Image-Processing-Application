@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.*;
+import java.awt.Image;
 import java.util.List;
 
 import controller.features.Features;

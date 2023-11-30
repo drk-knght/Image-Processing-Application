@@ -1,8 +1,15 @@
 package view.dialogMenus.simpledialog;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
-import javax.swing.*;
+import javax.swing.JDialog;
+import javax.swing.JSlider;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 /**
  * This class represents a JDialog box which takes only the slider input val;ue from the user.

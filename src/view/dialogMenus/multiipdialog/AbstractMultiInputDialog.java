@@ -1,8 +1,14 @@
 package view.dialogMenus.multiipdialog;
 
-import java.awt.*;
+import java.awt.BorderLayout;
 
-import javax.swing.*;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JSlider;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
 /**

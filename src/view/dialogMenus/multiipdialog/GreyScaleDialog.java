@@ -1,10 +1,18 @@
 package view.dialogMenus.multiipdialog;
 
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JRadioButton;
+import javax.swing.JLabel;
+import javax.swing.JSlider;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ButtonGroup;
 
 import enums.GreyScaleType;
 

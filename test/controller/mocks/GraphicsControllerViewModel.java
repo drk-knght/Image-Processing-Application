@@ -3,7 +3,7 @@ package controller.mocks;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,10 @@
 package controller.graphicalcontroller;
 
-import java.awt.*;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.List;
 
-import javax.swing.*;
-
+import javax.swing.JFrame;
 import controller.RGBImageControllerInterface;
 import controller.features.FeatureImpl;
 import controller.features.Features;

@@ -1,10 +1,16 @@
 package view.dialogMenus.multiipdialog;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JSlider;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 /**
  * This class represent a JDialog box to get the input data from the user for Level Adjustment.

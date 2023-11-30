@@ -1,6 +1,6 @@
 package enums;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * Enum to store the color names and their mapping to fixed value for any color related operation.
