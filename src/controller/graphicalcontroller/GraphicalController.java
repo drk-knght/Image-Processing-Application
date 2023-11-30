@@ -44,21 +44,17 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
 
   @Override
   public void loadImage() {
-    String filePath= null;
     try{
-      filePath= view.getInputFilePath();
+      String filePath= view.getInputFilePath();
       checkNullFilePath(filePath);
-    }
-    catch(Exception ex){
-      view.setPopupMessage(ex.getMessage());
-      return;
-    }
-    try {
-
       InputReaderInterface fileReader=new FileReader(filePath);
       this.currentPreviewImage=new RGBImage(fileReader.read());
     }
-    catch (Exception ex){
+    catch(IllegalArgumentException ex){
+      view.setPopupMessage(ex.getMessage());
+      return;
+    }
+    catch (IOException ex){
       view.setErrorMessage("Wrong or illegal value passed to the file load operation.");
       return;
     }
@@ -67,7 +63,6 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     updateLiveImage(UpdateType.NEW.ordinal());
     refreshImageOnScreen(this.currentPreviewImage);
     view.setPopupMessage("Image Preview Loaded");
-
   }
 
   @Override
@@ -75,22 +70,18 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     if(checkNullImage()){
       return;
     }
-    String filePath=null;
-    try {
-      filePath=view.getOutputFilePath();
+    try{
+      String filePath=view.getOutputFilePath();
       checkNullFilePath(filePath);
-    }
-    catch (Exception ex){
-      view.setPopupMessage(ex.getMessage());
-      return;
-    }
-
-    try {
       OutputWriterInterface fileWriter=new FileWriter(filePath);
       fileWriter.write(this.liveImageModel);
       isSaved=true;
     }
-    catch (Exception ex){
+    catch (IllegalArgumentException ex){
+      view.setPopupMessage(ex.getMessage());
+      return;
+    }
+    catch (IOException ex){
       view.setErrorMessage(ex.getMessage());
       return;
     }
@@ -102,25 +93,19 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     if(checkNullImage()){
       return;
     }
-    int splitPercentage;
     try {
-      splitPercentage=view.displayDialogSingleSplitPreview("Split Preview Option",
+      int splitPercentage=view.displayDialogSingleSplitPreview("Split Preview Option",
               "The preview % of image on which change in sharpness operation is visible");
-    }
-    catch (Exception ex){
-      getExceptionFromExternalEnv(ex);
-      return;
-    }
-    RGBImageInterface displayImage=null;
-    try{
-      displayImage=this.liveImageModel.changeSharpness(kernelMap,splitPercentage);
+      RGBImageInterface displayImage=this.liveImageModel.changeSharpness(kernelMap,splitPercentage);
       currentPreviewImage=this.liveImageModel.changeSharpness(kernelMap,100);
+      refreshImageOnScreen(displayImage);
+    }
+    catch (NullPointerException ex) {
+      getExceptionFromExternalEnv(ex);
     }
     catch (Exception ex){
       view.setErrorMessage("Changing the sharpness of the image failed. \nReason: "+ex.getMessage());
-      return;
     }
-    refreshImageOnScreen(displayImage);
   }
 
   @Override
@@ -128,27 +113,20 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     if(checkNullImage()){
       return;
     }
-    List<Integer> greyScaleValues=view.displayDialogMultiINPreview(new GreyScaleDialog((JFrame) view, "Greyscale Split"));
-    int splitPercentage;
-    int greyScaleValueMap;
     try{
-      splitPercentage=greyScaleValues.get(0);
-      greyScaleValueMap=greyScaleValues.get(1);
-    }
-    catch (Exception ex){
-      getExceptionFromExternalEnv(ex);
-      return;
-    }
-    RGBImageInterface displayImage=null;
-    try{
-      displayImage=this.liveImageModel.greyScaleImage(greyScaleValueMap,splitPercentage);
+      List<Integer> greyScaleValues=view.displayDialogMultiINPreview(new GreyScaleDialog((JFrame) view, "Greyscale Split"));
+      int splitPercentage=greyScaleValues.get(0);
+      int greyScaleValueMap=greyScaleValues.get(1);
+      RGBImageInterface displayImage=this.liveImageModel.greyScaleImage(greyScaleValueMap,splitPercentage);
       currentPreviewImage=this.liveImageModel.greyScaleImage(greyScaleValueMap,100);
+      refreshImageOnScreen(displayImage);
+    }
+    catch (NullPointerException ex){
+      getExceptionFromExternalEnv(ex);
     }
     catch (Exception ex){
       view.setErrorMessage("Grey scale operation failed. \nReason: "+ex.getMessage());
-      return;
     }
-    refreshImageOnScreen(displayImage);
   }
 
   @Override
@@ -156,26 +134,19 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     if(checkNullImage()){
       return;
     }
-    int splitPercentage;
     try{
-      splitPercentage=view.displayDialogSingleSplitPreview("Sepia Preview Option",
+      int splitPercentage=view.displayDialogSingleSplitPreview("Sepia Preview Option",
               "The preview % of image on which change in sepia operation is visible");
-    }
-    catch (Exception ex){
-      getExceptionFromExternalEnv(ex);
-      return;
-    }
-    RGBImageInterface displayImage=null;
-    try {
-
-      displayImage=this.liveImageModel.sepiaImage(splitPercentage);
+      RGBImageInterface displayImage=this.liveImageModel.sepiaImage(splitPercentage);
       currentPreviewImage=this.liveImageModel.sepiaImage(100);
+      refreshImageOnScreen(displayImage);
+    }
+    catch (NullPointerException ex){
+      getExceptionFromExternalEnv(ex);
     }
     catch (Exception ex){
       view.setErrorMessage("Sepia Transformation operation failed. \nReason: "+ex.getMessage());
-      return;
     }
-    refreshImageOnScreen(displayImage);
   }
 
   @Override
@@ -183,25 +154,19 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     if(checkNullImage()){
       return;
     }
-    int splitPercentage;
     try {
-      splitPercentage=view.displayDialogSingleSplitPreview("Color Correction Split",
+      int splitPercentage=view.displayDialogSingleSplitPreview("Color Correction Split",
               "The preview % of image on which Color Correction operation is visible");
-    }
-    catch (Exception ex){
-      getExceptionFromExternalEnv(ex);
-      return;
-    }
-    RGBImageInterface displayImage=null;
-    try {
-      displayImage=this.liveImageModel.colorCorrectionImage(splitPercentage);
+      RGBImageInterface displayImage=this.liveImageModel.colorCorrectionImage(splitPercentage);
       currentPreviewImage=this.liveImageModel.colorCorrectionImage(100);
+      refreshImageOnScreen(displayImage);
+    }
+    catch (NullPointerException ex){
+      getExceptionFromExternalEnv(ex);
     }
     catch (Exception ex){
       view.setErrorMessage("Color correction operation failed. \nReason: "+ex.getMessage());
-      return;
     }
-    refreshImageOnScreen(displayImage);
   }
 
   @Override
@@ -209,31 +174,22 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     if(checkNullImage()){
       return;
     }
-    RGBImageInterface displayImage=null;
-    int blackPoint;
-    int midPoint;
-    int highlightPoint;
-    int splitPercentage;
     try{
       List<Integer>levelAdjustmentValues=view.displayDialogMultiINPreview(new LevelAdjustDialog((JFrame)view, "Level Adjustment Split"));
-      blackPoint=levelAdjustmentValues.get(LevelAdjustment.BLACK.levelValue);
-      midPoint=levelAdjustmentValues.get(LevelAdjustment.MID.levelValue);
-      highlightPoint=levelAdjustmentValues.get(LevelAdjustment.HIGHLIGHT.levelValue);
-      splitPercentage=levelAdjustmentValues.get(0);
-    }
-    catch (Exception ex){
-      getExceptionFromExternalEnv(ex);
-      return;
-    }
-    try {
-      displayImage=this.liveImageModel.levelsAdjustment(blackPoint,midPoint,highlightPoint,splitPercentage);
+      int blackPoint=levelAdjustmentValues.get(LevelAdjustment.BLACK.levelValue);
+      int midPoint=levelAdjustmentValues.get(LevelAdjustment.MID.levelValue);
+      int highlightPoint=levelAdjustmentValues.get(LevelAdjustment.HIGHLIGHT.levelValue);
+      int splitPercentage=levelAdjustmentValues.get(0);
+      RGBImageInterface displayImage=this.liveImageModel.levelsAdjustment(blackPoint,midPoint,highlightPoint,splitPercentage);
       currentPreviewImage=this.liveImageModel.levelsAdjustment(blackPoint,midPoint,highlightPoint,100);
+      refreshImageOnScreen(displayImage);
+    }
+    catch (NullPointerException ex){
+      getExceptionFromExternalEnv(ex);
     }
     catch (Exception ex){
       view.setErrorMessage("Level adjustment operation failed. \nReason: "+ex.getMessage());
-      return;
     }
-    refreshImageOnScreen(displayImage);
   }
 
   @Override
@@ -271,23 +227,18 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
     if(checkNullImage()){
       return;
     }
-    int compressionPercentage;
     try {
-      compressionPercentage=view.displayDialogSingleSplitPreview("Image Compression Factor",
+      int compressionPercentage=view.displayDialogSingleSplitPreview("Image Compression Factor",
               "The current compression factor of the image is");
-    }
-    catch (Exception ex){
-      getExceptionFromExternalEnv(ex);
-      return;
-    }
-    try {
       currentPreviewImage=this.currentPreviewImage.compressImage(compressionPercentage);
+      refreshImageOnScreen(currentPreviewImage);
+    }
+    catch (NullPointerException ex){
+      getExceptionFromExternalEnv(ex);
     }
     catch (Exception ex){
       view.setErrorMessage("Compression operation failed. \nReason: "+ex.getMessage());
-      return;
     }
-    refreshImageOnScreen(currentPreviewImage);
   }
 
   @Override
@@ -345,7 +296,7 @@ public class GraphicalController implements GraphicalControllerInterface, RGBIma
   }
 
   private void checkNullFilePath(String filePath){
-    if(filePath==null || filePath.equals("")){
+    if(filePath==null || filePath.isEmpty()){
       throw new IllegalArgumentException("Operation cancelled.");
     }
   }

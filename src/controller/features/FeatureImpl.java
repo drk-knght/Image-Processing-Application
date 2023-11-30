@@ -47,10 +47,6 @@ public class FeatureImpl implements Features{
     controller.getSingleComponentImage(colorType);
   }
 
-//  @Override
-//  public void compressImage(int compressionFactor) {
-//    controller.compressImage(compressionFactor);
-//  }
 
   @Override
   public void compressImage() {
@@ -59,14 +55,9 @@ public class FeatureImpl implements Features{
 
   @Override
   public void load() {
-//    controller.loadImage(imagePath);
     controller.loadImage();
   }
 
-//  @Override
-//  public void save(String imagePath) {
-//    controller.saveImage(imagePath);
-//  }
 
   @Override
   public void save() {

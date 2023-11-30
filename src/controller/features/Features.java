@@ -17,7 +17,6 @@ public interface Features {
 
   void getSingleComponent(int colorType);
 
-
   void compressImage();
 
   void load();
