@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.util.List;
 
 import controller.features.Features;
-import view.dialogMenus.multiipdialog.MultiInputSliderDialogInterface;
+import view.dialogmenus.multiipdialog.MultiInputSliderDialogInterface;
 
 /**
  * This interface represents the functionalities offered by a view.

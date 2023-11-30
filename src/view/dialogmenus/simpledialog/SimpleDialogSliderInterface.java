@@ -1,4 +1,4 @@
-package view.dialogMenus.simpledialog;
+package view.dialogmenus.simpledialog;
 
 /**
  * The interface represents the functionalities offered by a simple dialog graphical user interface.

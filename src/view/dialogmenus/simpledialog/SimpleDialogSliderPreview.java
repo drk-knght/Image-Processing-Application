@@ -1,4 +1,4 @@
-package view.dialogMenus.simpledialog;
+package view.dialogmenus.simpledialog;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

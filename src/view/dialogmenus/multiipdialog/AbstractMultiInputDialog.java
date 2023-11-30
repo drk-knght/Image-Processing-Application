@@ -1,4 +1,4 @@
-package view.dialogMenus.multiipdialog;
+package view.dialogmenus.multiipdialog;
 
 import java.awt.BorderLayout;
 

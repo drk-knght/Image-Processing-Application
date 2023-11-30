@@ -22,9 +22,9 @@ import controller.features.Features;
 import enums.AxisName;
 import enums.ColorMapping;
 import enums.KernelImage;
-import view.dialogMenus.multiipdialog.MultiInputSliderDialogInterface;
-import view.dialogMenus.simpledialog.SimpleDialogSliderInterface;
-import view.dialogMenus.simpledialog.SimpleDialogSliderPreview;
+import view.dialogmenus.multiipdialog.MultiInputSliderDialogInterface;
+import view.dialogmenus.simpledialog.SimpleDialogSliderInterface;
+import view.dialogmenus.simpledialog.SimpleDialogSliderPreview;
 
 /**
  * This class represents the Graphical User Interface of the MVC architecture.

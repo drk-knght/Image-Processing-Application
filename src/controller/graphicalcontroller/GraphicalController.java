@@ -1,10 +1,11 @@
 package controller.graphicalcontroller;
 
-import java.awt.Image;
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+
 import controller.RGBImageControllerInterface;
 import controller.features.FeatureImpl;
 import controller.features.Features;
@@ -17,8 +18,8 @@ import enums.LevelAdjustment;
 import enums.UpdateType;
 import model.RGBImageInterface;
 import view.IView;
-import view.dialogMenus.multiipdialog.GreyScaleDialog;
-import view.dialogMenus.multiipdialog.LevelAdjustDialog;
+import view.dialogmenus.multiipdialog.GreyScaleDialog;
+import view.dialogmenus.multiipdialog.LevelAdjustDialog;
 
 
 /**
@@ -338,7 +339,8 @@ public class GraphicalController implements GraphicalControllerInterface,
   }
 
   private boolean checkNullImage() {
-    if (this.liveImageModel == null) {
+    if (this.liveImageModel.getImageWidth() == 0 || this.liveImageModel.getImageHeight() == 0
+            || this.liveImageModel == null || this.liveImageModel.getPixel() == null) {
       view.setErrorMessage("No image has been loaded but an action has been requested."
               + "\nLoad an image to use the operations.");
       return true;

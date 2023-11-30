@@ -14,7 +14,7 @@ import controller.graphicalcontroller.GraphicalController;
 import controller.graphicalcontroller.GraphicalControllerInterface;
 import model.RGBImageInterface;
 import view.IView;
-import view.dialogMenus.multiipdialog.MultiInputSliderDialogInterface;
+import view.dialogmenus.multiipdialog.MultiInputSliderDialogInterface;
 
 import static org.junit.Assert.assertEquals;
 
