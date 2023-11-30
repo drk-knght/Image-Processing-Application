@@ -264,7 +264,7 @@ public class GraphicControllerModel {
 //    controller.execute(mp);
     IView view=new GraphicalView();
     GraphicalControllerInterface controller=new GraphicalController(view);
-    controller.levelAdjustImage(1,3,4,5);
+    controller.levelAdjustImage();
     assertEquals("loading the image.Brightness "
             + "image operation: 0", mockModel.logData.toString());
   }

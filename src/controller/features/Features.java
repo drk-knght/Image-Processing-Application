@@ -3,26 +3,24 @@ package controller.features;
 
 public interface Features {
 
-  void greyScale(int greyScaleType, int splitPercent);
+  void greyScale();
 
   void flip(int axisFlip);
 
-  void colorCorrection(int splitPercent);
+  void colorCorrection();
 
-  void changeSharpness(int sharpen, int splitPercent);
+  void changeSharpness(int kernelMap);
 
-  void sepia(int splitPercent);
+  void sepia();
 
-  void levelAdjustment(int b, int m, int w, int splitPercent);
+  void levelAdjustment();
 
   void getSingleComponent(int colorType);
 
-  void compressImage(int compressionFactor);
 
-//  void load(String imagePath);
+  void compressImage();
 
   void load();
-//  void save(String imagePath);
 
   void save();
 

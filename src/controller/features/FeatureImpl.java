@@ -13,8 +13,8 @@ public class FeatureImpl implements Features{
   }
 
   @Override
-  public void greyScale(int greyScaleType, int splitPercent) {
-    controller.applyGreyScale(greyScaleType,splitPercent);
+  public void greyScale() {
+    controller.applyGreyScale();
   }
 
   @Override
@@ -23,23 +23,23 @@ public class FeatureImpl implements Features{
   }
 
   @Override
-  public void colorCorrection(int splitPercent) {
-    controller.applyColorCorrection(splitPercent);
+  public void colorCorrection() {
+    controller.applyColorCorrection();
   }
 
   @Override
-  public void changeSharpness(int sharpen, int splitPercent) {
-    controller.changeSharpness(sharpen,splitPercent);
+  public void changeSharpness(int kernelMap) {
+    controller.changeSharpness(kernelMap);
   }
 
   @Override
-  public void sepia(int splitPercent) {
-    controller.applySepia(splitPercent);
+  public void sepia(){
+    controller.applySepia();
   }
 
   @Override
-  public void levelAdjustment(int b, int m, int w, int splitPercent) {
-    controller.levelAdjustImage(b,m,w,splitPercent);
+  public void levelAdjustment() {
+    controller.levelAdjustImage();
   }
 
   @Override
@@ -47,16 +47,16 @@ public class FeatureImpl implements Features{
     controller.getSingleComponentImage(colorType);
   }
 
+//  @Override
+//  public void compressImage(int compressionFactor) {
+//    controller.compressImage(compressionFactor);
+//  }
+
   @Override
-  public void compressImage(int compressionFactor) {
-    controller.compressImage(compressionFactor);
+  public void compressImage() {
+    controller.compressImage();
   }
 
-//  @Override
-//  public void load(String imagePath) {
-////    controller.loadImage(imagePath);
-//    controller.loadImage();
-//  }
   @Override
   public void load() {
 //    controller.loadImage(imagePath);

@@ -5,15 +5,14 @@ import org.junit.Test;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import controller.RGBImageControllerInterface;
 import controller.features.Features;
 import controller.graphicalcontroller.GraphicalController;
 import controller.graphicalcontroller.GraphicalControllerInterface;
-import model.RGBImageInterface;
 import view.IView;
+import view.dialogMenus.multiipdialog.MultiInputSliderDialogInterface;
 
 import static org.junit.Assert.assertEquals;
 
@@ -65,6 +64,17 @@ public class GraphicControllerView {
     @Override
     public String getOutputFilePath() {
       viewlogData.append("Output file Path.");
+      return null;
+    }
+
+    @Override
+    public Integer displayDialogSingleSplitPreview(String operationTitle, String labelText) {
+      viewlogData.append("Split Preview");
+      return null;
+    }
+
+    @Override
+    public List<Integer> displayDialogMultiINPreview(MultiInputSliderDialogInterface levelAdjustDialog) {
       return null;
     }
   }
@@ -334,31 +344,31 @@ public class GraphicControllerView {
 
   @Test
   public void testSharpness() throws IOException {
-    controllerInterface.changeSharpness(1,1);
+    controllerInterface.changeSharpness(1);
     assertEquals(expResult,log.toString());
   }
 
   @Test
   public void testGreyScale() throws IOException {
-    controllerInterface.applyGreyScale(0,0);
+    controllerInterface.applyGreyScale();
     assertEquals(expResult,log.toString());
   }
 
   @Test
   public void testSepia(){
-    controllerInterface.applySepia(10);
+    controllerInterface.applySepia();
     assertEquals(expResult,log.toString());
   }
 
   @Test
   public void testColorCorrection(){
-    controllerInterface.applyColorCorrection(10);
+    controllerInterface.applyColorCorrection();
     assertEquals(expResult,log.toString());
   }
 
   @Test
   public void testLevelAdjustment(){
-    controllerInterface.levelAdjustImage(10,50,100,5);
+    controllerInterface.levelAdjustImage();
     assertEquals(expResult,log.toString());
   }
 
@@ -376,7 +386,7 @@ public class GraphicControllerView {
 
   @Test
   public void testCompressImage(){
-    controllerInterface.compressImage(23);
+    controllerInterface.compressImage();
     assertEquals(expResult,log.toString());
   }
 

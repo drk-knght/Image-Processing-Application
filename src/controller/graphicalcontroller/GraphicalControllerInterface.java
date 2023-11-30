@@ -6,28 +6,25 @@ package controller.graphicalcontroller;
 
 public interface GraphicalControllerInterface {
 
-//  void loadImage(String filePath);
   void loadImage();
-
-//  void saveImage(String filePath);
 
   void saveImage();
 
-  void changeSharpness(int kernelMap,int splitPercentage);
+  void changeSharpness(int kernelMap);
 
-  void applyGreyScale(int greyScaleType, int splitPercentage);
+  void applyGreyScale();
 
-  void applySepia(int splitPercentage);
+  void applySepia();
 
-  void applyColorCorrection(int splitPercentage);
+  void applyColorCorrection();
 
-  void levelAdjustImage(int black, int mid, int highlight,int splitPercentage);
+  void levelAdjustImage();
 
   void flipImage(int axisNameMap);
 
   void getSingleComponentImage(int colorType);
 
-  void compressImage(int compressionPercentage);
+  void compressImage();
 
   void setLiveImage(int updateType);
 

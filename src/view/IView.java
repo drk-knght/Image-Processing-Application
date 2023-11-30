@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.*;
+import java.util.List;
 
 import controller.features.Features;
+import view.dialogMenus.multiipdialog.MultiInputSliderDialogInterface;
 
 public interface IView {
 
@@ -21,5 +23,9 @@ public interface IView {
   String getInputFilePath();
 
   String getOutputFilePath();
+
+  Integer displayDialogSingleSplitPreview(String operationTitle,String labelText);
+
+  List<Integer> displayDialogMultiINPreview(MultiInputSliderDialogInterface levelAdjustDialog);
 
 }

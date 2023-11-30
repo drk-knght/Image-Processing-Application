@@ -17,9 +17,6 @@ import controller.features.Features;
 import enums.AxisName;
 import enums.ColorMapping;
 import enums.KernelImage;
-import enums.LevelAdjustment;
-import view.dialogMenus.multiipdialog.GreyScaleDialog;
-import view.dialogMenus.multiipdialog.LevelAdjustDialog;
 import view.dialogMenus.multiipdialog.MultiInputSliderDialogInterface;
 import view.dialogMenus.simpledialog.SimpleDialogSliderInterface;
 import view.dialogMenus.simpledialog.SimpleDialogSliderPreview;
@@ -57,14 +54,7 @@ public class GraphicalView extends JFrame implements IView {
 
     addPreviewListeners();
     buttonActions.put("Compression",evt-> {
-      try {
-        int compressionFactor=getSplitPercentage("Image Compression Factor",
-                "The current compression factor of the image is");
-        this.features.compressImage(compressionFactor);
-      }
-      catch (Exception ex){
-        this.features.getExceptionFromView(ex);
-      }
+      this.features.compressImage();
     });
   }
 
@@ -75,74 +65,26 @@ public class GraphicalView extends JFrame implements IView {
 
   private void addSingleSplitPreview(){
     buttonActions.put("Blur",evt-> {
-      try{
-        int splitPercentage=getSplitPercentage("Blur Split",
-                "The preview % of image on which Blur operation is visible");
-        this.features.changeSharpness(KernelImage.Blur.ordinal(),splitPercentage);
-      }
-      catch (Exception ex){
-        this.features.getExceptionFromView(ex);
-      }
+      this.features.changeSharpness(KernelImage.Blur.ordinal());
     });
     buttonActions.put("Sharpen",evt-> {
-      try{
-        int splitPercentage = getSplitPercentage("Sharpen Split",
-                "The  preview % of image on which Sharpen operation is visible");
-        this.features.changeSharpness(KernelImage.Sharpen.ordinal(), splitPercentage);
-      }
-      catch (Exception ex){
-        this.features.getExceptionFromView(ex);
-      }
+      this.features.changeSharpness(KernelImage.Sharpen.ordinal());
     });
     buttonActions.put("Sepia",evt-> {
-      try{
-        int splitPercentage = getSplitPercentage("Sepia Split",
-                "The preview % of image on which sepia operation is visible");
-        this.features.sepia(splitPercentage);
-      }
-      catch (Exception ex){
-        this.features.getExceptionFromView(ex);
-      }
+        this.features.sepia();
     });
     buttonActions.put("Color Correction",evt-> {
-      try{
-        int splitPercentage = getSplitPercentage("Color Correction Split",
-                "The preview % of image on which Color Correction operation is visible");
-        this.features.colorCorrection(splitPercentage);
-      }
-      catch (Exception ex){
-        this.features.getExceptionFromView(ex);
-      }
+      this.features.colorCorrection();
     });
   }
 
   private void addMultiInSplitPreview(){
-    buttonActions.put("Level Adjustment", evt->
-    {
-      try{
-        List<Integer>levelAdjustmentValues=getLevelAdjustmentValues(new LevelAdjustDialog(this, "Level Adjustment Split"));
-        int blackPoint=levelAdjustmentValues.get(LevelAdjustment.BLACK.levelValue);
-        int midPoint=levelAdjustmentValues.get(LevelAdjustment.MID.levelValue);
-        int highlightPoint=levelAdjustmentValues.get(LevelAdjustment.HIGHLIGHT.levelValue);
-        int splitPercentage=levelAdjustmentValues.get(0);
-        this.features.levelAdjustment(blackPoint,midPoint,highlightPoint,splitPercentage);
-      }
-      catch (Exception ex){
-        this.features.getExceptionFromView(ex);
-      }
+    buttonActions.put("Level Adjustment", evt-> {
+      this.features.levelAdjustment();
     });
 
-    buttonActions.put("Greyscale", evt->
-    {
-      List<Integer>greyScaleValues=getLevelAdjustmentValues(new GreyScaleDialog(this, "Greyscale Split"));
-      try{
-        int splitPercentage=greyScaleValues.get(0);
-        int greyScaleValueMap=greyScaleValues.get(1);
-        this.features.greyScale(greyScaleValueMap,splitPercentage);
-      }
-      catch (Exception ex){
-        this.features.getExceptionFromView(ex);
-      }
+    buttonActions.put("Greyscale", evt-> {
+      this.features.greyScale();
     });
   }
 
@@ -156,24 +98,10 @@ public class GraphicalView extends JFrame implements IView {
 
   private void addIOButtonListeners(){
     buttonActions.put("Load Image",evt->{
-      try{
-//        String filePath=this.getUploadedFilePath();
-//        this.features.load(filePath);
-          this.features.load();
-      }
-      catch (Exception ex){
-        this.features.getExceptionFromView(ex);
-      }
+      this.features.load();
     });
     buttonActions.put("Save Image",evt->{
-      try {
-//        String filePath=this.getSavingFilePath();
-//        this.features.save(filePath);
-          this.features.save();
-      }
-      catch (Exception ex){
-        this.features.getExceptionFromView(ex);
-      }
+      this.features.save();
     });
     buttonActions.put("Exit App",evt->System.exit(0));
   }
@@ -183,7 +111,8 @@ public class GraphicalView extends JFrame implements IView {
     buttonActions.put("Cancel Operation",evt->{this.features.cancelOperation();});
   }
 
-  private Integer getSplitPercentage(String operationTitle,String labelText){
+  @Override
+  public Integer displayDialogSingleSplitPreview(String operationTitle,String labelText){
     SimpleDialogSliderInterface simpleJDialog=new SimpleDialogSliderPreview(this,operationTitle,labelText);
     Integer splitPercentage=null;
 
@@ -194,7 +123,8 @@ public class GraphicalView extends JFrame implements IView {
     return splitPercentage;
   }
 
-  private List<Integer> getLevelAdjustmentValues(MultiInputSliderDialogInterface levelAdjustDialog){
+  @Override
+  public List<Integer> displayDialogMultiINPreview(MultiInputSliderDialogInterface levelAdjustDialog){
     List<Integer> resultList=null;
     if(levelAdjustDialog.getResultOperationFlag()){
       resultList=levelAdjustDialog.getListOfInputValues();
@@ -214,9 +144,6 @@ public class GraphicalView extends JFrame implements IView {
       File f=selectFile.getSelectedFile();
       return f.getPath();
     }
-//    else {
-//      throw new IOException("Load operation cancelled by the user.");
-//    }
     return null;
   }
 
