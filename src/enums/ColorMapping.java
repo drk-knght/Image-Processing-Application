@@ -1,6 +1,6 @@
 package enums;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * Enum to store the color names and their mapping to fixed value for any color related operation.
@@ -18,6 +18,13 @@ public enum ColorMapping {
 
   public final Color color;
 
+  /**
+   * The constructor assigns the color mapping value mapping to each of the enum objects.
+   * For this enum it assigns values to red, green and blue enums the numerical maps.
+   *
+   * @param colorCoding Integer representing the enum map for the diff colors: red, green & blue.
+   * @param color       Color object representing the enum map for the diff colors: red, green & blue.
+   */
   ColorMapping(int colorCoding, Color color) {
     this.colorCoding = colorCoding;
     this.color = color;

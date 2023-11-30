@@ -11,6 +11,12 @@ public enum AxisName {
 
   final int axisValue;
 
+  /**
+   * The constructor assigns the axis value mapping to each of the enum objects.
+   * For this enum it assigns values to horizontal and vertical enums the numerical maps.
+   *
+   * @param axisValue Integer representing the enum map for the diff axis: horizontal & vertical.
+   */
   AxisName(int axisValue) {
     this.axisValue = axisValue;
   }

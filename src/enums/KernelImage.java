@@ -35,6 +35,13 @@ public enum KernelImage {
    */
   public final double[][] kernel;
 
+  /**
+   * The constructor assigns the Kernel mapping value mapping to each of the enum objects.
+   * For this enum it assigns values to BLUR and SHARPEN enums the numerical maps.
+   *
+   * @param kernelValue   Integer representing the enum map for the diff Kernels: Sharpen & Blur.
+   * @param kernel        A 2-D matrix having the kernel transformation values for different ops.
+   */
   KernelImage(int kernelValue, double[][] kernel) {
     this.kernelValue = kernelValue;
     this.kernel = kernel;
