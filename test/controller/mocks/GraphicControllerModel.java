@@ -4,14 +4,11 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import controller.graphicalcontroller.GraphicalController;
 import controller.graphicalcontroller.GraphicalControllerInterface;
-import controller.imagecommands.RGBImageCommandInterface;
-import controller.imagecommands.singleincommands.BrightnessCommand;
+
 import model.RGBImageInterface;
 import view.GraphicalView;
 import view.IView;

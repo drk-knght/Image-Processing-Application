@@ -2,15 +2,17 @@ package model;
 
 import java.util.List;
 
-
 import enums.AxisName;
 import enums.ColorMapping;
 import enums.GreyScaleType;
 import enums.KernelImage;
+import model.imageoperations.multiin.CombineChannelImage;
+import model.imageoperations.multiin.MultipleImagesSingleOperation;
+import model.imageoperations.multiout.MultipleOperationImages;
+import model.imageoperations.multiout.SplitChannelImage;
 import model.imageoperations.singlein.Brightness;
 import model.imageoperations.singlein.ColorCorrection;
 import model.imageoperations.singlein.ColorTransformation;
-import model.imageoperations.multiin.CombineChannelImage;
 import model.imageoperations.singlein.Compression;
 import model.imageoperations.singlein.Flip;
 import model.imageoperations.singlein.GreyScale;
@@ -18,10 +20,7 @@ import model.imageoperations.singlein.Histogram;
 import model.imageoperations.singlein.ImageOperation;
 import model.imageoperations.singlein.LevelsAdjustment;
 import model.imageoperations.singlein.Monochrome;
-import model.imageoperations.multiin.MultipleImagesSingleOperation;
-import model.imageoperations.multiout.MultipleOperationImages;
 import model.imageoperations.singlein.Sharpness;
-import model.imageoperations.multiout.SplitChannelImage;
 import model.imageoperations.singlein.SplitBuffer;
 
 /**
@@ -49,7 +48,24 @@ public class RGBImage implements RGBImageInterface {
     checkAndAssignValues(pixelMatrix);
   }
 
-  private void checkAndAssignValues(int[][][] pixelMatrix) {
+  /**
+   * Constructor to create an empty image object.
+   * The object here behaves like a container of an img.
+   * While creation of the object it is empty but can get new items over the time.
+   */
+  public RGBImage() {
+    this.pixelMatrix = null;
+    this.height = 0;
+    this.width = 0;
+  }
+
+  /**
+   * The method is used to check and assign new image matrix value to the model currently in use.
+   *
+   * @param pixelMatrix 3-d Matrix signifying the pixels of the present image in use.
+   */
+  @Override
+  public void checkAndAssignValues(int[][][] pixelMatrix) {
     checkValidDimensionImage(pixelMatrix);
     this.pixelMatrix = pixelMatrix;
     this.height = pixelMatrix.length;

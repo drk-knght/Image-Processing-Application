@@ -158,4 +158,11 @@ public interface RGBImageInterface {
    * @return 3-d Matrix signifying the pixels of the present image in use.
    */
   int[][][] getPixel();
+
+  /**
+   * The method is used to check and assign new image matrix value to the model currently in use.
+   *
+   * @param pixelMatrix 3-d Matrix signifying the pixels of the present image in use.
+   */
+  void checkAndAssignValues(int[][][] pixelMatrix);
 }

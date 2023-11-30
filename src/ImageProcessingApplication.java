@@ -9,6 +9,8 @@ import java.util.Scanner;
 import controller.graphicalcontroller.GraphicalController;
 import controller.scriptcontroller.RGBImageController;
 import controller.RGBImageControllerInterface;
+import model.RGBImage;
+import model.RGBImageInterface;
 import view.GraphicalView;
 import view.IView;
 
@@ -51,7 +53,8 @@ public class ImageProcessingApplication {
     }
     else {
       IView view=new GraphicalView();
-      controller=new GraphicalController(view);
+      RGBImageInterface model=new RGBImage();
+      controller=new GraphicalController(model,view);
 
     }
     controller.goCall();

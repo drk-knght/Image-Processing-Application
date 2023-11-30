@@ -36,8 +36,10 @@ public class GraphicalController implements GraphicalControllerInterface,
 
   private boolean isSaved;
 
-  public GraphicalController(IView view) {
+  public GraphicalController(RGBImageInterface liveImageModel, IView view) {
     this.view = view;
+    this.liveImageModel=liveImageModel;
+    this.currentPreviewImage=liveImageModel;
     this.features = new FeatureImpl(this);
     isSaved = true;
     setFeaturesInView();
@@ -54,7 +56,7 @@ public class GraphicalController implements GraphicalControllerInterface,
       String filePath = view.getInputFilePath();
       checkNullFilePath(filePath);
       InputReaderInterface fileReader = new FileReader(filePath);
-      this.currentPreviewImage = new RGBImage(fileReader.read());
+      this.currentPreviewImage.checkAndAssignValues(fileReader.read());
     } catch (IllegalArgumentException ex) {
       view.setPopupMessage(ex.getMessage());
       return;

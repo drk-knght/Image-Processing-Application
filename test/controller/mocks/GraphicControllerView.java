@@ -17,6 +17,12 @@ import view.dialogMenus.multiipdialog.MultiInputSliderDialogInterface;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class represents the mock testing of graphical controller.
+ * The mock model is created. Data passed to the mock model & view from controller is log to test.
+ * The log is asserted against the expected value to ensure that data is going correctly to model.
+ * It also checks assertion against if the data is perfect for the view as well.
+ */
 public class GraphicControllerView {
 
   static class ViewMock implements IView {
