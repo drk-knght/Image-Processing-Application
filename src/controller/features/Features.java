@@ -26,6 +26,4 @@ public interface Features {
   void applyOperation();
 
   void cancelOperation();
-
-  void getExceptionFromView(Exception ex);
 }

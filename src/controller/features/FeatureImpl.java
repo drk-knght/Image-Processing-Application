@@ -73,9 +73,4 @@ public class FeatureImpl implements Features{
   public void cancelOperation() {
     controller.setLiveImage(UpdateType.OLD.ordinal());
   }
-
-  @Override
-  public void getExceptionFromView(Exception ex) {
-    controller.getExceptionFromExternalEnv(ex);
-  }
 }

@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import controller.RGBImageControllerInterface;
@@ -19,63 +20,64 @@ import static org.junit.Assert.assertEquals;
 public class GraphicControllerView {
 
   static class ViewMock implements IView {
-    StringBuilder viewlogData;
+    StringBuilder viewLogData;
 
     public ViewMock(StringBuilder logData){
-      this.viewlogData=logData;
+      this.viewLogData=logData;
     }
 
     @Override
     public void setDisplay() {
-      viewlogData.append("Setting up the display for the mock view model.");
+      viewLogData.append("Setting up the display for the mock view model.");
     }
 
     @Override
     public void setPopupMessage(String message) {
-      viewlogData.append("Pop up message for the mock view model.");
+      viewLogData.append("Pop up message for the mock view model.");
     }
 
     @Override
     public void setErrorMessage(String message) {
-      viewlogData.append("Error message for the mock view model.");
+      viewLogData.append("Error message for the mock view model.");
     }
 
     @Override
     public void displayImage(Image image) {
-      viewlogData.append("Display image from the mock view model.");
+      viewLogData.append("Display image from the mock view model.");
     }
 
     @Override
     public void displayHistogram(Image image) {
-      viewlogData.append("Display histogram from the mock view model.");
+      viewLogData.append("Display histogram from the mock view model.");
     }
 
     @Override
     public void setFeatures(Features features) {
-      viewlogData.append("Features from the mock view model.");
+      viewLogData.append("Features from the mock view model.");
     }
 
     @Override
     public String getInputFilePath() {
-      viewlogData.append("Input file Path.");
-      return null;
+      viewLogData.append("Input file Path.");
+      return "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger.png";
     }
 
     @Override
     public String getOutputFilePath() {
-      viewlogData.append("Output file Path.");
-      return null;
+      viewLogData.append("Output file Path.");
+      return "/Users/omagarwal/Desktop/Grad@NEU/Acads/Sem-1/CS 5010 PDP/Labs/Image Processing/res/Tiger2.png";
     }
 
     @Override
     public Integer displayDialogSingleSplitPreview(String operationTitle, String labelText) {
-      viewlogData.append("Split Preview");
-      return null;
+      viewLogData.append("Single Split Preview");
+      return 0;
     }
 
     @Override
     public List<Integer> displayDialogMultiINPreview(MultiInputSliderDialogInterface levelAdjustDialog) {
-      return null;
+      viewLogData.append("Multiple Split Preview");
+      return new ArrayList<>(List.of(1,2,3,4));
     }
   }
 
@@ -311,18 +313,20 @@ public class GraphicControllerView {
 
   private StringBuilder log;
 
-  private IView view;
-
   private String expResult;
   @Before
   public void setUp(){
     log=new StringBuilder();
-    view =new ViewMock(log);
+    IView view = new ViewMock(log);
     controllerInterface=new GraphicalController(view);
     controllerInterface.loadImage();
-    expResult="Features from the mock view model.Input file Path."
+    expResult="Features from the mock view model."
+            + "Input file Path."
+            + "Display image from the mock view model."
+            + "Display histogram from the mock view model."
             + "Pop up message for the mock view model."
-            + "Error message for the mock view model.";
+            + "Single Split PreviewDisplay image from the mock view model."
+            + "Display histogram from the mock view model.";
   }
 
   @Test
@@ -345,12 +349,25 @@ public class GraphicControllerView {
   @Test
   public void testSharpness() throws IOException {
     controllerInterface.changeSharpness(1);
+    expResult="Features from the mock view model."
+            + "Input file Path."
+            + "Display image from the mock view model."
+            + "Display histogram from the mock view model."
+            + "Pop up message for the mock view model."
+            + "Single Split PreviewDisplay image from the mock view model."
+            + "Display histogram from the mock view model.";
     assertEquals(expResult,log.toString());
   }
 
   @Test
   public void testGreyScale() throws IOException {
     controllerInterface.applyGreyScale();
+    expResult="Features from the mock view model."
+            + "Input file Path."
+            + "Display image from the mock view model."
+            + "Display histogram from the mock view model."
+            + "Pop up message for the mock view model."
+            + "Error message for the mock view model.";
     assertEquals(expResult,log.toString());
   }
 
@@ -369,18 +386,36 @@ public class GraphicControllerView {
   @Test
   public void testLevelAdjustment(){
     controllerInterface.levelAdjustImage();
+    expResult="Features from the mock view model."
+            + "Input file Path.Display image from the mock view model."
+            + "Display histogram from the mock view model."
+            + "Pop up message for the mock view model."
+            + "Error message for the mock view model.";
     assertEquals(expResult,log.toString());
   }
 
   @Test
   public void testFlipImage(){
     controllerInterface.flipImage(1);
+    expResult="Features from the mock view model."
+            + "Input file Path.Display image from the mock view model."
+            + "Display histogram from the mock view model."
+            + "Pop up message for the mock view model."
+            + "Display image from the mock view model."
+            + "Display histogram from the mock view model.";
     assertEquals(expResult,log.toString());
   }
 
   @Test
   public void testSingleComponent(){
     controllerInterface.getSingleComponentImage(2);
+    expResult="Features from the mock view model."
+            + "Input file Path."
+            + "Display image from the mock view model."
+            + "Display histogram from the mock view model."
+            + "Pop up message for the mock view model."
+            + "Display image from the mock view model."
+            + "Display histogram from the mock view model.";
     assertEquals(expResult,log.toString());
   }
 
@@ -393,6 +428,12 @@ public class GraphicControllerView {
   @Test
   public void testLiveImage(){
     controllerInterface.setLiveImage(1);
+    expResult="Features from the mock view model."
+            + "Input file Path.Display image from the mock view model."
+            + "Display histogram from the mock view model."
+            + "Pop up message for the mock view model."
+            + "Display image from the mock view model."
+            + "Display histogram from the mock view model.";
     assertEquals(expResult,log.toString());
   }
 
@@ -400,7 +441,8 @@ public class GraphicControllerView {
   public void testExceptionFromView(){
     controllerInterface.getExceptionFromExternalEnv(new Exception("Test Exception"));
     expResult="Features from the mock view model."
-            + "Input file Path."
+            + "Input file Path.Display image from the mock view model."
+            + "Display histogram from the mock view model."
             + "Pop up message for the mock view model."
             + "Pop up message for the mock view model.";
     assertEquals(expResult,log.toString());

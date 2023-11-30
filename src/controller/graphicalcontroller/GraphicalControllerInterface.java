@@ -1,7 +1,7 @@
 package controller.graphicalcontroller;
 
 /**
- * This interface
+ * This interface represents the
  */
 
 public interface GraphicalControllerInterface {
