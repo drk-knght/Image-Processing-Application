@@ -114,7 +114,8 @@ public class GraphicalView extends JFrame implements IView {
    */
   @Override
   public Integer displayDialogSingleSplitPreview(String operationTitle, String labelText) {
-    SimpleDialogSliderInterface simpleJDialog = new SimpleDialogSliderPreview(this, operationTitle, labelText);
+    SimpleDialogSliderInterface simpleJDialog = new SimpleDialogSliderPreview(this,
+            operationTitle, labelText);
     Integer splitPercentage = null;
 
     if (simpleJDialog.getResultOperationFlag()) {
@@ -135,7 +136,8 @@ public class GraphicalView extends JFrame implements IView {
    * @return List containing the data in sequential manner that were required by the callee method.
    */
   @Override
-  public List<Integer> displayDialogMultiINPreview(MultiInputSliderDialogInterface levelAdjustDialog) {
+  public List<Integer> displayDialogMultiINPreview(
+          MultiInputSliderDialogInterface levelAdjustDialog) {
     List<Integer> resultList = null;
     if (levelAdjustDialog.getResultOperationFlag()) {
       resultList = levelAdjustDialog.getListOfInputValues();
@@ -153,7 +155,8 @@ public class GraphicalView extends JFrame implements IView {
   @Override
   public String getInputFilePath() {
     JFileChooser selectFile = new JFileChooser(".");
-    FileNameExtensionFilter fileExtensions = new FileNameExtensionFilter("PPM, JPG, JPEG, PNG Images",
+    FileNameExtensionFilter fileExtensions = new FileNameExtensionFilter("PPM, JPG,"
+            + " JPEG, PNG Images",
             "jpg", "jpeg", "png", "ppm");
     selectFile.setFileFilter(fileExtensions);
     int retrievalResult = selectFile.showOpenDialog(GraphicalView.this);
@@ -173,7 +176,8 @@ public class GraphicalView extends JFrame implements IView {
   @Override
   public String getOutputFilePath() {
     JFileChooser selectFile = new JFileChooser(".");
-    FileNameExtensionFilter fileExtensions = new FileNameExtensionFilter("PPM, JPG, JPEG, PNG Images",
+    FileNameExtensionFilter fileExtensions = new FileNameExtensionFilter("PPM, JPG, "
+            + "JPEG, PNG Images",
             "jpg", "jpeg", "png", "ppm");
     selectFile.setFileFilter(fileExtensions);
     int retrievalResult = selectFile.showSaveDialog(GraphicalView.this);
@@ -229,7 +233,8 @@ public class GraphicalView extends JFrame implements IView {
    */
   @Override
   public void setPopupMessage(String message) {
-    JOptionPane.showMessageDialog(this, message, "Popup Message", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(this, message,
+            "Popup Message", JOptionPane.INFORMATION_MESSAGE);
   }
 
   /**
@@ -240,7 +245,8 @@ public class GraphicalView extends JFrame implements IView {
    */
   @Override
   public void setErrorMessage(String message) {
-    JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(this, message,
+            "Error Message", JOptionPane.ERROR_MESSAGE);
   }
 
   /**

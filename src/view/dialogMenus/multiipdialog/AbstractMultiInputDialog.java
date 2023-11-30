@@ -53,7 +53,8 @@ public abstract class AbstractMultiInputDialog extends JDialog
    * The panel is attached with a heading label which represents the purpose of using this slider.
    *
    * @param headingLabel      Representing the heading of the slider and info gathered through this.
-   * @param max               As the controller restricts the max value permissible in the slider, it sets that.
+   * @param max               As the controller restricts the max value permissible in the slider,
+   *                          it sets that.
    * @param presentSlider     The Slider which needs to be added to the panel created here.
    * @param actionChangeLabel The label which shows the presently selected value in the slider.
    * @return The newly created panel having slider, its label and the title of it for the purpose.
