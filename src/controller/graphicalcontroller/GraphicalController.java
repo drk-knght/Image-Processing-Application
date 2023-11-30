@@ -16,13 +16,19 @@ import controller.filehandling.writer.ImageIOWriter;
 import controller.filehandling.writer.OutputWriterInterface;
 import enums.LevelAdjustment;
 import enums.UpdateType;
-import model.RGBImage;
 import model.RGBImageInterface;
 import view.IView;
 import view.dialogMenus.multiipdialog.GreyScaleDialog;
 import view.dialogMenus.multiipdialog.LevelAdjustDialog;
 
 
+/**
+ * The class represents a controller which manages the graphical user interface for the MVC app.
+ * The controller gets the model and view object from the constructor in the parameter.
+ * The GUI controller can perform several actions like display image and histogram on the display.
+ * It can handle several image operations like blur, sepia, etc. along with split preview options.
+ * The controller is the one which interacts with the external env so it performs load and save op.
+ */
 public class GraphicalController implements GraphicalControllerInterface,
         RGBImageControllerInterface {
 
@@ -36,10 +42,18 @@ public class GraphicalController implements GraphicalControllerInterface,
 
   private boolean isSaved;
 
+  /**
+   * The constructor of the GUI controller initializes the view and the model parameter for MVC.
+   * It also passes itself to feature class to get a features object for call backs implementations.
+   * Sets the all the features for the passed the view interface and complete the load operations.
+   *
+   * @param liveImageModel The object of the model on which the image operation would be applied.
+   * @param view           The object of the view on which the GUI is displayed for the present app.
+   */
   public GraphicalController(RGBImageInterface liveImageModel, IView view) {
     this.view = view;
-    this.liveImageModel=liveImageModel;
-    this.currentPreviewImage=liveImageModel;
+    this.liveImageModel = liveImageModel;
+    this.currentPreviewImage = liveImageModel;
     this.features = new FeatureImpl(this);
     isSaved = true;
     setFeaturesInView();
@@ -243,11 +257,10 @@ public class GraphicalController implements GraphicalControllerInterface,
     }
     try {
       currentPreviewImage = this.currentPreviewImage.flipImage(axisNameMap);
+      refreshImageOnScreen(currentPreviewImage);
     } catch (Exception ex) {
       view.setErrorMessage("Flip operation failed. \nReason: " + ex.getMessage());
-      return;
     }
-    refreshImageOnScreen(currentPreviewImage);
   }
 
   /**
@@ -264,11 +277,10 @@ public class GraphicalController implements GraphicalControllerInterface,
     }
     try {
       currentPreviewImage = this.currentPreviewImage.getSingleComponentImage(colorType);
+      refreshImageOnScreen(currentPreviewImage);
     } catch (Exception ex) {
       view.setErrorMessage("Single channel operation failed. \nReason: " + ex.getMessage());
-      return;
     }
-    refreshImageOnScreen(currentPreviewImage);
   }
 
   /**
@@ -357,9 +369,9 @@ public class GraphicalController implements GraphicalControllerInterface,
 
   private void updateLiveImage(int updateType) {
     if (updateType == UpdateType.OLD.ordinal()) {
-      this.currentPreviewImage = new RGBImage(liveImageModel.getPixel());
+      this.currentPreviewImage.checkAndAssignValues(this.liveImageModel.getPixel());
     } else {
-      this.liveImageModel = new RGBImage(currentPreviewImage.getPixel());
+      this.liveImageModel.checkAndAssignValues(currentPreviewImage.getPixel());
     }
   }
 

@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import controller.imagecommands.RGBImageCommandInterface;
 import controller.imagecommands.multiincommand.CombineChannelsCommand;
 import controller.imagecommands.multioutcommand.SplitChannelsCommand;
-import controller.imagecommands.RGBImageCommandInterface;
 import controller.imagecommands.singleincommands.BrightnessCommand;
 import controller.imagecommands.singleincommands.ColorCorrectionCommand;
 import controller.imagecommands.singleincommands.ColorTransformationCommand;
@@ -264,6 +264,11 @@ public class ScriptControllerModelMock {
     public int[][][] getPixel() {
       logData.append("Get pixel matrix of an image.");
       return new int[0][][];
+    }
+
+    @Override
+    public void checkAndAssignValues(int[][][] pixelMatrix) {
+      logData.append("Getting pixel values from the caller");
     }
   }
 
