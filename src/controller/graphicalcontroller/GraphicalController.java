@@ -1,10 +1,10 @@
 package controller.graphicalcontroller;
 
-import java.awt.*;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 import controller.RGBImageControllerInterface;
 import controller.features.FeatureImpl;
@@ -256,7 +256,7 @@ public class GraphicalController implements GraphicalControllerInterface,
       return;
     }
     try {
-      currentPreviewImage = this.currentPreviewImage.flipImage(axisNameMap);
+      currentPreviewImage = this.liveImageModel.flipImage(axisNameMap);
       refreshImageOnScreen(currentPreviewImage);
     } catch (Exception ex) {
       view.setErrorMessage("Flip operation failed. \nReason: " + ex.getMessage());
@@ -276,7 +276,7 @@ public class GraphicalController implements GraphicalControllerInterface,
       return;
     }
     try {
-      currentPreviewImage = this.currentPreviewImage.getSingleComponentImage(colorType);
+      currentPreviewImage = this.liveImageModel.getSingleComponentImage(colorType);
       refreshImageOnScreen(currentPreviewImage);
     } catch (Exception ex) {
       view.setErrorMessage("Single channel operation failed. \nReason: " + ex.getMessage());
@@ -297,7 +297,7 @@ public class GraphicalController implements GraphicalControllerInterface,
       int compressionPercentage = view.displayDialogSingleSplitPreview("Image "
                       + "Compression Factor",
               "The current compression factor of the image is");
-      currentPreviewImage = this.currentPreviewImage.compressImage(compressionPercentage);
+      currentPreviewImage = this.liveImageModel.compressImage(compressionPercentage);
       refreshImageOnScreen(currentPreviewImage);
     } catch (NullPointerException ex) {
       getExceptionFromExternalEnv(ex);

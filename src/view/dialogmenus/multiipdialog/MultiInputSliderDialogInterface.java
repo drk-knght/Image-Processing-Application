@@ -31,8 +31,7 @@ public interface MultiInputSliderDialogInterface {
    * When the user finalizes all the values present in the present JDialog frame,
    * this gets all the data from the GUI put it in a list and return it back to the controller.
    * The data from different components are fetched and then store it as required for parsing.
-   * @return It returns a list of integer values containing different information
-   * about the additional components that required data.
+   * @return It returns a list of int of different info about the components that required data.
    */
   List<Integer> getListOfInputValues();
 }

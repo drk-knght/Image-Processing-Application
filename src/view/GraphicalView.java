@@ -14,7 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JFileChooser;
+import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -49,9 +57,9 @@ public class GraphicalView extends JFrame implements IView {
   private final String[] ioOperations = {"Load Image", "Exit App", "Save Image"};
 
   private final String[] imgOp = {"Visualize Red Component", "Visualize Green Component",
-          "Visualize Blue Component", "Flip Horizontal", "Flip Vertical",
-          "Blur", "Sharpen", "Greyscale", "Sepia", "Compression",
-          "Color Correction", "Level Adjustment"};
+      "Visualize Blue Component", "Flip Horizontal", "Flip Vertical",
+      "Blur", "Sharpen", "Greyscale", "Sepia", "Compression",
+      "Color Correction", "Level Adjustment"};
 
   private final String[] changeImage = {"Save Operation", "Cancel Operation"};
 
@@ -61,7 +69,7 @@ public class GraphicalView extends JFrame implements IView {
 
     addNonPreviewListeners();
 
-    ModifyImageListeners();
+    modifyImageListeners();
 
     addPreviewListeners();
     buttonActions.put("Compression", evt -> this.features.compressImage());
@@ -104,7 +112,7 @@ public class GraphicalView extends JFrame implements IView {
     buttonActions.put("Exit App", evt -> System.exit(0));
   }
 
-  private void ModifyImageListeners() {
+  private void modifyImageListeners() {
     buttonActions.put("Save Operation", evt -> this.features.applyOperation());
     buttonActions.put("Cancel Operation", evt -> this.features.cancelOperation());
   }
@@ -312,7 +320,8 @@ public class GraphicalView extends JFrame implements IView {
   private JPanel getLineStartPanel(Image imageData) {
     JPanel lineStart = new JPanel();
     lineStart.setLayout(new BorderLayout(5, 20));
-    JPanel ioPanel = setPanel(ioOperations, "I/O Operations", new FlowLayout(FlowLayout.CENTER, 10, 10));
+    JPanel ioPanel = setPanel(ioOperations, "I/O Operations",
+            new FlowLayout(FlowLayout.CENTER, 10, 10));
     JPanel opPanel = setPanel(imgOp, "Image Operations", new GridLayout(imgOp.length, 1));
     this.histogramPanel = getLiveImagePanel(imageData, "Histogram of the image", 256, 256);
     lineStart.add(ioPanel, BorderLayout.PAGE_START);

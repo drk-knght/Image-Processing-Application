@@ -7,8 +7,8 @@ import java.util.InputMismatchException;
 
 import javax.imageio.ImageIO;
 
-import model.RGBImageInterface;
 import enums.ColorMapping;
+import model.RGBImageInterface;
 
 /**
  * The class represents ImageIO write functionalities required while performing the I/O operations.
@@ -58,6 +58,16 @@ public class ImageIOWriter {
     }
   }
 
+  /**
+   * Method takes the image data and returns a new object of the image accessible by buffer class.
+   * It takes the width, height and the pixel data of the image in form of matrix to convert it.
+   * This is a helper method used at several places to create an awt image object when required.
+   *
+   * @param width       Integer signifying the width of the image passed to this method.
+   * @param height      Integer signifying the height of the image passed to this method.
+   * @param imageMatrix 3-D matrix signifying the image matrix data of an rgb image.
+   * @return An object of Buffered Image class that can be accessed by different awt components.
+   */
   public static BufferedImage getBufferedImage(int width, int height, int[][][] imageMatrix) {
     BufferedImage imageSavingElement = new BufferedImage(width,
             height, BufferedImage.TYPE_3BYTE_BGR);

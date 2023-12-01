@@ -20,13 +20,13 @@ public enum GreyScaleType {
     @Override
     public int[] calculateReturnPixelValue(int[] rgbPixelArray) {
       return GreyScaleType.setPixelValue(rgbPixelArray,
-              ar -> {
-                int num = 0;
-                for (int ele = 0; ele < ar.length; ele++) {
-                  num = Math.max(num, ar[ele]);
-                }
-                return num;
-              }
+        ar -> {
+          int num = 0;
+          for (int ele = 0; ele < ar.length; ele++) {
+            num = Math.max(num, ar[ele]);
+          }
+          return num;
+        }
       );
 
     }
@@ -42,12 +42,12 @@ public enum GreyScaleType {
     @Override
     public int[] calculateReturnPixelValue(int[] rgbPixelArray) {
       return GreyScaleType.setPixelValue(rgbPixelArray,
-              ar -> {
-                double num = 0.2125 * rgbPixelArray[ColorMapping.red.ordinal()]
-                        + 0.7152 * rgbPixelArray[ColorMapping.green.ordinal()]
-                        + 0.0722 * rgbPixelArray[ColorMapping.blue.ordinal()];
-                return (int) Math.min(255, Math.max(0, num));
-              }
+        ar -> {
+          double num = 0.2125 * rgbPixelArray[ColorMapping.red.ordinal()]
+                  + 0.7152 * rgbPixelArray[ColorMapping.green.ordinal()]
+                  + 0.0722 * rgbPixelArray[ColorMapping.blue.ordinal()];
+          return (int) Math.min(255, Math.max(0, num));
+        }
       );
     }
   },
@@ -62,13 +62,13 @@ public enum GreyScaleType {
     @Override
     public int[] calculateReturnPixelValue(int[] rgbPixelArray) {
       return GreyScaleType.setPixelValue(rgbPixelArray,
-              ar -> {
-                int num = 0;
-                for (int ele = 0; ele < ar.length; ele++) {
-                  num += ar[ele];
-                }
-                return (num / ColorMapping.values().length);
-              }
+        ar -> {
+          int num = 0;
+          for (int ele = 0; ele < ar.length; ele++) {
+            num += ar[ele];
+          }
+          return (num / ColorMapping.values().length);
+        }
       );
     }
 

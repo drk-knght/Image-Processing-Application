@@ -23,7 +23,7 @@ public enum ColorMapping {
    * For this enum it assigns values to red, green and blue enums the numerical maps.
    *
    * @param colorCoding Integer representing the enum map for the diff colors: red, green & blue.
-   * @param color       Color object representing the enum map for the diff colors: red, green & blue.
+   * @param color       Color obj representing the enum map for the diff colors: red, green & blue.
    */
   ColorMapping(int colorCoding, Color color) {
     this.colorCoding = colorCoding;

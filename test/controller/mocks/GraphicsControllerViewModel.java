@@ -227,7 +227,7 @@ public class GraphicsControllerViewModel {
      * @throws IllegalArgumentException If the arguments passed are not valid.
      */
     @Override
-    public RGBImageInterface combineImageComponents(java.util.List<RGBImageInterface> imageComponents)
+    public RGBImageInterface combineImageComponents(List<RGBImageInterface> imageComponents)
             throws IllegalArgumentException {
       modelLogData.append("Combine image operation on a "
               + "list of images having size:" + imageComponents.size());
